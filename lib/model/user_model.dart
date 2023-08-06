@@ -1,4 +1,4 @@
-class User{
+class UserModel{
   String name;
   int phoneNumber;
   String email;
@@ -8,7 +8,7 @@ class User{
   bool isAdmin;
   bool isMaster;
   DateTime lastLogin;
-  User(
+  UserModel(
     this.name,
     this.phoneNumber,
     this.email,
