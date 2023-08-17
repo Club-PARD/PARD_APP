@@ -41,6 +41,7 @@ dependencies:
   flutter_local_notifications: ^15.1.0+1
   cloud_firestore: ^4.8.4
   device_info_plus: ^9.0.3
+  mobile_scanner: ^3.4.1
 
 dev_dependencies:
   flutter_test:
