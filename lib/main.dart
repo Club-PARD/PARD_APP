@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
+import 'package:pard_app/view/home.dart';
 import 'package:pard_app/view/mypage.dart';
 import 'firebase_options.dart';
 
@@ -65,9 +66,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: BindingsBuilder.put(() => PushNotificationController(),permanent: true),
-      home: const MyPage(),    /** 초기 페이지 mypage.dart로 설정 */
+      home: const Home(),    /** 초기 페이지 mypage.dart로 설정 */
       getPages: [              /** router */
         GetPage(name: '/mypage', page: () => const MyPage()),
+        GetPage(name: '/home', page: () => const Home())
       ],
     );
   }
