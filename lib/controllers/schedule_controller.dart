@@ -44,40 +44,9 @@ class ScheduleController extends GetxController {
           }
         }
       }
-
-      // Reverse the order of past schedules to have the most recent ones at the top
       pastSchedules = pastSchedules.reversed.toList().obs;
     } catch (e) {
       print('Error fetching schedules: $e');
-    }
-  }
-
-  Future<void> addSchedule(ScheduleModel newSchedule) async {
-    try {
-      await _firestore.collection('schedules').add({
-        'attend': newSchedule.attend,
-        'title': newSchedule.title,
-        'description': newSchedule.description,
-        'dueDate': newSchedule.dueDate.toIso8601String(),
-        'place': newSchedule.place,
-        'part': newSchedule.part,
-        'previous': newSchedule.previous,
-      });
-      fetchSchedules(newSchedule.part);
-    } catch (e) {
-      print('Error adding schedule: $e');
-    }
-  }
-
-  String calculateDday(DateTime dueDate) {
-    final now = DateTime.now();
-    final difference = dueDate.difference(now).inDays;
-    if (difference > 0) {
-      return 'D-$difference';
-    } else if (difference == 0) {
-      return 'D-Day';
-    } else {
-      return 'D+${-difference}';
     }
   }
 }

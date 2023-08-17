@@ -41,6 +41,8 @@ dependencies:
   flutter_local_notifications: ^15.1.0+1
   cloud_firestore: ^4.8.4
   firebase_auth: ^4.7.2
+  gradient_borders: ^1.0.0
+  simple_gradient_text: ^1.2.4
 
 dev_dependencies:
   flutter_test:
