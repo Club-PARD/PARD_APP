@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyArT5Wdakh1mXAi8ygFaK7yaYe4qupec7Q',
-    appId: '1:676828935630:web:c304e79fe85355b605a79f',
-    messagingSenderId: '676828935630',
-    projectId: 'pard-app-project',
-    authDomain: 'pard-app-project.firebaseapp.com',
-    storageBucket: 'pard-app-project.appspot.com',
-    measurementId: 'G-KZP2WRTZQ5',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDYuSzECIeL4af0rwUdUC0Y4xH6bVLBR60',
     appId: '1:676828935630:android:cd84d5445726a3f205a79f',
@@ -69,15 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'pard-app-project.appspot.com',
     iosClientId: '676828935630-o0m4qfq5i5f0j5mjo3uvsel9099ngg0k.apps.googleusercontent.com',
     iosBundleId: 'com.example.pardApp',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDnLAm1IPNOSfUAiG9h_bIc2LAI1bYy0rY',
-    appId: '1:676828935630:ios:f3629abcfb32cc7705a79f',
-    messagingSenderId: '676828935630',
-    projectId: 'pard-app-project',
-    storageBucket: 'pard-app-project.appspot.com',
-    iosClientId: '676828935630-sfm0a65oqnents0no6ecb9c9bvkak2kk.apps.googleusercontent.com',
-    iosBundleId: 'com.example.pardApp.RunnerTests',
   );
 }

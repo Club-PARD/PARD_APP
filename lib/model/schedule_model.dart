@@ -1,11 +1,12 @@
-class ScheduleModel{
-  Map<String,int> attend;
+class ScheduleModel {
+  Map<String, int> attend;
   String title;
   String description;
   DateTime dueDate;
   String place;
   String part;
   bool previous;
+
   ScheduleModel(
     this.attend,
     this.title,
@@ -13,6 +14,6 @@ class ScheduleModel{
     this.dueDate,
     this.place,
     this.part,
-    this.previous
+    this.previous,
   );
 }
