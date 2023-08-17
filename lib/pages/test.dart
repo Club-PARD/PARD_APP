@@ -22,18 +22,15 @@ class SchedulerPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          _buildSection('다가오는 일정', scheduleController.upcomingSchedules),
-          _buildSection('지난 일정', scheduleController.pastSchedules),
+          _buildSection('다가오는 일정', () => scheduleController.upcomingSchedules),
+          _buildSection('지난 일정', () => scheduleController.pastSchedules),
         ],
       ),
     );
   }
 
-  Widget _buildSection(String title, List<ScheduleModel> schedules) {
-    if (schedules.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
+  Widget _buildSection(
+      String title, List<ScheduleModel> Function() getSchedules) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,6 +47,11 @@ class SchedulerPage extends StatelessWidget {
         ),
         Obx(
           () {
+            final schedules = getSchedules();
+            if (schedules.isEmpty) {
+              return const SizedBox.shrink();
+            }
+
             return ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
