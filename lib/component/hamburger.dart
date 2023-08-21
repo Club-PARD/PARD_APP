@@ -36,17 +36,40 @@ class _HamburgerState extends State<Hamburger> {
                   _areItemsVisible = !_areItemsVisible;
                 });
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(iconSize: 19, padding: EdgeInsets.zero, onPressed: () {
+              child: Container(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      'assets/Notion.png',
+                      width: 22,
+                      height: 22,
+                    ),
+                    const Text('PARD 노션',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600)),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        _areItemsVisible
+                            ? Icons.keyboard_arrow_down_sharp
+                            : Icons.keyboard_arrow_right_sharp,
+                        size: 19,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
                         setState(() {
-                  _areItemsVisible = !_areItemsVisible;
-                });
-              }, icon: const Icon(Icons.arrow_drop_down_outlined, color: Colors.white,)),
-                  Image.asset('assets/Notion.png',width: 22, height: 22,),
-                  const Text('PARD 노션', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)),
-                ],
+                          _areItemsVisible = !_areItemsVisible;
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
             if (_areItemsVisible) ...[

@@ -144,7 +144,9 @@ class MyPage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const SizedBox(width: 24,),
+                        const SizedBox(
+                          width: 24,
+                        ),
                         Container(
                           width: 45,
                           height: 24,
@@ -167,13 +169,20 @@ class MyPage extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          width: 8,
+                        ),
                         Container(
                           width: 90,
                           height: 24,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 4),
                           decoration: ShapeDecoration(
-                            color: const Color(0xFF5262F5),
+                            gradient: const LinearGradient(
+                              begin: Alignment(1.00, -0.03),
+                              end: Alignment(-1, 0.03),
+                              colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
@@ -189,13 +198,16 @@ class MyPage extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          width: 8,
+                        ),
                         Container(
-                          width: 90,
+                          width: 80,
                           height: 24,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 4),
                           decoration: ShapeDecoration(
-                            color: const Color(0xFF5262F5),
+                            color: const Color(0xFF7B3EEF),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
@@ -213,14 +225,17 @@ class MyPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Text(
-                      '김파드님',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w700,
-                        height: 1.20,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 24.0),
+                      child: Text(
+                        '김파드님',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w700,
+                          height: 1.20,
+                        ),
                       ),
                     ),
                   ],
@@ -250,32 +265,38 @@ class MyPage extends StatelessWidget {
                 height: height / 101.5,
               ),
               Container(
-                width: width / 1.3,
+                width: width / 1.14,
                 height: height / 16,
                 decoration: const BoxDecoration(color: Color(0xFF2A2A2A)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      '알림 설정',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        height: 1.29,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 24.0),
+                      child: Text(
+                        '알림 설정',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w600,
+                          height: 1.29,
+                        ),
                       ),
                     ),
-                    Obx(() {
-                      return Switch(
-                        value: controller.onOff.value,
-                        onChanged: (value) {
-                          controller.onOff.value = !controller.onOff.value;
-                          print(controller.onOff.value);
-                        },
-                      );
-                    }),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 24.0),
+                      child: Obx(() {
+                        return Switch(
+                          value: controller.onOff.value,
+                          onChanged: (value) {
+                            controller.onOff.value = !controller.onOff.value;
+                            print(controller.onOff.value);
+                          },
+                        );
+                      }),
+                    ),
                   ],
                 ),
               ),
@@ -303,56 +324,72 @@ class MyPage extends StatelessWidget {
                 height: height / 101.5,
               ),
               Container(
-                width: width / 1.3,
+                width: width / 1.14,
                 height: height / 16,
-                decoration: const BoxDecoration(color: Color(0xFF2A2A2A)),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF2A2A2A),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      '개인정보 처리방침',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        height: 1.29,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 24.0),
+                      child: Text(
+                        '개인정보 처리방침',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w600,
+                          height: 1.29,
+                        ),
                       ),
                     ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Color.fromRGBO(228, 228, 228, 1),
-                        ))
+                    Padding(
+                      padding: const EdgeInsets.only(right: 24.0),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            color: Color.fromRGBO(228, 228, 228, 1),
+                          )),
+                    )
                   ],
                 ),
               ),
               Container(
-                width: width / 1.3,
+                width: width / 1.14,
                 height: height / 16,
-                decoration: const BoxDecoration(color: Color(0xFF2A2A2A)),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF2A2A2A),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      '서비스 이용약관',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        height: 1.29,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 24.0),
+                      child: Text(
+                        '서비스 이용약관',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w600,
+                          height: 1.29,
+                        ),
                       ),
                     ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Color.fromRGBO(228, 228, 228, 1),
-                        ))
+                    Padding(
+                      padding: const EdgeInsets.only(right: 24.0),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            color: Color.fromRGBO(228, 228, 228, 1),
+                          )),
+                    )
                   ],
                 ),
               ),
@@ -380,37 +417,45 @@ class MyPage extends StatelessWidget {
                 height: height / 101.5,
               ),
               Container(
-                width: width / 1.3,
+                width: width / 1.14,
                 height: height / 16,
-                decoration: const BoxDecoration(color: Color(0xFF2A2A2A)),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF2A2A2A),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      '로그아웃',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        height: 1.29,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 24.0),
+                      child: Text(
+                        '로그아웃',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w600,
+                          height: 1.29,
+                        ),
                       ),
                     ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Color.fromRGBO(228, 228, 228, 1),
-                        ))
+                    Padding(
+                      padding: const EdgeInsets.only(right: 24.0),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            color: Color.fromRGBO(228, 228, 228, 1),
+                          )),
+                    )
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ],
       ),
-      bottomNavigationBar: const BottomBar(),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
