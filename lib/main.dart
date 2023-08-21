@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
+import 'package:pard_app/view/home.dart';
 import 'package:pard_app/view/mypage.dart';
 import 'firebase_options.dart';
 
@@ -34,40 +35,31 @@ Future <void> main() async {
   );
   Get.put(PushNotificationController()); /** pushNotifiaction controller초기화되지 않았다고 해서 초기화 */
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  runApp( const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
- final PushNotificationController pnc = PushNotificationController.to;
-
-  @override
-  void initState(){
-    super.initState();
-     FirebaseMessaging.onMessage.listen((message) {   /** foreground 수신처리 */
-  PushNotificationController.showFlutterNotification(  /** 알림 보여주게 한다 */
+  final PushNotificationController pnc = PushNotificationController.to;
+  
+  FirebaseMessaging.onMessage.listen((message) {
+    PushNotificationController.showFlutterNotification(
       message, 
       pnc.flutterLocalNotificationsPlugin, 
       pnc.channel
-  );
-});   
-     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler); /** bacjground 수신처리 */
-     FirebaseMessaging.onMessageOpenedApp.listen(pnc.handleMessage);   /** 알림 클릭 */
-  }
+    );
+  });
+  
+  FirebaseMessaging.onMessageOpenedApp.listen(pnc.handleMessage);
+  runApp( const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: BindingsBuilder.put(() => PushNotificationController(),permanent: true),
-      home: const MyPage(),    /** 초기 페이지 mypage.dart로 설정 */
+      home: const Home(),    /** 초기 페이지 mypage.dart로 설정 */
       getPages: [              /** router */
         GetPage(name: '/mypage', page: () => const MyPage()),
+        GetPage(name: '/home', page: () => const Home())
       ],
     );
   }
