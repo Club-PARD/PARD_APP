@@ -16,6 +16,8 @@ class BottomBarController extends GetxController {
       case 2:
         Get.offNamed('/mypage');
         break;
+      default:
+         Get.offNamed('/home'); 
     }
   }
 }
