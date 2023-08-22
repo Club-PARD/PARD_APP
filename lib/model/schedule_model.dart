@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'schedule_model.g.dart';
+
+@JsonSerializable()
 class ScheduleModel {
   Map<String, int> attend;
   String title;
@@ -16,4 +21,9 @@ class ScheduleModel {
     this.part,
     this.previous,
   );
+
+  factory ScheduleModel.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ScheduleModelToJson(this);
 }
