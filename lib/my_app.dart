@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/Views/my_point_view.dart';
 
@@ -7,19 +8,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        fontFamily: 'Pretendard',
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      builder: (context, child) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          fontFamily: 'Pretendard',
+          useMaterial3: true,
+        ),
+        initialRoute: '/',
+        getPages: [
+          GetPage(name: '/', page: () => MyPointScreen()),
+          // GetPage(name: '/first', page: () => FirstNamedPage()),
+          // GetPage(name: '/second', page: () => SecondNamedPage()),
+        ],
       ),
-      initialRoute: '/',
-      getPages: [
-        GetPage(name: '/', page: () => MyPointScreen()),
-        // GetPage(name: '/first', page: () => FirstNamedPage()),
-        // GetPage(name: '/second', page: () => SecondNamedPage()),
-      ],
     );
   }
 }
