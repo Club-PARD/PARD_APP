@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/Views/my_point_view.dart';
+import 'package:pard_app/Views/number_auth_view.dart';
+import 'package:pard_app/Views/signin_view.dart';
+import 'package:pard_app/Views/tos_view.dart';
 import 'package:pard_app/utilities/app_theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -24,7 +27,10 @@ class MyApp extends StatelessWidget {
         },
         initialRoute: '/',
         getPages: [
-          GetPage(name: '/', page: () => MyPointScreen()),
+          GetPage(name: '/', page: () => const SignInView()),
+          GetPage(name: '/tos', page: () => const TosView()),
+          GetPage(name: '/numberauth', page: () => const NumberAuthView()),
+          GetPage(name: '/mypoint', page: () => MyPointScreen()),
           // GetPage(name: '/first', page: () => FirstNamedPage()),
           // GetPage(name: '/second', page: () => SecondNamedPage()),
         ],
