@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/Views/home_view.dart';
 import 'package:pard_app/Views/my_point_view.dart';
+import 'package:pard_app/Views/mypage.dart';
+import 'package:pard_app/component/qr_scanner.dart';
 import 'package:pard_app/utilities/app_theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -22,11 +25,12 @@ class MyApp extends StatelessWidget {
             child: child!,
           );
         },
-        initialRoute: '/',
+        initialRoute: '/home',
         getPages: [
           GetPage(name: '/', page: () => MyPointScreen()),
-          // GetPage(name: '/first', page: () => FirstNamedPage()),
-          // GetPage(name: '/second', page: () => SecondNamedPage()),
+           GetPage(name: '/home', page: () => HomePage()),
+           GetPage(name: '/mypage', page: () => const MyPage()),
+           GetPage(name: '/qr', page: ()=> QRScan())
         ],
       ),
     );
