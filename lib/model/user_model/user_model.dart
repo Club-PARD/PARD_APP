@@ -17,6 +17,7 @@ class UserModel {
     this.isAdmin,
     this.isMaster,
     this.lastLogin,
+    this.attend,
   });
 
   String? uid;
@@ -30,6 +31,8 @@ class UserModel {
   bool? isMaster;
   @JsonKey(fromJson: dateTimeFromTimestamp)
   final DateTime? lastLogin;
+  String? pid;
+  Map<String, dynamic>? attend;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

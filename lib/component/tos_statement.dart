@@ -1,55 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/utilities/color_style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-Widget tosAgreement(double height, double width) {
+Widget tosAgreement(BuildContext context) {
   return Container(
-    width: width * 327,
-    height: height * 104,
+    width: 327.w,
+    height: 104.h,
     decoration: BoxDecoration(
-        color: Color.fromRGBO(42, 42, 42, 1),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+        color: const Color(0xff2A2A2A),
+        borderRadius: BorderRadius.all(Radius.circular(8.w)),
         border: Border.all(
-          color: Color.fromRGBO(163, 163, 163, 1),
+          color: grayScale[30]!,
           width: 1,
         )),
     child: Padding(
-      padding: const EdgeInsets.only(left: 20),
+      padding: EdgeInsets.only(left: 20.w),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             children: [
               Icon(
                 Icons.check,
-                color: Color.fromRGBO(228, 228, 228, 1),
+                size: 14.sp,
+                color: Theme.of(context).colorScheme.surface,
               ),
               SizedBox(
-                width: width * 4,
+                width: 4.w,
               ),
-              Text(
-                '개인정보 수집 및 이용 동의(필수)',
-                style: TextStyle(
-                    fontSize: 14, color: Color.fromRGBO(228, 228, 228, 1)),
+              GestureDetector(
+                onTap: () {
+                  launchUrl(Uri.parse(
+                      'https://pardhgu.notion.site/Pard-APP-fbccc11671d14b4d8012dd999eff7f93?pvs=4'));
+                },
+                child: Text('개인정보 수집 및 이용 동의(필수)',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      height: 20 / 14,
+                      color: Theme.of(context).colorScheme.surface,
+                    )),
               ),
             ],
           ),
           SizedBox(
-            height: height * 16,
+            height: 16.h,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Icon(
                 Icons.check,
-                color: Color.fromRGBO(228, 228, 228, 1),
+                size: 14.sp,
+                color: Theme.of(context).colorScheme.surface,
               ),
               SizedBox(
-                width: width * 4,
+                width: 4.w,
               ),
-              Text(
-                '서비스 이용약관(필수)',
-                style: TextStyle(
-                    fontSize: 14, color: Color.fromRGBO(228, 228, 228, 1)),
+              GestureDetector(
+                onTap: () {
+                  launchUrl(Uri.parse(
+                      'https://pardhgu.notion.site/Pard-APP-18c93fe8a2c648009e17d1ab294a4fa9?pvs=4'));
+                },
+                child: Text(
+                  '서비스 이용약관(필수)',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                    height: 20 / 14,
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                ),
               ),
             ],
           ),
@@ -59,16 +84,16 @@ Widget tosAgreement(double height, double width) {
   );
 }
 
-Widget tosDescription(double height, double width, String string1,
-    String string2, String string3) {
+Widget tosDescription(
+    BuildContext context, String string1, String string2, String string3) {
   return Container(
-    width: width * 327,
-    height: height * 68,
+    width: 327.w,
+    height: 68.h,
     decoration: BoxDecoration(
-        color: Color.fromRGBO(42, 42, 42, 1),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+        color: const Color(0xff2A2A2A),
+        borderRadius: BorderRadius.all(Radius.circular(8.w)),
         border: Border.all(
-          color: Color.fromRGBO(163, 163, 163, 1),
+          color: grayScale[30]!,
           width: 1,
         )),
     child: Column(
@@ -77,8 +102,10 @@ Widget tosDescription(double height, double width, String string1,
       children: [
         Text(
           string1,
-          style:
-              TextStyle(fontSize: 14, color: Color.fromRGBO(163, 163, 163, 1)),
+          style: TextStyle(
+            fontSize: 14.sp,
+            color: grayScale[30],
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -89,45 +116,50 @@ Widget tosDescription(double height, double width, String string1,
                 foreground: Paint()
                   ..shader = LinearGradient(
                     colors: [
-                      Color.fromRGBO(82, 98, 245, 1),
-                      Color.fromRGBO(123, 63, 239, 1),
+                      Theme.of(context).colorScheme.onSecondary,
+                      Theme.of(context).colorScheme.secondary,
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
-                  ).createShader(
-                      Rect.fromLTWH(0, 0, 90, 0)), // Adjust the Rect as needed
-                fontSize: 14,
+                  ).createShader(Rect.fromLTWH(
+                      0, 0, 327.w, 68.h)), // Adjust the Rect as needed
+                fontSize: 14.sp,
               ),
             ),
             Text(
               string3,
               style: TextStyle(
-                  fontSize: 14, color: Color.fromRGBO(163, 163, 163, 1)),
+                fontSize: 14.sp,
+                color: grayScale[30],
+              ),
             )
           ],
         ),
       ],
     ),
   );
-}
+} 
 
-Widget checkbox(RxBool isAgree, double width, double height) {
-    return Container(
-      width: width,
+Widget checkbox(
+    BuildContext context, RxBool isAgree, double height) {
+  return GestureDetector(
+    onTap: () {
+      isAgree.value = !(isAgree.value);
+    },
+    child: SizedBox(
+      width: height,
       height: height,
-      child: Checkbox(
-        value: isAgree.value,
-        onChanged: (bool? value) {
-          isAgree.value = !(isAgree.value);
-        },
-        checkColor: Colors.black,
-        fillColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed) || isAgree.value) {
-            return Color.fromRGBO(82, 98, 245, 1); // 배경색 (눌렸을 때 또는 true 일 때)
-          }
-          return Color.fromRGBO(171, 171, 171, 1); // 배경색 (false 일 때)
-        }),
+      child: Container(
+        width: (16.25).h,
+        height: (16.25).h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular((1.88).w)),
+          color: isAgree.value
+              ? Theme.of(context).colorScheme.onSecondary
+              : grayScale[30],
+        ),
+        child: Center(child: Icon(Icons.check, size: (14.37).sp, color: blackScale[100],)),
       ),
-    );
-  }
+    ),
+  );
+}

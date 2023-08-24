@@ -17,7 +17,8 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       isAdmin: json['isAdmin'] as bool?,
       isMaster: json['isMaster'] as bool?,
       lastLogin: dateTimeFromTimestamp(json['lastLogin'] as Timestamp),
-    );
+      attend: json['attend'] as Map<String, dynamic>?,
+    )..pid = json['pid'] as String?;
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'uid': instance.uid,
@@ -30,4 +31,6 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'isAdmin': instance.isAdmin,
       'isMaster': instance.isMaster,
       'lastLogin': instance.lastLogin?.toIso8601String(),
+      'pid': instance.pid,
+      'attend': instance.attend,
     };

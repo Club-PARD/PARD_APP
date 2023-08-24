@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pard_app/controllers/phone_verification_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pard_app/utilities/color_style.dart';
 
-Widget verificationTextField(PhoneVerificationController controller,
-    PhoneNumberFormatter? formatter, String hint, double width, double height) {
-  return Container(
-    width: width * 211,
-    height: height * 48,
+Widget verificationTextField(BuildContext context, controller,
+    PhoneNumberFormatter? formatter, String hint) {
+  return SizedBox(
+    width: 211.w,
+    height: 48.h,
     child: TextFormField(
       onChanged: (value) {
         formatter != null
@@ -18,28 +19,31 @@ Widget verificationTextField(PhoneVerificationController controller,
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
-        fillColor: Color.fromRGBO(42, 42, 42, 1),
-        contentPadding:
-            EdgeInsets.fromLTRB(width * 15, height * 15, 0, height * 15),
+        fillColor: const Color(0xff2A2A2A),
+        contentPadding: EdgeInsets.fromLTRB(15.w, 15.h, 0, 15.h),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4), // 테두리 radius 설정
+          borderRadius: BorderRadius.circular(4.w), // 테두리 radius 설정
           borderSide:
-              BorderSide(color: Color.fromRGBO(228, 228, 228, 1), width: 1),
+              BorderSide(color: Theme.of(context).colorScheme.surface, width: 1.w),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4), // 테두리 radius 설정
+          borderRadius: BorderRadius.circular(4.w), // 테두리 radius 설정
           borderSide:
-              BorderSide(color: Color.fromRGBO(228, 228, 228, 1), width: 1),
+              BorderSide(color: Theme.of(context).colorScheme.surface, width: 1.w),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4), // 테두리 radius 설정
+          borderRadius: BorderRadius.circular(4.w), // 테두리 radius 설정
           borderSide:
-              BorderSide(color: Color.fromRGBO(82, 98, 245, 1), width: 1),
+              BorderSide(color: Theme.of(context).colorScheme.onSecondary, width: 1.w),
         ),
-        hintStyle:
-            TextStyle(color: Color.fromRGBO(228, 228, 228, 1)), // 힌트 텍스트 색상
+        hintStyle: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+          height: 18.h / 14.h,
+          color: grayScale[30],
+        ), // 힌트 텍스트 색상
       ),
-      style: TextStyle(color: Colors.white),
+      style: Theme.of(context).textTheme.headlineSmall,
     ),
   );
 }

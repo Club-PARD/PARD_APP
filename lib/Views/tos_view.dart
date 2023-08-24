@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
@@ -10,55 +11,53 @@ class TosView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double unit_height = MediaQuery.of(context).size.height / 812;
-    double unit_width = MediaQuery.of(context).size.width / 375;
-    double appBar_height = AppBar().preferredSize.height;
-
-    final AuthController _authController = Get.put(AuthController());
+    final AuthController authController = Get.put(AuthController());
 
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Color.fromRGBO(26, 26, 26, 1),
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: PardAppBar('이용약관'),
           body: Obx(
-            () => Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24),
+            () => Center(
               child: Column(
                 children: [
+                  tosDescription(
+                      context, '서비스 가입 및 이용을 위해', '서비스 이용약관', '에 동의해주세요'),
                   SizedBox(
-                    height: unit_height * 56 - appBar_height,
-                  ),
-                  tosDescription(unit_height, unit_width, '서비스 가입 및 이용을 위해',
-                      '서비스 이용약관', '에 동의해주세요'),
-                  SizedBox(
-                    height: unit_height * 48,
-                  ),
-                  Row(
-                    children: [
-                      checkbox(_authController.isAgree, unit_width * 20,
-                          unit_height * 20),
-                      SizedBox(
-                        width: unit_width * 4,
-                      ),
-                      Text(
-                        '서비스 이용약관 전체동의',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: _authController.isAgree.value
-                                ? Color.fromRGBO(82, 98, 245, 1)
-                                : Colors.white),
-                      ),
-                    ],
+                    height: 48.h,
                   ),
                   SizedBox(
-                    height: unit_height * 16,
+                    width: 327.w,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        checkbox(context, authController.isAgree, 20.h),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Text(
+                          '서비스 이용약관 전체동의',
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700,
+                              height: 20.h / 16.h,
+                              color: authController.isAgree.value
+                                  ? Theme.of(context).colorScheme.onSecondary
+                                  : Theme.of(context).colorScheme.surface),
+                        ),
+                      ],
+                    ),
                   ),
-                  tosAgreement(unit_height, unit_width),
                   SizedBox(
-                    height: unit_height * 316,
+                    height: 16.h,
                   ),
-                  nextButton('다음', '/numberauth', unit_width, unit_height,
-                      _authController.isAgree.value, null),
+                  tosAgreement(context),
+                  SizedBox(
+                    height: 316.h,
+                  ),
+                  nextButton(context, '다음', '/numberauth',
+                      authController.isAgree.value, null),
                 ],
               ),
             ),

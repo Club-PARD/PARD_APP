@@ -8,8 +8,7 @@ import 'package:pard_app/controllers/user_controller.dart';
 class AuthController extends GetxController {
   final UserController _userController = Get.put(UserController());
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  Rx<String?> userEmail = Rx<String?>(null); // Observable for email
-
+  Rx<String?> userEmail = Rx<String?>(null); // 1차적으로 이메일 저장(휴대폰 인증 전 필요)
   Rx<User?> user = Rx<User?>(null);
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -34,6 +33,7 @@ class AuthController extends GetxController {
     // });
   }
 
+  //로그인
   Future<void> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
@@ -49,13 +49,12 @@ class AuthController extends GetxController {
             await _auth.signInWithCredential(credential);
         final User? user = authResult.user;
 
-        if (user != null) {
+        if (user != null) { // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
           userEmail.value = user.email;
           print(userEmail.value);
           bool isUserExists =
               await _userController.isVerifyUserByEmail(user.email!);
-          if (isUserExists) 
-          {
+          if (isUserExists) {
             await _userController.updateTimeByEmail(user.email!);
             await _userController.getUserInfoByEmail(user.email!);
             Get.toNamed('/mypoint');
@@ -66,6 +65,16 @@ class AuthController extends GetxController {
       }
     } catch (error) {
       print("Google Sign-In Error: $error");
+    }
+  }
+
+  //로그아웃
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+      Get.toNamed('/');
+    } catch (error) {
+      print('Sign Out Error: $error');
     }
   }
 }

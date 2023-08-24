@@ -1,36 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/utilities/color_style.dart';
 
-Widget nextButton(String title, String route, double unit_width,
-    double unit_height, bool isNext, VoidCallback? function) {
+Widget nextButton(BuildContext context, title, String route, bool isNext,
+    VoidCallback? function) {
   return GestureDetector(
       child: Container(
-        width: unit_width * 327,
-        height: unit_height * 56,
+        width: 327.w,
+        height: 56.h,
         decoration: BoxDecoration(
           gradient: isNext
               ? LinearGradient(
                   colors: [
-                    Color.fromRGBO(82, 98, 245, 1),
-                    Color.fromRGBO(123, 63, 239, 1),
+                    Theme.of(context).colorScheme.onSecondary,
+                    Theme.of(context).colorScheme.secondary,
                   ],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 )
               : null,
-          color: !isNext ? Color.fromRGBO(163, 163, 163, 1) : null,
+          color: !isNext ? grayScale[30] : null,
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         child: Center(
           child: Text(
             title,
-            style: TextStyle(fontSize: 18, color: Colors.white),
+            style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                height: 24.h / 18.h,
+                color: whiteScale[100]),
           ),
         ),
       ),
       onTap: () {
         if (isNext) {
-          if(function != null) {
+          if (function != null) {
             function;
           }
           Get.toNamed(route);
