@@ -28,6 +28,7 @@ final TextStyle displaySmall = TextStyle(
 // Pretendard / Body @@@@@@@@@@@@@@@@@@@@@@@@@@@
 //B6-16-B
 final TextStyle headlineLarge = TextStyle(
+  fontFamily: "Pretendard",
   fontSize: 16,
   fontWeight: FontWeight.w700,
   height: 20 / 16,
@@ -36,6 +37,7 @@ final TextStyle headlineLarge = TextStyle(
 
 //B5-16-SB
 final TextStyle headlineMedium = TextStyle(
+  fontFamily: "Pretendard",
   fontSize: 16,
   fontWeight: FontWeight.w600,
   height: 20 / 16,
@@ -44,6 +46,7 @@ final TextStyle headlineMedium = TextStyle(
 
 //B4-14-SB
 final TextStyle headlineSmall = TextStyle(
+  fontFamily: "Pretendard",
   fontSize: 14,
   fontWeight: FontWeight.w600,
   height: 18 / 14,
@@ -52,6 +55,7 @@ final TextStyle headlineSmall = TextStyle(
 
 //B3-14-M
 final TextStyle titleLarge = TextStyle(
+  fontFamily: "Pretendard",
   fontSize: 14,
   fontWeight: FontWeight.w500,
   height: 18 / 14,
@@ -60,6 +64,7 @@ final TextStyle titleLarge = TextStyle(
 
 //B2-12-SB
 final TextStyle titleMedium = TextStyle(
+  fontFamily: "Pretendard",
   fontSize: 12,
   fontWeight: FontWeight.w600,
   height: 16 / 12,
@@ -68,6 +73,7 @@ final TextStyle titleMedium = TextStyle(
 
 //B1-12-M
 final TextStyle titleSmall = TextStyle(
+  fontFamily: "Pretendard",
   fontSize: 12,
   fontWeight: FontWeight.w500,
   height: 16 / 12,
