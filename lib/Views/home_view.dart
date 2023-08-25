@@ -151,7 +151,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 5.h,
+                    height: 20.h,
                   ),
 
                   /** 캐릭터 Row로 나중에 point 정보로 캐릭터들 변경해야함*/
@@ -189,7 +189,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'level 1',
+                            'LEVEL 1',
                             style: TextStyle(
                               color: const Color(0x665262F5),
                               fontSize: 14.h,
@@ -233,23 +233,37 @@ class HomePage extends StatelessWidget {
                                 side: const BorderSide(
                                   width: 1,
                                   strokeAlign: BorderSide.strokeAlignOutside,
-                                  color: Color(0xFF5262F5),
+                                  color: Color(0xFF3B3B3B)
                                 ),
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                            child: Center(
-                              child: Image.asset(
-                                'assets/images/pardie1.png',
+                            child: Column(
+                              children: [
+                                SizedBox(height: 16.h,),
+                                const Text(
+                                'NEXT LEVEL',
+                                style: TextStyle(
+                                  color: Color(0x335262F5),
+                                  fontSize: 18,
+                                  fontFamily: 'Sandoll Danpatpang',
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.50,
+                                ),
+                              ),
+                              SizedBox(height: 10.h,),
+                                Image.asset(
+                                'assets/images/lv2s.png',
                                 width: 50.w,
                                 height: 50.h,
                               ),
+                              ]
                             ),
                           ),
                           Text(
-                            'level 1',
+                            'LEVEL ?',
                             style: TextStyle(
-                              color: const Color(0x665262F5),
+                              color: const Color(0xFF3B3B3B),
                               fontSize: 14.h,
                               fontFamily: 'Sandoll Danpatpang',
                               fontWeight: FontWeight.w400,
@@ -280,6 +294,7 @@ class HomePage extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  SizedBox(height: 10.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -294,15 +309,16 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),
+                  SizedBox(
+                              height: 20.5.h,
+                            ),
                   Row(
                     children: [
                       SizedBox(
                         width: 163.5.w,
                         child: Column(
                           children: [
-                            SizedBox(
-                              height: 20.5.h,
-                            ),
+                            
                             Text('파드 포인트', style: titleMedium),
                             SizedBox(
                               height: 8.h,
@@ -319,9 +335,7 @@ class HomePage extends StatelessWidget {
                         width: 162.5.w,
                         child: Column(
                           children: [
-                            SizedBox(
-                              height: 20.5.h,
-                            ),
+                           
                             Text('벌점', style: titleMedium),
                             SizedBox(
                               height: 8.h,
