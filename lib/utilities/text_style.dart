@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // Pretendard / Head @@@@@@@@@@@@@@@@@@@@@@@@@@@
 //H3-24-B
-final TextStyle displayLarge = TextStyle(
+const TextStyle displayLarge = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.w700,
   height: 28 / 24,
@@ -10,7 +10,7 @@ final TextStyle displayLarge = TextStyle(
 );
 
 //H2-20-B
-final TextStyle displayMedium = TextStyle(
+const TextStyle displayMedium = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w700,
   height: 24 / 20,
@@ -18,7 +18,7 @@ final TextStyle displayMedium = TextStyle(
 );
 
 //H1-18-SB
-final TextStyle displaySmall = TextStyle(
+const TextStyle displaySmall = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w600,
   height: 24 / 18,
@@ -27,7 +27,7 @@ final TextStyle displaySmall = TextStyle(
 
 // Pretendard / Body @@@@@@@@@@@@@@@@@@@@@@@@@@@
 //B6-16-B
-final TextStyle headlineLarge = TextStyle(
+const TextStyle headlineLarge = TextStyle(
   fontFamily: "Pretendard",
   fontSize: 16,
   fontWeight: FontWeight.w700,
@@ -36,7 +36,7 @@ final TextStyle headlineLarge = TextStyle(
 );
 
 //B5-16-SB
-final TextStyle headlineMedium = TextStyle(
+const TextStyle headlineMedium = TextStyle(
   fontFamily: "Pretendard",
   fontSize: 16,
   fontWeight: FontWeight.w600,
@@ -45,7 +45,7 @@ final TextStyle headlineMedium = TextStyle(
 );
 
 //B4-14-SB
-final TextStyle headlineSmall = TextStyle(
+const TextStyle headlineSmall = TextStyle(
   fontFamily: "Pretendard",
   fontSize: 14,
   fontWeight: FontWeight.w600,
@@ -54,7 +54,7 @@ final TextStyle headlineSmall = TextStyle(
 );
 
 //B3-14-M
-final TextStyle titleLarge = TextStyle(
+const TextStyle titleLarge = TextStyle(
   fontFamily: "Pretendard",
   fontSize: 14,
   fontWeight: FontWeight.w500,
@@ -63,7 +63,7 @@ final TextStyle titleLarge = TextStyle(
 );
 
 //B2-12-SB
-final TextStyle titleMedium = TextStyle(
+const TextStyle titleMedium = TextStyle(
   fontFamily: "Pretendard",
   fontSize: 12,
   fontWeight: FontWeight.w600,
@@ -72,7 +72,7 @@ final TextStyle titleMedium = TextStyle(
 );
 
 //B1-12-M
-final TextStyle titleSmall = TextStyle(
+const TextStyle titleSmall = TextStyle(
   fontFamily: "Pretendard",
   fontSize: 12,
   fontWeight: FontWeight.w500,

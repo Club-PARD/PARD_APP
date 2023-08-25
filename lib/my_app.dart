@@ -25,12 +25,12 @@ class MyApp extends StatelessWidget {
             child: child!,
           );
         },
-        initialRoute: '/home',
+        initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => MyPointScreen()),
-           GetPage(name: '/home', page: () => HomePage()),
-           GetPage(name: '/mypage', page: () => const MyPage()),
-           GetPage(name: '/qr', page: ()=> QRScan())
+          GetPage(name: '/home', page: () => HomePage()),
+          GetPage(name: '/mypage', page: () => const MyPage()),
+          GetPage(name: '/qr', page: () => QRScan())
         ],
       ),
     );
