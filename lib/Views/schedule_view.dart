@@ -40,7 +40,7 @@ class SchedulerScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.width / 34,
           ),
           Divider(
-            color: Theme.of(context).colorScheme.grayScale[30],
+            color: grayScale[30],
             thickness: 1,
           ),
           _buildSection('지난 일정', () => scheduleController.pastSchedules,

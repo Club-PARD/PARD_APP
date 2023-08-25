@@ -20,30 +20,28 @@ class MyPointScreen extends StatelessWidget {
               onPressed: () {
                 pointController.getUserUid();
               },
-              child: const Text('uid 가져오기 버튼'),
+              child: Text('uid 가져오기 버튼'),
             ),
             ElevatedButton(
               onPressed: () {
                 pointController.getUserPoints();
               },
-              child: const Text('point 가져오기 버튼'),
+              child: Text('point 가져오기 버튼'),
             ),
             ElevatedButton(
               onPressed: () {
                 pointController.getUserPoints();
                 pointController.getUserDataAndPoints();
               },
-              child: const Text('point model 버튼'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/schedule');
-              },
-              child: const Text('Schedule'),
+              child: Text('point model 버튼'),
             ),
             ElevatedButton(
               onPressed: () {},
-              child: const Text('버튼'),
+              child: Text('버튼'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('버튼'),
             ),
           ],
         ),

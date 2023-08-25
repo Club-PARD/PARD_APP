@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/Views/home_view.dart';
 import 'package:pard_app/Views/my_point_view.dart';
-import 'package:pard_app/Views/schedule_view.dart';
+import 'package:pard_app/Views/number_auth_view.dart';
+import 'package:pard_app/Views/signin_view.dart';
+import 'package:pard_app/Views/tos_view.dart';
+import 'package:pard_app/Views/mypage.dart';
+import 'package:pard_app/component/qr_scanner.dart';
 import 'package:pard_app/utilities/app_theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -25,8 +30,13 @@ class MyApp extends StatelessWidget {
         },
         initialRoute: '/',
         getPages: [
-          GetPage(name: '/', page: () => MyPointScreen()),
-          GetPage(name: '/schedule', page: () => SchedulerScreen()),
+          GetPage(name: '/', page: () => const SignInView()),
+          GetPage(name: '/tos', page: () => const TosView()),
+          GetPage(name: '/numberauth', page: () => const NumberAuthView()),
+          GetPage(name: '/mypoint', page: () => MyPointScreen()),
+          GetPage(name: '/home', page: () => HomePage()),
+          GetPage(name: '/mypage', page: () => const MyPage()),
+          GetPage(name: '/qr', page: () => QRScan())
           // GetPage(name: '/first', page: () => FirstNamedPage()),
           // GetPage(name: '/second', page: () => SecondNamedPage()),
         ],
