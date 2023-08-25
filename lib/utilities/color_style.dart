@@ -6,6 +6,7 @@ const Color primaryPurple = Color(0xff7B3FEF);
 const Color primaryBlue = Color(0xff5262F5);
 const Color errorRed = Color(0xffFF5A5A);
 const Color backgroundColor = Color(0xff1A1A1A);
+const Color containerBackgroundColor = Color(0xff2A2A2A);
 
 // default is 80
 const MaterialColor whiteScale = MaterialColor(0xffEFEFEF, {
