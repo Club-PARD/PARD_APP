@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeBar extends StatefulWidget {
   const HomeBar({super.key});
@@ -9,6 +10,24 @@ class HomeBar extends StatefulWidget {
   @override
   State<HomeBar> createState() => _HomeBarState();
 }
+
+void launchInstaURL() async {
+    final Uri pardInstaUrl = Uri.parse('https://www.instagram.com/official_pard_/');
+    if (await canLaunchUrl(pardInstaUrl)) {
+      await launchUrl(pardInstaUrl);
+    } else {
+      throw 'Could not launch $pardInstaUrl';
+    }
+  }
+
+  void launchPardWebURL() async {
+    final Uri pardWebUrl = Uri.parse('https://we-pard.com/');
+    if (await canLaunchUrl(pardWebUrl)) {
+      await launchUrl(pardWebUrl);
+    } else {
+      throw 'Could not launch $pardWebUrl';
+    }
+  }
 
 class _HomeBarState extends State<HomeBar> {
   bool _areItemsVisible = false;
@@ -144,25 +163,31 @@ class _HomeBarState extends State<HomeBar> {
                 children: [
                   SizedBox(
                     height: 60.h,
-                    child: Row(
-                      children: [
-                        SizedBox(width: 24.w,),
-                        Image.asset("assets/images/ig.png", width: 16.w,height: 16.h,),
-                        SizedBox(width: 8.w,),
-                        Text('인스타그램',style: headlineSmall)
-                      ],
+                    child: InkWell(
+                      onTap: launchInstaURL,
+                      child: Row(
+                        children: [
+                          SizedBox(width: 24.w,),
+                          Image.asset("assets/images/ig.png", width: 16.w,height: 16.h,),
+                          SizedBox(width: 8.w,),
+                          Text('인스타그램',style: headlineSmall)
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 1.h,),
                   SizedBox(
                     height: 60.h,
-                    child: Row(
-                      children: [
-                         SizedBox(width: 24.w,),
-                        Image.asset("assets/images/logo.png", width: 43.7.w,height: 9.h),
-                         SizedBox(width: 8.w),
-                         Text('웹사이트',style: headlineSmall,)
-                      ],
+                    child: InkWell(
+                      onTap: launchPardWebURL,
+                      child: Row(
+                        children: [
+                           SizedBox(width: 24.w,),
+                          Image.asset("assets/images/logo.png", width: 43.7.w,height: 9.h),
+                           SizedBox(width: 8.w),
+                           Text('웹사이트',style: headlineSmall,)
+                        ],
+                      ),
                     ),
                   ),
                 ],

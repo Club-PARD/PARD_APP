@@ -1,4 +1,3 @@
-
 //import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +9,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 class QRScan extends StatelessWidget {
   final QRController qrController = Get.put(QRController());
 
-   QRScan({super.key});
+  QRScan({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class QRScan extends StatelessWidget {
           ),
           Positioned(
             top: 222.h,
-            left: 56.w,
+            left: 60.w,
             child: Text(
               '테두리 안에 출석 QR코드를 인식해주세요',
               style: headlineLarge.copyWith(

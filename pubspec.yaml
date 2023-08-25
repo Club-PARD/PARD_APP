@@ -44,6 +44,7 @@ dependencies:
   firebase_auth: ^4.7.3
   qr_code_scanner: ^1.0.1
   mobile_scanner: ^3.4.1
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:
