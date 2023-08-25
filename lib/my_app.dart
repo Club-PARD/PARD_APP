@@ -34,6 +34,9 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/tos', page: () => const TosView()),
           GetPage(name: '/numberauth', page: () => const NumberAuthView()),
           GetPage(name: '/mypoint', page: () => MyPointScreen()),
+          GetPage(name: '/home', page: () => HomePage()),
+          GetPage(name: '/mypage', page: () => const MyPage()),
+          GetPage(name: '/qr', page: () => QRScan())
           // GetPage(name: '/first', page: () => FirstNamedPage()),
           // GetPage(name: '/second', page: () => SecondNamedPage()),
         ],
