@@ -1,0 +1,227 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:pard_app/component/pard_appbar.dart';
+import 'package:pard_app/component/verification_textfield.dart';
+import 'package:pard_app/controllers/phone_verification_controller.dart';
+import 'package:pard_app/component/tos_statement.dart';
+import 'package:pard_app/component/next_button.dart';
+import 'package:pard_app/controllers/user_controller.dart';
+import 'package:pard_app/utilities/color_style.dart';
+
+import '../controllers/auth_controller.dart';
+
+class NumberAuthView extends StatelessWidget {
+  const NumberAuthView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final PhoneVerificationController phoneVerificationController =
+        Get.put(PhoneVerificationController());
+    final UserController userController = Get.put(UserController());
+    final AuthController authController = Get.put(AuthController());
+
+    const String phoneValidation = '* PARD 회원으로 등록된 전화번호가 아니예요.';
+    const String codeValidation = '* 잘못된 인증번호예요. 다시 입력해주세요.';
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: PardAppBar('PARD 회원인증'),
+      body: Obx(
+        () => Center(
+          child: Column(
+            children: [
+              tosDescription(context, 'PARD 회원임을 인증하기 위해', 'PARD 등록에 사용한 전화번호',
+                  '를 입력해주세요.'),
+              SizedBox(
+                height: 48.h,
+              ),
+              SizedBox(
+                width: 327.w,
+                child: Text(
+                  '전화번호',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      height: 20.h / 16.h,
+                      color: Theme.of(context).colorScheme.surface),
+                ),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              SizedBox(
+                width: 327.w,
+                height: 48.h,
+                child: Row(
+                  children: [
+                    verificationTextField(context, phoneVerificationController,
+                        PhoneNumberFormatter(), '전화번호를 입력해주세요.'),
+                    SizedBox(
+                      width: 8.w,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        print(phoneVerificationController
+                            .phoneTextFormField.value);
+                        phoneVerificationController.isCorrectPhoneNumber.value =
+                            await phoneVerificationController
+                                .isVerifyPhoneNumber(phoneVerificationController
+                                    .phoneTextFormField.value);
+                        if (phoneVerificationController
+                                    .isCorrectPhoneNumber.value !=
+                                null &&
+                            phoneVerificationController
+                                    .isCorrectPhoneNumber.value ==
+                                true) {
+                          await phoneVerificationController.sendPhoneNumber();
+                          print(
+                              '인증번호: ${phoneVerificationController.verificationCodeFromAuth.value}');
+                        }
+                      },
+                      child: Container(
+                        width: 108.w,
+                        height: 48.h,
+                        decoration: BoxDecoration(
+                          color: phoneVerificationController
+                                      .phoneTextFormField.value ==
+                                  ''
+                              ? grayScale[30]
+                              : Theme.of(context).colorScheme.onSecondary,
+                          borderRadius: BorderRadius.all(Radius.circular(8.w)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '인증번호 받기',
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              SizedBox(
+                  width: 327.w,
+                  height: 16.h,
+                  child: Text(
+                    phoneVerificationController.isCorrectPhoneNumber.value !=
+                                null &&
+                            phoneVerificationController
+                                    .isCorrectPhoneNumber.value ==
+                                false
+                        ? phoneValidation
+                        : '',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      height: 16.h / 12.h,
+                      color: Theme.of(context).colorScheme.onError,
+                    ),
+                  )),
+              SizedBox(
+                height: 24.h,
+              ),
+              SizedBox(
+                width: 327.w,
+                child: Text(
+                  '인증번호',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      height: 20.h / 16.h,
+                      color: Theme.of(context).colorScheme.surface),
+                ),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              SizedBox(
+                width: 327.w,
+                height: 48.h,
+                child: Row(
+                  children: [
+                    verificationTextField(context, phoneVerificationController,
+                        null, '인증번호(6자리)를 입력해주세요.'),
+                    SizedBox(
+                      width: 8.w,
+                    ),
+                    GestureDetector(
+                      onTap: () =>
+                          phoneVerificationController.verifyCode(context),
+                      child: Container(
+                        width: 108.w,
+                        height: 48.h,
+                        decoration: BoxDecoration(
+                          color: phoneVerificationController
+                                      .codeTextFormField.value ==
+                                  ''
+                              ? grayScale[30]
+                              : Theme.of(context).colorScheme.onSecondary,
+                          borderRadius: BorderRadius.all(Radius.circular(8.w)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '인증번호 확인',
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              SizedBox(
+                  width: 327.w,
+                  height: 16.h,
+                  child: Text(
+                    phoneVerificationController.isCorrectCode.value != null &&
+                            phoneVerificationController.isCorrectCode.value ==
+                                false
+                        ? codeValidation
+                        : '',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      height: 16.h / 12.h,
+                      color: Theme.of(context).colorScheme.onError,
+                    ),
+                  )),
+              SizedBox(
+                height: 232.h,
+              ),
+              // nextButton('PARD 회원 인증하기', '/mypage', unit_width, unit_height,
+              //     _phoneVerificationController.isCorrectCode.value ?? false, () async {await _userController.updateTimeByEmail(_authController.userEmail.value!);}),
+              nextButton(context, 'PARD 회원 인증하기', '/mypoint',
+                  phoneVerificationController.isCorrectCode.value ?? false,
+                  () async {
+                await userController
+                    .updateTimeByEmail(authController.userEmail.value!);
+              }),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                '회원 인증에 실패하셨나요?',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  height: 20.h / 14.h,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

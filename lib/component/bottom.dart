@@ -32,24 +32,31 @@ class BottomBar extends StatelessWidget {
                 selectedItemColor: const Color.fromRGBO(82, 98, 245, 1),
                 onTap: controller.onItemTapped,
               )),
-          SizedBox(
+          Container(
             width: 80.w,
             height: 80.h,
+            decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(50),  
+    gradient: const LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Color(0xFF5262F5),
+        Color(0xFF7B3FEF),
+      ],
+    ),
+  ),
             child: FloatingActionButton(
               onPressed: () {
                 controller.onItemTapped(1);
                 Get.toNamed('/qr');
                 // 활성화, 비활 만들어야 함
               },
-              backgroundColor: const Color.fromRGBO(42, 42, 42, 1),
-              child: Obx(
-                () => Icon(
-                  Icons.qr_code_scanner_outlined,
-                  color: controller.selectedIndex.value == 1
-                      ? const Color.fromRGBO(82, 98, 245, 1)
-                      : Colors.white,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              child: Image.asset(
+                  'assets/images/qr.png',
                 ),
-              ),
             ),
           ),
         ],
