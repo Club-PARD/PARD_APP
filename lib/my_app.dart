@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/Views/home_view.dart';
 import 'package:pard_app/Views/my_point_view.dart';
 import 'package:pard_app/Views/number_auth_view.dart';
 import 'package:pard_app/Views/signin_view.dart';
 import 'package:pard_app/Views/tos_view.dart';
+import 'package:pard_app/Views/mypage.dart';
+import 'package:pard_app/component/qr_scanner.dart';
 import 'package:pard_app/utilities/app_theme.dart';
 
 class MyApp extends StatelessWidget {
