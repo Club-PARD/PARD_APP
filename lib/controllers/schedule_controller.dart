@@ -1,6 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+<<<<<<< Updated upstream
 import 'package:pard_app/model/schedule_model.dart';
+=======
+import 'package:pard_app/model/schedule_model/schedule_model.dart';
+>>>>>>> Stashed changes
 
 class ScheduleController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -11,10 +16,17 @@ class ScheduleController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+<<<<<<< Updated upstream
     fetchSchedules('앱');
   }
 
   Future<void> fetchSchedules(String userPart) async {
+=======
+    getSchedules('앱');
+  }
+
+  Future<void> getSchedules(String userPart) async {
+>>>>>>> Stashed changes
     try {
       final now = DateTime.now();
       final schedulesSnapshot =
@@ -46,7 +58,13 @@ class ScheduleController extends GetxController {
       }
       pastSchedules = pastSchedules.reversed.toList().obs;
     } catch (e) {
+<<<<<<< Updated upstream
       print('Error fetching schedules: $e');
+=======
+      if (kDebugMode) {
+        print('Error fetching schedules: $e');
+      }
+>>>>>>> Stashed changes
     }
   }
 }

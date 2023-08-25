@@ -44,6 +44,16 @@ dependencies:
   gradient_borders: ^1.0.0
   simple_gradient_text: ^1.2.4
   json_annotation: ^4.8.1
+<<<<<<< Updated upstream
+=======
+  device_info_plus: ^9.0.3
+  cloud_firestore: ^4.8.5
+  firebase_core: ^2.15.1
+  flutter_screenutil: ^5.9.0
+  firebase_auth: ^4.7.3
+  gradient_borders: ^1.0.0
+  simple_gradient_text: ^1.2.4
+>>>>>>> Stashed changes
 
 dev_dependencies:
   flutter_test:
