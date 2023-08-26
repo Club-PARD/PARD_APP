@@ -47,8 +47,7 @@ dependencies:
   gradient_borders: ^1.0.0
   qr_code_scanner: ^1.0.1
   mobile_scanner: ^3.4.1
-  gradient_borders: ^1.0.0
-  carousel_slider: ^4.2.1
+  simple_gradient_text: ^1.2.4
 
 dev_dependencies:
   flutter_test:
