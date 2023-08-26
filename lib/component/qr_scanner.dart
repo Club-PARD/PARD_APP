@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/bottombar_controller.dart';
 import 'package:pard_app/controllers/qr_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRScan extends StatelessWidget {
   final QRController qrController = Get.put(QRController());
+  final BottomBarController bController = Get.find();
 
   QRScan({super.key});
 
@@ -16,19 +18,16 @@ class QRScan extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Expanded(
-            flex: 4,
-            child: QRView(
-              key: qrController.qrKey,
-              onQRViewCreated: qrController.onQRViewCreated,
-              overlay: QrScannerOverlayShape(
-                borderColor: const Color(0xFF7B3FEF),
-                borderLength: 30,
-                borderWidth: 10,
-                cutOutSize: 280.h,
-              ),
-              onPermissionSet: (ctrl, p) => qrController.onPermissionSet(p),
+          QRView(
+            key: qrController.qrKey,
+            onQRViewCreated: qrController.onQRViewCreated,
+            overlay: QrScannerOverlayShape(
+              borderColor: const Color(0xFF7B3FEF),
+              borderLength: 30,
+              borderWidth: 10,
+              cutOutSize: 280.h,
             ),
+            onPermissionSet: (ctrl, p) => qrController.onPermissionSet(p),
           ),
           Positioned(
             top: 222.h,
@@ -60,6 +59,8 @@ class QRScan extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
+                    bController.selectedIndex.value = 0;
+                    print(bController.selectedIndex);
                     Get.back();
                   },
                   icon: const Icon(Icons.close, color: Colors.white),

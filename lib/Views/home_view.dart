@@ -7,9 +7,114 @@ import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
+  bool showContainer = false;
+  OverlayEntry? overlayEntry;
+
+  void showOverlay(BuildContext context) {
+    if (overlayEntry == null) {
+      OverlayState? overlayState = Overlay.of(context);
+      overlayEntry = OverlayEntry(
+        builder: (context) {
+          return Stack(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  removeOverlay();
+                },
+              ),
+              Positioned(
+                top: 200.h,
+                left: 30.w,
+                child: Material(
+                  child: GestureDetector(
+                    onTap: () {
+                      removeOverlay();
+                    },
+                    child: Container(
+                        width: 310.w,
+                        height: 50.h,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFF1A1A1A),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                                width: 0.50, color: Color(0xFF5262F5)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: 268.w,
+                              height: 40.h,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height : 8.h),
+                                  SizedBox(
+                                    height: 32.h,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                      text: '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
+                                                      style: titleSmall),
+                                                   TextSpan(
+                                                    text: '팡울이',
+                                                    style: titleSmall.copyWith(color: const Color(0xFF5262F5)),
+                                                  ),
+                                                  TextSpan(
+                                                    text: '‘예요.',
+                                                    style: titleSmall,
+                                                  ),
+                                                  TextSpan(
+                                                    text: '\n오늘도 PARD에서 저와 함께 성장해가요! ☺️',
+                                                    style: titleSmall,
+                                                  ),
+                                                ],
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            SizedBox(width: 8.w,),
+                                            Icon(Icons.close, color: grayScale[30], size: 20.h,)
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+      overlayState.insert(overlayEntry!);
+    }
+  }
+
+  void removeOverlay() {
+    overlayEntry?.remove();
+    overlayEntry = null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +170,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 31.h,
+                    height: 15.h,
                   ),
                   Row(
                     children: [
@@ -88,12 +193,13 @@ class HomePage extends StatelessWidget {
                     height: 12.h,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizedBox(
                         width: 24.w,
                       ),
                       Container(
-                        width: 42.w,
+                        width: 50.w,
                         height: 24.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
@@ -112,7 +218,7 @@ class HomePage extends StatelessWidget {
                         width: 8.w,
                       ),
                       Container(
-                        width: 79.w,
+                        width: 90.w,
                         height: 24.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
@@ -135,7 +241,7 @@ class HomePage extends StatelessWidget {
                         width: 8.w,
                       ),
                       Container(
-                        width: 70.w,
+                        width: 80.w,
                         height: 24.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
@@ -150,7 +256,22 @@ class HomePage extends StatelessWidget {
                             '거친 파도',
                             style: titleMedium),
                       ),
-                      SizedBox(width: 96.w,),
+                      SizedBox(
+                        width: 60.w,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            showOverlay(context);
+                          });
+                        },
+                        child: Image.asset(
+                          'assets/images/question.png',
+                          width: 24.w,
+                          height: 24.h,
+                        ),
+                      ),
+                      SizedBox(width: 24.w,),
                     ],
                   ),
                   SizedBox(
@@ -233,41 +354,37 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 120.w,
-                            height: 120.h,
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                    width: 1.w,
-                                    strokeAlign: BorderSide.strokeAlignOutside,
-                                    color: const Color(0xFF3B3B3B)),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                            child: Column(children: [
+                          Stack(
+                            children: [
                               SizedBox(
-                                height: 16.h,
-                              ),
-                              const Text(
-                                'NEXT LEVEL',
-                                style: TextStyle(
-                                  color: Color(0x335262F5),
-                                  fontSize: 18,
-                                  fontFamily: 'Sandoll Danpatpang',
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.50,
+                                  width: 120.w,
+                                  height: 120.h,
+                                  child: Image.asset(
+                                    'assets/images/Frame.png',
+                                    width: 120.w,
+                                    height: 120.h,
+                                    fit: BoxFit.fill,
+                                  )),
+                              Positioned(
+                                  left: 10.w,
+                                  top: 16.h,
+                                  child: SizedBox(
+                                      width: 94.w,
+                                      height: 18.h,
+                                      child: Image.asset(
+                                        'assets/images/NEXT_LEVEL.png',
+                                        fit: BoxFit.fill,
+                                      ))),
+                              Positioned(
+                                left: 35.w,
+                                top: 42.h,
+                                child: Image.asset(
+                                  'assets/images/lv2s.png',
+                                  width: 50.w,
+                                  height: 50.h,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Image.asset(
-                                'assets/images/lv2s.png',
-                                width: 50.w,
-                                height: 50.h,
-                              ),
-                            ]),
+                              )
+                            ],
                           ),
                           SizedBox(
                             height: 8.h,

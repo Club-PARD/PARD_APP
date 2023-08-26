@@ -13,20 +13,22 @@ class HomeBar extends StatefulWidget {
 
 void launchInstaURL() async {
     final Uri pardInstaUrl = Uri.parse('https://www.instagram.com/official_pard_/');
-    if (await canLaunchUrl(pardInstaUrl)) {
-      await launchUrl(pardInstaUrl);
-    } else {
-      throw 'Could not launch $pardInstaUrl';
-    }
+    try {
+  await launchUrl(pardInstaUrl);
+} catch (e) {
+  print("Could not launch $pardInstaUrl: $e");
+}
+
   }
 
   void launchPardWebURL() async {
     final Uri pardWebUrl = Uri.parse('https://we-pard.com/');
-    if (await canLaunchUrl(pardWebUrl)) {
-      await launchUrl(pardWebUrl);
-    } else {
-      throw 'Could not launch $pardWebUrl';
-    }
+    try {
+  await launchUrl(pardWebUrl);
+} catch (e) {
+  print("Could not launch $pardWebUrl: $e");
+}
+
   }
 
 class _HomeBarState extends State<HomeBar> {
