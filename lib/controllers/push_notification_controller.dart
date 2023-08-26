@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/user_controller.dart';
 
 class PushNotificationController extends GetxController {
     late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     late AndroidNotificationChannel channel;
     static PushNotificationController get to => Get.find();
+    final UserController userController = Get.put(UserController());
   /// 앱 어디서든지 접근 가능하게
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
 
@@ -38,15 +41,24 @@ class PushNotificationController extends GetxController {
   
   // 토큰 요청
   getToken();
-  // 셋팅flag 설정
-} 
+  
+    }
 
   Future<void> getToken() async{
     final fcmToken = await firebaseMessaging.getToken();
     /**공지 받으려면 기기의 토큰 받아와야 한다 */
     print("--------TOKEN--------------");
-    print(fcmToken);
+    print(fcmToken);     
     print("--------TOKEN--------------");
+
+   try {
+  await FirebaseFirestore.instance.collection('users').doc(userController.userInfo.value!.uid).set(
+    {'fcmToken': fcmToken},
+    SetOptions(merge: true)
+  );
+} catch (e) {
+  print("firestore에 등록실패 $e");
+}
   }
   /// FCM이 notification으로 올 경우
   void showFlutterNotification(RemoteMessage message) {
@@ -54,7 +66,7 @@ class PushNotificationController extends GetxController {
   AndroidNotification? android = message.notification?.android;
 
   String? title = message.notification!.title;
-      String? description = message.notification!.body;
+  String? description = message.notification!.body;
 
       //im gonna have an alertdialog when clicking from push notification
      print(title);

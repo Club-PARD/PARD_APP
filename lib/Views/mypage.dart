@@ -167,8 +167,7 @@ class _MyPageState extends State<MyPage> {
                             ),
                             child: Text(
                                 /** generation값으로 대체 */
-                                 '2기',
-                                // userController.userInfo.value.generation,
+                                 '${userController.userInfo.value!.generation}기',
                                 style: titleMedium),
                           ),
                           SizedBox(
@@ -183,17 +182,17 @@ class _MyPageState extends State<MyPage> {
                               gradient: const LinearGradient(
                                 begin: Alignment(1.00, -0.03),
                                 end: Alignment(-1, 0.03),
-                                colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                                colors: [ Color(0xFF7B3FEF), Color(0xFF5262F5),],
                               ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-                            child: Text(
-                                /** part값으로 대체 */
-                                '디자인 파트',
-                                // userController.userInfo.value.part,
-                                style: titleMedium),
+                            child: Center(
+                              child: Text(
+                                  '${userController.userInfo.value!.part} 파트',
+                                  style: titleMedium),
+                            ),
                           ),
                           SizedBox(
                             width: 8.w,
@@ -209,11 +208,12 @@ class _MyPageState extends State<MyPage> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-                            child: Text(
-                                /** member값으로 대체 */
-                                '거친 파도',
-                                // userController.userInfo.value.member,
-                                style: titleMedium),
+                            child: Center(
+                              child: Text(
+                      
+                                  '${userController.userInfo.value!.member}',
+                                  style: titleMedium),
+                            ),
                           ),
                         ],
                       ),
@@ -223,8 +223,7 @@ class _MyPageState extends State<MyPage> {
                       Padding(
                         padding: EdgeInsets.only(left: 24.w),
                         child: Text(
-                          '김파드님', 
-                          // userController.userInfo.value.name,
+                           '${userController.userInfo.value!.name}',
                         style: displayMedium),
                       ),
                     ],

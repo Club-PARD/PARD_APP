@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/component/home_appbar.dart';
 import 'package:pard_app/controllers/point_controller.dart';
+import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
@@ -16,12 +17,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
+
   final PointController pointController = Get.put(PointController());
   final UserController userController = Get.put(UserController());
   bool showContainer = false;
   OverlayEntry? overlayEntry;
 
-  void showOverlay(BuildContext context) {
+  void showOverlay(BuildContext context) async {
+    await PushNotificationController.to.setupFlutterNotifications();
     if (overlayEntry == null) {
       OverlayState? overlayState = Overlay.of(context);
       overlayEntry = OverlayEntry(
@@ -183,13 +187,12 @@ class _HomePageState extends State<HomePage> {
                       RichText(
                         text: TextSpan(
                           style: displaySmall,
-                          children: const <TextSpan>[
-                            TextSpan(text: '안녕하세요, '),
+                          children:  <TextSpan>[
+                            const TextSpan(text: '안녕하세요, '),
                             TextSpan(
-                                 text: '천주현', //user값으로 대체
-                               // text: userController.userInfo.value.name,
-                                style: TextStyle(color: Color(0XFF5262F5))),
-                            TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
+                                text: userController.userInfo.value!.name,
+                                style: const TextStyle(color: Color(0XFF5262F5))),
+                            const TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
                           ],
                         ),
                       ),
@@ -218,9 +221,9 @@ class _HomePageState extends State<HomePage> {
                         child: Center(
                           child: Text(
                               /** generation값으로 대체 */
-                              '2기',
-                              // userController.userInfo.value.generation,
-                              style: titleMedium),
+                               '${userController.userInfo.value?.generation}기'.toString(),
+                              style: titleMedium
+                              ),
                         ),
                       ),
                       SizedBox(
@@ -235,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                           gradient: const LinearGradient(
                             begin: Alignment(1.00, -0.03),
                             end: Alignment(-1, 0.03),
-                            colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                            colors: [ Color(0xFF7B3FEF), Color(0xFF5262F5),],
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -243,9 +246,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Center(
                           child: Text(
-                               '디자인 파트',
+                              
                                 /** part값으로 대체 */
-                              // userController.userInfo.value.part,
+                               '${userController.userInfo.value!.part} 파트',
                               style: titleMedium),
                         ),
                       ),
@@ -266,8 +269,7 @@ class _HomePageState extends State<HomePage> {
                         child: Center(
                           child: Text(
                               /** member값으로 대체 */
-                               '거친 파도',
-                              // userController.userInfo.value.member,
+                               '${userController.userInfo.value!.member}',
                               style: titleMedium),
                         ),
                       ),

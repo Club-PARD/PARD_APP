@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             child: child!,
           );
         },
-        initialRoute: '/home',
+        initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => const SignInView()),
           GetPage(name: '/tos', page: () => const TosView()),
