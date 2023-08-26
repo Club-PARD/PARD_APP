@@ -28,13 +28,13 @@ class MyApp extends StatelessWidget {
             child: child!,
           );
         },
-        initialRoute: '/home',
+        initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => const SignInView()),
           GetPage(name: '/tos', page: () => const TosView()),
           GetPage(name: '/numberauth', page: () => const NumberAuthView()),
           GetPage(name: '/mypoint', page: () => MyPointScreen()),
-          GetPage(name: '/home', page: () => HomePage()),
+          GetPage(name: '/home', page: () => const HomePage()),
           GetPage(name: '/mypage', page: () => const MyPage()),
           GetPage(name: '/qr', page: () => QRScan())
           // GetPage(name: '/first', page: () => FirstNamedPage()),
