@@ -15,8 +15,8 @@ const MaterialColor whiteScale = MaterialColor(0xffEFEFEF, {
 });
 
 // default is 10
-const MaterialColor grayScale = MaterialColor(0xffF8F8F8, {
-  10: Color(0xffF8F8F8),
+const MaterialColor grayScale = MaterialColor(0xffE4E4E4, {
+  10: Color(0xffE4E4E4),
   30: Color(0xffA3A3A3),
   60: Color(0xff808080),
   90: Color(0xff353535),
