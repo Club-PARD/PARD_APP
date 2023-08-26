@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 
 class UserController extends GetxController {
@@ -97,7 +98,7 @@ class UserController extends GetxController {
     });
   }
 
-  //로그인 기록 업데이트(by 이메일)
+  //로그인 기록 업데이트(by 이메일) - 휴대폰 인증 성공시, 휴대폰 인증 완료 후 다시 로그인 할 때,
   Future<void> updateTimeByEmail(String email) async {
     final currentTime = Timestamp.now();
 
@@ -114,6 +115,45 @@ class UserController extends GetxController {
       print('사용자를 찾을 수 없습니다: $email');
     }
   }
+
+  //휴대폰 인증 성공시
+  Future<void> setUserByEmail(String email) async {
+    final currentTime = Timestamp.now();
+
+    final usersCollection = FirebaseFirestore.instance.collection('users');
+    final querySnapshot =
+        await usersCollection.where('email', isEqualTo: email).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      final userDoc = querySnapshot.docs.first;
+      await userDoc.reference.update({
+        'lastLogin': currentTime,
+        'attend': <String, dynamic>{},
+        
+      }
+      );
+      print('유저세팅성공 $email');
+    } else {
+      print('사용자를 찾을 수 없습니다: $email');
+    }
+  } 
+
+  Future<void> AddAttend(String sid, String attend) async {
+    final userDocument = FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
+    
+    try {
+      final userSnapshot = await userDocument.get();
+      if (userSnapshot.exists) {
+        Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
+        
+        userData['attend'] ??= <String, dynamic>{};
+        userData['attend'][sid] = attend;
+        await userDocument.update({'attend': userData['attend']});
+      }
+    } catch(e) {
+      print(e);
+    }
+  } 
 
   //휴대폰 기종 파악
   Future<void> getDeviceInfo() async {

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:pard_app/utilities/color_style.dart';
 
 class NextButton extends StatelessWidget {
-
   final String title;
   final String route;
   final bool isNext;
@@ -48,10 +47,12 @@ class NextButton extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () {
+        onTap: () async {
           if (isNext) {
-            function?? (){};
-            Get.toNamed(route);
+            if (function != null) {
+              await function;
+            }
+            await Get.toNamed(route);
           }
         });
   }
