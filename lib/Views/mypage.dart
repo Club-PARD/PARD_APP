@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/component/bottom.dart';
+import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,17 +14,26 @@ class MyPage extends StatefulWidget {
   State<MyPage> createState() => _MyPageState();
 }
 
+void launchNotion() async {
+    final Uri pardNotion = Uri.parse('https://pardhgu.notion.site/PARD-1-a26b1363b86a4740936a92e254876205');
+    try {
+  await launchUrl(pardNotion);
+} catch (e) {
+  print("Could not launch $pardNotion: $e");
+}
+  }
+
 class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
-    //final controller = PushNotificationController.to;
+    final UserController userController = Get.put(UserController());
     /** push_notification controller 가져온다  */
     return Scaffold(
       backgroundColor: const Color.fromRGBO(26, 26, 26, 1),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(26, 26, 26, 1),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,),
           onPressed: () => Get.offNamed('/home'),
         ),
         title: Text('마이 페이지', style: headlineLarge),
@@ -132,7 +142,7 @@ class _MyPageState extends State<MyPage> {
                           ),
                           Container(
                             width: 42.w,
-                            height: 24.h,
+                            height: 30.h,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 12.w, vertical: 4.h),
                             decoration: ShapeDecoration(
@@ -143,7 +153,8 @@ class _MyPageState extends State<MyPage> {
                             ),
                             child: Text(
                                 /** generation값으로 대체 */
-                                '2기',
+                                 '2기',
+                                // userController.userInfo.value.generation,
                                 style: titleMedium),
                           ),
                           SizedBox(
@@ -151,7 +162,7 @@ class _MyPageState extends State<MyPage> {
                           ),
                           Container(
                             width: 79.w,
-                            height: 24.h,
+                            height: 30.h,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 12.w, vertical: 4.h),
                             decoration: ShapeDecoration(
@@ -167,6 +178,7 @@ class _MyPageState extends State<MyPage> {
                             child: Text(
                                 /** part값으로 대체 */
                                 '디자인 파트',
+                                // userController.userInfo.value.part,
                                 style: titleMedium),
                           ),
                           SizedBox(
@@ -174,7 +186,7 @@ class _MyPageState extends State<MyPage> {
                           ),
                           Container(
                             width: 70.w,
-                            height: 24.h,
+                            height: 30.h,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 12.w, vertical: 4.h),
                             decoration: ShapeDecoration(
@@ -186,6 +198,7 @@ class _MyPageState extends State<MyPage> {
                             child: Text(
                                 /** member값으로 대체 */
                                 '거친 파도',
+                                // userController.userInfo.value.member,
                                 style: titleMedium),
                           ),
                         ],
@@ -195,7 +208,10 @@ class _MyPageState extends State<MyPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 24.w),
-                        child: Text('김파드님', style: displayMedium),
+                        child: Text(
+                          '김파드님', 
+                          // userController.userInfo.value.name,
+                        style: displayMedium),
                       ),
                     ],
                   ),
@@ -270,7 +286,9 @@ class _MyPageState extends State<MyPage> {
                       Padding(
                         padding: EdgeInsets.only(right: 24.w),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              launchNotion();
+                            },
                             icon: const Icon(
                               Icons.arrow_forward_ios_outlined,
                               color: Color.fromRGBO(228, 228, 228, 1),
@@ -296,7 +314,9 @@ class _MyPageState extends State<MyPage> {
                       Padding(
                         padding: EdgeInsets.only(right: 24.w),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              launchNotion();
+                            },
                             icon: const Icon(
                               Icons.arrow_forward_ios_outlined,
                               color: Color.fromRGBO(228, 228, 228, 1),

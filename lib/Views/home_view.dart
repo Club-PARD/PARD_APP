@@ -43,26 +43,29 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: Container(
                         width: 310.w,
-                        height: 50.h,
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFF1A1A1A),
+                        height: 80.h,
+                        decoration:
+                          const ShapeDecoration(
+                          color: Color(0xFF1A1A1A),
                           shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                width: 0.50, color: Color(0xFF5262F5)),
-                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                                width: 1,
+                                color: Color(0xFF5262F5)
+                                ),
                           ),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: 268.w,
-                              height: 40.h,
+                              width: 300.w,
+                              height: 60.h,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   SizedBox(height : 8.h),
                                   SizedBox(
-                                    height: 32.h,
+                                    height: 45.h,
                                     child: Column(
                                       children: [
                                         Row(
@@ -183,7 +186,8 @@ class _HomePageState extends State<HomePage> {
                           children: const <TextSpan>[
                             TextSpan(text: '안녕하세요, '),
                             TextSpan(
-                                text: '천주현',
+                                 text: '천주현', //user값으로 대체
+                               // text: userController.userInfo.value.name,
                                 style: TextStyle(color: Color(0XFF5262F5))),
                             TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
                           ],
@@ -202,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Container(
                         width: 50.w,
-                        height: 24.h,
+                        height: 30.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
                         decoration: ShapeDecoration(
@@ -211,17 +215,20 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: Text(
-                            /** generation값으로 대체 */
-                            '2기',
-                            style: titleMedium),
+                        child: Center(
+                          child: Text(
+                              /** generation값으로 대체 */
+                              '2기',
+                              // userController.userInfo.value.generation,
+                              style: titleMedium),
+                        ),
                       ),
                       SizedBox(
                         width: 8.w,
                       ),
                       Container(
                         width: 90.w,
-                        height: 24.h,
+                        height: 30.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
                         decoration: ShapeDecoration(
@@ -234,17 +241,20 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: Text(
-                            /** part값으로 대체 */
-                            '디자인 파트',
-                            style: titleMedium),
+                        child: Center(
+                          child: Text(
+                               '디자인 파트',
+                                /** part값으로 대체 */
+                              // userController.userInfo.value.part,
+                              style: titleMedium),
+                        ),
                       ),
                       SizedBox(
                         width: 8.w,
                       ),
                       Container(
                         width: 80.w,
-                        height: 24.h,
+                        height: 30.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
                         decoration: ShapeDecoration(
@@ -253,10 +263,13 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: Text(
-                            /** member값으로 대체 */
-                            '거친 파도',
-                            style: titleMedium),
+                        child: Center(
+                          child: Text(
+                              /** member값으로 대체 */
+                               '거친 파도',
+                              // userController.userInfo.value.member,
+                              style: titleMedium),
+                        ),
                       ),
                       SizedBox(
                         width: 60.w,
@@ -269,8 +282,9 @@ class _HomePageState extends State<HomePage> {
                         },
                         child: Image.asset(
                           'assets/images/question.png',
+                          fit: BoxFit.fill,
                           width: 24.w,
-                          height: 24.h,
+                          height: 30.h,
                         ),
                       ),
                       SizedBox(width: 24.w,),

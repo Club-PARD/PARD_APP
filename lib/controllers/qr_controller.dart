@@ -62,7 +62,7 @@ class QRController extends GetxController {
                       ),
                       SizedBox(
                         width: 56.w,
-                        height: 56.h,
+                        height: 58.h,
                         child: Image.asset(
                           'assets/images/check_success.png',
                           fit: BoxFit.fill,
