@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -36,6 +37,15 @@ void launchInstaURL() async {
   await launchUrl(pardNotion);
 } catch (e) {
   print("Could not launch $pardNotion: $e");
+}
+  }
+
+  void launchSeminar() async {
+    final Uri SeminarFeedback = Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSdvXT0iaH6dXNdzsSf-eZuLcgcrTD5c8Upw3LfTKitixUp3uw/viewform?usp=sf_link');
+    try {
+  await launchUrl(SeminarFeedback);
+} catch (e) {
+  print("Could not launch $SeminarFeedback: $e");
 }
   }
 
@@ -173,14 +183,20 @@ class _HomeBarState extends State<HomeBar> {
                 )
             ],
             SizedBox(height: 32.h,),
-            Container(
-              padding: EdgeInsets.only(left: 20.w),
-              decoration: const BoxDecoration(
-                color: Color(0XFF2A2A2A),
+            InkWell(
+              onTap: () {
+                launchFeedback();
+              },
+              child: Container(
+                padding: EdgeInsets.only(left: 20.w),
+                decoration: const BoxDecoration(
+                  color: Color(0XFF2A2A2A),
+                ),
+                child:  Text('피드백', style: headlineMedium.copyWith(color: const Color.fromRGBO(82, 98, 245, 1))),
               ),
-              child:  Text('피드백', style: headlineMedium.copyWith(color: const Color.fromRGBO(82, 98, 245, 1))),
             ),
             InkWell(
+              onTap: launchSeminar,
               child: SizedBox(
                 width: 200.w,
                 height: 60.h,
