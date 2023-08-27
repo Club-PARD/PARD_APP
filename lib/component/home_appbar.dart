@@ -28,7 +28,51 @@ void launchInstaURL() async {
 } catch (e) {
   print("Could not launch $pardWebUrl: $e");
 }
+  }
 
+  void launchNotion() async {
+    final Uri pardNotion = Uri.parse('https://pardhgu.notion.site/PARD-1-a26b1363b86a4740936a92e254876205');
+    try {
+  await launchUrl(pardNotion);
+} catch (e) {
+  print("Could not launch $pardNotion: $e");
+}
+  }
+
+  void launchPMNotion() async {
+    final Uri pardPMNotion = Uri.parse('https://mercurial-nymphea-2ab.notion.site/PARD-1-3ea9e2fa106e4323a539e9a377c2d106');
+    try {
+  await launchUrl(pardPMNotion);
+} catch (e) {
+  print("Could not launch $pardPMNotion: $e");
+}
+  }
+
+  void launchDesignNotion() async {
+    final Uri pardDesignNotion = Uri.parse('https://pardhgu.notion.site/PARD-1-a3ea2c327c944fac8651af8143b5ec0c');
+    try {
+  await launchUrl(pardDesignNotion);
+} catch (e) {
+  print("Could not launch $pardDesignNotion: $e");
+}
+  }
+
+  void launchWebNotion() async {
+    final Uri pardWebNotion = Uri.parse('https://pardhgu.notion.site/bb6cc47609c844efab77c8910338dca2');
+    try {
+  await launchUrl(pardWebNotion);
+} catch (e) {
+  print("Could not launch $pardWebNotion: $e");
+}
+  }
+
+  void launchAppNotion() async {
+    final Uri pardAppNotionUrl = Uri.parse('https://pardhgu.notion.site/PARD-1-79c6436b9f9243b3a4b5e1ef5e04ff23');
+    try {
+  await launchUrl(pardAppNotionUrl);
+} catch (e) {
+  print("Could not launch $pardAppNotionUrl: $e");
+}
   }
 
 class _HomeBarState extends State<HomeBar> {
@@ -43,7 +87,7 @@ class _HomeBarState extends State<HomeBar> {
         backgroundColor: const Color(0XFF2A2A2A),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 64.h),
+            SizedBox(height: 20.h),
             Container(
               padding: EdgeInsets.only(left: 24.w),
               decoration: const BoxDecoration(
@@ -92,39 +136,39 @@ class _HomeBarState extends State<HomeBar> {
             ),
             if (_areItemsVisible) ...[
                 ListTile(
-                  title: Text('전체', style: headlineSmall.copyWith(color:grayScale[30])),
+                  title: InkWell( child: Text('전체', style: headlineSmall.copyWith(color:grayScale[30]))),
+                  onTap: () {
+                    launchNotion();
+                  },
+                ),
+                ListTile(
+                  title:  InkWell(child: Text('기획 파트', style: headlineSmall.copyWith(color:grayScale[30]))),
+                  onTap: () {
+                    launchPMNotion();
+                  },
+                ),
+                ListTile(
+                  title:  InkWell(child: Text('디자인 파트', style: headlineSmall.copyWith(color:grayScale[30]))),
+                  onTap: () {
+                    launchDesignNotion();
+                  },
+                ),
+                ListTile(
+                  title:  InkWell(child: Text('서버 파트', style:headlineSmall.copyWith(color:grayScale[30]))),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  title:  Text('기획 파트', style: headlineSmall.copyWith(color:grayScale[30])),
+                  title:  InkWell(child: Text('웹 파트', style: headlineSmall.copyWith(color:grayScale[30]))),
                   onTap: () {
-                    Navigator.pop(context);
+                    launchWebNotion();
                   },
                 ),
                 ListTile(
-                  title:  Text('다저안 파트', style: headlineSmall.copyWith(color:grayScale[30])),
+                  title:  InkWell(child: Text('iOS 파트', style: headlineSmall.copyWith(color:grayScale[30]))),
                   onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:  Text('서버 파트', style:headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:  Text('웹 파트', style: headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:  Text('iOS 파트', style: headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
+                    launchAppNotion();
                   },
                 )
             ],
@@ -136,17 +180,19 @@ class _HomeBarState extends State<HomeBar> {
               ),
               child:  Text('피드백', style: headlineMedium.copyWith(color: const Color.fromRGBO(82, 98, 245, 1))),
             ),
-            SizedBox(
-              width: 200.w,
-              height: 60.h,
-             
-              child: Row(
-                children: [
-                  SizedBox(width: 24.w,),
-                  Image.asset('assets/images/googleSheet.png', width: 13.w,height: 18.h,),
-                  SizedBox(width: 8.w,),
-                   Text('세미나 구글폼',style: headlineSmall)
-                ],
+            InkWell(
+              child: SizedBox(
+                width: 200.w,
+                height: 60.h,
+               
+                child: Row(
+                  children: [
+                    SizedBox(width: 24.w,),
+                    Image.asset('assets/images/googleSheet.png', width: 13.w,height: 18.h,),
+                    SizedBox(width: 8.w,),
+                     Text('세미나 구글폼',style: headlineSmall)
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 32.h),

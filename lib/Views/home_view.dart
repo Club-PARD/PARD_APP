@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/component/home_appbar.dart';
 import 'package:pard_app/controllers/point_controller.dart';
+import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
+  final UserController userController = Get.put(UserController());
   bool showContainer = false;
   OverlayEntry? overlayEntry;
 
@@ -139,7 +141,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 34.h,
+                    height: 20.h,
                   ),
                   Row(
                     children: [
@@ -181,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                           children: const <TextSpan>[
                             TextSpan(text: '안녕하세요, '),
                             TextSpan(
-                                text: '조세희',
+                                text: '천주현',
                                 style: TextStyle(color: Color(0XFF5262F5))),
                             TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
                           ],
@@ -315,16 +317,11 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: 8.h,
                           ),
-                          Text(
-                            'LEVEL 1',
-                            style: TextStyle(
-                              color: const Color(0x665262F5),
-                              fontSize: 14.h,
-                              fontFamily: 'Sandoll Danpatpang',
-                              fontWeight: FontWeight.w400,
-                              height: 1.40,
-                            ),
-                          ),
+                          SizedBox(
+                            width: 53.w,
+                            height: 14.h,
+                            child: Image.asset('assets/images/level1.png', fit: BoxFit.fill,),
+                          )
                         ],
                       ),
                       SizedBox(
@@ -374,7 +371,8 @@ class _HomePageState extends State<HomePage> {
                                       child: Image.asset(
                                         'assets/images/NEXT_LEVEL.png',
                                         fit: BoxFit.fill,
-                                      ))),
+                                      ))
+                                      ),
                               Positioned(
                                 left: 35.w,
                                 top: 42.h,
@@ -389,16 +387,11 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: 8.h,
                           ),
-                          Text(
-                            'LEVEL ?',
-                            style: TextStyle(
-                              color: const Color(0xFF3B3B3B),
-                              fontSize: 14.h,
-                              fontFamily: 'Sandoll Danpatpang',
-                              fontWeight: FontWeight.w400,
-                              height: 1.40,
-                            ),
-                          ),
+                          SizedBox(
+                            width: 53.w,
+                            height: 14.h,
+                            child: Image.asset('assets/images/n_level2.png', fit: BoxFit.fill,),
+                          )
                         ],
                       ),
                       SizedBox(
@@ -429,11 +422,8 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(
-                        height: 20.h,
-                        child: Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
-                            style: headlineLarge),
-                      ),
+                      Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
+                          style: headlineLarge),
                       TextButton(
                           onPressed: () {},
                           child: Text('더보기', style: titleMedium)),
@@ -441,7 +431,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),
                   SizedBox(
-                    height: 20.5.h,
+                    height: 10.h,
                   ),
                   Row(
                     children: [

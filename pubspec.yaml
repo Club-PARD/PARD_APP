@@ -47,6 +47,10 @@ dependencies:
   qr_code_scanner: ^1.0.1
   mobile_scanner: ^3.4.1
   url_launcher: ^6.1.12
+  push_notification: ^1.1.1
+  firebase_messaging: ^14.6.7
+  rflutter_alert: ^2.0.7
+  flutter_local_notifications: ^15.1.1
 
 dev_dependencies:
   flutter_test:
