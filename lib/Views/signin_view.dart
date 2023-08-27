@@ -10,12 +10,16 @@ class SignInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthController _authController = Get.put(AuthController());
-    final UserController _userController = Get.put(UserController());
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: SafeArea(
-        child: Center(
+    final AuthController authController = Get.put(AuthController());
+    final UserController userController = Get.put(UserController());
+
+    authController.checkPreviousLogin();
+
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        body: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -35,8 +39,8 @@ class SignInView extends StatelessWidget {
                 height: 112.h,
               ),
               Image.asset(
-                'assets/images/logo_image.png',
-                width: 461.w,
+                'assets/images/logo_image_cutted.png',
+                width: 375.w,
                 height: 178.h,
               ),
               SizedBox(
@@ -51,7 +55,7 @@ class SignInView extends StatelessWidget {
                         Theme.of(context).colorScheme.onSecondary,
                         Theme.of(context).colorScheme.secondary,
                       ], begin: Alignment.centerLeft, end: Alignment.centerRight),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -76,10 +80,10 @@ class SignInView extends StatelessWidget {
                     ),
                   ),
                   onTap: () async {
-                    await _userController.getDeviceInfo();
+                    await userController.getDeviceInfo();
                     print(
-                        '디바이스 명: ${_userController.deviceName}, 디바이스 버전: ${_userController.deviceVersion}');
-                    _authController.signInWithGoogle();
+                        '디바이스 명: ${userController.deviceName}, 디바이스 버전: ${userController.deviceVersion}');
+                    authController.signInWithGoogle();
                   }),
             ],
           ),
