@@ -13,7 +13,7 @@ class SignInView extends StatelessWidget {
     final AuthController authController = Get.put(AuthController());
     final UserController userController = Get.put(UserController());
 
-    authController.checkPreviousLogin();
+    _authController.checkPreviousLogin();
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -80,10 +80,10 @@ class SignInView extends StatelessWidget {
                     ),
                   ),
                   onTap: () async {
-                    await userController.getDeviceInfo();
+                    await _userController.getDeviceInfo();
                     print(
-                        '디바이스 명: ${userController.deviceName}, 디바이스 버전: ${userController.deviceVersion}');
-                    authController.signInWithGoogle();
+                        '디바이스 명: ${_userController.deviceName}, 디바이스 버전: ${_userController.deviceVersion}');
+                    _authController.signInWithGoogle();
                   }),
             ],
           ),
