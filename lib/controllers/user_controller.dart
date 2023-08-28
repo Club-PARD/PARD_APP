@@ -1,7 +1,7 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 
@@ -11,6 +11,8 @@ class UserController extends GetxController {
   Rx<UserModel?> userInfo = Rx<UserModel?>(null);
   Rx<String?> deviceName = Rx<String?>(null); 
   Rx<String?> deviceVersion = Rx<String?>(null);
+  Rx<String?> fcmToken = Rx<String?>(null);
+  late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
   
   //user모델 가져오기(by 이메일)
   Future<void> getUserInfoByEmail(String email) async {
@@ -36,6 +38,7 @@ class UserController extends GetxController {
         print('lastLogin: ${user.lastLogin}');
         print('pid: ${user.email}');
         print('attend: ${user.attend}');
+        print('fcmToken${user.fcmTOKEN}');
         userInfo.value = user;
       } else {
         print('사용자 정보 없음');
@@ -113,6 +116,13 @@ class UserController extends GetxController {
     } else {
       print('사용자를 찾을 수 없습니다: $email');
     }
+  }
+
+  Future<void> saveToken(String fcmToken) async {
+         final fcmToken = await firebaseMessaging.getToken();
+    await FirebaseFirestore.instance.collection('users').doc(fcmToken).update({
+      'fcmToken': fcmToken,
+    });
   }
 
   //휴대폰 기종 파악

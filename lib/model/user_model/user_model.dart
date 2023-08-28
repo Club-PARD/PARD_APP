@@ -18,6 +18,7 @@ class UserModel {
     this.isMaster,
     this.lastLogin,
     this.attend,
+    this.fcmTOKEN,
   });
 
   String? uid;
@@ -33,6 +34,7 @@ class UserModel {
   final DateTime? lastLogin;
   String? pid;
   Map<String, dynamic>? attend;
+  String ?fcmTOKEN;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
