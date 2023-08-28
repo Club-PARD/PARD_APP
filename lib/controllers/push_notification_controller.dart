@@ -11,6 +11,7 @@ class PushNotificationController extends GetxController {
     final UserController userController = Get.put(UserController());
   /// 앱 어디서든지 접근 가능하게
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
+  var onOff = true.obs;
 
     Future<void> setupFlutterNotifications() async {
   channel = const AndroidNotificationChannel(
@@ -41,6 +42,11 @@ class PushNotificationController extends GetxController {
   
   // 토큰 요청
   getToken();
+  ever(onOff, (value) async {
+      await FirebaseFirestore.instance.collection('notification_controller').doc('notification').set({
+        'onOff': value
+      });
+    });
   
     }
 

@@ -10,6 +10,8 @@ import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/component/qr_scanner.dart';
 import 'package:pard_app/utilities/app_theme.dart';
 
+import 'Views/schedule_view.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -36,7 +38,8 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/mypoint', page: () => MyPointScreen()),
           GetPage(name: '/home', page: () => const HomePage()),
           GetPage(name: '/mypage', page: () => const MyPage()),
-          GetPage(name: '/qr', page: () => QRScan())
+          GetPage(name: '/qr', page: () => QRScan()),
+          GetPage(name: '/schedule', page: () => SchedulerScreen())
           // GetPage(name: '/first', page: () => FirstNamedPage()),
           // GetPage(name: '/second', page: () => SecondNamedPage()),
         ],

@@ -509,7 +509,9 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text('🗓 UPCOMING EVENT 🗓 ', style: headlineLarge),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed('/schedule');
+                          },
                           child: Text('더보기', style: titleMedium)),
                     ],
                   ),

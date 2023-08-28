@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/component/bottom.dart';
+import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,6 +36,7 @@ void launchNotion() async {
 class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
+        final controller = PushNotificationController.to;
     final UserController userController = Get.put(UserController());
     /** push_notification controller 가져온다  */
     return Scaffold(
@@ -255,15 +257,15 @@ class _MyPageState extends State<MyPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: 24.w),
-                        // child: Obx(() {
-                        //   return Switch(
-                        //     value: controller.onOff.value,
-                        //     onChanged: (value) {
-                        //       controller.onOff.value = !controller.onOff.value;
-                        //       print(controller.onOff.value);
-                        //     },
-                        //   );
-                        // }),
+                        child: Obx(() {
+                          return Switch(
+                            value: controller.onOff.value,
+                            onChanged: (value) {
+                              controller.onOff.value = !controller.onOff.value;
+                              print(controller.onOff.value);
+                            },
+                          );
+                        }),
                       ),
                     ],
                   ),
