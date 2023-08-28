@@ -51,7 +51,11 @@ android {
         applicationId "com.example.pard_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+<<<<<<< HEAD
         minSdkVersion 21
+=======
+        minSdkVersion 19
+>>>>>>> 60f5fd7 ([FIX] push_notification_controller)
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
