@@ -167,10 +167,12 @@ class _MyPageState extends State<MyPage> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-                            child: Text(
-                                /** generation값으로 대체 */
-                                 '${userController.userInfo.value!.generation}기',
-                                style: titleMedium),
+                            child: Center(
+                              child: Text(
+                                  /** generation값으로 대체 */
+                                   '${userController.userInfo.value!.generation}기',
+                                  style: titleMedium),
+                            ),
                           ),
                           SizedBox(
                             width: 8.w,

@@ -109,6 +109,25 @@ class UserController extends GetxController {
     });
   }
 
+Future<void> updateAttend(String? uid, String? qrCode) async {
+  if (uid == null || qrCode == null) {
+    print("uid or qrCode is null. Cannot update attend.");
+    return;
+  }
+  final currentTime = DateTime.now().toIso8601String(); 
+  final userDocument = FirebaseFirestore.instance.collection('users').doc(uid);
+
+  try {
+    await userDocument.update({
+      'attend': {qrCode: currentTime}
+    });
+  } catch (e) {
+    print(e);
+  }
+}
+
+
+
   //로그인 기록 업데이트(by 이메일) - 휴대폰 인증 성공시, 휴대폰 인증 완료 후 다시 로그인 할 때,
   Future<void> updateTimeByEmail(String email) async {
     final currentTime = Timestamp.now();

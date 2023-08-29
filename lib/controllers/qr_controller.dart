@@ -27,6 +27,8 @@ class QRController extends GetxController {
         String currentTime = DateTime.now().toIso8601String();
         print("Scanned QR Code: ${result.value!.code}");
         print("Scanned Time: $currentTime");
+        userController.updateAttend(userController.userInfo.value!.uid!, result.value!.code);
+
         Get.back(); //찍으면 홈으로 돌아감
         bController.selectedIndex.value = 0;
         print(bController.selectedIndex);
