@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pard_app/Views/schedule_view.dart';
+import 'package:pard_app/Views/home_schedule_view.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/component/home_appbar.dart';
 import 'package:pard_app/component/pard_part.dart';
 import 'package:pard_app/component/schedule_container.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
+import 'package:pard_app/controllers/schedule_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
@@ -22,6 +23,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
   final UserController userController = Get.put(UserController());
+  final ScheduleController scheduleController = Get.put(ScheduleController());
+
   bool showContainer = false;
   OverlayEntry? overlayEntry;
 
@@ -157,7 +160,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 20.h,
+                    height: 40.h,
                   ),
                   Row(
                     children: [
@@ -513,7 +516,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               width: 327.w,
-              height: 162.h,
+              height: 180.h,
               decoration: ShapeDecoration(
                 color: const Color(0xFF2A2A2A),
                 shape: RoundedRectangleBorder(
@@ -538,13 +541,8 @@ class _HomePageState extends State<HomePage> {
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),
                    SizedBox(
                     width: 275.w,
-                    height: 66.h,
-                     child: const Row(
-                      children: [
-                        
-                      
-                      ],
-                                     ),
+                    height: 90.h,
+                     child:  HomeSchedule(),
                    )
                 ],
               ),
