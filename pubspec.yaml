@@ -41,17 +41,17 @@ dependencies:
   cloud_firestore: ^4.8.5
   firebase_core: ^2.15.1
   flutter_screenutil: ^5.9.0
-  firebase_auth: ^4.7.3
   google_sign_in: ^6.1.4
   gradient_borders: ^1.0.0
   qr_code_scanner: ^1.0.1
   mobile_scanner: ^3.4.1
   url_launcher: ^6.1.12
-  push_notification: ^1.1.1
   firebase_messaging: ^14.6.7
   rflutter_alert: ^2.0.7
   flutter_local_notifications: ^15.1.1
   simple_gradient_text: ^1.2.4
+  firebase_core_platform_interface: ^4.8.0
+  firebase_auth: ^4.8.0
 
 dev_dependencies:
   flutter_test:

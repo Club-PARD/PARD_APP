@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/Views/schedule_view.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/component/home_appbar.dart';
+import 'package:pard_app/component/pard_part.dart';
+import 'package:pard_app/component/schedule_container.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
@@ -17,8 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
-
   final PointController pointController = Get.put(PointController());
   final UserController userController = Get.put(UserController());
   bool showContainer = false;
@@ -48,14 +49,11 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                         width: 310.w,
                         height: 80.h,
-                        decoration:
-                          const ShapeDecoration(
+                        decoration: const ShapeDecoration(
                           color: Color(0xFF1A1A1A),
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                                width: 1,
-                                color: Color(0xFF5262F5)
-                                ),
+                            side:
+                                BorderSide(width: 1, color: Color(0xFF5262F5)),
                           ),
                         ),
                         child: Column(
@@ -67,38 +65,49 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SizedBox(height : 8.h),
+                                  SizedBox(height: 8.h),
                                   SizedBox(
                                     height: 45.h,
                                     child: Column(
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Text.rich(
                                               TextSpan(
                                                 children: [
                                                   TextSpan(
-                                                      text: '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
+                                                      text:
+                                                          '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
                                                       style: titleSmall),
-                                                   TextSpan(
+                                                  TextSpan(
                                                     text: '팡울이',
-                                                    style: titleSmall.copyWith(color: const Color(0xFF5262F5)),
+                                                    style: titleSmall.copyWith(
+                                                        color: const Color(
+                                                            0xFF5262F5)),
                                                   ),
                                                   TextSpan(
                                                     text: '‘예요.',
                                                     style: titleSmall,
                                                   ),
                                                   TextSpan(
-                                                    text: '\n오늘도 PARD에서 저와 함께 성장해가요! ☺️',
+                                                    text:
+                                                        '\n오늘도 PARD에서 저와 함께 성장해가요! ☺️',
                                                     style: titleSmall,
                                                   ),
                                                 ],
                                               ),
                                               textAlign: TextAlign.center,
                                             ),
-                                            SizedBox(width: 8.w,),
-                                            Icon(Icons.close, color: grayScale[30], size: 20.h,)
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Icon(
+                                              Icons.close,
+                                              color: grayScale[30],
+                                              size: 20.h,
+                                            )
                                           ],
                                         ),
                                       ],
@@ -187,11 +196,12 @@ class _HomePageState extends State<HomePage> {
                       RichText(
                         text: TextSpan(
                           style: displaySmall,
-                          children:  <TextSpan>[
+                          children: <TextSpan>[
                             const TextSpan(text: '안녕하세요, '),
                             TextSpan(
                                 text: userController.userInfo.value!.name,
-                                style: const TextStyle(color: Color(0XFF5262F5))),
+                                style:
+                                    const TextStyle(color: Color(0XFF5262F5))),
                             const TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
                           ],
                         ),
@@ -221,9 +231,9 @@ class _HomePageState extends State<HomePage> {
                         child: Center(
                           child: Text(
                               /** generation값으로 대체 */
-                               '${userController.userInfo.value?.generation}기'.toString(),
-                              style: titleMedium
-                              ),
+                              '${userController.userInfo.value?.generation}기'
+                                  .toString(),
+                              style: titleMedium),
                         ),
                       ),
                       SizedBox(
@@ -238,7 +248,10 @@ class _HomePageState extends State<HomePage> {
                           gradient: const LinearGradient(
                             begin: Alignment(1.00, -0.03),
                             end: Alignment(-1, 0.03),
-                            colors: [ Color(0xFF7B3FEF), Color(0xFF5262F5),],
+                            colors: [
+                              Color(0xFF7B3FEF),
+                              Color(0xFF5262F5),
+                            ],
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -246,9 +259,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Center(
                           child: Text(
-                              
-                                /** part값으로 대체 */
-                               '${userController.userInfo.value!.part} 파트',
+
+                              /** part값으로 대체 */
+                              '${userController.userInfo.value!.part} 파트',
                               style: titleMedium),
                         ),
                       ),
@@ -269,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                         child: Center(
                           child: Text(
                               /** member값으로 대체 */
-                               '${userController.userInfo.value!.member}',
+                              '${userController.userInfo.value!.member}',
                               style: titleMedium),
                         ),
                       ),
@@ -289,7 +302,9 @@ class _HomePageState extends State<HomePage> {
                           height: 30.h,
                         ),
                       ),
-                      SizedBox(width: 24.w,),
+                      SizedBox(
+                        width: 24.w,
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -336,7 +351,10 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             width: 53.w,
                             height: 14.h,
-                            child: Image.asset('assets/images/level1.png', fit: BoxFit.fill,),
+                            child: Image.asset(
+                              'assets/images/level1.png',
+                              fit: BoxFit.fill,
+                            ),
                           )
                         ],
                       ),
@@ -387,8 +405,7 @@ class _HomePageState extends State<HomePage> {
                                       child: Image.asset(
                                         'assets/images/NEXT_LEVEL.png',
                                         fit: BoxFit.fill,
-                                      ))
-                                      ),
+                                      ))),
                               Positioned(
                                 left: 35.w,
                                 top: 42.h,
@@ -406,7 +423,10 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             width: 53.w,
                             height: 14.h,
-                            child: Image.asset('assets/images/n_level2.png', fit: BoxFit.fill,),
+                            child: Image.asset(
+                              'assets/images/n_level2.png',
+                              fit: BoxFit.fill,
+                            ),
                           )
                         ],
                       ),
@@ -516,6 +536,16 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),
+                   SizedBox(
+                    width: 275.w,
+                    height: 66.h,
+                     child: const Row(
+                      children: [
+                        
+                      
+                      ],
+                                     ),
+                   )
                 ],
               ),
             ),

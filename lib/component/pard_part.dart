@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:pard_app/utilities/color_style.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 //import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class PartComponent extends StatelessWidget {
@@ -30,17 +31,13 @@ class PartComponent extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: 
-      Text(
-           part,
+      GradientText(
+        part,
         style: Theme.of(context).textTheme.headlineSmall,
-      )
-      // GradientText(
-      //   part,
-      //   style: Theme.of(context).textTheme.headlineSmall,
-      //   colors: part == '전체'
-      //       ? [Colors.white, Colors.white]
-      //       : [primaryBlue, primaryPurple],
-      // ),
+        colors: part == '전체'
+            ? [Colors.white, Colors.white]
+            : [primaryBlue, primaryPurple],
+      ),
     );
   }
 }

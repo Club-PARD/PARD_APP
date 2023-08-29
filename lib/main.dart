@@ -33,9 +33,10 @@ Future<void> main() async {
   } catch (error) {
   print("실패 : $error");
 }
+  
 
   Get.put(PushNotificationController()); /** pushNotificationController에 있는것들 사용한다 */
-  // await PushNotificationController.to.setupFlutterNotifications();
+   await PushNotificationController.to.setupFlutterNotifications();
   FirebaseMessaging.onMessage.listen(PushNotificationController.to. showFlutterNotification);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     final BottomBarController bottomBarController = Get.put(BottomBarController());

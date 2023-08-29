@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/bottombar_controller.dart';
+import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -13,6 +14,7 @@ class QRController extends GetxController {
   BottomBarController bController = Get.find();
   bool isScanned = false; // 한 번만 찍게 하려고
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  UserController userController = Get.find();
 
   void onQRViewCreated(QRViewController controller) {
     this.controller = controller;

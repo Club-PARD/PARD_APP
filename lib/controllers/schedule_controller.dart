@@ -29,7 +29,7 @@ class ScheduleController extends GetxController {
       for (var scheduleDoc in schedulesSnapshot.docs) {
         final scheduleData = scheduleDoc.data();
 
-        if (scheduleData['part'] == userPart || scheduleData['part'] == '천체') {
+        if (scheduleData['part'] == userPart || scheduleData['part'] == '전체') {
           final schedule = ScheduleModel(
             Map<String, int>.from(scheduleData['attend']),
             scheduleData['title'],

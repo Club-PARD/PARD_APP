@@ -54,18 +54,21 @@ class PushNotificationController extends GetxController {
     final fcmToken = await firebaseMessaging.getToken();
     /**공지 받으려면 기기의 토큰 받아와야 한다 */
     print("--------TOKEN--------------");
+    print('');
+    print('');
+    print('');
+    print('');
+    print('');
+    print('');
+    print('');
+    print('');
     print(fcmToken);     
     print("--------TOKEN--------------");
 
-   try {
-  await FirebaseFirestore.instance.collection('users').doc(userController.userInfo.value!.uid).set(
-    {'fcmToken': fcmToken},
-    SetOptions(merge: true)
-  );
-} catch (e) {
-  print("firestore에 등록실패 $e");
-}
   }
+
+
+
   /// FCM이 notification으로 올 경우
   void showFlutterNotification(RemoteMessage message) {
   RemoteNotification? notification = message.notification;

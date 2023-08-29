@@ -60,7 +60,7 @@ class _MyPageState extends State<MyPage> {
                 gradient: LinearGradient(
                   begin: Alignment(1.00, -0.03),
                   end: Alignment(-1, 0.03),
-                  colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                  colors: [Color(0xFF7B3FEF), Color(0xFF5262F5), ],
                 ),
               ),
               child: Row(
@@ -94,7 +94,7 @@ class _MyPageState extends State<MyPage> {
                           const Text(
                             '피드백 남기기',
                             style: TextStyle(
-                              color: Color(0xFF5262F5),
+                              color:  Color(0XFF5262F5),
                               fontSize: 9,
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
@@ -112,7 +112,7 @@ class _MyPageState extends State<MyPage> {
                               icon: const Icon(
                                 Icons.arrow_forward_ios_outlined,
                                 size: 10,
-                                color: Color(0XFF5262F5),
+                                color: Color(0xFF5262F5),
                               ),
                             ),
                           ),
