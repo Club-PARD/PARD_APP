@@ -36,7 +36,6 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 64.h,
                   ),
-                  
                   Row(
                     children: [
                       SizedBox(
@@ -200,7 +199,9 @@ class HomePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(width: 30.w,),
+                      SizedBox(
+                        width: 30.w,
+                      ),
                       Transform(
                         transform: Matrix4.identity()
                           ..translate(0.0, 0.0)
@@ -231,17 +232,17 @@ class HomePage extends StatelessWidget {
                             decoration: ShapeDecoration(
                               shape: RoundedRectangleBorder(
                                 side: const BorderSide(
-                                  width: 1,
-                                  strokeAlign: BorderSide.strokeAlignOutside,
-                                  color: Color(0xFF3B3B3B)
-                                ),
+                                    width: 1,
+                                    strokeAlign: BorderSide.strokeAlignOutside,
+                                    color: Color(0xFF3B3B3B)),
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                            child: Column(
-                              children: [
-                                SizedBox(height: 16.h,),
-                                const Text(
+                            child: Column(children: [
+                              SizedBox(
+                                height: 16.h,
+                              ),
+                              const Text(
                                 'NEXT LEVEL',
                                 style: TextStyle(
                                   color: Color(0x335262F5),
@@ -251,14 +252,15 @@ class HomePage extends StatelessWidget {
                                   height: 1.50,
                                 ),
                               ),
-                              SizedBox(height: 10.h,),
-                                Image.asset(
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Image.asset(
                                 'assets/images/lv2s.png',
                                 width: 50.w,
                                 height: 50.h,
                               ),
-                              ]
-                            ),
+                            ]),
                           ),
                           Text(
                             'LEVEL ?',
@@ -294,7 +296,9 @@ class HomePage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: 10.h,),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -304,21 +308,22 @@ class HomePage extends StatelessWidget {
                             style: headlineLarge),
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed('/mypoint');
+                          },
                           child: Text('더보기', style: titleMedium)),
                     ],
                   ),
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),
                   SizedBox(
-                              height: 20.5.h,
-                            ),
+                    height: 20.5.h,
+                  ),
                   Row(
                     children: [
                       SizedBox(
                         width: 163.5.w,
                         child: Column(
                           children: [
-                            
                             Text('파드 포인트', style: titleMedium),
                             SizedBox(
                               height: 8.h,
@@ -335,7 +340,6 @@ class HomePage extends StatelessWidget {
                         width: 162.5.w,
                         child: Column(
                           children: [
-                           
                             Text('벌점', style: titleMedium),
                             SizedBox(
                               height: 8.h,
