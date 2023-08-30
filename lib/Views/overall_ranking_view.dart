@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pard_app/component/pard_appbar.dart';
+import 'package:pard_app/controllers/point_controller.dart';
+import 'package:pard_app/model/user_model/user_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 
 class OverallRankingView extends StatelessWidget {
-  const OverallRankingView({Key? key}) : super(key: key);
+  OverallRankingView({Key? key}) : super(key: key);
+  final PointController pointController = Get.put(PointController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class OverallRankingView extends StatelessWidget {
               SizedBox(
                 height: 16.h,
               ),
-              infiniteRankScroll(),
+              infiniteRankScroll(context),
             ],
           ),
         ),
@@ -37,35 +41,57 @@ class OverallRankingView extends StatelessWidget {
     );
   }
 
-  Widget infiniteRankScroll() {
-    return Container(
-      width: double.infinity,
-      height: 600.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
-        color: containerBackgroundColor,
-      ),
-      child: ListView.separated(
-        padding: EdgeInsets.zero,
-        itemCount: 20,
-        itemBuilder: (context, index) {
-          if (index < 3) return beforeFourthTile(index);
-          return afterFourthTile(index);
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider(
-            indent: 8.w,
-            endIndent: 8.w,
-            height: 0,
-            thickness: 1.h,
-            color: grayScale[30],
-          );
-        },
-      ),
+  Widget infiniteRankScroll(context) {
+    return Obx(
+      () {
+        final RxMap<dynamic, dynamic> rxUserPointsMap =
+            pointController.userPointsMap;
+
+        if (rxUserPointsMap.isEmpty) {
+          return CircularProgressIndicator(); // 로딩 처리
+        }
+
+        // RxMap을 Map<UserModel, int>으로 변환
+        final Map<UserModel, int> userPointsMap =
+            Map<UserModel, int>.from(rxUserPointsMap);
+
+        return Container(
+          width: double.infinity,
+          height: userPointsMap.length * 70,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.r),
+            color: containerBackgroundColor,
+          ),
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: userPointsMap.length * 2 - 1,
+            itemBuilder: (context, index) {
+              if (index.isEven) {
+                UserModel user = userPointsMap.keys.elementAt(index ~/ 2);
+                int points = userPointsMap.values.elementAt(index ~/ 2);
+
+                if (index ~/ 2 < 3) {
+                  return beforeFourthTile(index ~/ 2, user, points);
+                } else {
+                  return afterFourthTile(index ~/ 2, user, points);
+                }
+              } else {
+                return Divider(
+                  indent: 8.w,
+                  endIndent: 8.w,
+                  height: 0,
+                  thickness: 1.h,
+                  color: grayScale[30],
+                );
+              }
+            },
+          ),
+        );
+      },
     );
   }
 
-  Widget beforeFourthTile(int index) {
+  Widget beforeFourthTile(int index, UserModel user, int points) {
     return Padding(
       padding: EdgeInsets.fromLTRB(16.0.w, 8.h, 16.0.w, 16.0.h),
       child: Row(
@@ -82,14 +108,14 @@ class OverallRankingView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    '김파트너',
+                    user.name!,
                     style: headlineMedium.copyWith(
                       color: grayScale[10],
                     ),
                   ),
                   SizedBox(width: 4.w),
                   Text(
-                    '디자인파트',
+                    '${user.part}파트',
                     style: titleSmall.copyWith(
                       color: grayScale[30],
                     ),
@@ -105,7 +131,7 @@ class OverallRankingView extends StatelessWidget {
           Column(
             children: [
               Text(
-                '20점',
+                '$points점',
                 style: titleMedium.copyWith(
                   color: grayScale[10],
                 ),
@@ -118,7 +144,7 @@ class OverallRankingView extends StatelessWidget {
     );
   }
 
-  Widget afterFourthTile(index) {
+  Widget afterFourthTile(index, UserModel user, int points) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 22.h),
       child: Row(
@@ -147,14 +173,14 @@ class OverallRankingView extends StatelessWidget {
           Row(
             children: [
               Text(
-                '김파트너',
+                user.name!,
                 style: headlineMedium.copyWith(
                   color: grayScale[10],
                 ),
               ),
               SizedBox(width: 4.w),
               Text(
-                '디자인파트',
+                '${user.part}파트',
                 style: titleSmall.copyWith(
                   color: grayScale[30],
                 ),
@@ -165,7 +191,7 @@ class OverallRankingView extends StatelessWidget {
             child: SizedBox(),
           ),
           Text(
-            '20점',
+            '$points점',
             style: titleMedium.copyWith(
               color: grayScale[10],
             ),

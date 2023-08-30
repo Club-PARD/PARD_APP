@@ -1,20 +1,44 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/component/point_policy_dialog.dart';
 import 'package:pard_app/controllers/point_controller.dart';
+import 'package:pard_app/model/point_model/point_model.dart';
+import 'package:pard_app/model/user_model/user_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
-class MyPointView extends StatelessWidget {
+class MyPointView extends StatefulWidget {
   MyPointView({super.key});
+
+  @override
+  State<MyPointView> createState() => _MyPointViewState();
+}
+
+class _MyPointViewState extends State<MyPointView> {
   final PointController pointController = Get.put(PointController());
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      PointController pointController = Get.put(PointController());
+      pointController.fetchAndSortUserPoints();
+      pointController.fetchCurrentUserPoints();
+    });
+  }
+
+  // final PointController pointController = Get.find<PointController>();
+  @override
   Widget build(BuildContext context) {
     final GlobalKey buttonKey = GlobalKey();
+    int currentUserRank = pointController.getCurrentUserRank();
+    int currentUserPartRank = pointController.getCurrentUserPartRank();
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -39,14 +63,39 @@ class MyPointView extends StatelessWidget {
               SizedBox(
                 height: 16.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  rankWithTopIcon('top1', context),
-                  rankWithTopIcon('top2', context),
-                  rankWithTopIcon('top3', context),
-                ],
-              ),
+              Obx(() {
+                final RxMap<dynamic, dynamic> rxUserPointsMap =
+                    pointController.userPointsMap;
+
+                if (rxUserPointsMap.isEmpty) {
+                  return CircularProgressIndicator(); // 로딩 처리
+                }
+
+                // RxMap을 Map<UserModel, int>으로 변환
+                final Map<UserModel, int> userPointsMap =
+                    Map<UserModel, int>.from(rxUserPointsMap);
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    rankWithTopIcon(
+                      'top1',
+                      context,
+                      userPointsMap.keys.elementAt(0),
+                    ),
+                    rankWithTopIcon(
+                      'top2',
+                      context,
+                      userPointsMap.keys.elementAt(1),
+                    ),
+                    rankWithTopIcon(
+                      'top3',
+                      context,
+                      userPointsMap.keys.elementAt(2),
+                    ),
+                  ],
+                );
+              }),
               SizedBox(
                 height: 24.h,
               ),
@@ -56,8 +105,18 @@ class MyPointView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      rankWithText(context),
-                      rankWithText(context),
+                      rankWithText(
+                        '파트 내 랭킹',
+                        context,
+                        currentUserRank,
+                        currentUserPartRank,
+                      ),
+                      rankWithText(
+                        '전체 랭킹',
+                        context,
+                        currentUserRank,
+                        currentUserPartRank,
+                      ),
                     ],
                   ),
                   TextButton(
@@ -86,7 +145,7 @@ class MyPointView extends StatelessWidget {
     );
   }
 
-  Widget rankWithTopIcon(String top, context) {
+  Widget rankWithTopIcon(String top, context, UserModel user) {
     return Row(
       children: [
         Image(
@@ -99,14 +158,14 @@ class MyPointView extends StatelessWidget {
           children: [
             // TODO: 유저 데이터 가져오기
             Text(
-              '디자인 파트',
+              '${user.part} 파트',
               style: Theme.of(context)
                   .textTheme
                   .titleSmall!
                   .copyWith(color: grayScale[30]),
             ),
             Text(
-              '김파드',
+              user.name!,
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall!
@@ -118,7 +177,8 @@ class MyPointView extends StatelessWidget {
     );
   }
 
-  Widget rankWithText(context) {
+  Widget rankWithText(
+      String text, context, int currentUserRank, int currentUserPartRank) {
     return Container(
       width: 155.5.w,
       height: 68.h,
@@ -137,7 +197,7 @@ class MyPointView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '파드 내 랭킹',
+            text,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
@@ -145,7 +205,7 @@ class MyPointView extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Text(
-            '3위',
+            (text == '파트 내 랭킹') ? '$currentUserPartRank위' : '$currentUserRank위',
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge!
@@ -191,12 +251,14 @@ class MyPointView extends StatelessWidget {
                     SizedBox(
                       height: 2.h,
                     ),
-                    Text(
-                      '+7점',
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayMedium!
-                          .copyWith(color: primaryGreen),
+                    Obx(
+                      () => Text(
+                        '+${pointController.points.value}점',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(color: primaryGreen),
+                      ),
                     ),
                   ],
                 ),
@@ -207,18 +269,20 @@ class MyPointView extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      '파드 포인트',
+                      '벌점',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     SizedBox(
                       height: 2.h,
                     ),
-                    Text(
-                      '+7점',
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayMedium!
-                          .copyWith(color: errorRed),
+                    Obx(
+                      () => Text(
+                        '-${pointController.beePoints.value}점',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(color: errorRed),
+                      ),
                     ),
                   ],
                 ),
@@ -231,63 +295,97 @@ class MyPointView extends StatelessWidget {
   }
 
   Widget pointRecordCarouselSlider(context, buttonKey) {
-    List<int> list = [1, 2, 3, 4, 5];
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+    return Obx(() {
+      PointModel? pointModel = pointController.rxPointModel.value;
+      List<Map>? sortedPoints = [];
+
+      if (pointModel?.points != null) {
+        sortedPoints.addAll(pointModel!.points!);
+      }
+
+      if (pointModel?.beePoints != null) {
+        sortedPoints.addAll(pointModel!.beePoints!);
+      }
+
+      if (sortedPoints.isNotEmpty) {
+        // points 리스트를 날짜 기준으로 정렬
+        sortedPoints.sort((a, b) => b['timestamp'].compareTo(a['timestamp']));
+
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '점수 기록',
-                style: Theme.of(context).textTheme.displaySmall,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    '점수 기록',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  InkWell(
+                    key: buttonKey,
+                    onTap: () {
+                      PointPolicyDialog(context, buttonKey)
+                          .showPointPolicyDialog();
+                    },
+                    child: Image(
+                      image: AssetImage('assets/images/checkPointPolicy.png'),
+                      width: 102.w,
+                      height: 20.h,
+                    ),
+                  ),
+                ],
               ),
-              InkWell(
-                key: buttonKey,
-                onTap: () {
-                  PointPolicyDialog(context, buttonKey).showPointPolicyDialog();
-                },
-                child: Image(
-                  image: AssetImage('assets/images/checkPointPolicy.png'),
-                  width: 102.w,
-                  height: 20.h,
+              SizedBox(
+                height: 16.h,
+              ),
+              SizedBox(
+                height: 136.h,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: sortedPoints.length,
+                  itemBuilder: (context, index) {
+                    return itemInCarouselSlider(
+                      context,
+                      isFirst: index == 0,
+                      isLast: index == sortedPoints.length - 1,
+                      pointData: sortedPoints[index],
+                    );
+                  },
+                  separatorBuilder: (context, index) => VerticalDivider(
+                    width: 1,
+                    thickness: 0.5,
+                    color: grayScale[30],
+                  ),
                 ),
               ),
             ],
           ),
-          SizedBox(
-            height: 16.h,
-          ),
-          SizedBox(
-            height: 136.h,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                return itemInCarouselSlider(
-                  context,
-                  isFirst: index == 0,
-                  isLast: index == list.length - 1,
-                );
-              },
-              separatorBuilder: (context, index) => VerticalDivider(
-                width: 1,
-                thickness: 0.5,
-                color: grayScale[30],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+        );
+      } else {
+        return Container();
+      }
+    });
   }
 
   Widget itemInCarouselSlider(context,
-      {bool isFirst = false, bool isLast = false}) {
+      {bool isFirst = false, bool isLast = false, required Map pointData}) {
+    String type = pointData['type'];
+    String reason = pointData['reason'];
+    String date = formatTimestamp(pointData['timestamp']);
+    int digit = pointData['digit'];
+    bool isBeePoint = false;
+
+    if (type == '세미나 지각' ||
+        type == '세미나 결석' ||
+        type == '과제 지각' ||
+        type == '과제 결석') {
+      isBeePoint = true;
+    }
+
     return Container(
       width: 144.w,
       decoration: BoxDecoration(
@@ -317,27 +415,48 @@ class MyPointView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                   border: GradientBoxBorder(
                     width: 1.w,
-                    gradient: LinearGradient(colors: [
-                      Theme.of(context).colorScheme.onSecondary,
-                      Theme.of(context).colorScheme.secondary,
-                    ]),
+                    gradient: isBeePoint
+                        ? LinearGradient(colors: [
+                            Theme.of(context).colorScheme.error,
+                            Theme.of(context).colorScheme.error,
+                          ])
+                        : LinearGradient(colors: [
+                            Theme.of(context).colorScheme.onSecondary,
+                            Theme.of(context).colorScheme.secondary,
+                          ]),
                   ),
-                  gradient: LinearGradient(colors: [
-                    Theme.of(context).colorScheme.onSecondary.withOpacity(0.1),
-                    Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-                  ]),
+                  gradient: isBeePoint
+                      ? LinearGradient(colors: [
+                          Theme.of(context).colorScheme.error.withOpacity(0.1),
+                          Theme.of(context).colorScheme.error.withOpacity(0.1),
+                        ])
+                      : LinearGradient(colors: [
+                          Theme.of(context)
+                              .colorScheme
+                              .onSecondary
+                              .withOpacity(0.1),
+                          Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.1),
+                        ]),
                 ),
                 child: Center(
                   child: GradientText(
-                    '스터디',
+                    isBeePoint ? '벌점' : type,
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!
                         .copyWith(height: 0),
-                    colors: [
-                      Theme.of(context).colorScheme.onSecondary,
-                      Theme.of(context).colorScheme.secondary,
-                    ],
+                    colors: isBeePoint
+                        ? [
+                            Theme.of(context).colorScheme.error,
+                            Theme.of(context).colorScheme.error,
+                          ]
+                        : [
+                            Theme.of(context).colorScheme.onSecondary,
+                            Theme.of(context).colorScheme.secondary,
+                          ],
                   ),
                 ),
               ),
@@ -345,7 +464,7 @@ class MyPointView extends StatelessWidget {
                 height: 12.h,
               ),
               Text(
-                'AI 스터디\n참여',
+                reason,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
@@ -353,7 +472,7 @@ class MyPointView extends StatelessWidget {
                 height: 8.h,
               ),
               Text(
-                '08.23(토) | +1점',
+                isBeePoint ? '$date | -$digit점' : '$date | +$digit점',
                 textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
@@ -366,4 +485,10 @@ class MyPointView extends StatelessWidget {
       ),
     );
   }
+}
+
+String formatTimestamp(Timestamp firestoreTimestamp) {
+  DateTime dateTime = firestoreTimestamp.toDate();
+  final DateFormat formatter = DateFormat('MM.dd(E)', 'ko_KR');
+  return formatter.format(dateTime);
 }
