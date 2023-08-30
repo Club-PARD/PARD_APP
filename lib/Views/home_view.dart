@@ -1,15 +1,141 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/Views/home_schedule_view.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/component/home_appbar.dart';
+import 'package:pard_app/component/pard_part.dart';
+import 'package:pard_app/component/schedule_container.dart';
 import 'package:pard_app/controllers/point_controller.dart';
+import 'package:pard_app/controllers/push_notification_controller.dart';
+import 'package:pard_app/controllers/schedule_controller.dart';
+import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
+  final UserController userController = Get.put(UserController());
+  final ScheduleController scheduleController = Get.put(ScheduleController());
+
+  bool showContainer = false;
+  OverlayEntry? overlayEntry;
+
+  void showOverlay(BuildContext context) async {
+    await PushNotificationController.to.setupFlutterNotifications();
+    if (overlayEntry == null) {
+      OverlayState? overlayState = Overlay.of(context);
+      overlayEntry = OverlayEntry(
+        builder: (context) {
+          return Stack(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  removeOverlay();
+                },
+              ),
+              Positioned(
+                top: 200.h,
+                left: 30.w,
+                child: Material(
+                  child: GestureDetector(
+                    onTap: () {
+                      removeOverlay();
+                    },
+                    child: Container(
+                        width: 310.w,
+                        height: 80.h,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF1A1A1A),
+                          shape: RoundedRectangleBorder(
+                            side:
+                                BorderSide(width: 1, color: Color(0xFF5262F5)),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 300.w,
+                              height: 60.h,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 8.h),
+                                  SizedBox(
+                                    height: 45.h,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                      text:
+                                                          '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
+                                                      style: titleSmall),
+                                                  TextSpan(
+                                                    text: '팡울이',
+                                                    style: titleSmall.copyWith(
+                                                        color: const Color(
+                                                            0xFF5262F5)),
+                                                  ),
+                                                  TextSpan(
+                                                    text: '‘예요.',
+                                                    style: titleSmall,
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '\n오늘도 PARD에서 저와 함께 성장해가요! ☺️',
+                                                    style: titleSmall,
+                                                  ),
+                                                ],
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Icon(
+                                              Icons.close,
+                                              color: grayScale[30],
+                                              size: 20.h,
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+      overlayState.insert(overlayEntry!);
+    }
+  }
+
+  void removeOverlay() {
+    overlayEntry?.remove();
+    overlayEntry = null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +160,7 @@ class HomePage extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 64.h,
+                    height: 40.h,
                   ),
                   Row(
                     children: [
@@ -64,18 +190,22 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   Row(
                     children: [
                       SizedBox(width: 24.w),
                       RichText(
                         text: TextSpan(
                           style: displaySmall,
-                          children: const <TextSpan>[
-                            TextSpan(text: '안녕하세요, '),
+                          children: <TextSpan>[
+                            const TextSpan(text: '안녕하세요, '),
                             TextSpan(
-                                text: '조세희',
-                                style: TextStyle(color: Color(0XFF5262F5))),
-                            TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
+                                text: userController.userInfo.value!.name,
+                                style:
+                                    const TextStyle(color: Color(0XFF5262F5))),
+                            const TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
                           ],
                         ),
                       ),
@@ -85,13 +215,14 @@ class HomePage extends StatelessWidget {
                     height: 12.h,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizedBox(
                         width: 24.w,
                       ),
                       Container(
-                        width: 42.w,
-                        height: 24.h,
+                        width: 50.w,
+                        height: 30.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
                         decoration: ShapeDecoration(
@@ -100,40 +231,49 @@ class HomePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: Text(
-                            /** generation값으로 대체 */
-                            '2기',
-                            style: titleMedium),
+                        child: Center(
+                          child: Text(
+                              /** generation값으로 대체 */
+                              '${userController.userInfo.value?.generation}기'
+                                  .toString(),
+                              style: titleMedium),
+                        ),
                       ),
                       SizedBox(
                         width: 8.w,
                       ),
                       Container(
-                        width: 79.w,
-                        height: 24.h,
+                        width: 90.w,
+                        height: 30.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
                         decoration: ShapeDecoration(
                           gradient: const LinearGradient(
                             begin: Alignment(1.00, -0.03),
                             end: Alignment(-1, 0.03),
-                            colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                            colors: [
+                              Color(0xFF7B3FEF),
+                              Color(0xFF5262F5),
+                            ],
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: Text(
-                            /** part값으로 대체 */
-                            '디자인 파트',
-                            style: titleMedium),
+                        child: Center(
+                          child: Text(
+
+                              /** part값으로 대체 */
+                              '${userController.userInfo.value!.part} 파트',
+                              style: titleMedium),
+                        ),
                       ),
                       SizedBox(
                         width: 8.w,
                       ),
                       Container(
-                        width: 70.w,
-                        height: 24.h,
+                        width: 80.w,
+                        height: 30.h,
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 4.h),
                         decoration: ShapeDecoration(
@@ -142,10 +282,31 @@ class HomePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: Text(
-                            /** member값으로 대체 */
-                            '거친 파도',
-                            style: titleMedium),
+                        child: Center(
+                          child: Text(
+                              /** member값으로 대체 */
+                              '${userController.userInfo.value!.member}',
+                              style: titleMedium),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 60.w,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            showOverlay(context);
+                          });
+                        },
+                        child: Image.asset(
+                          'assets/images/question.png',
+                          fit: BoxFit.fill,
+                          width: 24.w,
+                          height: 30.h,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 24.w,
                       ),
                     ],
                   ),
@@ -187,16 +348,17 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Text(
-                            'LEVEL 1',
-                            style: TextStyle(
-                              color: const Color(0x665262F5),
-                              fontSize: 14.h,
-                              fontFamily: 'Sandoll Danpatpang',
-                              fontWeight: FontWeight.w400,
-                              height: 1.40,
-                            ),
+                          SizedBox(
+                            height: 8.h,
                           ),
+                          SizedBox(
+                            width: 53.w,
+                            height: 14.h,
+                            child: Image.asset(
+                              'assets/images/level1.png',
+                              fit: BoxFit.fill,
+                            ),
+                          )
                         ],
                       ),
                       SizedBox(
@@ -226,52 +388,49 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 120.w,
-                            height: 120.h,
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                    width: 1,
-                                    strokeAlign: BorderSide.strokeAlignOutside,
-                                    color: Color(0xFF3B3B3B)),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                            child: Column(children: [
+                          Stack(
+                            children: [
                               SizedBox(
-                                height: 16.h,
-                              ),
-                              const Text(
-                                'NEXT LEVEL',
-                                style: TextStyle(
-                                  color: Color(0x335262F5),
-                                  fontSize: 18,
-                                  fontFamily: 'Sandoll Danpatpang',
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.50,
+                                  width: 120.w,
+                                  height: 120.h,
+                                  child: Image.asset(
+                                    'assets/images/Frame.png',
+                                    width: 120.w,
+                                    height: 120.h,
+                                    fit: BoxFit.fill,
+                                  )),
+                              Positioned(
+                                  left: 10.w,
+                                  top: 16.h,
+                                  child: SizedBox(
+                                      width: 94.w,
+                                      height: 18.h,
+                                      child: Image.asset(
+                                        'assets/images/NEXT_LEVEL.png',
+                                        fit: BoxFit.fill,
+                                      ))),
+                              Positioned(
+                                left: 35.w,
+                                top: 42.h,
+                                child: Image.asset(
+                                  'assets/images/lv2s.png',
+                                  width: 50.w,
+                                  height: 50.h,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Image.asset(
-                                'assets/images/lv2s.png',
-                                width: 50.w,
-                                height: 50.h,
-                              ),
-                            ]),
+                              )
+                            ],
                           ),
-                          Text(
-                            'LEVEL ?',
-                            style: TextStyle(
-                              color: const Color(0xFF3B3B3B),
-                              fontSize: 14.h,
-                              fontFamily: 'Sandoll Danpatpang',
-                              fontWeight: FontWeight.w400,
-                              height: 1.40,
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          SizedBox(
+                            width: 53.w,
+                            height: 14.h,
+                            child: Image.asset(
+                              'assets/images/n_level2.png',
+                              fit: BoxFit.fill,
                             ),
-                          ),
+                          )
                         ],
                       ),
                       SizedBox(
@@ -302,11 +461,8 @@ class HomePage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(
-                        height: 20.h,
-                        child: Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
-                            style: headlineLarge),
-                      ),
+                      Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
+                          style: headlineLarge),
                       TextButton(
                           onPressed: () {
                             Get.toNamed('/mypoint');
@@ -316,7 +472,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),
                   SizedBox(
-                    height: 20.5.h,
+                    height: 10.h,
                   ),
                   Row(
                     children: [
@@ -362,7 +518,7 @@ class HomePage extends StatelessWidget {
             ),
             Container(
               width: 327.w,
-              height: 162.h,
+              height: 180.h,
               decoration: ShapeDecoration(
                 color: const Color(0xFF2A2A2A),
                 shape: RoundedRectangleBorder(
@@ -370,19 +526,26 @@ class HomePage extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text('🗓 UPCOMING EVENT 🗓 ', style: headlineLarge),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed('/schedule');
+                          },
                           child: Text('더보기', style: titleMedium)),
                     ],
                   ),
-                  SizedBox(
-                    height: 15.5.h,
-                  ),
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),
+                  SizedBox(
+                    width: 275.w,
+                    height: 90.h,
+                    child: HomeSchedule(),
+                  )
                 ],
               ),
             ),

@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pard_app/utilities/color_style.dart';
 
 class VerificationTextField extends StatelessWidget {
+  final FocusNode textFocus;
   final dynamic controller;
   final String hint;
   final PhoneNumberFormatter? formatter;
   VerificationTextField(
+    this.textFocus,
     this.controller,
     this.hint, {
     this.formatter,
@@ -19,6 +21,7 @@ class VerificationTextField extends StatelessWidget {
       width: 211.w,
       height: 48.h,
       child: TextFormField(
+        focusNode: textFocus,
         onChanged: (value) {
           formatter != null
               ? controller.phoneTextFormField.value = value
