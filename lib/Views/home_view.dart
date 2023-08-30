@@ -351,12 +351,14 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: 8.h,
                           ),
-                          SizedBox(
-                            width: 53.w,
-                            height: 14.h,
-                            child: Image.asset(
-                              'assets/images/level1.png',
-                              fit: BoxFit.fill,
+                          Center(
+                            child: SizedBox(
+                              width: 40.w,
+                              height: 14.h,
+                              child: Image.asset(
+                                'assets/images/level1.png',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           )
                         ],
@@ -400,11 +402,11 @@ class _HomePageState extends State<HomePage> {
                                     fit: BoxFit.fill,
                                   )),
                               Positioned(
-                                  left: 10.w,
+                                  left: 25.w,
                                   top: 16.h,
                                   child: SizedBox(
-                                      width: 94.w,
-                                      height: 18.h,
+                                      width: 70.w,
+                                      height: 15.h,
                                       child: Image.asset(
                                         'assets/images/NEXT_LEVEL.png',
                                         fit: BoxFit.fill,
