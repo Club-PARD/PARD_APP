@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/Views/home_schedule_view.dart';
+import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/component/home_appbar.dart';
 import 'package:pard_app/component/pard_part.dart';
 import 'package:pard_app/component/schedule_container.dart';
+import 'package:pard_app/controllers/bottombar_controller.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -316,128 +319,135 @@ class _HomePageState extends State<HomePage> {
 
                   /** 캐릭터 Row로 나중에 point 정보로 캐릭터들 변경해야함*/
 /** -------------------------- 여기부터 ---------------------------------------------------- */
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        width: 24.w,
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 120.w,
-                            height: 120.h,
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                  width: 1,
-                                  strokeAlign: BorderSide.strokeAlignOutside,
-                                  color: Color(0xFF5262F5),
-                                ),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                            child: Center(
-                              child: Image.asset(
-                                'assets/images/pardie1.png',
-                                width: 50.w,
-                                height: 50.h,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          SizedBox(
-                            width: 53.w,
-                            height: 14.h,
-                            child: Image.asset(
-                              'assets/images/level1.png',
-                              fit: BoxFit.fill,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 30.w,
-                      ),
-                      Transform(
-                        transform: Matrix4.identity()
-                          ..translate(0.0, 0.0)
-                          ..rotateZ(1.57),
-                        child: Container(
+                  Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
                           width: 24.w,
-                          height: 24.h,
-                          decoration: const ShapeDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment(1.00, -0.03),
-                              end: Alignment(-1, 0.03),
-                              colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 120.w,
+                              height: 120.h,
+                              decoration: ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                    width: 1,
+                                    strokeAlign: BorderSide.strokeAlignOutside,
+                                    color: Color(0xFF5262F5),
+                                  ),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              child: Center(
+                                child: Image.asset(
+                                  'assets/images/pardie${pointController.level.value}.png',
+                                  width: changeCurrentWidth(
+                                      pointController.level.value),
+                                  height: changeCurrentHeight(
+                                      pointController.level.value),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             ),
-                            shape: StarBorder.polygon(
-                              sides: 3,
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            SizedBox(
+                              width: 53.w,
+                              height: 14.h,
+                              child: Image.asset(
+                                'assets/images/level${pointController.level.value}.png',
+                                fit: BoxFit.fill,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          width: 30.w,
+                        ),
+                        Transform(
+                          transform: Matrix4.identity()
+                            ..translate(0.0, 0.0)
+                            ..rotateZ(1.57),
+                          child: Container(
+                            width: 24.w,
+                            height: 24.h,
+                            decoration: const ShapeDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment(1.00, -0.03),
+                                end: Alignment(-1, 0.03),
+                                colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                              ),
+                              shape: StarBorder.polygon(
+                                sides: 3,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Stack(
-                            children: [
-                              SizedBox(
-                                  width: 120.w,
-                                  height: 120.h,
-                                  child: Image.asset(
-                                    'assets/images/Frame.png',
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Stack(
+                              children: [
+                                SizedBox(
                                     width: 120.w,
                                     height: 120.h,
-                                    fit: BoxFit.fill,
-                                  )),
-                              Positioned(
-                                  left: 10.w,
-                                  top: 16.h,
-                                  child: SizedBox(
-                                      width: 94.w,
-                                      height: 18.h,
-                                      child: Image.asset(
-                                        'assets/images/NEXT_LEVEL.png',
-                                        fit: BoxFit.fill,
-                                      ))),
-                              Positioned(
-                                left: 35.w,
-                                top: 42.h,
-                                child: Image.asset(
-                                  'assets/images/lv2s.png',
-                                  width: 50.w,
-                                  height: 50.h,
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          SizedBox(
-                            width: 53.w,
-                            height: 14.h,
-                            child: Image.asset(
-                              'assets/images/n_level2.png',
-                              fit: BoxFit.fill,
+                                    child: Image.asset(
+                                      'assets/images/Frame.png',
+                                      width: 120.w,
+                                      height: 120.h,
+                                      fit: BoxFit.fill,
+                                    )),
+                                Positioned(
+                                    left: 10.w,
+                                    top: 16.h,
+                                    child: SizedBox(
+                                        width: 94.w,
+                                        height: 18.h,
+                                        child: Image.asset(
+                                          'assets/images/NEXT_LEVEL.png',
+                                          fit: BoxFit.fill,
+                                        ))),
+                                Positioned(
+                                  left: 35.w,
+                                  top: 42.h,
+                                  child: Image.asset(
+                                    'assets/images/lv${pointController.level.value + 1}s.png',
+                                    width: changeNextWidth(
+                                        pointController.level.value),
+                                    height: changeNextHeight(
+                                        pointController.level.value),
+                                  ),
+                                )
+                              ],
                             ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 24.w,
-                      ),
-                    ],
-                  )
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            SizedBox(
+                              width: 53.w,
+                              height: 14.h,
+                              child: Image.asset(
+                                'assets/images/n_level${pointController.level.value + 1}.png',
+                                fit: BoxFit.fill,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          width: 24.w,
+                        ),
+                      ],
+                    ),
+                  ),
                   /** -------------------------- 여기까지 이미지 ---------------------------------------------------- */
                 ],
               ),
@@ -485,9 +495,15 @@ class _HomePageState extends State<HomePage> {
                               height: 8.h,
                             ),
                             /** User의 point로 변경 */
-                            Text('+7점',
-                                style: headlineLarge.copyWith(
-                                    color: const Color(0xFF64C59A)))
+                            Obx(
+                              () => Text(
+                                '+${pointController.points.value}점',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .copyWith(color: primaryGreen),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -501,10 +517,15 @@ class _HomePageState extends State<HomePage> {
                               height: 8.h,
                             ),
                             /** User의 point로 변경 */
-                            Text('컨트롤러에서 ㅋ',
-                                style: headlineLarge.copyWith(
-                                  color: const Color(0xFFFF5A5A),
-                                ))
+                            Obx(
+                              () => Text(
+                                '-${pointController.beePoints.value}점',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .copyWith(color: errorRed),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -552,7 +573,67 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(),
+      // bottomNavigationBar: BottomBar(),
     );
+  }
+
+  double changeCurrentWidth(int level) {
+    switch (level) {
+      case 1:
+        return 50.w;
+      case 2:
+        return 66.w;
+      case 3:
+        return 76.59.w;
+      case 4:
+        return 83.02.w;
+      default:
+        return 106.16.w;
+    }
+  }
+
+  double changeCurrentHeight(int level) {
+    switch (level) {
+      case 1:
+        return 49.14.h;
+      case 2:
+        return 70.14.h;
+      case 3:
+        return 86.h;
+      case 4:
+        return 93.h;
+      default:
+        return 100.h;
+    }
+  }
+
+  double changeNextWidth(int level) {
+    switch (level) {
+      case 1:
+        return 56.1.w;
+      case 2:
+        return 54.67.w;
+      case 3:
+        return 60.w;
+      case 4:
+        return 78.w;
+      default:
+        return 91.w;
+    }
+  }
+
+  double changeNextHeight(int level) {
+    switch (level) {
+      case 1:
+        return 59.17.h;
+      case 2:
+        return 64.h;
+      case 3:
+        return 68.3.h;
+      case 4:
+        return 69.31.h;
+      default:
+        return 14.h;
+    }
   }
 }
