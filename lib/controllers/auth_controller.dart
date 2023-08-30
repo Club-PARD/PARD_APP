@@ -49,7 +49,8 @@ class AuthController extends GetxController {
             await _auth.signInWithCredential(credential);
         final User? user = authResult.user;
 
-        if (user != null) { // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
+        if (user != null) {
+          // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
           userEmail.value = user.email;
           print(userEmail.value);
           bool isUserExists =
@@ -57,7 +58,7 @@ class AuthController extends GetxController {
           if (isUserExists) {
             await _userController.updateTimeByEmail(user.email!);
             await _userController.getUserInfoByEmail(user.email!);
-            Get.toNamed('/mypoint');
+            Get.toNamed('/home');
             // Get.toNamed('/mypage');
           } else
             Get.toNamed('/tos');
