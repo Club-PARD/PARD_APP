@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               Positioned(
-                top: 200.h,
+                top: 210.h,
                 left: 30.w,
                 child: Material(
                   child: GestureDetector(
@@ -51,77 +51,92 @@ class _HomePageState extends State<HomePage> {
                       removeOverlay();
                     },
                     child: Container(
-                        width: 310.w,
-                        height: 80.h,
-                        decoration: const ShapeDecoration(
-                          color: Color(0xFF1A1A1A),
-                          shape: RoundedRectangleBorder(
-                            side:
-                                BorderSide(width: 1, color: Color(0xFF5262F5)),
+                      color: const Color(0xFF242424),
+                      child: Container(
+                          width: 320.w,
+                          height: 80.h,
+                          decoration:  ShapeDecoration(
+                            color: const Color(0xFF1A1A1A),
+                            shape: RoundedRectangleBorder(
+                              side:
+                                  const BorderSide(width: 1, color: Color(0xFF5262F5)),
+                                  borderRadius: BorderRadius.circular(8.h),
+                            ),
+                            
                           ),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 300.w,
-                              height: 60.h,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
                                 children: [
-                                  SizedBox(height: 8.h),
+                                  SizedBox(width: 10.w,),
                                   SizedBox(
-                                    height: 45.h,
+                                    width: 270.w,
+                                    height: 60.h,
                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text.rich(
-                                              TextSpan(
+                                        SizedBox(height: 8.h),
+                                        SizedBox(
+                                          height: 45.h,
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                                  TextSpan(
-                                                      text:
-                                                          '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
-                                                      style: titleSmall),
-                                                  TextSpan(
-                                                    text: '팡울이',
-                                                    style: titleSmall.copyWith(
-                                                        color: const Color(
-                                                            0xFF5262F5)),
+                                                  Text.rich(
+                                                    TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                            text:
+                                                                '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
+                                                            style: titleSmall),
+                                                        TextSpan(
+                                                          text: '팡울이',
+                                                          style: titleSmall.copyWith(
+                                                              color: const Color(
+                                                                  0xFF5262F5)),
+                                                        ),
+                                                        TextSpan(
+                                                          text: '‘예요.',
+                                                          style: titleSmall,
+                                                        ),
+                                                        TextSpan(
+                                                          text:
+                                                              '\n오늘도 PARD에서 저와 함께 성장해가요! ☺️',
+                                                          style: titleSmall,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    textAlign: TextAlign.center,
                                                   ),
-                                                  TextSpan(
-                                                    text: '‘예요.',
-                                                    style: titleSmall,
-                                                  ),
-                                                  TextSpan(
-                                                    text:
-                                                        '\n오늘도 PARD에서 저와 함께 성장해가요! ☺️',
-                                                    style: titleSmall,
-                                                  ),
+                                                 
                                                 ],
                                               ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            SizedBox(
-                                              width: 8.w,
-                                            ),
-                                            Icon(
-                                              Icons.close,
-                                              color: grayScale[30],
-                                              size: 20.h,
-                                            )
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ),
+                                   Column(
+                                    children: [
+                                      Icon(
+                                        Icons.close,
+                                        color: grayScale[30],
+                                        size: 20.h,
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                    ],
+                                  )
                                 ],
                               ),
-                            ),
-                          ],
-                        )),
+                            ],
+                          )),
+                    ),
                   ),
                 ),
               ),
@@ -143,38 +158,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       endDrawer: const HomeBar(),
       backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: 375.w,
-              height: 377.h,
-              decoration: const ShapeDecoration(
-                color: Color(0xFF242424),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(40),
-                    bottomRight: Radius.circular(40),
-                  ),
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 40.h,
-                  ),
+      appBar: AppBar(
+        backgroundColor:const Color(0xFF242424),
+        leading: null,
+        title: 
                   Row(
                     children: [
-                      SizedBox(
-                        width: 24.w,
-                      ),
                       Image.asset(
                         "assets/images/logo.png",
                         width: 120.w,
                         height: 25.h,
                       ),
                       const Spacer(),
-                      Builder(builder: (context) {
+                    ],
+                  ),
+                  actions: [Builder(builder: (context) {
                         return IconButton(
                           onPressed: () {
                             Scaffold.of(context).openEndDrawer();
@@ -189,8 +187,26 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         width: 20.w,
                       ),
-                    ],
+                      ],
+      ),
+
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: 375.w,
+              height: 310.h,
+              decoration: const ShapeDecoration(
+                color: Color(0xFF242424),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40),
                   ),
+                ),
+              ),
+              child: Column(
+                children: [
                   SizedBox(
                     height: 15.h,
                   ),
@@ -204,8 +220,7 @@ class _HomePageState extends State<HomePage> {
                             const TextSpan(text: '안녕하세요, '),
                             TextSpan(
                                 text: userController.userInfo.value!.name,
-                                style:
-                                    const TextStyle(color: Color(0XFF5262F5))),
+                                style: displayMedium.copyWith(color: const Color(0XFF5262F5)),),
                             const TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
                           ],
                         ),
@@ -346,11 +361,14 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             Container(
-                                width: 120.w,
-                                height: 120.h,
-                                color: backgroundColor,
-                                
+                              width: 120.w,
+                              height: 120.h,
+                              decoration: BoxDecoration(
+                                color: backgroundColor, // Set the color here
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
                             ),
+
                             Container(
                             width: 120.w,
                             height: 120.h,
@@ -505,7 +523,7 @@ class _HomePageState extends State<HomePage> {
                           style: headlineLarge),
                       TextButton(
                           onPressed: () {},
-                          child: Text('더보기', style: titleMedium)),
+                          child: Text('더보기', style: titleMedium.copyWith(decoration: TextDecoration.underline,))),
                     ],
                   ),
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),
@@ -575,7 +593,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Get.toNamed('/schedule');
                           },
-                          child: Text('더보기', style: titleMedium)),
+                          child: Text('더보기', style: titleMedium.copyWith(decoration: TextDecoration.underline,))),
                     ],
                   ),
                   Container(width: 279.w, height: 1.h, color: grayScale[30]),

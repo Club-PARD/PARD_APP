@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/component/bottom.dart';
+import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
@@ -489,6 +490,11 @@ class _MyPageState extends State<MyPage> {
                                                             ),
                                                             child: TextButton(
                                                                 onPressed: () {
+                                                                  AuthController
+                                                                      authController =
+                                                                      Get.put(AuthController());
+                                                                  authController
+                                                                      .signOut(); 
                                                                   Get.back();
                                                                 },
                                                                 child: Text(

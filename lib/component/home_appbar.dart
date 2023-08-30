@@ -168,7 +168,7 @@ class _HomeBarState extends State<HomeBar> {
                 ListTile(
                   title:  InkWell(child: Row(
                     children: [
-                      SizedBox(width: 22.w,),
+                      SizedBox(width: 20.w,),
                       Text('기획 파트', style: headlineSmall.copyWith(color:grayScale[30])),
                     ],
                   )),
@@ -179,7 +179,7 @@ class _HomeBarState extends State<HomeBar> {
                 ListTile(
                   title:  InkWell(child: Row(
                     children: [
-                      SizedBox(width: 22.w),
+                      SizedBox(width: 20.w),
                       Text('디자인 파트', style: headlineSmall.copyWith(color:grayScale[30])),
                     ],
                   )),
@@ -190,7 +190,7 @@ class _HomeBarState extends State<HomeBar> {
                 ListTile(
                   title:  InkWell(child: Row(
                     children: [
-                      SizedBox(width: 22.w,),
+                      SizedBox(width: 20.w,),
                       Text('서버 파트', style:headlineSmall.copyWith(color:grayScale[30])),
                     ],
                   )),
@@ -201,7 +201,7 @@ class _HomeBarState extends State<HomeBar> {
                 ListTile(
                   title:  InkWell(child: Row(
                     children: [
-                      SizedBox(width: 22.w,),
+                      SizedBox(width: 20.w,),
                       Text('웹 파트', style: headlineSmall.copyWith(color:grayScale[30])),
                     ],
                   )),
@@ -212,7 +212,7 @@ class _HomeBarState extends State<HomeBar> {
                 ListTile(
                   title:  InkWell(child: Row(
                     children: [
-                      SizedBox(width: 22.w,),
+                      SizedBox(width: 20.w,),
                       Text('iOS 파트', style: headlineSmall.copyWith(color:grayScale[30])),
                     ],
                   )),
