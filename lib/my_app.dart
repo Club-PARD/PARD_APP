@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/tos', page: () => const TosView()),
           GetPage(name: '/numberauth', page: () => const NumberAuthView()),
           GetPage(name: '/mypoint', page: () => MyPointView()),
-          GetPage(
-              name: '/overallRanking', page: () => const OverallRankingView()),
+          GetPage(name: '/overallRanking', page: () => OverallRankingView()),
           GetPage(name: '/home', page: () => HomePage()),
           GetPage(name: '/mypage', page: () => const MyPage()),
           GetPage(name: '/qr', page: () => QRScan())
