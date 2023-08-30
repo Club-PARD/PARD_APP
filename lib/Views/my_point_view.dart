@@ -242,49 +242,55 @@ class _MyPointViewState extends State<MyPointView> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Text(
-                      '파드 포인트',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Obx(
-                      () => Text(
-                        '+${pointController.points.value}점',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(color: primaryGreen),
+                SizedBox(
+                  width: 60.w,
+                  child: Column(
+                    children: [
+                      Text(
+                        '파드 포인트',
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Obx(
+                        () => Text(
+                          '+${pointController.points.value}점',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(color: primaryGreen),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 VerticalDivider(
                   thickness: 1,
                   color: grayScale[30],
                 ),
-                Column(
-                  children: [
-                    Text(
-                      '벌점',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Obx(
-                      () => Text(
-                        '-${pointController.beePoints.value}점',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(color: errorRed),
+                SizedBox(
+                  width: 60.w,
+                  child: Column(
+                    children: [
+                      Text(
+                        '벌점',
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Obx(
+                        () => Text(
+                          '-${pointController.beePoints.value}점',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(color: errorRed),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

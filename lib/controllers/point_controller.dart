@@ -11,6 +11,7 @@ class PointController extends GetxController {
   Rx<PointModel?> rxPointModel = Rx<PointModel?>(null);
   RxInt points = 0.obs;
   RxInt beePoints = 0.obs;
+  RxInt level = 1.obs;
 
   @override
   void onInit() {
@@ -169,6 +170,20 @@ class PointController extends GetxController {
           rxPointModel.value = pointModel;
           points.value = totalPoints;
           beePoints.value = totalBeePoints;
+
+          // 레벨 계산
+          int calculatedPoints = totalPoints - totalBeePoints;
+          if (calculatedPoints >= 0 && calculatedPoints <= 25) {
+            level.value = 1;
+          } else if (calculatedPoints <= 50) {
+            level.value = 2;
+          } else if (calculatedPoints <= 75) {
+            level.value = 3;
+          } else if (calculatedPoints <= 100) {
+            level.value = 4;
+          } else {
+            level.value = 5;
+          }
         }
       }
     }
