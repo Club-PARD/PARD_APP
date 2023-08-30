@@ -14,41 +14,21 @@
       },
       "oauth_client": [
         {
-          "client_id": "676828935630-k1u2fmvmvjgeqh9vq19iqr2s3en1qcja.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
+          "client_id": "676828935630-onj0ppa8j692au48j58t0i02c4tdqtas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pard_app",
+            "certificate_hash": "cfae6f8057d49a9196ab41116238d2ee4999b17d"
+          }
+        },
         {
-          "current_key": "AIzaSyDYuSzECIeL4af0rwUdUC0Y4xH6bVLBR60"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "676828935630-hj0mu4i21a0c9iabqpfq56db28bjvr4o.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "676828935630-o0m4qfq5i5f0j5mjo3uvsel9099ngg0k.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.pardApp"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:676828935630:android:e4a0046fe3bc772f05a79f",
-        "android_client_info": {
-          "package_name": "com.example.pard_app_project"
-        }
-      },
-      "oauth_client": [
+          "client_id": "676828935630-ou8s0d0esojfae54l0kgbu9n1qembvrn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pard_app",
+            "certificate_hash": "ebf7ebace5082b3e4f25a250f20314cecdfa0ae5"
+          }
+        },
         {
           "client_id": "676828935630-k1u2fmvmvjgeqh9vq19iqr2s3en1qcja.apps.googleusercontent.com",
           "client_type": 3
@@ -67,10 +47,11 @@
               "client_type": 3
             },
             {
-              "client_id": "676828935630-o0m4qfq5i5f0j5mjo3uvsel9099ngg0k.apps.googleusercontent.com",
+              "client_id": "676828935630-kgjng4it3rdg3616d46bjk0opom69es9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.pardApp"
+                "bundle_id": "com.example.pard",
+                "app_store_id": "12345678"
               }
             }
           ]
