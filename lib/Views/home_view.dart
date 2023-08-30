@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 import 'package:pard_app/Views/home_schedule_view.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/component/home_appbar.dart';
@@ -327,19 +328,53 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 120.w,
-                            height: 120.h,
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                  width: 1,
-                                  strokeAlign: BorderSide.strokeAlignOutside,
-                                  color: Color(0xFF5262F5),
-                                ),
-                                borderRadius: BorderRadius.circular(30),
+                          Stack(
+                            children: [
+                              Container(
+                              width: 120.w,
+                              height: 120.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(0.1),
+                                    blurRadius: 12,
+                                    offset: const Offset(0, -1),
+                                    spreadRadius: 3,
+                                  ),
+                                ],
                               ),
                             ),
+                            Container(
+                                width: 120.w,
+                                height: 120.h,
+                                color: backgroundColor,
+                                
+                            ),
+                            Container(
+                            width: 120.w,
+                            height: 120.h,
+                            decoration: 
+                            BoxDecoration(
+                               borderRadius: BorderRadius.circular(8.r),
+                               border: GradientBoxBorder(width: 1.w,
+                               gradient: LinearGradient(colors: [
+                            Theme.of(context).colorScheme.onSecondary,
+                            Theme.of(context).colorScheme.secondary,
+                          ]),
+                               ),
+                               gradient: LinearGradient(colors: [
+                          Theme.of(context)
+                              .colorScheme
+                              .onSecondary
+                              .withOpacity(0.1),
+                          Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.1),
+                                                ]),
+                            ),
+                            
                             child: Center(
                               child: Image.asset(
                                 'assets/images/pardie1.png',
@@ -348,6 +383,9 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
+                            ]
+                          ),
+                          
                           SizedBox(
                             height: 8.h,
                           ),

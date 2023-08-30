@@ -85,6 +85,15 @@ void launchInstaURL() async {
 }
   }
 
+  void launchServerNotion() async {
+    final Uri pardServerNotionUrl = Uri.parse('https://pardhgu.notion.site/c32944fa18d042caa150a1ba1de306bd');
+    try {
+  await launchUrl(pardServerNotionUrl);
+} catch (e) {
+  print("Could not launch $pardServerNotionUrl: $e");
+}
+  }
+
 class _HomeBarState extends State<HomeBar> {
   bool _areItemsVisible = false;
   @override
@@ -146,37 +155,67 @@ class _HomeBarState extends State<HomeBar> {
             ),
             if (_areItemsVisible) ...[
                 ListTile(
-                  title: InkWell( child: Text('전체', style: headlineSmall.copyWith(color:grayScale[30]))),
+                  title: InkWell( child: Row(
+                    children: [
+                      SizedBox(width: 22.w,),
+                      Text('전체', style: headlineSmall.copyWith(color:grayScale[30])),
+                    ],
+                  )),
                   onTap: () {
                     launchNotion();
                   },
                 ),
                 ListTile(
-                  title:  InkWell(child: Text('기획 파트', style: headlineSmall.copyWith(color:grayScale[30]))),
+                  title:  InkWell(child: Row(
+                    children: [
+                      SizedBox(width: 22.w,),
+                      Text('기획 파트', style: headlineSmall.copyWith(color:grayScale[30])),
+                    ],
+                  )),
                   onTap: () {
                     launchPMNotion();
                   },
                 ),
                 ListTile(
-                  title:  InkWell(child: Text('디자인 파트', style: headlineSmall.copyWith(color:grayScale[30]))),
+                  title:  InkWell(child: Row(
+                    children: [
+                      SizedBox(width: 22.w),
+                      Text('디자인 파트', style: headlineSmall.copyWith(color:grayScale[30])),
+                    ],
+                  )),
                   onTap: () {
                     launchDesignNotion();
                   },
                 ),
                 ListTile(
-                  title:  InkWell(child: Text('서버 파트', style:headlineSmall.copyWith(color:grayScale[30]))),
+                  title:  InkWell(child: Row(
+                    children: [
+                      SizedBox(width: 22.w,),
+                      Text('서버 파트', style:headlineSmall.copyWith(color:grayScale[30])),
+                    ],
+                  )),
                   onTap: () {
-                    Navigator.pop(context);
+                    launchServerNotion();
                   },
                 ),
                 ListTile(
-                  title:  InkWell(child: Text('웹 파트', style: headlineSmall.copyWith(color:grayScale[30]))),
+                  title:  InkWell(child: Row(
+                    children: [
+                      SizedBox(width: 22.w,),
+                      Text('웹 파트', style: headlineSmall.copyWith(color:grayScale[30])),
+                    ],
+                  )),
                   onTap: () {
                     launchWebNotion();
                   },
                 ),
                 ListTile(
-                  title:  InkWell(child: Text('iOS 파트', style: headlineSmall.copyWith(color:grayScale[30]))),
+                  title:  InkWell(child: Row(
+                    children: [
+                      SizedBox(width: 22.w,),
+                      Text('iOS 파트', style: headlineSmall.copyWith(color:grayScale[30])),
+                    ],
+                  )),
                   onTap: () {
                     launchAppNotion();
                   },
