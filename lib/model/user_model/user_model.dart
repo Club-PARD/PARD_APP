@@ -8,6 +8,7 @@ part 'user_model.g.dart';
 class UserModel {
   UserModel({
     this.uid,
+    this.pid,
     this.name,
     this.phone,
     this.email,
@@ -21,6 +22,7 @@ class UserModel {
   });
 
   String? uid;
+  String? pid;
   String? name;
   String? phone;
   String? email;
@@ -31,7 +33,6 @@ class UserModel {
   bool? isMaster;
   @JsonKey(fromJson: dateTimeFromTimestamp)
   final DateTime? lastLogin;
-  String? pid;
   Map<String, dynamic>? attend;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
