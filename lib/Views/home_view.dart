@@ -23,12 +23,17 @@ class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
   final UserController userController = Get.put(UserController());
   final ScheduleController scheduleController = Get.put(ScheduleController());
+  final GlobalKey questionDialogKey = GlobalKey();
+
 
   bool showContainer = false;
   OverlayEntry? overlayEntry;
 
   void showOverlay(BuildContext context) async {
     await PushNotificationController.to.setupFlutterNotifications();
+  final RenderBox renderBox = questionDialogKey.currentContext!.findRenderObject() as RenderBox;
+  final boxPosition = renderBox.localToGlobal(Offset.zero);
+
     if (overlayEntry == null) {
       OverlayState? overlayState = Overlay.of(context);
       overlayEntry = OverlayEntry(
@@ -41,8 +46,8 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               Positioned(
-                top: 210.h,
-                left: 30.w,
+                top: boxPosition.dy+renderBox.size.height ,
+              left: 30.w,
                 child: Material(
                   child: GestureDetector(
                     onTap: () {
@@ -157,7 +162,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       endDrawer: const HomeBar(),
       backgroundColor: backgroundColor,
-      appBar: HomeFixedBar(),
+      appBar: const HomeFixedBar(),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -285,23 +290,22 @@ class _HomePageState extends State<HomePage> {
                           Expanded(
                             child: Container(),
                           ),
-                          InkWell(
-                            onTap: () {
-                              final RenderBox renderBox =
-                                  context.findRenderObject() as RenderBox;
-                              final offset =
-                                  renderBox.localToGlobal(Offset.zero);
-
-                              setState(() {
-                                showOverlay(context);
-                              });
-                            },
-                            child: Image.asset(
-                              'assets/images/question.png',
-                              fit: BoxFit.fill,
-                              width: 24.w,
-                              height: 24.h,
-                            ),
+                          Builder(
+                            key: questionDialogKey,
+                            builder: (BuildContext questionDialogContext) {
+                              return InkWell(
+                              
+                                onTap: () {
+                                    showOverlay(context);
+                                },
+                                child: Image.asset(
+                                  'assets/images/question.png',
+                                  fit: BoxFit.fill,
+                                  width: 24.w,
+                                  height: 24.h,
+                                ),
+                              );
+                            }
                           ),
                           SizedBox(
                             width: 24.w,
