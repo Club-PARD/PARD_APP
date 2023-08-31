@@ -6,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+<<<<<<< Updated upstream
 import '../model/user_model/user_model.dart';
+=======
+>>>>>>> Stashed changes
 import 'auth_controller.dart';
 
 class PhoneVerificationController extends GetxController {
@@ -91,6 +94,7 @@ class PhoneVerificationController extends GetxController {
       if (email.isNotEmpty) {
         String uid = findedUID.value!;
         await _userController.saveEmail(uid, email);
+<<<<<<< Updated upstream
         await _userController.getUserInfoByUID(uid);
         // 토스트 메시지 출력
         codeValidationSnackBar(context);
@@ -109,6 +113,11 @@ class PhoneVerificationController extends GetxController {
           print('isMaster: ${user.isMaster}');
           print('lastLogin: ${user.lastLogin}');
         }
+=======
+        // 토스트 메시지 출력
+        codeValidationSnackBar(context);
+        print('인증성공');
+>>>>>>> Stashed changes
       }
     } else {
       print('인증실패');

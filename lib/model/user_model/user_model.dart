@@ -8,6 +8,10 @@ part 'user_model.g.dart';
 class UserModel {
   UserModel({
     this.uid,
+<<<<<<< Updated upstream
+=======
+    this.pid,
+>>>>>>> Stashed changes
     this.name,
     this.phone,
     this.email,
@@ -18,9 +22,17 @@ class UserModel {
     this.isMaster,
     this.lastLogin,
     this.attend,
+<<<<<<< Updated upstream
   });
 
   String? uid;
+=======
+    this.fcmToken,
+  });
+
+  String? uid;
+  String? pid;
+>>>>>>> Stashed changes
   String? name;
   String? phone;
   String? email;
@@ -31,8 +43,13 @@ class UserModel {
   bool? isMaster;
   @JsonKey(fromJson: dateTimeFromTimestamp)
   final DateTime? lastLogin;
+<<<<<<< Updated upstream
   String? pid;
   Map<String, dynamic>? attend;
+=======
+  Map<String, dynamic>? attend;
+  String ?fcmToken;
+>>>>>>> Stashed changes
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

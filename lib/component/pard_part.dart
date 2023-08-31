@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+//import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class PartComponent extends StatelessWidget {
   final String part;
@@ -14,11 +15,11 @@ class PartComponent extends StatelessWidget {
     final bool isAllParts = part == '전체';
 
     return Container(
-      width: 55,
+      width: 60,
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        gradient: part == '천체'
+        gradient: part == '전체'
             ? const LinearGradient(
                 colors: [primaryBlue, primaryPurple],
               )
@@ -32,7 +33,11 @@ class PartComponent extends StatelessWidget {
       child: GradientText(
         part,
         style: Theme.of(context).textTheme.headlineSmall,
+<<<<<<< Updated upstream
         colors: part == '천체'
+=======
+        colors: part == '전체'
+>>>>>>> Stashed changes
             ? [Colors.white, Colors.white]
             : [primaryBlue, primaryPurple],
       ),

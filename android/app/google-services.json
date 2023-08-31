@@ -14,6 +14,25 @@
       },
       "oauth_client": [
         {
+<<<<<<< Updated upstream
+=======
+          "client_id": "676828935630-onj0ppa8j692au48j58t0i02c4tdqtas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pard_app",
+            "certificate_hash": "cfae6f8057d49a9196ab41116238d2ee4999b17d"
+          }
+        },
+        {
+          "client_id": "676828935630-ou8s0d0esojfae54l0kgbu9n1qembvrn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pard_app",
+            "certificate_hash": "ebf7ebace5082b3e4f25a250f20314cecdfa0ae5"
+          }
+        },
+        {
+>>>>>>> Stashed changes
           "client_id": "676828935630-k1u2fmvmvjgeqh9vq19iqr2s3en1qcja.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -31,9 +50,10 @@
               "client_type": 3
             },
             {
-              "client_id": "676828935630-o0m4qfq5i5f0j5mjo3uvsel9099ngg0k.apps.googleusercontent.com",
+              "client_id": "676828935630-kgjng4it3rdg3616d46bjk0opom69es9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
+<<<<<<< Updated upstream
                 "bundle_id": "com.example.pardApp"
               }
             }
@@ -71,6 +91,10 @@
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.pardApp"
+=======
+                "bundle_id": "com.example.pard",
+                "app_store_id": "12345678"
+>>>>>>> Stashed changes
               }
             }
           ]
