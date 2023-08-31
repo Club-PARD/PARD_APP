@@ -16,7 +16,6 @@ class HomeSchedule extends StatelessWidget {
       width: 280.w,
       height: 100.h,
       child: Obx(() {
-        // Check if upcomingSchedules is not empty
         if (scheduleController.upcomingSchedules.isNotEmpty) {
           ScheduleModel firstSchedule =
               scheduleController.upcomingSchedules.first;
