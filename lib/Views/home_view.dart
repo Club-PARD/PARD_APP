@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   width: 375.w,
-                  height: 310.h,
+                  height: 287.h,
                   decoration: const ShapeDecoration(
                     color: Color(0xFF242424),
                     shape: RoundedRectangleBorder(
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                         height: 12.h,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
                             width: 24.w,
@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: 1.w,
+                            width: 8.w,
                           ),
                           Container(
                             width:
@@ -262,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: 1.w,
+                            width: 8.w,
                           ),
                           Container(
                             width: 80.w,
@@ -282,8 +282,8 @@ class _HomePageState extends State<HomePage> {
                                   style: titleMedium),
                             ),
                           ),
-                          SizedBox(
-                            width: 60.w,
+                          Expanded(
+                            child: Container(),
                           ),
                           InkWell(
                             onTap: () {
@@ -316,7 +316,7 @@ class _HomePageState extends State<HomePage> {
 /** -------------------------- 여기부터 ---------------------------------------------------- */
                       Obx(
                         () => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
                               width: 24.w,
@@ -396,8 +396,8 @@ class _HomePageState extends State<HomePage> {
                                   height: 8.h,
                                 ),
                                 SizedBox(
-                                  width: 53.w,
-                                  height: 14.h,
+                                  width: 60.w,
+                                  height: 12.h,
                                   child: Image.asset(
                                     'assets/images/level${pointController.level.value}.png',
                                     fit: BoxFit.fill,
@@ -406,7 +406,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                             SizedBox(
-                              width: 30.w,
+                              width: 40.w,
                             ),
                             Transform(
                               transform: Matrix4.identity()
@@ -446,19 +446,26 @@ class _HomePageState extends State<HomePage> {
                                           height: 120.h,
                                           fit: BoxFit.fill,
                                         )),
-                                    Positioned(
-                                        left: 10.w,
-                                        top: 16.h,
+                                    if (pointController.level.value != 5)
+                                      Positioned(
+                                        left: 15.w,
+                                        top: 18.h,
                                         child: SizedBox(
-                                            width: 94.w,
-                                            height: 18.h,
-                                            child: Image.asset(
-                                              'assets/images/NEXT_LEVEL.png',
-                                              fit: BoxFit.fill,
-                                            ))),
+                                          width: 94.w,
+                                          height: 12.h,
+                                          child: Image.asset(
+                                            'assets/images/NEXT_LEVEL.png',
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ),
                                     Positioned(
-                                      left: 35.w,
-                                      top: 42.h,
+                                      left: (pointController.level.value != 5)
+                                          ? 35.w
+                                          : 14.w,
+                                      top: (pointController.level.value != 5)
+                                          ? 42.h
+                                          : 31.h,
                                       child: Image.asset(
                                         'assets/images/lv${pointController.level.value + 1}s.png',
                                         width: changeNextWidth(
@@ -473,8 +480,8 @@ class _HomePageState extends State<HomePage> {
                                   height: 8.h,
                                 ),
                                 SizedBox(
-                                  width: 53.w,
-                                  height: 14.h,
+                                  width: 60.w,
+                                  height: 12.h,
                                   child: Image.asset(
                                     'assets/images/n_level${pointController.level.value + 1}.png',
                                     fit: BoxFit.fill,
@@ -627,11 +634,11 @@ class _HomePageState extends State<HomePage> {
   double changeCurrentWidth(int level) {
     switch (level) {
       case 1:
-        return 50.w;
+        return 70.w;
       case 2:
-        return 66.w;
+        return 76.w;
       case 3:
-        return 76.59.w;
+        return 86.59.w;
       case 4:
         return 83.02.w;
       default:
@@ -642,11 +649,11 @@ class _HomePageState extends State<HomePage> {
   double changeCurrentHeight(int level) {
     switch (level) {
       case 1:
-        return 49.14.h;
+        return 69.14.h;
       case 2:
-        return 70.14.h;
+        return 80.14.h;
       case 3:
-        return 86.h;
+        return 96.h;
       case 4:
         return 93.h;
       default:
@@ -680,7 +687,7 @@ class _HomePageState extends State<HomePage> {
       case 4:
         return 69.31.h;
       default:
-        return 14.h;
+        return 60.h;
     }
   }
 }
