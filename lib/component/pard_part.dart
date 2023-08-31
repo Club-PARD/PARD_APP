@@ -33,11 +33,7 @@ class PartComponent extends StatelessWidget {
       child: GradientText(
         part,
         style: Theme.of(context).textTheme.headlineSmall,
-<<<<<<< Updated upstream
-        colors: part == '천체'
-=======
         colors: part == '전체'
->>>>>>> Stashed changes
             ? [Colors.white, Colors.white]
             : [primaryBlue, primaryPurple],
       ),

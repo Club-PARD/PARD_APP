@@ -1,17 +1,3 @@
-<<<<<<< Updated upstream
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pard_app/component/pard_appbar.dart';
-import 'package:pard_app/controllers/point_controller.dart';
-
-class MyPointScreen extends StatelessWidget {
-  MyPointScreen({super.key});
-  final PointController pointController = Get.put(PointController());
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-=======
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -56,43 +42,10 @@ class _MyPointViewState extends State<MyPointView> {
 
     return Scaffold(
       backgroundColor: backgroundColor,
->>>>>>> Stashed changes
       appBar: PardAppBar(
         '내 점수',
       ),
       body: Center(
-<<<<<<< Updated upstream
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                pointController.getUserUid();
-              },
-              child: Text('uid 가져오기 버튼'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                pointController.getUserPoints();
-              },
-              child: Text('point 가져오기 버튼'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                pointController.getUserPoints();
-                pointController.getUserDataAndPoints();
-              },
-              child: Text('point model 버튼'),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('버튼'),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('버튼'),
-            ),
-          ],
-=======
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 24.0.w,
@@ -187,13 +140,10 @@ class _MyPointViewState extends State<MyPointView> {
               pointRecordCarouselSlider(context, buttonKey),
             ],
           ),
->>>>>>> Stashed changes
         ),
       ),
     );
   }
-<<<<<<< Updated upstream
-=======
 
   Widget rankWithTopIcon(String top, context, UserModel user) {
     return Row(
@@ -547,5 +497,4 @@ String formatTimestamp(Timestamp firestoreTimestamp) {
   DateTime dateTime = firestoreTimestamp.toDate();
   final DateFormat formatter = DateFormat('MM.dd(E)', 'ko_KR');
   return formatter.format(dateTime);
->>>>>>> Stashed changes
 }

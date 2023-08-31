@@ -13,12 +13,8 @@ class TosView extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
 
-<<<<<<< Updated upstream
-    return SafeArea(
-=======
     return WillPopScope(
       onWillPop: () async => false,
->>>>>>> Stashed changes
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Theme.of(context).colorScheme.background,
@@ -27,12 +23,7 @@ class TosView extends StatelessWidget {
             () => Center(
               child: Column(
                 children: [
-<<<<<<< Updated upstream
-                  tosDescription(
-                      context, '서비스 가입 및 이용을 위해', '서비스 이용약관', '에 동의해주세요'),
-=======
                   TosDescription('서비스 가입 및 이용을 위해', '서비스 이용약관', '에 동의해주세요'),
->>>>>>> Stashed changes
                   SizedBox(
                     height: 48.h,
                   ),
@@ -41,11 +32,7 @@ class TosView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-<<<<<<< Updated upstream
-                        checkbox(context, authController.isAgree, 20.h),
-=======
                         TosCheckbox(authController.isAgree, 20.h),
->>>>>>> Stashed changes
                         SizedBox(
                           width: 4.w,
                         ),
@@ -65,19 +52,6 @@ class TosView extends StatelessWidget {
                   SizedBox(
                     height: 16.h,
                   ),
-<<<<<<< Updated upstream
-                  tosAgreement(context),
-                  SizedBox(
-                    height: 316.h,
-                  ),
-                  nextButton(context, '다음', '/numberauth',
-                      authController.isAgree.value, null),
-                ],
-              ),
-            ),
-          )),
-    );
-=======
                   TosAgreement(
                       '개인정보 수집 및 이용 동의(필수)',
                       'https://pardhgu.notion.site/Pard-APP-fbccc11671d14b4d8012dd999eff7f93?pvs=4',
@@ -92,6 +66,5 @@ class TosView extends StatelessWidget {
             ),
           ),
         ));
->>>>>>> Stashed changes
   }
 }

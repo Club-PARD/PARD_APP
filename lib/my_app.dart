@@ -4,23 +4,16 @@ import 'package:get/get.dart';
 import 'package:pard_app/Views/home_view.dart';
 import 'package:pard_app/Views/my_point_view.dart';
 import 'package:pard_app/Views/number_auth_view.dart';
-<<<<<<< Updated upstream
-import 'package:pard_app/Views/schedule_view.dart';
-=======
 import 'package:pard_app/Views/overall_ranking_view.dart';
 import 'package:pard_app/Views/root_view.dart';
->>>>>>> Stashed changes
 import 'package:pard_app/Views/signin_view.dart';
 import 'package:pard_app/Views/tos_view.dart';
 import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/component/qr_scanner.dart';
 import 'package:pard_app/utilities/app_theme.dart';
 
-<<<<<<< Updated upstream
-=======
 import 'Views/schedule_view.dart';
 
->>>>>>> Stashed changes
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -39,21 +32,11 @@ class MyApp extends StatelessWidget {
             child: child!,
           );
         },
-<<<<<<< Updated upstream
-        initialRoute: '/home',
-=======
         initialRoute: '/',
->>>>>>> Stashed changes
         getPages: [
           GetPage(name: '/', page: () => const SignInView()),
           GetPage(name: '/tos', page: () => const TosView()),
           GetPage(name: '/numberauth', page: () => const NumberAuthView()),
-<<<<<<< Updated upstream
-          GetPage(name: '/mypoint', page: () => MyPointScreen()),
-          GetPage(name: '/home', page: () => HomePage()),
-          GetPage(name: '/mypage', page: () => const MyPage()),
-          GetPage(name: '/qr', page: () => QRScan()),
-=======
           GetPage(name: '/mypoint', page: () => MyPointView()),
           GetPage(name: '/overallRanking', page: () => OverallRankingView()),
           GetPage(name: '/home', page: () => const RootVeiw()),
@@ -62,7 +45,6 @@ class MyApp extends StatelessWidget {
               name: '/qr',
               page: () => QRScan(),
               transition: Transition.downToUp),
->>>>>>> Stashed changes
           GetPage(name: '/schedule', page: () => SchedulerScreen())
           // GetPage(name: '/first', page: () => FirstNamedPage()),
           // GetPage(name: '/second', page: () => SecondNamedPage()),

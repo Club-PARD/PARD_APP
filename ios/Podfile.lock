@@ -20,12 +20,9 @@ PODS:
   - Firebase/Firestore (10.12.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.12.0)
-<<<<<<< Updated upstream
-=======
   - Firebase/Messaging (10.12.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 10.12.0)
->>>>>>> Stashed changes
   - firebase_auth (4.8.0):
     - Firebase/Auth (= 10.12.0)
     - firebase_core
@@ -33,15 +30,11 @@ PODS:
   - firebase_core (2.15.1):
     - Firebase/CoreOnly (= 10.12.0)
     - Flutter
-<<<<<<< Updated upstream
-  - FirebaseAppCheckInterop (10.13.0)
-=======
   - firebase_messaging (14.6.7):
     - Firebase/Messaging (= 10.12.0)
     - firebase_core
     - Flutter
   - FirebaseAppCheckInterop (10.14.0)
->>>>>>> Stashed changes
   - FirebaseAuth (10.12.0):
     - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseCore (~> 10.0)
@@ -62,14 +55,25 @@ PODS:
   - FirebaseFirestore/Base (10.12.0)
   - FirebaseFirestore/WithLeveldb (10.12.0):
     - FirebaseFirestore/Base
+  - FirebaseInstallations (10.13.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.12.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - Flutter (1.0.0)
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - google_sign_in_ios (0.0.1):
     - Flutter
-<<<<<<< Updated upstream
-=======
-  - google_sign_in_ios (0.0.1):
-    - Flutter
->>>>>>> Stashed changes
     - GoogleSignIn (~> 6.2)
   - GoogleDataTransport (9.2.5):
     - GoogleUtilities/Environment (~> 7.7)
@@ -158,12 +162,10 @@ DEPENDENCIES:
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `10.12.0`)
   - Flutter (from `Flutter`)
-<<<<<<< Updated upstream
-=======
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
->>>>>>> Stashed changes
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - mobile_scanner (from `.symlinks/plugins/mobile_scanner/ios`)
   - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
@@ -177,6 +179,8 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreInternal
+    - FirebaseInstallations
+    - FirebaseMessaging
     - GoogleDataTransport
     - GoogleMLKit
     - GoogleSignIn
@@ -202,16 +206,15 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_messaging:
+    :path: ".symlinks/plugins/firebase_messaging/ios"
   FirebaseFirestore:
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
     :tag: 10.12.0
   Flutter:
     :path: Flutter
-<<<<<<< Updated upstream
-=======
   flutter_local_notifications:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
->>>>>>> Stashed changes
   google_sign_in_ios:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
   mobile_scanner:
@@ -233,21 +236,16 @@ SPEC CHECKSUMS:
   Firebase: 07150e75d142fb9399f6777fa56a187b17f833a0
   firebase_auth: 604e47908bc2dcd7baa113bbd37ab74000bff488
   firebase_core: 4a3246a02f828a01c74a2c26427037786d90f17f
-<<<<<<< Updated upstream
-  FirebaseAppCheckInterop: 5e12dc623d443dedffcde9c6f3ed41510125d8ef
-=======
   firebase_messaging: 0b4f7997f491343b90d9300af54fe55c72135833
   FirebaseAppCheckInterop: c87f1d5421c852413dd936b2b2340b21e62501a0
->>>>>>> Stashed changes
   FirebaseAuth: a66c1e14ec58f41d154a4b41ce1a23ea00ad4805
   FirebaseCore: f86a1394906b97ac445ae49c92552a9425831bed
   FirebaseCoreInternal: d558159ee6cc4b823c2296ecc193de9f6d9a5bb3
   FirebaseFirestore: 8d9dd05bb50e0891ebe4fdd9bd0f9b9d22ea5556
+  FirebaseInstallations: b28af1b9f997f1a799efe818c94695a3728c352f
+  FirebaseMessaging: bb2c4f6422a753038fe137d90ae7c1af57251316
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-<<<<<<< Updated upstream
-=======
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
->>>>>>> Stashed changes
   google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
   GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
   GoogleMLKit: 2bd0dc6253c4d4f227aad460f69215a504b2980e

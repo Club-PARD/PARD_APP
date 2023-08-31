@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-<<<<<<< Updated upstream
-=======
 import 'package:pard_app/controllers/user_controller.dart';
->>>>>>> Stashed changes
 
 import 'package:pard_app/model/schedule_model/schedule_model.dart';
 
@@ -18,16 +15,11 @@ class ScheduleController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-<<<<<<< Updated upstream
-
-    getSchedules('앱');
-=======
     final userPart = userController.userInfo.value?.part;
 
     if (userPart != null) {
       getSchedules(userPart);
     }
->>>>>>> Stashed changes
   }
 
   Future<void> getSchedules(String userPart) async {

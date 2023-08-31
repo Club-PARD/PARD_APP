@@ -80,27 +80,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-<<<<<<< Updated upstream
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>CFBundleURLTypes</key>
-	<array>
-	    <dict>
-	        <key>CFBundleTypeRole</key>
-	        <string>Editor</string>
-	        <key>CFBundleURLSchemes</key>
-	        <array>
-	        	<string>com.googleusercontent.apps.676828935630-o0m4qfq5i5f0j5mjo3uvsel9099ngg0k</string>
-	        </array>
-	    </dict>
-	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>https</string>
-	</array>
-=======
->>>>>>> Stashed changes
 </dict>
 </plist>

@@ -34,11 +34,7 @@ class SchedulerScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width / 24),
         children: [
-<<<<<<< Updated upstream
-          _buildSection('다가오는 일정', () => scheduleController.upcomingSchedules,
-=======
           buildSection('다가오는 일정', () => scheduleController.upcomingSchedules,
->>>>>>> Stashed changes
               displaySmall, false),
           SizedBox(
             height: MediaQuery.of(context).size.width / 34,
@@ -47,11 +43,7 @@ class SchedulerScreen extends StatelessWidget {
             color: grayScale[30],
             thickness: 1,
           ),
-<<<<<<< Updated upstream
-          _buildSection('지난 일정', () => scheduleController.pastSchedules,
-=======
           buildSection('지난 일정', () => scheduleController.pastSchedules,
->>>>>>> Stashed changes
               displaySmall, true),
         ],
       ),

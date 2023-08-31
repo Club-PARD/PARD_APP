@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-<<<<<<< Updated upstream
-import 'package:pard_app/utilities/color_style.dart';
-import 'package:pard_app/utilities/text_style.dart';
-=======
 import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
->>>>>>> Stashed changes
 
 class HomeBar extends StatefulWidget {
   const HomeBar({super.key});
@@ -17,8 +12,6 @@ class HomeBar extends StatefulWidget {
   State<HomeBar> createState() => _HomeBarState();
 }
 
-<<<<<<< Updated upstream
-=======
 void launchInstaURL() async {
     final Uri pardInstaUrl = Uri.parse('https://www.instagram.com/official_pard_/');
     try {
@@ -101,7 +94,6 @@ void launchInstaURL() async {
 }
   }
 
->>>>>>> Stashed changes
 class _HomeBarState extends State<HomeBar> {
   bool _areItemsVisible = false;
   @override
@@ -114,11 +106,7 @@ class _HomeBarState extends State<HomeBar> {
         backgroundColor: const Color(0XFF2A2A2A),
         child: ListView(
           children: <Widget>[
-<<<<<<< Updated upstream
-            SizedBox(height: 64.h),
-=======
             SizedBox(height: 20.h),
->>>>>>> Stashed changes
             Container(
               padding: EdgeInsets.only(left: 24.w),
               decoration: const BoxDecoration(
@@ -167,41 +155,6 @@ class _HomeBarState extends State<HomeBar> {
             ),
             if (_areItemsVisible) ...[
                 ListTile(
-<<<<<<< Updated upstream
-                  title: Text('전체', style: headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:  Text('기획 파트', style: headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:  Text('다저안 파트', style: headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:  Text('서버 파트', style:headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:  Text('웹 파트', style: headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:  Text('iOS 파트', style: headlineSmall.copyWith(color:grayScale[30])),
-                  onTap: () {
-                    Navigator.pop(context);
-=======
                   title: InkWell( child: Row(
                     children: [
                       SizedBox(width: 22.w,),
@@ -265,31 +218,10 @@ class _HomeBarState extends State<HomeBar> {
                   )),
                   onTap: () {
                     launchAppNotion();
->>>>>>> Stashed changes
                   },
                 )
             ],
             SizedBox(height: 32.h,),
-<<<<<<< Updated upstream
-            Container(
-              padding: EdgeInsets.only(left: 20.w),
-              decoration: const BoxDecoration(
-                color: Color(0XFF2A2A2A),
-              ),
-              child:  Text('피드백', style: headlineMedium.copyWith(color: const Color.fromRGBO(82, 98, 245, 1))),
-            ),
-            SizedBox(
-              width: 200.w,
-              height: 60.h,
-             
-              child: Row(
-                children: [
-                  SizedBox(width: 24.w,),
-                  Image.asset('assets/images/googleSheet.png', width: 13.w,height: 18.h,),
-                  SizedBox(width: 8.w,),
-                   Text('세미나 구글폼',style: headlineSmall)
-                ],
-=======
             InkWell(
               onTap: () {
                 launchFeedback();
@@ -316,7 +248,6 @@ class _HomeBarState extends State<HomeBar> {
                      Text('세미나 구글폼',style: headlineSmall)
                   ],
                 ),
->>>>>>> Stashed changes
               ),
             ),
             SizedBox(height: 32.h),
@@ -335,15 +266,6 @@ class _HomeBarState extends State<HomeBar> {
                 children: [
                   SizedBox(
                     height: 60.h,
-<<<<<<< Updated upstream
-                    child: Row(
-                      children: [
-                        SizedBox(width: 24.w,),
-                        Image.asset("assets/images/ig.png", width: 16.w,height: 16.h,),
-                        SizedBox(width: 8.w,),
-                        Text('인스타그램',style: headlineSmall)
-                      ],
-=======
                     child: InkWell(
                       onTap: launchInstaURL,
                       child: Row(
@@ -354,21 +276,11 @@ class _HomeBarState extends State<HomeBar> {
                           Text('인스타그램',style: headlineSmall)
                         ],
                       ),
->>>>>>> Stashed changes
                     ),
                   ),
                   SizedBox(height: 1.h,),
                   SizedBox(
                     height: 60.h,
-<<<<<<< Updated upstream
-                    child: Row(
-                      children: [
-                         SizedBox(width: 24.w,),
-                        Image.asset("assets/images/logo.png", width: 43.7.w,height: 9.h),
-                         SizedBox(width: 8.w),
-                         Text('웹사이트',style: headlineSmall,)
-                      ],
-=======
                     child: InkWell(
                       onTap: launchPardWebURL,
                       child: Row(
@@ -379,7 +291,6 @@ class _HomeBarState extends State<HomeBar> {
                            Text('웹사이트',style: headlineSmall,)
                         ],
                       ),
->>>>>>> Stashed changes
                     ),
                   ),
                 ],

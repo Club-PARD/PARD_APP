@@ -1,20 +1,10 @@
-<<<<<<< Updated upstream
-=======
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
->>>>>>> Stashed changes
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 
 class PushNotificationController extends GetxController {
-<<<<<<< Updated upstream
-  var _counter = 0.obs;
-
-  int get counter => _counter.value;
-
-  void increment() => _counter.value++;
-=======
     late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     late AndroidNotificationChannel channel;
     static PushNotificationController get to => Get.find();
@@ -110,7 +100,6 @@ class PushNotificationController extends GetxController {
   }
 
 
->>>>>>> Stashed changes
 }
 
 }

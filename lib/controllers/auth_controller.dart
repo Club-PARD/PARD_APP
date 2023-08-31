@@ -14,25 +14,6 @@ class AuthController extends GetxController {
 
   RxBool isAgree = false.obs;
 
-<<<<<<< Updated upstream
-  @override
-  void onInit() {
-    super.onInit();
-    user.bindStream(_auth.authStateChanges());
-
-    // ever(user, (User? user) async {
-    //   if (user != null) {
-    //     userEmail.value = user.email;
-    //     if (userEmail.value != null) {
-    //       await _userController.getUserInfoByEmail(userEmail.value!);
-    //     }
-    //   } else {
-    //     // 사용자가 로그아웃한 경우, user 및 userEmail 초기화
-    //     user = null;
-    //     userEmail.value = null;
-    //   }
-    // });
-=======
   Future<void> checkPreviousLogin() async {
     if (_auth.currentUser != null) {
       userEmail.value = _auth.currentUser!.email;
@@ -47,7 +28,6 @@ class AuthController extends GetxController {
         print('로그인 이력 없음: 로그인 필요');
       }
     }
->>>>>>> Stashed changes
   }
 
   //로그인
@@ -66,12 +46,8 @@ class AuthController extends GetxController {
             await _auth.signInWithCredential(credential);
         final User? user = authResult.user;
 
-<<<<<<< Updated upstream
-        if (user != null) { // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
-=======
         if (user != null) {
           // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
->>>>>>> Stashed changes
           userEmail.value = user.email;
           print(userEmail.value);
           bool isUserExists =
@@ -79,12 +55,7 @@ class AuthController extends GetxController {
           if (isUserExists) {
             await _userController.updateTimeByEmail(user.email!);
             await _userController.getUserInfoByEmail(user.email!);
-<<<<<<< Updated upstream
-            Get.toNamed('/mypoint');
-            // Get.toNamed('/mypage');
-=======
             Get.toNamed('/home');
->>>>>>> Stashed changes
           } else
             Get.toNamed('/tos');
         }

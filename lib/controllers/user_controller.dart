@@ -1,14 +1,7 @@
-<<<<<<< Updated upstream
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-=======
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
->>>>>>> Stashed changes
 import 'package:get/get.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 
@@ -18,11 +11,8 @@ class UserController extends GetxController {
   Rx<UserModel?> userInfo = Rx<UserModel?>(null);
   Rx<String?> deviceName = Rx<String?>(null); 
   Rx<String?> deviceVersion = Rx<String?>(null);
-<<<<<<< Updated upstream
-=======
   Rx<String?> fcmToken = Rx<String?>(null);
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
->>>>>>> Stashed changes
   
   //user모델 가져오기(by 이메일)
   Future<void> getUserInfoByEmail(String email) async {
@@ -48,10 +38,7 @@ class UserController extends GetxController {
         print('lastLogin: ${user.lastLogin}');
         print('pid: ${user.email}');
         print('attend: ${user.attend}');
-<<<<<<< Updated upstream
-=======
         print('fcmToken : ${user.fcmToken}');
->>>>>>> Stashed changes
         userInfo.value = user;
       } else {
         print('사용자 정보 없음');
@@ -113,9 +100,6 @@ class UserController extends GetxController {
     });
   }
 
-<<<<<<< Updated upstream
-  //로그인 기록 업데이트(by 이메일)
-=======
   Future<void> saveFcmToken(String fcmToken) async {
     final fcmToken = await firebaseMessaging.getToken();
     print('저장용 토큰 ------------------------');
@@ -145,7 +129,6 @@ Future<void> updateAttend(String? uid, String? qrCode) async {
 
 
   //로그인 기록 업데이트(by 이메일) - 휴대폰 인증 성공시, 휴대폰 인증 완료 후 다시 로그인 할 때,
->>>>>>> Stashed changes
   Future<void> updateTimeByEmail(String email) async {
     final currentTime = Timestamp.now();
 
@@ -163,8 +146,6 @@ Future<void> updateAttend(String? uid, String? qrCode) async {
     }
   }
 
-<<<<<<< Updated upstream
-=======
   //휴대폰 인증 성공시
   Future<void> setUserByEmail(String email) async {
     final currentTime = Timestamp.now();
@@ -205,7 +186,6 @@ Future<void> updateAttend(String? uid, String? qrCode) async {
   } 
 
 
->>>>>>> Stashed changes
   //휴대폰 기종 파악
   Future<void> getDeviceInfo() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();

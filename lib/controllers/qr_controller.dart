@@ -1,9 +1,5 @@
 import 'dart:developer';
 
-<<<<<<< Updated upstream
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-=======
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,22 +7,16 @@ import 'package:pard_app/controllers/bottombar_controller.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
->>>>>>> Stashed changes
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRController extends GetxController {
   var result = Rx<Barcode?>(null); // 스캔한 결과
   QRViewController? controller; // qr 커트롤러
-<<<<<<< Updated upstream
-  bool isScanned = false; // 한 번만 찍게 하려고
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-=======
   BottomBarController bController = Get.find();
   bool isScanned = false; // 한 번만 찍게 하려고
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   UserController userController = Get.find();
 final ScheduleController scheduleController = Get.put(ScheduleController());
->>>>>>> Stashed changes
 
   void onQRViewCreated(QRViewController controller) {
     this.controller = controller;
@@ -36,12 +26,6 @@ final ScheduleController scheduleController = Get.put(ScheduleController());
         // isScanned이 false일 때만 스캔 처리
         isScanned = true; // 스캔을 true로 설정
         result.value = scanData;
-<<<<<<< Updated upstream
-        String currentTime = DateTime.now().toIso8601String();
-        print("Scanned QR Code: ${result.value!.code}");
-        print("Scanned Time: $currentTime");
-        Get.back(); //찍으면 홈으로 돌아감
-=======
        DateTime currentTime = DateTime.now();
         print("Scanned QR Code: ${result.value!.code}");
         print("Scanned Time: $currentTime");
@@ -225,7 +209,6 @@ final ScheduleController scheduleController = Get.put(ScheduleController());
 
 
         
->>>>>>> Stashed changes
       }
     });
   }
@@ -242,8 +225,4 @@ final ScheduleController scheduleController = Get.put(ScheduleController());
     controller?.dispose();
     super.onClose();
   }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

@@ -6,15 +6,9 @@ class AppTheme {
   AppTheme._();
 
   static final TextTheme _textTheme = TextTheme(
-<<<<<<< Updated upstream
-    displayLarge: headlineLarge, //H3-24-B
-    displayMedium: headlineMedium, //H2-20-B
-    displaySmall: headlineSmall, //H1-18-SB
-=======
     displayLarge: displayLarge, //H3-24-B
     displayMedium: displayMedium, //H2-20-B
     displaySmall: displaySmall, //H1-18-SB
->>>>>>> Stashed changes
     headlineLarge: headlineLarge, //B6-16-B
     headlineMedium: headlineMedium, //B5-16-SB
     headlineSmall: headlineSmall, //B4-14-SB
