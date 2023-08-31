@@ -111,7 +111,7 @@ class UserController extends GetxController {
 
 Future<void> updateAttend(String? uid, String? qrCode) async {
   if (uid == null || qrCode == null) {
-    print("uid or qrCode is null. Cannot update attend.");
+    print("uid null값");
     return;
   }
   final currentTime = DateTime.now().toIso8601String(); 
@@ -184,6 +184,7 @@ Future<void> updateAttend(String? uid, String? qrCode) async {
       print(e);
     }
   } 
+
 
   //휴대폰 기종 파악
   Future<void> getDeviceInfo() async {
