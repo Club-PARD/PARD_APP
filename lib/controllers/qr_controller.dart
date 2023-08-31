@@ -32,7 +32,8 @@ final ScheduleController scheduleController = Get.put(ScheduleController());
         
         Duration timeDifference = currentTime.difference(scheduleController.upcomingSchedules.first.dueDate);
         int differenceInMinutes = timeDifference.inMinutes.abs(); //일정 등록한 시간과 qr찍은 시간 분차이
-        if (currentTime.isAfter(scheduleController.upcomingSchedules.first.dueDate)) { //지각
+        //지각
+        if (currentTime.isAfter(scheduleController.upcomingSchedules.first.dueDate)) { 
         userController.updateAttend(result.value!.code, "지");
 
         Get.back(); //찍으면 홈으로 돌아감

@@ -12,6 +12,7 @@ class UserController extends GetxController {
   Rx<String?> deviceName = Rx<String?>(null); 
   Rx<String?> deviceVersion = Rx<String?>(null);
   Rx<String?> fcmToken = Rx<String?>(null);
+  Rx<bool?> onOff = Rx<bool?>(true);
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
   
   //user모델 가져오기(by 이메일)
@@ -39,6 +40,7 @@ class UserController extends GetxController {
         print('pid: ${user.email}');
         print('attend: ${user.attend}');
         print('fcmToken : ${user.fcmToken}');
+        print('onOff : ${user.onOff}');
         userInfo.value = user;
       } else {
         print('사용자 정보 없음');
@@ -83,6 +85,9 @@ class UserController extends GetxController {
         print('lastLogin: ${user.lastLogin}');
         print('pid: ${user.email}');
         print('attend: ${user.attend}');
+        print('onOff : ${user.onOff}');
+        print('fcmToken235315 : ${user.fcmToken}');
+
         userInfo.value = user;
       } catch (e) {
         print('user정보 불러오기 실패');
@@ -100,12 +105,11 @@ class UserController extends GetxController {
     });
   }
 
-  Future<void> saveFcmToken(String fcmToken) async {
-    final fcmToken = await firebaseMessaging.getToken();
-    print('저장용 토큰 ------------------------');
-    print(fcmToken);
-    await FirebaseFirestore.instance.collection('users').doc(fcmToken).update({
-      'fcmToken': fcmToken,
+
+  Future<void> saveOnOff(String uid,bool onOff) async {
+    
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+      'onOff': onOff,
     });
   }
 

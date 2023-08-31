@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   bool showContainer = false;
   OverlayEntry? overlayEntry;
+  
 
   void showOverlay(BuildContext context) async {
     await PushNotificationController.to.setupFlutterNotifications();
@@ -164,6 +165,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: backgroundColor,
       appBar: const HomeFixedBar(),
       body: CustomScrollView(
+        
         slivers: [
           SliverToBoxAdapter(
             child: Column(

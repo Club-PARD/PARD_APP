@@ -11,9 +11,9 @@ class RootVeiw extends StatelessWidget {
   const RootVeiw({super.key});
 
   static List<Widget> tabPages = <Widget>[
-    HomePage(),
+    const HomePage(),
     // Container(),
-    MyPage(),
+    const MyPage(),
   ];
 
   @override
@@ -48,8 +48,13 @@ class RootVeiw extends StatelessWidget {
           },
           backgroundColor: Colors.transparent,
           elevation: 0,
-          child: Image.asset(
-            'assets/images/qr.png',
+          child: SizedBox(
+            width: 40.w,
+            height: 40.h,
+            child: Image.asset(
+              'assets/images/qr.png',
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),
