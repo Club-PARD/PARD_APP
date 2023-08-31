@@ -12,7 +12,7 @@ class RootVeiw extends StatelessWidget {
 
   static List<Widget> tabPages = <Widget>[
     HomePage(),
-    Container(),
+    // Container(),
     MyPage(),
   ];
 
@@ -20,49 +20,41 @@ class RootVeiw extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(BottomBarController());
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: null,
+      extendBody: true,
       body: Obx(() => tabPages[BottomBarController.to.selectedIndex.value]),
-      bottomNavigationBar: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          BottomBar(),
-          Positioned(
-            bottom: 50.h,
-            child: Container(
-              width: 80.w,
-              height: 80.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF5262F5),
-                    Color(0xFF7B3FEF),
-                  ],
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 8.r,
-                    color: Colors.white.withOpacity(0.25),
-                  ),
-                ],
-              ),
-              child: FloatingActionButton(
-                onPressed: () {
-                  // controller.onItemTapped(3);
-                  Get.toNamed('/qr');
-                  // 활성화, 비활 만들어야 함
-                },
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                child: Image.asset(
-                  'assets/images/qr.png',
-                ),
-              ),
-            ),
+      floatingActionButton: Container(
+        width: 80.w,
+        height: 80.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          gradient: const LinearGradient(
+            colors: [
+              Color(0xFF5262F5),
+              Color(0xFF7B3FEF),
+            ],
           ),
-        ],
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 8.r,
+              color: Colors.white.withOpacity(0.25),
+            ),
+          ],
+        ),
+        child: FloatingActionButton(
+          onPressed: () {
+            // controller.onItemTapped(3);
+            Get.toNamed('/qr');
+            // 활성화, 비활 만들어야 함
+          },
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          child: Image.asset(
+            'assets/images/qr.png',
+          ),
+        ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
