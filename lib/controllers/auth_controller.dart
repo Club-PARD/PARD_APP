@@ -13,6 +13,7 @@ class AuthController extends GetxController {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   RxBool isAgree = false.obs;
+  RxBool isLogin = true.obs;
 
   Future<void> checkPreviousLogin() async {
     if (_auth.currentUser != null) {
@@ -24,10 +25,12 @@ class AuthController extends GetxController {
         await _userController.updateTimeByEmail(userEmail.value!);
         await _userController.getUserInfoByEmail(userEmail.value!);
         Get.offAllNamed('/home');
+        isLogin.value = true;
       } else {
         print('로그인 이력 없음: 로그인 필요');
+        isLogin.value = false;
       }
-    }
+    };
   }
 
   //로그인
