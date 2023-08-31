@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:pard_app/Views/home_schedule_view.dart';
 import 'package:pard_app/component/fixed_appbar.dart';
 import 'package:pard_app/component/home_appbar.dart';
@@ -317,19 +318,56 @@ final offset = renderBox.localToGlobal(Offset.zero);
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
+
+                            Stack(
+                              children: [
+                                Container(
                               width: 120.w,
                               height: 120.h,
-                              decoration: ShapeDecoration(
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(
-                                    width: 1,
-                                    strokeAlign: BorderSide.strokeAlignOutside,
-                                    color: Color(0xFF5262F5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(0.1),
+                                    blurRadius: 12,
+                                    offset: const Offset(0, -1),
+                                    spreadRadius: 3,
                                   ),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
+                                ],
                               ),
+                            ),
+                            Container(
+  width: 120.w,
+  height: 120.h,
+  decoration: BoxDecoration(
+    color: const Color(0xFF2A2A2A),
+    borderRadius: BorderRadius.circular(30),
+  ),
+),
+
+                                Container(
+                              width: 120.w,
+                              height: 120.h,
+                              decoration: 
+                            BoxDecoration(
+                               borderRadius: BorderRadius.circular(30),
+                               border: GradientBoxBorder(width: 1.w,
+                               gradient: LinearGradient(colors: [
+                            Theme.of(context).colorScheme.onSecondary,
+                            Theme.of(context).colorScheme.secondary,
+                          ]),
+                               ),
+                               gradient: LinearGradient(colors: [
+                          Theme.of(context)
+                              .colorScheme
+                              .onSecondary
+                              .withOpacity(0.1),
+                          Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.1),
+                                                ]),
+                            ),
                               child: Center(
                                 child: Image.asset(
                                   'assets/images/pardie${pointController.level.value}.png',
@@ -341,6 +379,9 @@ final offset = renderBox.localToGlobal(Offset.zero);
                                 ),
                               ),
                             ),
+                              ],
+                            ),
+                            
                             SizedBox(
                               height: 8.h,
                             ),
