@@ -6,6 +6,7 @@ const Color primaryPurple = Color(0xff7B3FEF);
 const Color primaryBlue = Color(0xff5262F5);
 const Color errorRed = Color(0xffFF5A5A);
 const Color backgroundColor = Color(0xff1A1A1A);
+const Color containerBackgroundColor = Color(0xff2A2A2A);
 
 // default is 80
 const MaterialColor whiteScale = MaterialColor(0xffEFEFEF, {
@@ -14,8 +15,8 @@ const MaterialColor whiteScale = MaterialColor(0xffEFEFEF, {
 });
 
 // default is 10
-const MaterialColor grayScale = MaterialColor(0xffF8F8F8, {
-  10: Color(0xffF8F8F8),
+const MaterialColor grayScale = MaterialColor(0xffE4E4E4, {
+  10: Color(0xffE4E4E4),
   30: Color(0xffA3A3A3),
   60: Color(0xff808080),
   90: Color(0xff353535),

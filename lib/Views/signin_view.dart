@@ -26,7 +26,8 @@ class SignInView extends StatelessWidget {
               SizedBox(
                 height: 146.h,
               ),
-              Text('Pay it Foward를 실천하는 IT 협업 동아리', style: Theme.of(context).textTheme.titleSmall),
+              Text('Pay it Foward를 실천하는 IT 협업 동아리',
+                  style: Theme.of(context).textTheme.titleSmall),
               SizedBox(
                 height: 12.h,
               ),
@@ -51,10 +52,13 @@ class SignInView extends StatelessWidget {
                     width: 327.w,
                     height: 56.h,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                        Theme.of(context).colorScheme.onSecondary,
-                        Theme.of(context).colorScheme.secondary,
-                      ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+                      gradient: LinearGradient(
+                          colors: [
+                            Theme.of(context).colorScheme.onSecondary,
+                            Theme.of(context).colorScheme.secondary,
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight),
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                     ),
                     child: Row(
@@ -71,10 +75,10 @@ class SignInView extends StatelessWidget {
                         Text(
                           '구글로 로그인 하기',
                           style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600,
-                                height: 24.h / 18.h,
-                                color: whiteScale[100]),
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600,
+                              height: 24.h / 18.h,
+                              color: whiteScale[100]),
                         ),
                       ],
                     ),

@@ -32,7 +32,7 @@ class PardAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: Icon(
                 Icons.chevron_left,
                 color: Colors.white,
-                size: 24,
+                size: 24.sp,
               ),
               onPressed: function ??
                   () {
@@ -42,7 +42,11 @@ class PardAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: [trailing ?? Container()],
         title: Text(
           title,
-          style: Theme.of(context).textTheme.displayMedium,
+          style: TextStyle(
+            fontFamily: "Pretendard",
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ),
     );

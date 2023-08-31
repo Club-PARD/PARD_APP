@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:pard_app/Views/home_view.dart';
 import 'package:pard_app/Views/my_point_view.dart';
 import 'package:pard_app/Views/number_auth_view.dart';
+import 'package:pard_app/Views/overall_ranking_view.dart';
+import 'package:pard_app/Views/root_view.dart';
 import 'package:pard_app/Views/signin_view.dart';
 import 'package:pard_app/Views/tos_view.dart';
 import 'package:pard_app/Views/mypage.dart';
@@ -35,10 +37,14 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/', page: () => const SignInView()),
           GetPage(name: '/tos', page: () => const TosView()),
           GetPage(name: '/numberauth', page: () => const NumberAuthView()),
-          GetPage(name: '/mypoint', page: () => MyPointScreen()),
-          GetPage(name: '/home', page: () => const HomePage()),
+          GetPage(name: '/mypoint', page: () => MyPointView()),
+          GetPage(name: '/overallRanking', page: () => OverallRankingView()),
+          GetPage(name: '/home', page: () => const RootVeiw()),
           GetPage(name: '/mypage', page: () => const MyPage()),
-          GetPage(name: '/qr', page: () => QRScan()),
+          GetPage(
+              name: '/qr',
+              page: () => QRScan(),
+              transition: Transition.downToUp),
           GetPage(name: '/schedule', page: () => SchedulerScreen())
           // GetPage(name: '/first', page: () => FirstNamedPage()),
           // GetPage(name: '/second', page: () => SecondNamedPage()),

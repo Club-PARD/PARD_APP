@@ -17,27 +17,29 @@ class MyPage extends StatefulWidget {
 }
 
 void launchNotion() async {
-    final Uri pardNotion = Uri.parse('https://pardhgu.notion.site/PARD-1-a26b1363b86a4740936a92e254876205');
-    try {
-  await launchUrl(pardNotion);
-} catch (e) {
-  print("Could not launch $pardNotion: $e");
-}
+  final Uri pardNotion = Uri.parse(
+      'https://pardhgu.notion.site/PARD-1-a26b1363b86a4740936a92e254876205');
+  try {
+    await launchUrl(pardNotion);
+  } catch (e) {
+    print("Could not launch $pardNotion: $e");
   }
+}
 
-  void launchFeedback() async {
-    final Uri feedback = Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSfFMK14a9BwcRPR2z6uuhQ_Cleg0povmGpcJwpAMLm-nWYp7A/viewform?usp=sf_link');
-    try {
-  await launchUrl(feedback);
-} catch (e) {
-  print("Could not launch $feedback: $e");
-}
+void launchFeedback() async {
+  final Uri feedback = Uri.parse(
+      'https://docs.google.com/forms/d/e/1FAIpQLSfFMK14a9BwcRPR2z6uuhQ_Cleg0povmGpcJwpAMLm-nWYp7A/viewform?usp=sf_link');
+  try {
+    await launchUrl(feedback);
+  } catch (e) {
+    print("Could not launch $feedback: $e");
   }
+}
 
 class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
-        final controller = PushNotificationController.to;
+    final controller = PushNotificationController.to;
     final UserController userController = Get.put(UserController());
     /** push_notification controller 가져온다  */
     return Scaffold(
@@ -45,7 +47,10 @@ class _MyPageState extends State<MyPage> {
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(26, 26, 26, 1),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Colors.white,
+          ),
           onPressed: () => Get.offNamed('/home'),
         ),
         title: Text('마이 페이지', style: headlineLarge),
@@ -61,7 +66,10 @@ class _MyPageState extends State<MyPage> {
                 gradient: LinearGradient(
                   begin: Alignment(1.00, -0.03),
                   end: Alignment(-1, 0.03),
-                  colors: [Color(0xFF7B3FEF), Color(0xFF5262F5), ],
+                  colors: [
+                    Color(0xFF7B3FEF),
+                    Color(0xFF5262F5),
+                  ],
                 ),
               ),
               child: Row(
@@ -95,7 +103,7 @@ class _MyPageState extends State<MyPage> {
                           const Text(
                             '피드백 남기기',
                             style: TextStyle(
-                              color:  Color(0XFF5262F5),
+                              color: Color(0XFF5262F5),
                               fontSize: 9,
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
@@ -171,7 +179,7 @@ class _MyPageState extends State<MyPage> {
                             child: Center(
                               child: Text(
                                   /** generation값으로 대체 */
-                                   '${userController.userInfo.value!.generation}기',
+                                  '${userController.userInfo.value!.generation}기',
                                   style: titleMedium),
                             ),
                           ),
@@ -187,7 +195,10 @@ class _MyPageState extends State<MyPage> {
                               gradient: const LinearGradient(
                                 begin: Alignment(1.00, -0.03),
                                 end: Alignment(-1, 0.03),
-                                colors: [ Color(0xFF7B3FEF), Color(0xFF5262F5),],
+                                colors: [
+                                  Color(0xFF7B3FEF),
+                                  Color(0xFF5262F5),
+                                ],
                               ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -215,7 +226,6 @@ class _MyPageState extends State<MyPage> {
                             ),
                             child: Center(
                               child: Text(
-                      
                                   '${userController.userInfo.value!.member}',
                                   style: titleMedium),
                             ),
@@ -227,9 +237,8 @@ class _MyPageState extends State<MyPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 24.w),
-                        child: Text(
-                           '${userController.userInfo.value!.name}',
-                        style: displayMedium),
+                        child: Text('${userController.userInfo.value!.name}',
+                            style: displayMedium),
                       ),
                     ],
                   ),
@@ -639,7 +648,7 @@ class _MyPageState extends State<MyPage> {
                                                           ),
                                                           const TextSpan(
                                                             text:
-                                                                ')으로         메일을 보내주세요. ',
+                                                                ')으로        메일을 보내주세요. ',
                                                             style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -724,7 +733,7 @@ class _MyPageState extends State<MyPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(),
+      // bottomNavigationBar: BottomBar(),
     );
   }
 }
