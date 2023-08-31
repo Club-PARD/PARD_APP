@@ -530,7 +530,10 @@ class _HomePageState extends State<HomePage> {
                               onPressed: () {
                                 Get.toNamed('/mypoint');
                               },
-                              child: Text('더보기', style: titleMedium)),
+                              child: Text('더보기',
+                                  style: titleMedium.copyWith(
+                                    decoration: TextDecoration.underline,
+                                  ))),
                         ],
                       ),
                       Container(

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/bottombar_controller.dart';
+import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
+import 'package:pard_app/model/user_model/user_model.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -17,15 +19,17 @@ class QRController extends GetxController {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   UserController userController = Get.find();
 final ScheduleController scheduleController = Get.put(ScheduleController());
+final PointController pointController = Get.find();
 
   void onQRViewCreated(QRViewController controller) {
     this.controller = controller;
 
-    controller.scannedDataStream.listen((scanData) {
+    controller.scannedDataStream.listen((scanData) async{
       if (!isScanned) {
         // isScanned이 false일 때만 스캔 처리
         isScanned = true; // 스캔을 true로 설정
         result.value = scanData;
+        UserModel user = userController.userInfo.value!;
        DateTime currentTime = DateTime.now();
         print("Scanned QR Code: ${result.value!.code}");
         print("Scanned Time: $currentTime");
@@ -35,6 +39,7 @@ final ScheduleController scheduleController = Get.put(ScheduleController());
         //지각
         if (currentTime.isAfter(scheduleController.upcomingSchedules.first.dueDate)) { 
         userController.updateAttend(result.value!.code, "지");
+        await pointController.addPointsToUser(user, 4);
 
         Get.back(); //찍으면 홈으로 돌아감
         bController.selectedIndex.value = 0;
@@ -121,6 +126,7 @@ final ScheduleController scheduleController = Get.put(ScheduleController());
 
 } else {
     userController.updateAttend(result.value!.code, "출");
+    await pointController.addPointsToUser(user, 6);
 
     Get.back(); //찍으면 홈으로 돌아감
         bController.selectedIndex.value = 0;
