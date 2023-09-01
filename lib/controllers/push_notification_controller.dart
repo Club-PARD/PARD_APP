@@ -53,7 +53,7 @@ class PushNotificationController extends GetxController {
   print(uid);
   print(fcmToken);
 
-
+      
       // await FirebaseFirestore.instance.collection('users').doc(uid).update({
       //   'fcmToken': fcmToken,
       // });

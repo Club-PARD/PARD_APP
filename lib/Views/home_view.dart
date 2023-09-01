@@ -522,8 +522,9 @@ class _HomePageState extends State<HomePage> {
                         height: 10.h,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          SizedBox(width: 24.w,),
                           Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
                               style: headlineLarge),
                           TextButton(
@@ -534,6 +535,7 @@ class _HomePageState extends State<HomePage> {
                                   style: titleMedium.copyWith(
                                     decoration: TextDecoration.underline,
                                   ))),
+                                  SizedBox(width: 20.w,)
                         ],
                       ),
                       Container(
@@ -609,9 +611,11 @@ class _HomePageState extends State<HomePage> {
                         height: 10.h,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          SizedBox(width: 24.w,),
                           Text('🗓 UPCOMING EVENT 🗓 ', style: headlineLarge),
+                          const Spacer(),
                           TextButton(
                               onPressed: () {
                                 Get.toNamed('/schedule');
@@ -620,6 +624,7 @@ class _HomePageState extends State<HomePage> {
                                   style: titleMedium.copyWith(
                                     decoration: TextDecoration.underline,
                                   ))),
+                            SizedBox(width: 20.w,)
                         ],
                       ),
                       Container(
