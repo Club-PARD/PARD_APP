@@ -266,6 +266,7 @@ class NumberAuthView extends StatelessWidget {
                               .setUserByEmail(authController.userEmail.value!);
                           await userController.getUserInfoByEmail(
                               authController.userEmail.value!);
+                          await authController.sStorage.value.write(key: 'login', value: userController.userInfo.value!.uid);
                           await Get.toNamed('/home');
                         }
                       }),
