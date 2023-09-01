@@ -13,6 +13,7 @@ class UserController extends GetxController {
   Rx<String?> deviceVersion = Rx<String?>(null);
   Rx<String?> fcmToken = Rx<String?>(null);
   Rx<bool?> onOff = Rx<bool?>(true);
+  Rx<String?> uid = Rx<String?>(null);
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
   
   //user모델 가져오기(by 이메일)
@@ -42,6 +43,7 @@ class UserController extends GetxController {
         print('fcmToken : ${user.fcmToken}');
         print('onOff : ${user.onOff}');
         userInfo.value = user;
+
       } else {
         print('사용자 정보 없음');
       }
@@ -130,6 +132,17 @@ Future<void> updateAttend(String? uid, String? qrCode) async {
   }
 }
 
+ Future<void> updateFcmToken(String uid, String token) async {
+    print('userToken UPDATE DEBUG --------------------------------------');
+    print(token);
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+      'fcmToken': token,
+    }).then((_) {
+      print("fcmToken 업데이트 성공");
+    }).catchError((error) {
+      print("fcmToken 업데이트 실패: $error");
+    });
+  }
 
 
   //로그인 기록 업데이트(by 이메일) - 휴대폰 인증 성공시, 휴대폰 인증 완료 후 다시 로그인 할 때,

@@ -39,7 +39,7 @@ final PointController pointController = Get.find();
         //지각
         if (currentTime.isAfter(scheduleController.upcomingSchedules.first.dueDate)) { 
         userController.updateAttend(result.value!.code, "지");
-        await pointController.addPointsToUser(user, 4);
+        await pointController.attendQR(user, 4);
 
         Get.back(); //찍으면 홈으로 돌아감
         bController.selectedIndex.value = 0;
@@ -126,7 +126,7 @@ final PointController pointController = Get.find();
 
 } else {
     userController.updateAttend(result.value!.code, "출");
-    await pointController.addPointsToUser(user, 6);
+    await pointController.attendQR(user, 6);
 
     Get.back(); //찍으면 홈으로 돌아감
         bController.selectedIndex.value = 0;

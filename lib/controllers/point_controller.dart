@@ -190,30 +190,24 @@ class PointController extends GetxController {
   }
 
   //QR 찍었을 때 점수 추가 
-Future<void> addPointsToUser(UserModel user, int pointToAdd) async {
+Future<void> attendQR(UserModel user, int attendPoint) async {
+  
   String? pid = user.pid;
-  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid);
+  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid); //user의 pid
 
   // 포인트 정보를 가져옵니다.
   DocumentSnapshot pointsSnapshot = await pointsRef.get();
-
-  // 포인트 정보가 이미 있으면 업데이트, 없으면 새로 만듭니다.
-  if (pointsSnapshot.exists) {
+    //현재 포인트 구하기
     Map<String, dynamic> existingPoints = pointsSnapshot.data() as Map<String, dynamic>;
+    print("existingPoints type: ${existingPoints.runtimeType}");
 
-    // 기존 포인트 목록에 새로운 포인트를 추가합니다.
+    // 기존 포인트 목록에 출석 포인트 추가
     List<Map>? currentPoints = existingPoints['points'];
-    currentPoints?.add({'digit': pointToAdd});
+    currentPoints?.add({'digit': attendPoint});
 
     // 데이터베이스 업데이트
     await pointsRef.update({'points': currentPoints});
-  } else {
-    await pointsRef.set({
-      'uid': user.uid,
-      'pid': pid,
-      'points': [{'digit': pointToAdd}]
-    });
-  }
+  
 
   // 로컬 상태 업데이트 (선택 사항)
   fetchAndSortUserPoints();

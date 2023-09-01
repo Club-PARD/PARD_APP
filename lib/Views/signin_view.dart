@@ -13,6 +13,7 @@ class SignInView extends StatelessWidget {
     final AuthController authController = Get.put(AuthController());
     final UserController userController = Get.put(UserController());
 
+    // authController.checkPreviousLogin();
     authController.checkPreviousLogin();
 
     return WillPopScope(

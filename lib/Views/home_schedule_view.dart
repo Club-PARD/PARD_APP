@@ -14,7 +14,7 @@ class HomeSchedule extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 280.w,
-      height: 100.h,
+      height: 110.h,
       child: Obx(() {
         if (scheduleController.upcomingSchedules.isNotEmpty) {
           ScheduleModel firstSchedule =
@@ -31,13 +31,14 @@ class HomeSchedule extends StatelessWidget {
                 height: 15.h,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         width: 45.w,
-                        height: 22.h,
+                        height: 30.h,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 4),
                         decoration: ShapeDecoration(
@@ -69,7 +70,9 @@ class HomeSchedule extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const Spacer(),
                   Text(' D - $dayLeft', style: titleMedium.copyWith(color: Colors.white)),
+                  SizedBox(width: 10.w,),
                 ],
               ),
               SizedBox(height: 5.h,),

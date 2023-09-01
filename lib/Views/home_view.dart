@@ -527,6 +527,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(width: 24.w,),
                           Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
                               style: headlineLarge),
+                              const Spacer(),
                           TextButton(
                               onPressed: () {
                                 Get.toNamed('/mypoint');
@@ -631,7 +632,7 @@ class _HomePageState extends State<HomePage> {
                           width: 279.w, height: 1.h, color: grayScale[30]),
                       SizedBox(
                         width: 275.w,
-                        height: 90.h,
+                        height: 110.h,
                         child: HomeSchedule(),
                       )
                     ],

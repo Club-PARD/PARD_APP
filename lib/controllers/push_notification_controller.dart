@@ -8,14 +8,15 @@ class PushNotificationController extends GetxController {
     late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     late AndroidNotificationChannel channel;
     static PushNotificationController get to => Get.find();
-    final UserController userController = Get.put(UserController());
+    late UserController userController = Get.put(UserController());
     late String? uid = userController.userInfo.value?.uid;
   /// 앱 어디서든지 접근 가능하게
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
+  String? fcmToken;
   var onOff = true.obs;
 
     Future<void> setupFlutterNotifications() async {
-      final fcmToken = await firebaseMessaging.getToken();
+      fcmToken = await firebaseMessaging.getToken();
   channel = const AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
@@ -43,21 +44,35 @@ class PushNotificationController extends GetxController {
 
   // 토큰 요청
   getToken();
-  ever(onOff, (value) async {
-      await FirebaseFirestore.instance.collection('users').doc(uid).update({
-        'onOff': value
-      });
-    });
+ // UserController의 uid가 업데이트될 때 FCM 토큰도 업데이트
+// ever(userController.uid, (_) async {
+//   if (userController.userInfo.value?.uid != null && fcmToken != null) {
+//     userController.updateFcmToken(userController.uid.value!, fcmToken!);
+//   }
+// });
+
+
+  //  late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
+  //              final fcmToken = await firebaseMessaging.getToken();
+  //       await FirebaseFirestore.instance
+  //     .collection('users')
+  //     .doc(uid)
+  //     .update({'fcmToken': fcmToken})
+  //     .then((_) {
+  //       print("fcmToken 업데이트 성공");
+  //     })
+  //     .catchError((error) {
+  //       print("fcmToken 업데이트 실패: $error");
+  //     });
 
   print('********#&#*&*#&%*#&*%#');
   print(uid);
   print(fcmToken);
+  print(userController.userInfo.value);
 
-      
-      // await FirebaseFirestore.instance.collection('users').doc(uid).update({
-      //   'fcmToken': fcmToken,
-      // });
+
     }
+
 
   Future<void> getToken() async{
 
