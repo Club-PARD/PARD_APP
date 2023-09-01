@@ -448,8 +448,8 @@ class _HomePageState extends State<HomePage> {
                                         )),
                                     if (pointController.level.value != 5)
                                       Positioned(
-                                        left: 15.w,
-                                        top: 18.h,
+                                        left: 14.w,
+                                        top: 20.h,
                                         child: SizedBox(
                                           width: 94.w,
                                           height: 12.h,
@@ -461,7 +461,9 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     Positioned(
                                       left: (pointController.level.value != 5)
-                                          ? 35.w
+                                          ? (pointController.level.value != 4)
+                                              ? 35.w
+                                              : 24.w
                                           : 14.w,
                                       top: (pointController.level.value != 5)
                                           ? 42.h
@@ -640,7 +642,7 @@ class _HomePageState extends State<HomePage> {
       case 3:
         return 86.59.w;
       case 4:
-        return 83.02.w;
+        return 93.02.w;
       default:
         return 106.16.w;
     }
@@ -655,7 +657,7 @@ class _HomePageState extends State<HomePage> {
       case 3:
         return 96.h;
       case 4:
-        return 93.h;
+        return 103.h;
       default:
         return 100.h;
     }

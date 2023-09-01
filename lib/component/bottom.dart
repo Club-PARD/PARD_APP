@@ -13,6 +13,7 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Container(
+        height: 88.h,
         decoration: BoxDecoration(
           color: const Color(0xFF2A2A2A),
           borderRadius: BorderRadius.vertical(
