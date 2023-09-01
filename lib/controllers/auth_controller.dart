@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pard_app/controllers/user_controller.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthController extends GetxController {
   final UserController _userController = Get.put(UserController());
@@ -15,22 +16,20 @@ class AuthController extends GetxController {
   RxBool isAgree = false.obs;
   RxBool isLogin = true.obs;
 
-  Future<void> checkPreviousLogin() async {
-    if (_auth.currentUser != null) {
-      userEmail.value = _auth.currentUser!.email;
-      print(userEmail.value);
-      bool isUserExists =
-          await _userController.isVerifyUserByEmail(userEmail.value!);
-      if (isUserExists) {
-        await _userController.updateTimeByEmail(userEmail.value!);
-        await _userController.getUserInfoByEmail(userEmail.value!);
-        Get.offAllNamed('/home');
-        isLogin.value = true;
-      } else {
-        print('로그인 이력 없음: 로그인 필요');
-        isLogin.value = false;
-      }
-    };
+  Rx<FlutterSecureStorage> sStorage = FlutterSecureStorage().obs;
+
+  checkPreviousLogin() async {
+    String? uid = await sStorage.value.read(key: 'login');
+    print(uid);
+    if (uid != null) {
+      await _userController.getUserInfoByUID(uid);
+      await _userController.updateTimeByEmail(_userController.userInfo.value!.email!);
+      Get.offAllNamed('/home');
+      isLogin.value = true;
+    } else {
+      print('로그인 이력 없음: 로그인 필요');
+      isLogin.value = false;
+    }
   }
 
   //로그인
@@ -58,6 +57,7 @@ class AuthController extends GetxController {
           if (isUserExists) {
             await _userController.updateTimeByEmail(user.email!);
             await _userController.getUserInfoByEmail(user.email!);
+            await sStorage.value.write(key: 'login', value: _userController.userInfo.value!.uid);
             Get.toNamed('/home');
           } else
             Get.toNamed('/tos');
@@ -72,6 +72,7 @@ class AuthController extends GetxController {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
+      await sStorage.value.delete(key: 'login');
       Get.toNamed('/');
     } catch (error) {
       print('Sign Out Error: $error');

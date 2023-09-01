@@ -60,7 +60,7 @@ class TosView extends StatelessWidget {
                   SizedBox(
                     height: 316.h,
                   ),
-                  NextButton('다음', '/numberauth', authController.isAgree.value),
+                  NextButton('다음', '/numberauth', authController.isAgree.value,),
                 ],
               ),
             ),
