@@ -15,9 +15,9 @@ class PartComponent extends StatelessWidget {
     final bool isAllParts = part == '전체';
 
     return Container(
-      width: 55,
+      width: 60,
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         gradient: part == '전체'
             ? const LinearGradient(
@@ -30,8 +30,7 @@ class PartComponent extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(4),
       ),
-      child: 
-      GradientText(
+      child: GradientText(
         part,
         style: Theme.of(context).textTheme.headlineSmall,
         colors: part == '전체'
