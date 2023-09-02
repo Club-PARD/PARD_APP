@@ -48,49 +48,50 @@ class SignInView extends StatelessWidget {
               SizedBox(
                 height: 162.h,
               ),
-              // if (!authController.isLogin.value)
-              GestureDetector(
-                  child: Container(
-                    width: 327.w,
-                    height: 56.h,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [
-                            Theme.of(context).colorScheme.onSecondary,
-                            Theme.of(context).colorScheme.secondary,
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight),
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+              if (!authController.isLogin.value)
+                GestureDetector(
+                    child: Container(
+                      width: 327.w,
+                      height: 56.h,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Theme.of(context).colorScheme.onSecondary,
+                              Theme.of(context).colorScheme.secondary,
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/logo_google.png',
+                            height: 22.h,
+                          ),
+                          SizedBox(
+                            width: 8.w,
+                          ),
+                          Text(
+                            '구글로 로그인 하기',
+                            style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w600,
+                                height: 24.h / 18.h,
+                                color: whiteScale[100]),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/logo_google.png',
-                          height: 22.h,
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Text(
-                          '구글로 로그인 하기',
-                          style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w600,
-                              height: 24.h / 18.h,
-                              color: whiteScale[100]),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () async {
-                    await userController.getDeviceInfo();
-                    print(
-                        '디바이스 명: ${userController.deviceName}, 디바이스 버전: ${userController.deviceVersion}');
-                    authController.signInWithGoogle();
-                  }),
+                    onTap: () async {
+                      await userController.getDeviceInfo();
+                      print(
+                          '디바이스 명: ${userController.deviceName}, 디바이스 버전: ${userController.deviceVersion}');
+                      authController.signInWithGoogle();
+                    }),
             ],
           ),
         ),
