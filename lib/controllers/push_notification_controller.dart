@@ -14,9 +14,13 @@ class PushNotificationController extends GetxController {
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
   String? fcmToken;
   var onOff = true.obs;
+  var fcmTokenUser = ''.obs;
+  
+  
 
     Future<void> setupFlutterNotifications() async {
       fcmToken = await firebaseMessaging.getToken();
+    //  await userController.updateFcmToken(fcmToken!);
   channel = const AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
@@ -44,26 +48,7 @@ class PushNotificationController extends GetxController {
 
   // 토큰 요청
   getToken();
- // UserController의 uid가 업데이트될 때 FCM 토큰도 업데이트
-// ever(userController.uid, (_) async {
-//   if (userController.userInfo.value?.uid != null && fcmToken != null) {
-//     userController.updateFcmToken(userController.uid.value!, fcmToken!);
-//   }
-// });
 
-
-  //  late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
-  //              final fcmToken = await firebaseMessaging.getToken();
-  //       await FirebaseFirestore.instance
-  //     .collection('users')
-  //     .doc(uid)
-  //     .update({'fcmToken': fcmToken})
-  //     .then((_) {
-  //       print("fcmToken 업데이트 성공");
-  //     })
-  //     .catchError((error) {
-  //       print("fcmToken 업데이트 실패: $error");
-  //     });
 
   print('********#&#*&*#&%*#&*%#');
   print(uid);
@@ -77,6 +62,9 @@ class PushNotificationController extends GetxController {
   Future<void> getToken() async{
 
     final fcmToken = await firebaseMessaging.getToken();
+    fcmTokenUser.value = await firebaseMessaging.getToken() ?? '';
+    print('22222222222222222222222');
+    print(fcmTokenUser);
     
     // /**공지 받으려면 기기의 토큰 받아와야 한다 */
     print("--------TOKEN--------------");

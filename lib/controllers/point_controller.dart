@@ -189,29 +189,68 @@ class PointController extends GetxController {
     }
   }
 
-  //QR 찍었을 때 점수 추가 
+ // QR 찍었을 때 점수 추가
 Future<void> attendQR(UserModel user, int attendPoint) async {
-  
   String? pid = user.pid;
-  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid); //user의 pid
+  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid); //user's pid
 
-  // 포인트 정보를 가져옵니다.
+  // Fetch the current points data
   DocumentSnapshot pointsSnapshot = await pointsRef.get();
-    //현재 포인트 구하기
+  Timestamp currentTime = Timestamp.fromDate(DateTime.now());
+
+  Map<String, dynamic> newPoint = {
+    'digit': attendPoint,
+    'reason': '정상출석',
+    'TimeStamp': currentTime,
+    'type':'출결'
+  };
+
+  if (pointsSnapshot.exists) {
     Map<String, dynamic> existingPoints = pointsSnapshot.data() as Map<String, dynamic>;
-    print("existingPoints type: ${existingPoints.runtimeType}");
+    await pointsRef.update({
+      'points': FieldValue.arrayUnion([newPoint])
+    });
+  } else {
+    await pointsRef.set({
+      'points': [newPoint]
+    });
+  }
 
-    // 기존 포인트 목록에 출석 포인트 추가
-    List<Map>? currentPoints = existingPoints['points'];
-    currentPoints?.add({'digit': attendPoint});
-
-    // 데이터베이스 업데이트
-    await pointsRef.update({'points': currentPoints});
-  
-
-  // 로컬 상태 업데이트 (선택 사항)
   fetchAndSortUserPoints();
   fetchCurrentUserPoints();
 }
+
+
+//QR 지각했을 때
+Future<void> lateQR(UserModel user, int attendPoint) async {
+  String? pid = user.pid;
+  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid); //user's pid
+
+  // Fetch the current points data
+  DocumentSnapshot pointsSnapshot = await pointsRef.get();
+  Timestamp currentTime = Timestamp.fromDate(DateTime.now());
+
+  Map<String, dynamic> newPoint = {
+    'digit': attendPoint,
+    'reason': '지각',
+    'TimeStamp': currentTime,
+    'type':'출결'
+  };
+
+  if (pointsSnapshot.exists) {
+    Map<String, dynamic> existingPoints = pointsSnapshot.data() as Map<String, dynamic>;
+    await pointsRef.update({
+      'points': FieldValue.arrayUnion([newPoint])
+    });
+  } else {
+    await pointsRef.set({
+      'points': [newPoint]
+    });
+  }
+
+  fetchAndSortUserPoints();
+  fetchCurrentUserPoints();
+}
+
 
 }

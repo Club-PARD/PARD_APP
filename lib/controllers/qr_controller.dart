@@ -38,8 +38,8 @@ final PointController pointController = Get.find();
         int differenceInMinutes = timeDifference.inMinutes.abs(); //일정 등록한 시간과 qr찍은 시간 분차이
         //지각
         if (currentTime.isAfter(scheduleController.upcomingSchedules.first.dueDate)) { 
-        userController.updateAttend(result.value!.code, "지");
-        await pointController.attendQR(user, 4);
+        userController.updateAttend(user, "지");
+        await pointController.lateQR(user, 4);
 
         Get.back(); //찍으면 홈으로 돌아감
         bController.selectedIndex.value = 0;
@@ -125,7 +125,7 @@ final PointController pointController = Get.find();
         ));
 
 } else {
-    userController.updateAttend(result.value!.code, "출");
+    userController.updateAttend(user, "출");
     await pointController.attendQR(user, 6);
 
     Get.back(); //찍으면 홈으로 돌아감
