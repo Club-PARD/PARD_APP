@@ -12,6 +12,7 @@ class ScheduleModel {
     this.place,
     this.part,
     this.previous,
+    this.sid
   );
 
   Map<String, int> attend;
@@ -21,6 +22,7 @@ class ScheduleModel {
   String place;
   String part;
   bool previous;
+ String sid;
 
   factory ScheduleModel.fromJson(Map<String, dynamic> json) =>
       _$ScheduleModelFromJson(json);
