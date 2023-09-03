@@ -179,26 +179,9 @@ class TosCheckbox extends StatelessWidget {
       onTap: () {
         isAgree.value = !(isAgree.value);
       },
-      child: SizedBox(
-        width: height,
-        height: height,
-        child: Container(
-          width: (16.25).h,
-          height: (16.25).h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular((1.88).w)),
-            color: isAgree.value
-                ? Theme.of(context).colorScheme.onSecondary
-                : grayScale[30],
-          ),
-          child: Center(
-              child: Icon(
-            Icons.check,
-            size: (14.37).sp,
-            color: blackScale[100],
-          )),
-        ),
-      ),
+      child: isAgree.value
+      ? Image.asset('assets/images/checkbox_blue.png', width: 20.w,)
+      : Image.asset('assets/images/checkbox_grey.png', width: 20.w)
     );
   }
 }
