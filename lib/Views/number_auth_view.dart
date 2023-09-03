@@ -7,6 +7,7 @@ import 'package:pard_app/controllers/phone_verification_controller.dart';
 import 'package:pard_app/component/tos_statement.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/auth_controller.dart';
 
@@ -164,10 +165,8 @@ class NumberAuthView extends StatelessWidget {
                     height: 48.h,
                     child: Row(
                       children: [
-                        VerificationTextField(
-                            codeFocus,
-                            phoneVerificationController,
-                            '인증번호(6자리)를 입력해주세요.'),
+                        VerificationTextField(codeFocus,
+                            phoneVerificationController, '인증번호(6자리)를 입력해주세요.'),
                         SizedBox(
                           width: 8.w,
                         ),
@@ -266,21 +265,28 @@ class NumberAuthView extends StatelessWidget {
                               .setUserByEmail(authController.userEmail.value!);
                           await userController.getUserInfoByEmail(
                               authController.userEmail.value!);
-                          await authController.sStorage.value.write(key: 'login', value: authController.userEmail.value!);
+                          await authController.sStorage.value.write(
+                              key: 'login',
+                              value: authController.userEmail.value!);
                           await Get.toNamed('/home');
                         }
                       }),
                   SizedBox(
                     height: 16.h,
                   ),
-                  Text(
-                    '회원 인증에 실패하셨나요?',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      height: 20.h / 14.h,
-                      color: Theme.of(context).colorScheme.onSecondary,
+                  GestureDetector(
+                    onTap: () {
+                      launchUrl(Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSdXG9ZFrKHz2n5K42r249IYneuJ4urArmYtxs6qv_13IwtO4g/viewform?usp=sf_link'));
+                    },
+                    child: Text(
+                      '회원 인증에 실패하셨나요?',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        height: 20.h / 14.h,
+                        color: Theme.of(context).colorScheme.onSecondary,
+                      ),
                     ),
                   ),
                 ],
