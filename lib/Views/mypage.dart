@@ -67,77 +67,13 @@ class _MyPageState extends State<MyPage> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                Container(
-                  width: 375.w,
-                  height: 76.h,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(1.00, -0.03),
-                      end: Alignment(-1, 0.03),
-                      colors: [
-                        Color(0xFF7B3FEF),
-                        Color(0xFF5262F5),
-                      ],
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 24.w,
-                      ),
-                      Text('운영진에게 전달하고 싶은 의견이 있나요?\n 피드백 창구를 활용해보세요!',
-                          style: headlineSmall),
-                      SizedBox(width: 12.w),
-                      InkWell(
-                        onTap: () {
-                          launchFeedback();
-                        },
-                        child: Container(
-                          width: 90.w,
-                          height: 22.h,
-                          decoration: ShapeDecoration(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text(
-                                '피드백 남기기',
-                                style: TextStyle(
-                                  color: Color(0XFF5262F5),
-                                  fontSize: 9,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                                height: 10.h,
-                                child: IconButton(
-                                  padding: const EdgeInsets.all(0),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    size: 10,
-                                    color: Color(0xFF5262F5),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+                GestureDetector(
+                  onTap: launchFeedback,
+                  child: SizedBox(
+                    width: 375.w,
+                    height: 76.h,
+                   
+                    child: Image.asset('assets/images/banner.png')
                   ),
                 ),
                 Column(
