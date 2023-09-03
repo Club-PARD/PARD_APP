@@ -271,7 +271,7 @@ class _MyPageState extends State<MyPage> {
                             child: Obx(() {
                               return Switch(
                                 value: controller.onOff.value,
-                                onChanged: (value) async{
+                                onChanged: (value) async {
                                   controller.onOff.value =
                                       !controller.onOff.value;
                                   print(controller.onOff.value);
@@ -505,7 +505,7 @@ class _MyPageState extends State<MyPage> {
                                                                     TextButton(
                                                                         onPressed:
                                                                             () {
-                                                                          Get.back();
+                                                                          
                                                                         },
                                                                         child:
                                                                             Text(
@@ -703,11 +703,6 @@ class _MyPageState extends State<MyPage> {
                                                             ),
                                                             child: TextButton(
                                                                 onPressed: () {
-                                                                  AuthController
-                                                                      authController =
-                                                                      Get.put(AuthController());
-                                                                  authController
-                                                                      .signOut(); 
                                                                   Get.back();
                                                                 },
                                                                 child: Text(

@@ -140,6 +140,7 @@ class _HomeBarState extends State<HomeBar> {
                       width: 22.w,
                       height: 22.h,
                     ),
+                    SizedBox(width: 4.w,),
                     Text('PARD 노션', style: headlineSmall),
                     SizedBox(width: 40.w),
                     IconButton(
