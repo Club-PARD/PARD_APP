@@ -28,6 +28,10 @@ class ScheduleController extends GetxController {
 
       for (var scheduleDoc in schedulesSnapshot.docs) {
         final scheduleData = scheduleDoc.data();
+        final sid = scheduleDoc.id; 
+        print('sid : $sid');
+       
+
 
         if (scheduleData['part'] == userPart || scheduleData['part'] == '전체') {
           final schedule = ScheduleModel(
@@ -38,6 +42,7 @@ class ScheduleController extends GetxController {
             scheduleData['place'],
             scheduleData['part'],
             now.isAfter((scheduleData['dueDate'] as Timestamp).toDate()),
+            sid
           );
 
           if (schedule.previous) {

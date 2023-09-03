@@ -20,6 +20,7 @@ class UserModel {
     this.lastLogin,
     this.attend,
     this.fcmToken,
+    this.onOff,
   });
 
   String? uid;
@@ -32,6 +33,7 @@ class UserModel {
   int? generation;
   bool? isAdmin;
   bool? isMaster;
+  bool? onOff;
   @JsonKey(fromJson: dateTimeFromTimestamp)
   final DateTime? lastLogin;
   Map<String, dynamic>? attend;

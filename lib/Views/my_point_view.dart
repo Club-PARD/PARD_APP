@@ -14,7 +14,7 @@ import 'package:pard_app/utilities/color_style.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class MyPointView extends StatefulWidget {
-  MyPointView({super.key});
+  const MyPointView({super.key});
 
   @override
   State<MyPointView> createState() => _MyPointViewState();
@@ -68,7 +68,7 @@ class _MyPointViewState extends State<MyPointView> {
                     pointController.userPointsMap;
 
                 if (rxUserPointsMap.isEmpty) {
-                  return CircularProgressIndicator(); // 로딩 처리
+                  return const CircularProgressIndicator(); // 로딩 처리
                 }
 
                 // RxMap을 Map<UserModel, int>으로 변환
@@ -229,7 +229,7 @@ class _MyPointViewState extends State<MyPointView> {
         ),
         Container(
           width: double.infinity,
-          height: 92.h,
+          height: 105.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             color: containerBackgroundColor,
@@ -337,7 +337,7 @@ class _MyPointViewState extends State<MyPointView> {
                           .showPointPolicyDialog();
                     },
                     child: Image(
-                      image: AssetImage('assets/images/checkPointPolicy.png'),
+                      image: const AssetImage('assets/images/checkPointPolicy.png'),
                       width: 102.w,
                       height: 20.h,
                     ),
