@@ -188,4 +188,69 @@ class PointController extends GetxController {
       }
     }
   }
+
+ // QR 찍었을 때 점수 추가
+Future<void> attendQR(UserModel user, int attendPoint) async {
+  String? pid = user.pid;
+  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid); //user's pid
+
+  // Fetch the current points data
+  DocumentSnapshot pointsSnapshot = await pointsRef.get();
+  Timestamp currentTime = Timestamp.fromDate(DateTime.now());
+
+  Map<String, dynamic> newPoint = {
+    'digit': attendPoint,
+    'reason': '정상출석',
+    'TimeStamp': currentTime,
+    'type':'출결'
+  };
+
+  if (pointsSnapshot.exists) {
+    Map<String, dynamic> existingPoints = pointsSnapshot.data() as Map<String, dynamic>;
+    await pointsRef.update({
+      'points': FieldValue.arrayUnion([newPoint])
+    });
+  } else {
+    await pointsRef.set({
+      'points': [newPoint]
+    });
+  }
+
+  fetchAndSortUserPoints();
+  fetchCurrentUserPoints();
+}
+
+
+//QR 지각했을 때
+Future<void> lateQR(UserModel user, int attendPoint) async {
+  String? pid = user.pid;
+  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid); //user's pid
+
+  // Fetch the current points data
+  DocumentSnapshot pointsSnapshot = await pointsRef.get();
+  Timestamp currentTime = Timestamp.fromDate(DateTime.now());
+
+  Map<String, dynamic> newPoint = {
+    'digit': attendPoint,
+    'reason': '지각',
+    'TimeStamp': currentTime,
+    'type':'출결'
+  };
+
+  if (pointsSnapshot.exists) {
+    Map<String, dynamic> existingPoints = pointsSnapshot.data() as Map<String, dynamic>;
+    await pointsRef.update({
+      'points': FieldValue.arrayUnion([newPoint])
+    });
+  } else {
+    await pointsRef.set({
+      'points': [newPoint]
+    });
+  }
+
+  fetchAndSortUserPoints();
+  fetchCurrentUserPoints();
+}
+
+
 }

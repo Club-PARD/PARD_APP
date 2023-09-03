@@ -50,8 +50,11 @@ class SchedulerScreen extends StatelessWidget {
     );
   }
 
-  Widget buildSection(String title, List<ScheduleModel> Function() getSchedules,
-      TextStyle titleStyle, bool isPast) {
+  Widget buildSection(
+      String title,
+      List<ScheduleModel> Function() getSchedules,
+      TextStyle titleStyle,
+      bool isPast) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -65,10 +68,7 @@ class SchedulerScreen extends StatelessWidget {
         ),
         Obx(
           () {
-            final schedules = isPast
-                ? scheduleController.pastSchedules
-                : scheduleController.upcomingSchedules;
-
+            final schedules = getSchedules();
             if (schedules.isEmpty) {
               return const SizedBox.shrink();
             }

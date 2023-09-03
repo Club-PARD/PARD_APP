@@ -15,6 +15,7 @@ ScheduleModel _$ScheduleModelFromJson(Map<String, dynamic> json) =>
       json['place'] as String,
       json['part'] as String,
       json['previous'] as bool,
+      json['sid'] as String,
     );
 
 Map<String, dynamic> _$ScheduleModelToJson(ScheduleModel instance) =>

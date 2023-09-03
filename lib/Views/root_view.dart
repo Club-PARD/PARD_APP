@@ -11,9 +11,9 @@ class RootVeiw extends StatelessWidget {
   const RootVeiw({super.key});
 
   static List<Widget> tabPages = <Widget>[
-    HomePage(),
+    const HomePage(),
     // Container(),
-    MyPage(),
+    const MyPage(),
   ];
 
   @override
@@ -23,8 +23,8 @@ class RootVeiw extends StatelessWidget {
       extendBody: true,
       body: Obx(() => tabPages[BottomBarController.to.selectedIndex.value]),
       floatingActionButton: Container(
-        width: 80.w,
-        height: 80.h,
+        width: 80,
+        height: 80,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
           gradient: const LinearGradient(
@@ -48,8 +48,13 @@ class RootVeiw extends StatelessWidget {
           },
           backgroundColor: Colors.transparent,
           elevation: 0,
-          child: Image.asset(
-            'assets/images/qr.png',
+          child: SizedBox(
+            width: 40,
+            height: 40,
+            child: Image.asset(
+              'assets/images/qr.png',
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),

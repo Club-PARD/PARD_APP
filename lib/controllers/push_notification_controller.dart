@@ -8,12 +8,19 @@ class PushNotificationController extends GetxController {
     late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     late AndroidNotificationChannel channel;
     static PushNotificationController get to => Get.find();
-    final UserController userController = Get.put(UserController());
+    late UserController userController = Get.put(UserController());
+    late String? uid = userController.userInfo.value?.uid;
   /// 앱 어디서든지 접근 가능하게
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
+  String? fcmToken;
   var onOff = true.obs;
+  var fcmTokenUser = ''.obs;
+  
+  
 
     Future<void> setupFlutterNotifications() async {
+      fcmToken = await firebaseMessaging.getToken();
+    //  await userController.updateFcmToken(fcmToken!);
   channel = const AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
@@ -39,20 +46,27 @@ class PushNotificationController extends GetxController {
     sound: true,
   );
 
-  
   // 토큰 요청
   getToken();
-  ever(onOff, (value) async {
-      await FirebaseFirestore.instance.collection('notification_controller').doc('notification').set({
-        'onOff': value
-      });
-    });
-  
+
+
+  print('********#&#*&*#&%*#&*%#');
+  print(uid);
+  print(fcmToken);
+  print(userController.userInfo.value);
+
+
     }
 
+
   Future<void> getToken() async{
+
     final fcmToken = await firebaseMessaging.getToken();
-    /**공지 받으려면 기기의 토큰 받아와야 한다 */
+    fcmTokenUser.value = await firebaseMessaging.getToken() ?? '';
+    print('22222222222222222222222');
+    print(fcmTokenUser);
+    
+    // /**공지 받으려면 기기의 토큰 받아와야 한다 */
     print("--------TOKEN--------------");
     print('');
     print('');
@@ -64,6 +78,7 @@ class PushNotificationController extends GetxController {
     print('');
     print(fcmToken);     
     print("--------TOKEN--------------");
+
 
   }
 
