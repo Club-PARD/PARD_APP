@@ -25,15 +25,14 @@ class _HomePageState extends State<HomePage> {
   final ScheduleController scheduleController = Get.put(ScheduleController());
   final GlobalKey questionDialogKey = GlobalKey();
 
-
   bool showContainer = false;
   OverlayEntry? overlayEntry;
-  
 
   void showOverlay(BuildContext context) async {
     await PushNotificationController.to.setupFlutterNotifications();
-  final RenderBox renderBox = questionDialogKey.currentContext!.findRenderObject() as RenderBox;
-  final boxPosition = renderBox.localToGlobal(Offset.zero);
+    final RenderBox renderBox =
+        questionDialogKey.currentContext!.findRenderObject() as RenderBox;
+    final boxPosition = renderBox.localToGlobal(Offset.zero);
 
     if (overlayEntry == null) {
       OverlayState? overlayState = Overlay.of(context);
@@ -47,8 +46,8 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               Positioned(
-                top: boxPosition.dy+renderBox.size.height ,
-              left: 30.w,
+                top: boxPosition.dy + renderBox.size.height,
+                left: 30.w,
                 child: Material(
                   child: GestureDetector(
                     onTap: () {
@@ -165,7 +164,6 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: backgroundColor,
       appBar: const HomeFixedBar(),
       body: CustomScrollView(
-        
         slivers: [
           SliverToBoxAdapter(
             child: Column(
@@ -293,22 +291,20 @@ class _HomePageState extends State<HomePage> {
                             child: Container(),
                           ),
                           Builder(
-                            key: questionDialogKey,
-                            builder: (BuildContext questionDialogContext) {
-                              return InkWell(
-                              
-                                onTap: () {
+                              key: questionDialogKey,
+                              builder: (BuildContext questionDialogContext) {
+                                return InkWell(
+                                  onTap: () {
                                     showOverlay(context);
-                                },
-                                child: Image.asset(
-                                  'assets/images/question.png',
-                                  fit: BoxFit.fill,
-                                  width: 24.w,
-                                  height: 24.h,
-                                ),
-                              );
-                            }
-                          ),
+                                  },
+                                  child: Image.asset(
+                                    'assets/images/question.png',
+                                    fit: BoxFit.fill,
+                                    width: 24,
+                                    height: 24,
+                                  ),
+                                );
+                              }),
                           SizedBox(
                             width: 24.w,
                           ),
@@ -335,8 +331,8 @@ class _HomePageState extends State<HomePage> {
                                 Stack(
                                   children: [
                                     Container(
-                                      width: 120.w,
-                                      height: 120.h,
+                                      width: 120,
+                                      height: 120,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
                                         boxShadow: [
@@ -351,16 +347,16 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Container(
-                                      width: 120.w,
-                                      height: 120.h,
+                                      width: 120,
+                                      height: 120,
                                       decoration: BoxDecoration(
                                         color: const Color(0xFF2A2A2A),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                     ),
                                     Container(
-                                      width: 120.w,
-                                      height: 120.h,
+                                      width: 120,
+                                      height: 120,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
                                         border: GradientBoxBorder(
@@ -444,18 +440,18 @@ class _HomePageState extends State<HomePage> {
                                 Stack(
                                   children: [
                                     SizedBox(
-                                        width: 120.w,
-                                        height: 120.h,
+                                        width: 120,
+                                        height: 120,
                                         child: Image.asset(
                                           'assets/images/Frame.png',
-                                          width: 120.w,
-                                          height: 120.h,
+                                          width: 120,
+                                          height: 120,
                                           fit: BoxFit.fill,
                                         )),
                                     if (pointController.level.value != 5)
                                       Positioned(
-                                        left: 15.w,
-                                        top: 18.h,
+                                        left: 14.w,
+                                        top: 20.h,
                                         child: SizedBox(
                                           width: 94.w,
                                           height: 12.h,
@@ -467,7 +463,9 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     Positioned(
                                       left: (pointController.level.value != 5)
-                                          ? 35.w
+                                          ? (pointController.level.value != 4)
+                                              ? 35.w
+                                              : 24.w
                                           : 14.w,
                                       top: (pointController.level.value != 5)
                                           ? 42.h
@@ -524,10 +522,12 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 24.w,),
+                          SizedBox(
+                            width: 24.w,
+                          ),
                           Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
                               style: headlineLarge),
-                              const Spacer(),
+                          const Spacer(),
                           TextButton(
                               onPressed: () {
                                 Get.toNamed('/mypoint');
@@ -536,7 +536,9 @@ class _HomePageState extends State<HomePage> {
                                   style: titleMedium.copyWith(
                                     decoration: TextDecoration.underline,
                                   ))),
-                                  SizedBox(width: 20.w,)
+                          SizedBox(
+                            width: 20.w,
+                          )
                         ],
                       ),
                       Container(
@@ -600,7 +602,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   width: 327.w,
-                  height: 180.h,
+                  height: 162.h,
                   decoration: ShapeDecoration(
                     color: const Color(0xFF2A2A2A),
                     shape: RoundedRectangleBorder(
@@ -614,7 +616,9 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 24.w,),
+                          SizedBox(
+                            width: 24.w,
+                          ),
                           Text('🗓 UPCOMING EVENT 🗓 ', style: headlineLarge),
                           const Spacer(),
                           TextButton(
@@ -625,14 +629,16 @@ class _HomePageState extends State<HomePage> {
                                   style: titleMedium.copyWith(
                                     decoration: TextDecoration.underline,
                                   ))),
-                            SizedBox(width: 20.w,)
+                          SizedBox(
+                            width: 20.w,
+                          )
                         ],
                       ),
                       Container(
                           width: 279.w, height: 1.h, color: grayScale[30]),
                       SizedBox(
                         width: 275.w,
-                        height: 110.h,
+                        height: 100.h,
                         child: HomeSchedule(),
                       )
                     ],
@@ -649,60 +655,60 @@ class _HomePageState extends State<HomePage> {
   double changeCurrentWidth(int level) {
     switch (level) {
       case 1:
-        return 70.w;
+        return 70;
       case 2:
-        return 76.w;
+        return 76;
       case 3:
-        return 86.59.w;
+        return 86.59;
       case 4:
-        return 83.02.w;
+        return 93.02;
       default:
-        return 106.16.w;
+        return 106.16;
     }
   }
 
   double changeCurrentHeight(int level) {
     switch (level) {
       case 1:
-        return 69.14.h;
+        return 69.14;
       case 2:
-        return 80.14.h;
+        return 80.14;
       case 3:
-        return 96.h;
+        return 96;
       case 4:
-        return 93.h;
+        return 103;
       default:
-        return 100.h;
+        return 100;
     }
   }
 
   double changeNextWidth(int level) {
     switch (level) {
       case 1:
-        return 56.1.w;
+        return 56.1;
       case 2:
-        return 54.67.w;
+        return 54.67;
       case 3:
-        return 60.w;
+        return 60;
       case 4:
-        return 78.w;
+        return 78;
       default:
-        return 91.w;
+        return 91;
     }
   }
 
   double changeNextHeight(int level) {
     switch (level) {
       case 1:
-        return 59.17.h;
+        return 59.17;
       case 2:
-        return 64.h;
+        return 64;
       case 3:
-        return 68.3.h;
+        return 68.3;
       case 4:
-        return 69.31.h;
+        return 69.31;
       default:
-        return 60.h;
+        return 60;
     }
   }
 }
