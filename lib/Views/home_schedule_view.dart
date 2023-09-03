@@ -82,12 +82,14 @@ class HomeSchedule extends StatelessWidget {
             ],
           );
         } else {
-          return const Text(
-            '다가오는 일정이 없어요.',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
+          return const Center(
+            child: Text(
+              '다가오는 일정이 없어요.',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           );
         }
