@@ -1,7 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
@@ -67,44 +66,6 @@ String? token = PushNotificationController.to.fcmTokenUser.value;
     } catch (error) {
       print("Error while verifying user by email: $error");
       return false;
-    }
-  }
-
-  //user모델 가져오기(by uid)
-  Future<void> getUserInfoByUID(String uid) async {
-    DocumentSnapshot<Map<String, dynamic>> snapshot =
-        await usersCollection.doc(uid).get();
-
-    if (snapshot.exists) {
-      try {
-        UserModel user = UserModel.fromJson(snapshot.data()!);
-
-        print('사용자 정보:');
-        print('uid: ${user.uid}');
-        print('name: ${user.name}');
-        print('phoneNumber: ${user.phone}');
-        print('email: ${user.email}');
-        print('part: ${user.part}');
-        print('member: ${user.member}');
-        print('generation: ${user.generation}');
-        print('isAdmin: ${user.isAdmin}');
-        print('isMaster: ${user.isMaster}');
-        print('lastLogin: ${user.lastLogin}');
-        print('pid: ${user.email}');
-        print('attend: ${user.attend}');
-        print('onOff : ${user.onOff}');
-        print('fcmToken235315 : ${user.fcmToken}');
-
-        userInfo.value = user;
-
-        String? token = PushNotificationController.to.fcmTokenUser.value;
-    await updateFcmToken(user, token);  
-      } catch (e) {
-        print('user정보 불러오기 실패');
-      }
-    } else {
-      print('user 불러오기 실패');
-      return;
     }
   }
 
