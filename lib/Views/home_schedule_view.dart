@@ -15,7 +15,7 @@ class HomeSchedule extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 280.w,
-      height: 100.h,
+      height: 110.h,
       child: Obx(() {
         if (scheduleController.upcomingSchedules.isNotEmpty) {
           ScheduleModel firstSchedule =
@@ -34,9 +34,10 @@ class HomeSchedule extends StatelessWidget {
                 height: 15.h,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       PartComponent(firstSchedule.part),
                       const SizedBox(

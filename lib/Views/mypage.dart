@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,6 +42,7 @@ class _MyPageState extends State<MyPage> {
   Widget build(BuildContext context) {
     final controller = PushNotificationController.to;
     final UserController userController = Get.put(UserController());
+    late String? uid = userController.userInfo.value?.uid;
     /** push_notification controller 가져온다  */
     return Scaffold(
       backgroundColor: const Color.fromRGBO(26, 26, 26, 1),
@@ -269,10 +271,14 @@ class _MyPageState extends State<MyPage> {
                             child: Obx(() {
                               return Switch(
                                 value: controller.onOff.value,
-                                onChanged: (value) {
+                                onChanged: (value) async{
                                   controller.onOff.value =
                                       !controller.onOff.value;
                                   print(controller.onOff.value);
+                                  await FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(uid)
+                                      .update({'onOff': value});
                                 },
                               );
                             }),
@@ -645,7 +651,7 @@ class _MyPageState extends State<MyPage> {
                                                               ),
                                                               const TextSpan(
                                                                 text:
-                                                                    ')으로        메일을 보내주세요. ',
+                                                                    ')으로\n메일을 보내주세요. ',
                                                                 style:
                                                                     TextStyle(
                                                                   color: Colors

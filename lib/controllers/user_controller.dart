@@ -1,8 +1,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 
 class UserController extends GetxController {
@@ -12,6 +14,8 @@ class UserController extends GetxController {
   Rx<String?> deviceName = Rx<String?>(null); 
   Rx<String?> deviceVersion = Rx<String?>(null);
   Rx<String?> fcmToken = Rx<String?>(null);
+  Rx<bool?> onOff = Rx<bool?>(true);
+  Rx<String?> uid = Rx<String?>(null);
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
   
   //user모델 가져오기(by 이메일)
@@ -39,7 +43,12 @@ class UserController extends GetxController {
         print('pid: ${user.email}');
         print('attend: ${user.attend}');
         print('fcmToken : ${user.fcmToken}');
+        print('onOff : ${user.onOff}');
         userInfo.value = user;
+
+String? token = PushNotificationController.to.fcmTokenUser.value;
+    await updateFcmToken(user, token);  
+
       } else {
         print('사용자 정보 없음');
       }
@@ -83,7 +92,13 @@ class UserController extends GetxController {
         print('lastLogin: ${user.lastLogin}');
         print('pid: ${user.email}');
         print('attend: ${user.attend}');
+        print('onOff : ${user.onOff}');
+        print('fcmToken235315 : ${user.fcmToken}');
+
         userInfo.value = user;
+
+        String? token = PushNotificationController.to.fcmTokenUser.value;
+    await updateFcmToken(user, token);  
       } catch (e) {
         print('user정보 불러오기 실패');
       }
@@ -100,22 +115,17 @@ class UserController extends GetxController {
     });
   }
 
-  Future<void> saveFcmToken(String fcmToken) async {
-    final fcmToken = await firebaseMessaging.getToken();
-    print('저장용 토큰 ------------------------');
-    print(fcmToken);
-    await FirebaseFirestore.instance.collection('users').doc(fcmToken).update({
-      'fcmToken': fcmToken,
+
+  Future<void> saveOnOff(String uid,bool onOff) async {
+    
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+      'onOff': onOff,
     });
   }
 
-Future<void> updateAttend(String? uid, String? qrCode) async {
-  if (uid == null || qrCode == null) {
-    print("uid null값");
-    return;
-  }
+Future<void> updateAttend(UserModel user, String? qrCode) async {
   final currentTime = DateTime.now().toIso8601String(); 
-  final userDocument = FirebaseFirestore.instance.collection('users').doc(uid);
+  final userDocument = FirebaseFirestore.instance.collection('users').doc(user.uid);
 
   try {
     await userDocument.update({
@@ -124,6 +134,23 @@ Future<void> updateAttend(String? uid, String? qrCode) async {
   } catch (e) {
     print(e);
   }
+}
+//FcmToken 파베에 업데이트
+
+ Future<void> updateFcmToken(UserModel user,String token) async {
+  var pushController = Get.find<PushNotificationController>();
+    fcmToken.value = token;
+    final usersCollection = FirebaseFirestore.instance.collection('users');
+  print('11111111111111111111111');
+   print("FcmToken is: ${pushController.fcmTokenUser.value}");
+    try {
+      print('11111111111111111111111');
+      print(userInfo.value?.uid);
+      await usersCollection.doc(user.uid).update({'fcmToken': fcmToken.value});
+      print("fcmToken updated in Firestore");
+    } catch (e) {
+      print("Failed to update fcmToken: $e");
+    }
 }
 
 
