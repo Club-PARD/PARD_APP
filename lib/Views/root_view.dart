@@ -6,6 +6,7 @@ import 'package:pard_app/Views/home_view.dart';
 import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/controllers/bottombar_controller.dart';
+import 'package:pard_app/utilities/color_style.dart';
 
 class RootVeiw extends StatelessWidget {
   const RootVeiw({super.key});
@@ -19,7 +20,7 @@ class RootVeiw extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(BottomBarController());
-    return Scaffold(
+    return Obx(()=>Scaffold(
       extendBody: true,
       body: Obx(() => tabPages[BottomBarController.to.selectedIndex.value]),
       floatingActionButton: Container(
@@ -27,12 +28,17 @@ class RootVeiw extends StatelessWidget {
         height: 80,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          gradient: const LinearGradient(
+          gradient: BottomBarController.to.selectedIndex.value == 0
+          ?  const LinearGradient(
             colors: [
               Color(0xFF5262F5),
               Color(0xFF7B3FEF),
             ],
-          ),
+          )
+          :null,
+          color: BottomBarController.to.selectedIndex.value == 1
+              ? grayScale[30]
+              : null,
           boxShadow: [
             BoxShadow(
               blurRadius: 8.r,
@@ -42,11 +48,11 @@ class RootVeiw extends StatelessWidget {
         ),
         child: FloatingActionButton(
           onPressed: () {
-            // controller.onItemTapped(3);
-            Get.toNamed('/qr');
-            // 활성화, 비활 만들어야 함
+            if (BottomBarController.to.selectedIndex.value != 1) {
+           Get.toNamed('/qr');
+      }
           },
-          backgroundColor: Colors.transparent,
+          backgroundColor:Colors.transparent,
           elevation: 0,
           child: SizedBox(
             width: 40,
@@ -60,6 +66,6 @@ class RootVeiw extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomBar(),
-    );
+    ));
   }
 }
