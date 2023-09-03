@@ -34,7 +34,7 @@ class HomeSchedule extends StatelessWidget {
                 height: 15.h,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -75,14 +75,23 @@ class HomeSchedule extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        Text('일시: ${_formatDate(firstSchedule.dueDate)}',
+                        Text('마감: ${_formatDate(firstSchedule.dueDate)}',
                             style: Theme.of(context).textTheme.titleLarge),
                       ],
                     ),
             ],
           );
         } else {
-          return const Text('No upcoming schedules');
+          return const Center(
+            child: Text(
+              '다가오는 일정이 없어요.',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          );
         }
       }),
     );
@@ -90,17 +99,15 @@ class HomeSchedule extends StatelessWidget {
 
   String _calculateDday(DateTime dueDate) {
     final now = DateTime.now();
-    final dueDateWithoutTime =
-        DateTime(dueDate.year, dueDate.month, dueDate.day);
-    final nowWithoutTime = DateTime(now.year, now.month, now.day);
-    final difference = dueDateWithoutTime.difference(nowWithoutTime).inDays;
+    final difference = dueDate.difference(now);
 
-    if (difference == 0) {
-      return 'D-DAY';
-    } else if (difference > 0) {
-      return 'D-$difference';
-    } else {
+    if (difference.isNegative) {
       return '';
+    } else if (difference.inDays > 0) {
+      final days = difference.inDays;
+      return 'D-$days';
+    } else {
+      return 'D-DAY';
     }
   }
 
