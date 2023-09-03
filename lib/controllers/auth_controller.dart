@@ -19,17 +19,16 @@ class AuthController extends GetxController {
   Rx<FlutterSecureStorage> sStorage = FlutterSecureStorage().obs;
 
   checkPreviousLogin() async {
-    String? uid = await sStorage.value.read(key: 'login');
-    print(uid);
-    if (uid != null) {
-      await _userController.getUserInfoByUID(uid);
-      await _userController
-          .updateTimeByEmail(_userController.userInfo.value!.email!);
-      Get.offAllNamed('/home');
-      isLogin.value = true;
-    } else {
+    String? email = await sStorage.value.read(key: 'login');
+    print(email);
+    if (email == null || !await _userController.isVerifyUserByEmail(email)) {
       print('로그인 이력 없음: 로그인 필요');
       isLogin.value = false;
+    } else {
+      await _userController.getUserInfoByEmail(email);
+      await _userController.updateTimeByEmail(email);
+      Get.offAllNamed('/home');
+      isLogin.value = true;
     }
   }
 
