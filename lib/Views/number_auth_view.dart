@@ -92,7 +92,7 @@ class NumberAuthView extends StatelessWidget {
                                         .isCorrectPhoneNumber.value ==
                                     true) {
                               await phoneVerificationController
-                                  .sendPhoneNumber();
+                                  .sendPhoneNumber(context);
                               print(
                                   '인증번호: ${phoneVerificationController.verificationCodeFromAuth.value}');
                             }

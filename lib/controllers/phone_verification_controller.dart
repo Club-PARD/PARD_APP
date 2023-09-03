@@ -45,7 +45,7 @@ class PhoneVerificationController extends GetxController {
   }
 
   //인증번호 전송
-  Future<void> sendPhoneNumber() async {
+  Future<void> sendPhoneNumber(BuildContext context) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
 
     await auth.verifyPhoneNumber(
@@ -66,6 +66,7 @@ class PhoneVerificationController extends GetxController {
         // verificationCompleter.complete(verificationId);
         // codeCompleter.complete(verificationId); // Complete the codeCompleter
         verificationCodeFromAuth.value = verificationId;
+        codeValidationSnackBar(context, '인증번호를 발송했어요.');
         print("인증번호 전송 완료");
       },
     );
@@ -91,7 +92,7 @@ class PhoneVerificationController extends GetxController {
         String uid = findedUID.value!;
         await _userController.saveEmail(uid, email);
         // 토스트 메시지 출력
-        codeValidationSnackBar(context);
+        codeValidationSnackBar(context, '인증번호가 확인되었어요.');
         print('인증성공');
       }
     } else {
@@ -100,54 +101,63 @@ class PhoneVerificationController extends GetxController {
   }
 
   //인증번호 인증성공 토스트 메시지
-  void codeValidationSnackBar(BuildContext context) {
-    final snackBar = SnackBar(
-      content: Container(
-                height: 40.h,
-                width: 343.w,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: GradientBoxBorder(
-                    gradient: LinearGradient(colors: [
-                      Theme.of(context).colorScheme.onSecondary,
-                      Theme.of(context).colorScheme.secondary,
-                    ]),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(8.w)),
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromRGBO(82, 98, 245, 0.1),
-                      Color.fromRGBO(123, 63, 239, 0.1),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
-                child: Text(
-                  '인증번호가 확인되었어요.',
-                  style: TextStyle(
-                    foreground: Paint()
-                      ..shader = LinearGradient(
-                        colors: [
-                          Theme.of(context).colorScheme.onSecondary,
-                          Theme.of(context).colorScheme.secondary,
-                        ],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ).createShader(Rect.fromLTWH(
-                          0, 0, 327.w, 40.h)), // Adjust the Rect as needed
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    height: 18.h / 14.h,
-                  ),
-                ),
-              ),
-      backgroundColor: Colors.transparent, // 배경색: 투명
-      duration: Duration(seconds: 3), // 메시지 표시 시간: 3초
+  void codeValidationSnackBar(BuildContext context, String text) {
+    final snackBar = Positioned(
+      top: 620.h,
+      left: 0,
+      right: 0,
+      child: Container(
+        height: 40.h,
+        width: 343.w,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: GradientBoxBorder(
+            gradient: LinearGradient(colors: [
+              Theme.of(context).colorScheme.onSecondary,
+              Theme.of(context).colorScheme.secondary,
+            ]),
+            width: 1,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(8.w)),
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(82, 98, 245, 0.1),
+              Color.fromRGBO(123, 63, 239, 0.1),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+        child: Material(
+          type: MaterialType.transparency,
+          child: Text(
+            text,
+            style: TextStyle(
+              foreground: Paint()
+                ..shader = LinearGradient(
+                  colors: [
+                    Theme.of(context).colorScheme.onSecondary,
+                    Theme.of(context).colorScheme.secondary,
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ).createShader(Rect.fromLTRB(0, 0, 323.w, 40.h)),
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              height: 18.h / 14.h,
+            ),
+          ),
+        ),
+      ),
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry overlayEntry;
+    overlayEntry = OverlayEntry(builder: (context) => snackBar);
+    overlayState.insert(overlayEntry);
+    Future.delayed(Duration(seconds: 3), () {
+      overlayEntry.remove();
+    });
   }
 
   //휴대폰 인증, 인증 후 휴대폰 로그인 기록 삭제

@@ -24,7 +24,6 @@ class AuthController extends GetxController {
     if (email == null || !await _userController.isVerifyUserByEmail(email)) {
       print('로그인 이력 없음: 로그인 필요');
       isLogin.value = false;
-      print(isLogin.value);
     } else {
       await _userController.getUserInfoByEmail(email);
       await _userController.updateTimeByEmail(email);
@@ -58,7 +57,8 @@ class AuthController extends GetxController {
           if (isUserExists) {
             await _userController.updateTimeByEmail(user.email!);
             await _userController.getUserInfoByEmail(user.email!);
-            await sStorage.value.write(key: 'login', value: user.email);
+            await sStorage.value.write(
+                key: 'login', value: user.email!);
             Get.toNamed('/home');
           } else
             Get.toNamed('/tos');
@@ -74,7 +74,7 @@ class AuthController extends GetxController {
     try {
       await _auth.signOut();
       await sStorage.value.delete(key: 'login');
-      Get.toNamed('/');
+      Get.offAllNamed('/');
     } catch (error) {
       print('Sign Out Error: $error');
     }
