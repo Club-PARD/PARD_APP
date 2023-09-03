@@ -91,7 +91,7 @@ class ScheduleContainer extends StatelessWidget {
                               .copyWith(color: grayScale[30])
                           : Theme.of(context).textTheme.titleLarge,
                     ),
-                    Text('일시: ${_formatDate(schedule.dueDate)}',
+                    Text('마감: ${_formatDate(schedule.dueDate)}',
                         style: isPast
                             ? Theme.of(context)
                                 .textTheme
@@ -107,17 +107,15 @@ class ScheduleContainer extends StatelessWidget {
 
   String _calculateDday(DateTime dueDate) {
     final now = DateTime.now();
-    final dueDateWithoutTime =
-        DateTime(dueDate.year, dueDate.month, dueDate.day);
-    final nowWithoutTime = DateTime(now.year, now.month, now.day);
-    final difference = dueDateWithoutTime.difference(nowWithoutTime).inDays;
+    final difference = dueDate.difference(now);
 
-    if (difference == 0) {
-      return 'D-DAY';
-    } else if (difference > 0) {
-      return 'D-$difference';
-    } else {
+    if (difference.isNegative) {
       return '';
+    } else if (difference.inDays > 0) {
+      final days = difference.inDays;
+      return 'D-$days';
+    } else {
+      return 'D-DAY';
     }
   }
 
