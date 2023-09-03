@@ -17,13 +17,23 @@ class MyPage extends StatefulWidget {
   State<MyPage> createState() => _MyPageState();
 }
 
-void launchNotion() async {
-  final Uri pardNotion = Uri.parse(
-      'https://pardhgu.notion.site/PARD-1-a26b1363b86a4740936a92e254876205');
+void launchPrivateInformation() async {
+  final Uri privateInfo = Uri.parse(
+      'https://pardhgu.notion.site/Pard-APP-fbccc11671d14b4d8012dd999eff7f93?pvs=4');
   try {
-    await launchUrl(pardNotion);
+    await launchUrl(privateInfo);
   } catch (e) {
-    print("Could not launch $pardNotion: $e");
+    print("Could not launch $privateInfo: $e");
+  }
+}
+
+void launchServiceInformation() async {
+  final Uri serviceInfo = Uri.parse(
+      'https://pardhgu.notion.site/Pard-APP-18c93fe8a2c648009e17d1ab294a4fa9?pvs=4');
+  try {
+    await launchUrl(serviceInfo);
+  } catch (e) {
+    print("Could not launch $serviceInfo: $e");
   }
 }
 
@@ -318,7 +328,7 @@ class _MyPageState extends State<MyPage> {
                             padding: EdgeInsets.only(right: 24.w),
                             child: IconButton(
                                 onPressed: () {
-                                  launchNotion();
+                                  launchPrivateInformation();
                                 },
                                 icon: const Icon(
                                   Icons.arrow_forward_ios_outlined,
@@ -346,7 +356,7 @@ class _MyPageState extends State<MyPage> {
                             padding: EdgeInsets.only(right: 24.w),
                             child: IconButton(
                                 onPressed: () {
-                                  launchNotion();
+                                  launchServiceInformation();
                                 },
                                 icon: const Icon(
                                   Icons.arrow_forward_ios_outlined,

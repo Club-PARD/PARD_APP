@@ -55,91 +55,92 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: Container(
                       color: const Color(0xFF242424),
-                      child: Container(
-                          width: 310.w,
-                          height: 64.h,
-                          decoration: ShapeDecoration(
-                            color: const Color(0xFF1A1A1A),
-                            shape: RoundedRectangleBorder(
-                              side: const BorderSide(
-                                  width: 1, color: Color(0xFF5262F5)),
-                              borderRadius: BorderRadius.circular(8.h),
+                      child: Center(
+                        child: Container(
+                            width: 310.w,
+                            height: 64.h,
+                            decoration: ShapeDecoration(
+                              color: const Color(0xFF1A1A1A),
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(
+                                    width: 1, color: Color(0xFF5262F5)),
+                                borderRadius: BorderRadius.circular(8.h),
+                              ),
                             ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  SizedBox(
-                                    width: 270.w,
-                                    height: 60.h,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizedBox(height: 8.h),
-                                        SizedBox(
-                                          height: 45.h,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text.rich(
-                                                    TextSpan(
-                                                      children: [
-                                                        TextSpan(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 12.5.h,),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                         
+                                          SizedBox(
+                                            height: 45.h,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text.rich(
+                                                      TextSpan(
+                                                        children: [
+                                                          TextSpan(
+                                                              text:
+                                                                  '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
+                                                              style: titleSmall),
+                                                          TextSpan(
+                                                            text: '팡울이',
+                                                            style: titleSmall.copyWith(
+                                                                color: const Color(
+                                                                    0xFF5262F5)),
+                                                          ),
+                                                          TextSpan(
+                                                            text: '‘예요.',
+                                                            style: titleSmall,
+                                                          ),
+                                                          TextSpan(
                                                             text:
-                                                                '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
-                                                            style: titleSmall),
-                                                        TextSpan(
-                                                          text: '팡울이',
-                                                          style: titleSmall.copyWith(
-                                                              color: const Color(
-                                                                  0xFF5262F5)),
-                                                        ),
-                                                        TextSpan(
-                                                          text: '‘예요.',
-                                                          style: titleSmall,
-                                                        ),
-                                                        TextSpan(
-                                                          text:
-                                                              '\n오늘도 PARD에서 저와 함께 성장해가요! ☺️',
-                                                          style: titleSmall,
-                                                        ),
-                                                      ],
+                                                                '\n오늘도 PARD에서 저와 함께 성장해가요! ☺️',
+                                                            style: titleSmall,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      textAlign: TextAlign.center,
                                                     ),
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
+                                        ],
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        Icon(
+                                          Icons.close,
+                                          color: grayScale[30],
+                                          size: 20.h,
+                                        ),
+                                        SizedBox(
+                                          height: 24.h,
                                         ),
                                       ],
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Icon(
-                                        Icons.close,
-                                        color: grayScale[30],
-                                        size: 20.h,
-                                      ),
-                                      SizedBox(
-                                        height: 20.h,
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ],
-                          )),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            )),
+                      ),
                     ),
                   ),
                 ),

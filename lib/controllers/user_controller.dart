@@ -191,4 +191,44 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
       print("디바이스 모델명 불러오기 실패: $e");
     }
   }
+
+  Future<bool> hasAlreadyScannedToday(String? qrCode) async { //찍은 qrCode 받아서
+    try {
+      if (userInfo.value == null) {
+        print("User is not set.");
+        return false;
+      }
+      
+      final userDocument = await FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid).get();
+      final userData = userDocument.data() as Map<String, dynamic>;
+
+      final attendData = userData['attend'] as Map<String, dynamic>?;
+
+      if (attendData == null || attendData.isEmpty) { //attendData가 없으면 찍은적 없다는 것
+        return false;  
+      }
+
+      final today = DateTime.now();
+      final todayString = "${today.year}-${today.month}-${today.day}";
+
+      for (var entry in attendData.entries) {
+        if (entry.key == qrCode) {
+          final scannedTime = DateTime.parse(entry.value);
+          final scannedDayString = "${scannedTime.year}-${scannedTime.month}-${scannedTime.day}";
+          
+          if (scannedDayString == todayString) {
+            return true; 
+          }
+        }
+      }
+      
+      return false; 
+
+    } catch (e) {
+      print("Error checking scan status: $e");
+      return false;
+    }
+  }
+
 }
+

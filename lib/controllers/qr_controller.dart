@@ -51,18 +51,21 @@ class QRController extends GetxController {
         isScanned = true; // 스캔을 true로 설정
         result.value = scanData;
         UserModel user = userController.userInfo.value!;
-
+        bool hasScanned = await userController.hasAlreadyScannedToday(result.value?.code); //찍은적 없으면 hasScanned는 false
         DateTime currentTime = DateTime.now();
-
+        print('HAS SCANNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+        print(hasScanned);
 
         print("Scanned QR Code: ${result.value!.code}");
         print("Scanned Time: $currentTime");
         print("Current time: $currentTime");
         print("Schedule Due Date: $scheduleDueDate");
 
-        //정상출석
+        //오늘 찍은적이 없으면 
+       if(!hasScanned) {
         if (currentTime.isBefore(scheduleDueDate) &&
             result.value!.code == "https://me-qr.com/uoN4lOs1") {
+              //정상출석
           userController.AddAttend(sid, '출');
           await pointController.attendQR(user, 6);
 
@@ -149,6 +152,9 @@ class QRController extends GetxController {
                 ]),
           ));
           isScanned = false;
+          !hasScanned;
+          print('HAS SCANNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!22222222');
+          print(hasScanned);
         } else if(currentTime.isAfter(scheduleDueDate) &&
             result.value!.code == "https://me-qr.com/uoN4lOs1") {
               //이미 시간 지난 오늘치 schedule과 qr찍은 시간 비교했을 때 이미 지났으면 지각
@@ -226,6 +232,92 @@ class QRController extends GetxController {
                                 },
                                 child: Text(
                                   '다음부터 안그럴게요',
+                                  style: headlineMedium.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ))),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                      ],
+                    ),
+                  ),
+                ]),
+          ));
+          isScanned = false;
+          !hasScanned;
+        }}
+        else if(hasScanned){
+          Get.back(); //찍으면 홈으로 돌아감
+          bController.selectedIndex.value = 0;
+          print(bController.selectedIndex);
+
+          Get.dialog(Dialog(
+            backgroundColor: const Color(0xFF1A1A1A),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 327.w,
+                    height: 264.h,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFF1A1A1A),
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                            width: 0.50, color: Color(0xFF5262F5)),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text('출석체크',
+                            style: displaySmall.copyWith(
+                              color: const Color(0xFF5262F5),
+                            )),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        SizedBox(
+                          width: 56.w,
+                          height: 58.h,
+                          child: Image.asset(
+                            'assets/images/2ndQR.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Text('이미 출석이 완료되었어요.',
+                            textAlign: TextAlign.center,
+                            style: titleSmall.copyWith(
+                              color: const Color(0xFF5262F5)
+                            )),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Container(
+                            width: 254.w,
+                            height: 44.h,
+                            decoration: ShapeDecoration(
+                              gradient: const LinearGradient(
+                                begin: Alignment(1.00, -0.03),
+                                end: Alignment(-1, 0.03),
+                                colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Text(
+                                  '세미나 입장하기',
                                   style: headlineMedium.copyWith(
                                     color: Colors.white,
                                   ),

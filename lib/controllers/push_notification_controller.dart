@@ -108,7 +108,7 @@ class PushNotificationController extends GetxController {
           channel.name,
           channelDescription: channel.description,
  
-          icon: 'launch_background',
+          icon: 'noti_icon',
         ),
       ),
     );
