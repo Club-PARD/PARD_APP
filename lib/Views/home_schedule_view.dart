@@ -34,7 +34,7 @@ class HomeSchedule extends StatelessWidget {
                 height: 15.h,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -75,14 +75,21 @@ class HomeSchedule extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        Text('일시: ${_formatDate(firstSchedule.dueDate)}',
+                        Text('마감: ${_formatDate(firstSchedule.dueDate)}',
                             style: Theme.of(context).textTheme.titleLarge),
                       ],
                     ),
             ],
           );
         } else {
-          return const Text('No upcoming schedules');
+          return const Text(
+            '다가오는 일정이 없어요.',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          );
         }
       }),
     );
