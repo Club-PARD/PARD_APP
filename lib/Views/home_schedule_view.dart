@@ -15,7 +15,7 @@ class HomeSchedule extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 280.w,
-      height: 110.h,
+      height: 100.h,
       child: Obx(() {
         if (scheduleController.upcomingSchedules.isNotEmpty) {
           ScheduleModel firstSchedule =
