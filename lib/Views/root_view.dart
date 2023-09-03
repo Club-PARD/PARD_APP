@@ -20,7 +20,7 @@ class RootVeiw extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(BottomBarController());
     return Scaffold(
-      // extendBody: true,
+      extendBody: true,
       body: Obx(() => tabPages[BottomBarController.to.selectedIndex.value]),
       floatingActionButton: Container(
         width: 80.w,

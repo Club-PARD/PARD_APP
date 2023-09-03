@@ -14,7 +14,7 @@ class AuthController extends GetxController {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   RxBool isAgree = false.obs;
-  RxBool isLogin = true.obs;
+  RxBool isLogin = false.obs;
 
   Rx<FlutterSecureStorage> sStorage = FlutterSecureStorage().obs;
 
@@ -23,7 +23,8 @@ class AuthController extends GetxController {
     print(uid);
     if (uid != null) {
       await _userController.getUserInfoByUID(uid);
-      await _userController.updateTimeByEmail(_userController.userInfo.value!.email!);
+      await _userController
+          .updateTimeByEmail(_userController.userInfo.value!.email!);
       Get.offAllNamed('/home');
       isLogin.value = true;
     } else {
@@ -57,7 +58,8 @@ class AuthController extends GetxController {
           if (isUserExists) {
             await _userController.updateTimeByEmail(user.email!);
             await _userController.getUserInfoByEmail(user.email!);
-            await sStorage.value.write(key: 'login', value: _userController.userInfo.value!.uid);
+            await sStorage.value.write(
+                key: 'login', value: _userController.userInfo.value!.uid);
             Get.toNamed('/home');
           } else
             Get.toNamed('/tos');
