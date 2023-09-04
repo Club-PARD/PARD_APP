@@ -17,13 +17,23 @@ class MyPage extends StatefulWidget {
   State<MyPage> createState() => _MyPageState();
 }
 
-void launchNotion() async {
-  final Uri pardNotion = Uri.parse(
-      'https://pardhgu.notion.site/PARD-1-a26b1363b86a4740936a92e254876205');
+void launchPrivateInformation() async {
+  final Uri privateInfo = Uri.parse(
+      'https://pardhgu.notion.site/Pard-APP-fbccc11671d14b4d8012dd999eff7f93?pvs=4');
   try {
-    await launchUrl(pardNotion);
+    await launchUrl(privateInfo);
   } catch (e) {
-    print("Could not launch $pardNotion: $e");
+    print("Could not launch $privateInfo: $e");
+  }
+}
+
+void launchServiceInformation() async {
+  final Uri serviceInfo = Uri.parse(
+      'https://pardhgu.notion.site/Pard-APP-18c93fe8a2c648009e17d1ab294a4fa9?pvs=4');
+  try {
+    await launchUrl(serviceInfo);
+  } catch (e) {
+    print("Could not launch $serviceInfo: $e");
   }
 }
 
@@ -57,77 +67,13 @@ class _MyPageState extends State<MyPage> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                Container(
-                  width: 375.w,
-                  height: 76.h,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(1.00, -0.03),
-                      end: Alignment(-1, 0.03),
-                      colors: [
-                        Color(0xFF7B3FEF),
-                        Color(0xFF5262F5),
-                      ],
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 24.w,
-                      ),
-                      Text('운영진에게 전달하고 싶은 의견이 있나요?\n 피드백 창구를 활용해보세요!',
-                          style: headlineSmall),
-                      SizedBox(width: 12.w),
-                      InkWell(
-                        onTap: () {
-                          launchFeedback();
-                        },
-                        child: Container(
-                          width: 90.w,
-                          height: 22.h,
-                          decoration: ShapeDecoration(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text(
-                                '피드백 남기기',
-                                style: TextStyle(
-                                  color: Color(0XFF5262F5),
-                                  fontSize: 9,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                                height: 10.h,
-                                child: IconButton(
-                                  padding: const EdgeInsets.all(0),
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    size: 10,
-                                    color: Color(0xFF5262F5),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+                GestureDetector(
+                  onTap: launchFeedback,
+                  child: SizedBox(
+                    width: 375.w,
+                    height: 76.h,
+                   
+                    child: Image.asset('assets/images/banner.png')
                   ),
                 ),
                 Column(
@@ -271,7 +217,7 @@ class _MyPageState extends State<MyPage> {
                             child: Obx(() {
                               return Switch(
                                 value: controller.onOff.value,
-                                onChanged: (value) async{
+                                onChanged: (value) async {
                                   controller.onOff.value =
                                       !controller.onOff.value;
                                   print(controller.onOff.value);
@@ -318,7 +264,7 @@ class _MyPageState extends State<MyPage> {
                             padding: EdgeInsets.only(right: 24.w),
                             child: IconButton(
                                 onPressed: () {
-                                  launchNotion();
+                                  launchPrivateInformation();
                                 },
                                 icon: const Icon(
                                   Icons.arrow_forward_ios_outlined,
@@ -346,7 +292,7 @@ class _MyPageState extends State<MyPage> {
                             padding: EdgeInsets.only(right: 24.w),
                             child: IconButton(
                                 onPressed: () {
-                                  launchNotion();
+                                  launchServiceInformation();
                                 },
                                 icon: const Icon(
                                   Icons.arrow_forward_ios_outlined,
@@ -505,7 +451,7 @@ class _MyPageState extends State<MyPage> {
                                                                     TextButton(
                                                                         onPressed:
                                                                             () {
-                                                                          Get.back();
+                                                                          
                                                                         },
                                                                         child:
                                                                             Text(
@@ -703,11 +649,6 @@ class _MyPageState extends State<MyPage> {
                                                             ),
                                                             child: TextButton(
                                                                 onPressed: () {
-                                                                  AuthController
-                                                                      authController =
-                                                                      Get.put(AuthController());
-                                                                  authController
-                                                                      .signOut(); 
                                                                   Get.back();
                                                                 },
                                                                 child: Text(

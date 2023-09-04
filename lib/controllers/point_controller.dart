@@ -201,7 +201,7 @@ Future<void> attendQR(UserModel user, int attendPoint) async {
   Map<String, dynamic> newPoint = {
     'digit': attendPoint,
     'reason': '정상출석',
-    'TimeStamp': currentTime,
+    'timeStamp': currentTime,
     'type':'출결'
   };
 
@@ -233,7 +233,7 @@ Future<void> lateQR(UserModel user, int attendPoint) async {
   Map<String, dynamic> newPoint = {
     'digit': attendPoint,
     'reason': '지각',
-    'TimeStamp': currentTime,
+    'timeStamp': currentTime,
     'type':'출결'
   };
 
