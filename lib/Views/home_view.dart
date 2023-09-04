@@ -536,6 +536,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text('더보기',
                                   style: titleMedium.copyWith(
                                     decoration: TextDecoration.underline,
+                                    color: grayScale[30]
                                   ))),
                           SizedBox(
                             width: 20.w,
@@ -629,6 +630,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text('더보기',
                                   style: titleMedium.copyWith(
                                     decoration: TextDecoration.underline,
+                                    color: grayScale[30],
                                   ))),
                           SizedBox(
                             width: 20.w,
