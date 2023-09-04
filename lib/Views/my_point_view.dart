@@ -46,135 +46,176 @@ class _MyPointViewState extends State<MyPointView> {
       appBar: PardAppBar(
         '내 점수',
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 24.0.w,
-            vertical: 24.0.h,
-          ),
-          child: Column(
-            children: [
-              SizedBox(
-                width: 229.w,
-                height: 36.h,
-                child: const Image(
-                  image: AssetImage('assets/images/pardnershipTop3.png'),
-                ),
+      body: Column(
+        children: [
+          Center(
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 24.0.w,
+                right: 24.0.w,
+                top: 24.0.h,
               ),
-              SizedBox(
-                height: 16.h,
-              ),
-              Obx(() {
-                final RxMap<dynamic, dynamic> rxUserPointsMap =
-                    pointController.userPointsMap;
-
-                if (rxUserPointsMap.isEmpty) {
-                  return const CircularProgressIndicator(); // 로딩 처리
-                }
-
-                // RxMap을 Map<UserModel, int>으로 변환
-                final Map<UserModel, int> userPointsMap =
-                    Map<UserModel, int>.from(rxUserPointsMap);
-
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    rankWithTopIcon(
-                      'top1',
-                      context,
-                      userPointsMap.keys.elementAt(0),
-                    ),
-                    rankWithTopIcon(
-                      'top2',
-                      context,
-                      userPointsMap.keys.elementAt(1),
-                    ),
-                    rankWithTopIcon(
-                      'top3',
-                      context,
-                      userPointsMap.keys.elementAt(2),
-                    ),
-                  ],
-                );
-              }),
-              SizedBox(
-                height: 24.h,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+              child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  SizedBox(
+                    width: 229.w,
+                    height: 36.h,
+                    child: const Image(
+                      image: AssetImage('assets/images/pardnershipTop3.png'),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  Obx(() {
+                    final RxMap<dynamic, dynamic> rxUserPointsMap =
+                        pointController.userPointsMap;
+
+                    if (rxUserPointsMap.isEmpty) {
+                      return const CircularProgressIndicator(); // 로딩 처리
+                    }
+
+                    // RxMap을 Map<UserModel, int>으로 변환
+                    final Map<UserModel, int> userPointsMap =
+                        Map<UserModel, int>.from(rxUserPointsMap);
+
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        rankWithTopIcon(
+                          'top1',
+                          context,
+                          userPointsMap.keys.elementAt(0),
+                        ),
+                        rankWithTopIcon(
+                          'top2',
+                          context,
+                          userPointsMap.keys.elementAt(1),
+                        ),
+                        rankWithTopIcon(
+                          'top3',
+                          context,
+                          userPointsMap.keys.elementAt(2),
+                        ),
+                      ],
+                    );
+                  }),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      rankWithText(
-                        '파트 내 랭킹',
-                        context,
-                        currentUserRank,
-                        currentUserPartRank,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          rankWithText(
+                            '파트 내 랭킹',
+                            context,
+                            currentUserRank,
+                            currentUserPartRank,
+                          ),
+                          rankWithText(
+                            '전체 랭킹',
+                            context,
+                            currentUserRank,
+                            currentUserPartRank,
+                          ),
+                        ],
                       ),
-                      rankWithText(
-                        '전체 랭킹',
-                        context,
-                        currentUserRank,
-                        currentUserPartRank,
+                      TextButton(
+                        onPressed: () {
+                          Get.toNamed('/overallRanking');
+                        },
+                        child: Text(
+                          '전체랭킹 확인하기',
+                          style:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    color: grayScale[30],
+                                    decoration: TextDecoration.underline,
+                                  ),
+                        ),
                       ),
                     ],
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Get.toNamed('/overallRanking');
-                    },
-                    child: Text(
-                      '전체랭킹 확인하기',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: grayScale[30],
-                            decoration: TextDecoration.underline,
+                  myCurrentPoints(context),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '점수 기록',
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                      InkWell(
+                        key: buttonKey,
+                        onTap: () {
+                          PointPolicyDialog(context, buttonKey)
+                              .showPointPolicyDialog();
+                        },
+                        child: SizedBox(
+                          height: 24.h,
+                          child: Image(
+                            image: const AssetImage(
+                                'assets/images/checkPointPolicy.png'),
+                            width: 102.w,
+                            // height: 20.h,
                           ),
-                    ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16.h,
                   ),
                 ],
               ),
-              myCurrentPoints(context),
-              SizedBox(
-                height: 24.h,
-              ),
-              pointRecordCarouselSlider(context, buttonKey),
-            ],
+            ),
           ),
-        ),
+          pointRecordCarouselSlider(context, buttonKey),
+        ],
       ),
     );
   }
 
   Widget rankWithTopIcon(String top, context, UserModel user) {
-    return Row(
-      children: [
-        Image(
-          width: 40.w,
-          height: 49.h,
-          image: AssetImage('assets/images/$top.png'),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // TODO: 유저 데이터 가져오기
-            Text(
-              '${user.part} 파트',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(color: grayScale[30]),
-            ),
-            Text(
-              user.name!,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .copyWith(color: grayScale[10]),
-            ),
-          ],
-        ),
-      ],
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: 92.w,
+        maxHeight: 49.h,
+      ),
+      child: Row(
+        children: [
+          Image(
+            width: 40.w,
+            height: 49.h,
+            image: AssetImage('assets/images/$top.png'),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // TODO: 유저 데이터 가져오기
+              Text(
+                '${user.part} 파트',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(color: grayScale[30]),
+              ),
+              Text(
+                user.name!,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .copyWith(color: grayScale[10]),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -229,16 +270,18 @@ class _MyPointViewState extends State<MyPointView> {
           height: 16.h,
         ),
         Container(
+          constraints: BoxConstraints(maxHeight: 92.h),
           width: double.infinity,
-          height: 105.h,
+          height: 92.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             color: containerBackgroundColor,
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 54.5.w,
-              vertical: 24.h,
+            padding: EdgeInsets.only(
+              left: 54.5.w,
+              right: 54.5.w,
+              top: 24.h,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -268,6 +311,7 @@ class _MyPointViewState extends State<MyPointView> {
                 ),
                 VerticalDivider(
                   thickness: 1,
+                  endIndent: 24.h,
                   color: grayScale[30],
                 ),
                 SizedBox(
@@ -323,33 +367,10 @@ class _MyPointViewState extends State<MyPointView> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    '점수 기록',
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                  InkWell(
-                    key: buttonKey,
-                    onTap: () {
-                      PointPolicyDialog(context, buttonKey)
-                          .showPointPolicyDialog();
-                    },
-                    child: Image(
-                      image: const AssetImage(
-                          'assets/images/checkPointPolicy.png'),
-                      width: 102.w,
-                      height: 20.h,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-              SizedBox(
+              Container(
+                constraints: BoxConstraints(
+                  minHeight: 136,
+                ),
                 height: 136.h,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
@@ -394,106 +415,121 @@ class _MyPointViewState extends State<MyPointView> {
       isBeePoint = true;
     }
 
-    return Container(
-      width: 144.w,
-      decoration: BoxDecoration(
-        borderRadius: isFirst
-            ? BorderRadius.only(
-                topLeft: Radius.circular(8.r),
-                bottomLeft: Radius.circular(8.r),
-              )
-            : isLast
-                ? BorderRadius.only(
-                    topRight: Radius.circular(8.r),
-                    bottomRight: Radius.circular(8.r),
-                  )
-                : BorderRadius.zero,
-        color: containerBackgroundColor,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 56.w,
-                height: 24.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: GradientBoxBorder(
-                    width: 1.w,
+    return Padding(
+      padding: isFirst
+          ? EdgeInsets.only(left: 24.w)
+          : isLast
+              ? EdgeInsets.only(right: 24.w)
+              : EdgeInsets.zero,
+      child: Container(
+        width: 144.w,
+        decoration: BoxDecoration(
+          borderRadius: isFirst
+              ? BorderRadius.only(
+                  topLeft: Radius.circular(8.r),
+                  bottomLeft: Radius.circular(8.r),
+                )
+              : isLast
+                  ? BorderRadius.only(
+                      topRight: Radius.circular(8.r),
+                      bottomRight: Radius.circular(8.r),
+                    )
+                  : BorderRadius.zero,
+          color: containerBackgroundColor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 56.w,
+                  height: 24.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    border: GradientBoxBorder(
+                      width: 1.w,
+                      gradient: isBeePoint
+                          ? LinearGradient(colors: [
+                              Theme.of(context).colorScheme.error,
+                              Theme.of(context).colorScheme.error,
+                            ])
+                          : LinearGradient(colors: [
+                              Theme.of(context).colorScheme.onSecondary,
+                              Theme.of(context).colorScheme.secondary,
+                            ]),
+                    ),
                     gradient: isBeePoint
                         ? LinearGradient(colors: [
-                            Theme.of(context).colorScheme.error,
-                            Theme.of(context).colorScheme.error,
+                            Theme.of(context)
+                                .colorScheme
+                                .error
+                                .withOpacity(0.1),
+                            Theme.of(context)
+                                .colorScheme
+                                .error
+                                .withOpacity(0.1),
                           ])
                         : LinearGradient(colors: [
-                            Theme.of(context).colorScheme.onSecondary,
-                            Theme.of(context).colorScheme.secondary,
+                            Theme.of(context)
+                                .colorScheme
+                                .onSecondary
+                                .withOpacity(0.1),
+                            Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(0.1),
                           ]),
                   ),
-                  gradient: isBeePoint
-                      ? LinearGradient(colors: [
-                          Theme.of(context).colorScheme.error.withOpacity(0.1),
-                          Theme.of(context).colorScheme.error.withOpacity(0.1),
-                        ])
-                      : LinearGradient(colors: [
-                          Theme.of(context)
-                              .colorScheme
-                              .onSecondary
-                              .withOpacity(0.1),
-                          Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withOpacity(0.1),
-                        ]),
-                ),
-                child: Center(
-                  child: GradientText(
-                    isBeePoint ? '벌점' : type,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(height: 0),
-                    colors: isBeePoint
-                        ? [
-                            Theme.of(context).colorScheme.error,
-                            Theme.of(context).colorScheme.error,
-                          ]
-                        : [
-                            Theme.of(context).colorScheme.onSecondary,
-                            Theme.of(context).colorScheme.secondary,
-                          ],
+                  child: Center(
+                    child: GradientText(
+                      isBeePoint ? '벌점' : type,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(height: 0),
+                      colors: isBeePoint
+                          ? [
+                              Theme.of(context).colorScheme.error,
+                              Theme.of(context).colorScheme.error,
+                            ]
+                          : [
+                              Theme.of(context).colorScheme.onSecondary,
+                              Theme.of(context).colorScheme.secondary,
+                            ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 12.h,
-              ),
-              SizedBox(
-                width: 100.w,
-                child: AutoSizeText(
-                  reason,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  maxLines: 2,
+                SizedBox(
+                  height: 12.h,
                 ),
-              ),
-              SizedBox(
-                height: 8.h,
-              ),
-              Text(
-                isBeePoint ? '$date | -$digit점' : '$date | +$digit점',
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(color: grayScale[30]),
-              ),
-            ],
-          ),
-        ],
+                SizedBox(
+                  width: 100.w,
+                  child: AutoSizeText(
+                    reason,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    maxLines: 2,
+                    minFontSize: 14,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Text(
+                  isBeePoint ? '$date | -$digit점' : '$date | +$digit점',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: grayScale[30]),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
