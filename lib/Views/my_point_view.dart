@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -337,7 +338,8 @@ class _MyPointViewState extends State<MyPointView> {
                           .showPointPolicyDialog();
                     },
                     child: Image(
-                      image: const AssetImage('assets/images/checkPointPolicy.png'),
+                      image: const AssetImage(
+                          'assets/images/checkPointPolicy.png'),
                       width: 102.w,
                       height: 20.h,
                     ),
@@ -469,10 +471,14 @@ class _MyPointViewState extends State<MyPointView> {
               SizedBox(
                 height: 12.h,
               ),
-              Text(
-                reason,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineSmall,
+              SizedBox(
+                width: 100.w,
+                child: AutoSizeText(
+                  reason,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  maxLines: 2,
+                ),
               ),
               SizedBox(
                 height: 8.h,

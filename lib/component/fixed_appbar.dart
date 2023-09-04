@@ -31,17 +31,27 @@ class HomeFixedBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 12.0.w),
-            child: IconButton(
-              onPressed: () {
+            padding: EdgeInsets.only(right: 20.0.w),
+            child: InkWell(
+              onTap: () {
                 Scaffold.of(context).openEndDrawer();
               },
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.white,
+              child: Image.asset(
+                "assets/images/hamburger.png",
+                width: 40.w,
+                height: 40.h,
               ),
-              iconSize: 40.w,
             ),
+            // IconButton(
+            //   onPressed: () {
+            //     Scaffold.of(context).openEndDrawer();
+            //   },
+            //   icon: const Icon(
+            //     Icons.menu,
+            //     color: Colors.white,
+            //   ),
+            //   iconSize: 40.w,
+            // ),
           ),
         ],
       ),

@@ -54,6 +54,7 @@ dependencies:
   firebase_auth: ^4.8.0
   intl: ^0.18.1
   flutter_secure_storage: ^9.0.0
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
