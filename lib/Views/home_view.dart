@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:pard_app/Views/home_schedule_view.dart';
 import 'package:pard_app/component/fixed_appbar.dart';
-import 'package:pard_app/component/home_appbar.dart';
+import 'package:pard_app/component/home_endDrawer.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
@@ -70,7 +70,9 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                SizedBox(height: 12.5.h,),
+                                SizedBox(
+                                  height: 12.5.h,
+                                ),
                                 Row(
                                   children: [
                                     SizedBox(
@@ -81,7 +83,6 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                         
                                           SizedBox(
                                             height: 45.h,
                                             child: Column(
@@ -96,7 +97,8 @@ class _HomePageState extends State<HomePage> {
                                                           TextSpan(
                                                               text:
                                                                   '저는 파드 포인트와 출석 점수를 먹고 자라는 ‘',
-                                                              style: titleSmall),
+                                                              style:
+                                                                  titleSmall),
                                                           TextSpan(
                                                             text: '팡울이',
                                                             style: titleSmall.copyWith(
@@ -114,7 +116,8 @@ class _HomePageState extends State<HomePage> {
                                                           ),
                                                         ],
                                                       ),
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                     ),
                                                   ],
                                                 ),
@@ -161,17 +164,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const HomeBar(),
       backgroundColor: backgroundColor,
-      appBar: const HomeFixedBar(),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
+                  constraints: BoxConstraints(
+                    minWidth: 375, // 최소 너비
+                    minHeight: 270, // 최소 높이
+                  ),
                   width: 375.w,
-                  height: 287.h,
+                  height: 281.h,
                   decoration: const ShapeDecoration(
                     color: Color(0xFF242424),
                     shape: RoundedRectangleBorder(
@@ -215,77 +221,82 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             width: 24.w,
                           ),
-                          Container(
-                            width: 50.w,
-                            height: 30.h,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.w, vertical: 4.h),
-                            decoration: ShapeDecoration(
-                              color: const Color(0xFF5262F5),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                          IntrinsicWidth(
+                            child: Container(
+                              // width: 50.w,
+                              height: 30.h,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 4.h),
+                              decoration: ShapeDecoration(
+                                color: const Color(0xFF5262F5),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
                               ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                  /** generation값으로 대체 */
-                                  '${userController.userInfo.value?.generation}기'
-                                      .toString(),
-                                  style: titleMedium),
+                              child: Center(
+                                child: Text(
+                                    /** generation값으로 대체 */
+                                    '${userController.userInfo.value?.generation}기'
+                                        .toString(),
+                                    style: titleMedium.copyWith(height: 0)),
+                              ),
                             ),
                           ),
                           SizedBox(
                             width: 8.w,
                           ),
-                          Container(
-                            width:
-                                (userController.userInfo.value!.part!.length <=
-                                        2)
-                                    ? 70.w
-                                    : 90.w,
-                            height: 30.h,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.w, vertical: 4.h),
-                            decoration: ShapeDecoration(
-                              gradient: const LinearGradient(
-                                begin: Alignment(1.00, -0.03),
-                                end: Alignment(-1, 0.03),
-                                colors: [
-                                  Color(0xFF7B3FEF),
-                                  Color(0xFF5262F5),
-                                ],
+                          IntrinsicWidth(
+                            child: Container(
+                              // width: (userController
+                              //             .userInfo.value!.part!.length <=
+                              //         2)
+                              //     ? 70.w
+                              //     : 90.w,
+                              height: 30.h,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 4.h),
+                              decoration: ShapeDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment(1.00, -0.03),
+                                  end: Alignment(-1, 0.03),
+                                  colors: [
+                                    Color(0xFF7B3FEF),
+                                    Color(0xFF5262F5),
+                                  ],
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
                               ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                              child: Center(
+                                child: Text(
+                                    /** part값으로 대체 */
+                                    '${userController.userInfo.value!.part} 파트',
+                                    style: titleMedium.copyWith(height: 0)),
                               ),
-                            ),
-                            child: Center(
-                              child: Text(
-
-                                  /** part값으로 대체 */
-                                  '${userController.userInfo.value!.part} 파트',
-                                  style: titleMedium),
                             ),
                           ),
                           SizedBox(
                             width: 8.w,
                           ),
-                          Container(
-                            width: 80.w,
-                            height: 30.h,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.w, vertical: 4.h),
-                            decoration: ShapeDecoration(
-                              color: const Color(0xFF7B3EEF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                          IntrinsicWidth(
+                            child: Container(
+                              // width: 80.w,
+                              height: 30.h,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 4.h),
+                              decoration: ShapeDecoration(
+                                color: const Color(0xFF7B3EEF),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
                               ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                  /** member값으로 대체 */
-                                  '${userController.userInfo.value!.member}',
-                                  style: titleMedium),
+                              child: Center(
+                                child: Text(
+                                    /** member값으로 대체 */
+                                    '${userController.userInfo.value!.member}',
+                                    style: titleMedium.copyWith(height: 0)),
+                              ),
                             ),
                           ),
                           Expanded(
@@ -319,7 +330,7 @@ class _HomePageState extends State<HomePage> {
 /** -------------------------- 여기부터 ---------------------------------------------------- */
                       Obx(
                         () => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             SizedBox(
                               width: 24.w,
@@ -329,11 +340,16 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                // 현재 캐릭터
                                 Stack(
                                   children: [
                                     Container(
-                                      width: 120,
-                                      height: 120,
+                                      constraints: BoxConstraints(
+                                        minWidth: 120, // 최소 너비
+                                        minHeight: 120, // 최소 높이
+                                      ),
+                                      width: 120.h,
+                                      height: 120.h,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
                                         boxShadow: [
@@ -348,16 +364,24 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Container(
-                                      width: 120,
-                                      height: 120,
+                                      constraints: BoxConstraints(
+                                        minWidth: 120, // 최소 너비
+                                        minHeight: 120, // 최소 높이
+                                      ),
+                                      width: 120.h,
+                                      height: 120.h,
                                       decoration: BoxDecoration(
                                         color: const Color(0xFF2A2A2A),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                     ),
                                     Container(
-                                      width: 120,
-                                      height: 120,
+                                      constraints: BoxConstraints(
+                                        minWidth: 120, // 최소 너비
+                                        minHeight: 120, // 최소 높이
+                                      ),
+                                      width: 120.h,
+                                      height: 120.h,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
                                         border: GradientBoxBorder(
@@ -383,13 +407,22 @@ class _HomePageState extends State<HomePage> {
                                         ]),
                                       ),
                                       child: Center(
-                                        child: Image.asset(
-                                          'assets/images/pardie${pointController.level.value}.png',
-                                          width: changeCurrentWidth(
-                                              pointController.level.value),
-                                          height: changeCurrentHeight(
-                                              pointController.level.value),
-                                          fit: BoxFit.fill,
+                                        child: Padding(
+                                          padding: (pointController
+                                                          .level.value ==
+                                                      1 ||
+                                                  pointController.level.value ==
+                                                      3)
+                                              ? const EdgeInsets.only(top: 8.0)
+                                              : const EdgeInsets.only(top: 0.0),
+                                          child: Image.asset(
+                                            'assets/images/pardie${pointController.level.value}.png',
+                                            width: changeCurrentWidth(
+                                                pointController.level.value),
+                                            height: changeCurrentHeight(
+                                                pointController.level.value),
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -398,7 +431,11 @@ class _HomePageState extends State<HomePage> {
                                 SizedBox(
                                   height: 8.h,
                                 ),
-                                SizedBox(
+                                Container(
+                                  constraints: BoxConstraints(
+                                    minWidth: 60, // 최소 너비
+                                    minHeight: 12, // 최소 높이
+                                  ),
                                   width: 60.w,
                                   height: 12.h,
                                   child: Image.asset(
@@ -408,31 +445,13 @@ class _HomePageState extends State<HomePage> {
                                 )
                               ],
                             ),
-                            SizedBox(
-                              width: 40.w,
+                            Expanded(child: Container()),
+                            Image.asset(
+                              'assets/images/triangle.png',
+                              width: 24.w,
+                              height: 24.h,
                             ),
-                            Transform(
-                              transform: Matrix4.identity()
-                                ..translate(0.0, 0.0)
-                                ..rotateZ(1.57),
-                              child: Container(
-                                width: 24.w,
-                                height: 24.h,
-                                decoration: const ShapeDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment(1.00, -0.03),
-                                    end: Alignment(-1, 0.03),
-                                    colors: [
-                                      Color(0xFF5262F5),
-                                      Color(0xFF7B3FEF)
-                                    ],
-                                  ),
-                                  shape: StarBorder.polygon(
-                                    sides: 3,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            Expanded(child: Container()),
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -440,9 +459,13 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Stack(
                                   children: [
-                                    SizedBox(
-                                        width: 120,
-                                        height: 120,
+                                    Container(
+                                        constraints: BoxConstraints(
+                                          minWidth: 120, // 최소 너비
+                                          minHeight: 120, // 최소 높이
+                                        ),
+                                        width: 120.h,
+                                        height: 120.h,
                                         child: Image.asset(
                                           'assets/images/Frame.png',
                                           width: 120,
@@ -451,10 +474,14 @@ class _HomePageState extends State<HomePage> {
                                         )),
                                     if (pointController.level.value != 5)
                                       Positioned(
-                                        left: 14.w,
+                                        left: 17.w,
                                         top: 20.h,
-                                        child: SizedBox(
-                                          width: 94.w,
+                                        child: Container(
+                                          constraints: BoxConstraints(
+                                            minWidth: 88, // 최소 너비
+                                            minHeight: 12, // 최소 높이
+                                          ),
+                                          width: 88.w,
                                           height: 12.h,
                                           child: Image.asset(
                                             'assets/images/NEXT_LEVEL.png',
@@ -465,18 +492,30 @@ class _HomePageState extends State<HomePage> {
                                     Positioned(
                                       left: (pointController.level.value != 5)
                                           ? (pointController.level.value != 4)
-                                              ? 35.w
+                                              ? (pointController.level.value !=
+                                                      3)
+                                                  ? 30.w
+                                                  : 35.w
                                               : 24.w
                                           : 14.w,
                                       top: (pointController.level.value != 5)
                                           ? 42.h
-                                          : 31.h,
-                                      child: Image.asset(
-                                        'assets/images/lv${pointController.level.value + 1}s.png',
+                                          : 32,
+                                      child: Container(
+                                        constraints:
+                                            (pointController.level.value == 5)
+                                                ? BoxConstraints(
+                                                    minWidth: 91, // 최소 너비
+                                                    minHeight: 60, // 최소 높이
+                                                  )
+                                                : BoxConstraints(),
                                         width: changeNextWidth(
                                             pointController.level.value),
                                         height: changeNextHeight(
                                             pointController.level.value),
+                                        child: Image.asset(
+                                          'assets/images/lv${pointController.level.value + 1}s.png',
+                                        ),
                                       ),
                                     )
                                   ],
@@ -484,7 +523,11 @@ class _HomePageState extends State<HomePage> {
                                 SizedBox(
                                   height: 8.h,
                                 ),
-                                SizedBox(
+                                Container(
+                                  constraints: BoxConstraints(
+                                    minWidth: 60, // 최소 너비
+                                    minHeight: 12, // 최소 높이
+                                  ),
                                   width: 60.w,
                                   height: 12.h,
                                   child: Image.asset(
@@ -508,6 +551,10 @@ class _HomePageState extends State<HomePage> {
                   height: 24.h,
                 ),
                 Container(
+                  constraints: BoxConstraints(
+                    minWidth: 327, // 최소 너비
+                    minHeight: 130, // 최소 높이
+                  ),
                   width: 327.w,
                   height: 140.h,
                   decoration: ShapeDecoration(
@@ -535,9 +582,8 @@ class _HomePageState extends State<HomePage> {
                               },
                               child: Text('더보기',
                                   style: titleMedium.copyWith(
-                                    decoration: TextDecoration.underline,
-                                    color: grayScale[30]
-                                  ))),
+                                      decoration: TextDecoration.underline,
+                                      color: grayScale[30]))),
                           SizedBox(
                             width: 20.w,
                           )
@@ -603,6 +649,10 @@ class _HomePageState extends State<HomePage> {
                   height: 24.h,
                 ),
                 Container(
+                  constraints: BoxConstraints(
+                    minWidth: 327, // 최소 너비
+                    minHeight: 162, // 최소 높이
+                  ),
                   width: 327.w,
                   height: 162.h,
                   decoration: ShapeDecoration(
@@ -647,6 +697,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 20.h,
+                ),
               ],
             ),
           ),
@@ -658,13 +711,13 @@ class _HomePageState extends State<HomePage> {
   double changeCurrentWidth(int level) {
     switch (level) {
       case 1:
-        return 70;
+        return 60;
       case 2:
         return 76;
       case 3:
         return 86.59;
       case 4:
-        return 93.02;
+        return 88.02;
       default:
         return 106.16;
     }
@@ -673,13 +726,13 @@ class _HomePageState extends State<HomePage> {
   double changeCurrentHeight(int level) {
     switch (level) {
       case 1:
-        return 69.14;
+        return 59.14;
       case 2:
         return 80.14;
       case 3:
         return 96;
       case 4:
-        return 103;
+        return 98;
       default:
         return 100;
     }
@@ -696,7 +749,7 @@ class _HomePageState extends State<HomePage> {
       case 4:
         return 78;
       default:
-        return 91;
+        return 91.w;
     }
   }
 
@@ -711,7 +764,7 @@ class _HomePageState extends State<HomePage> {
       case 4:
         return 69.31;
       default:
-        return 60;
+        return 60.h;
     }
   }
 }
