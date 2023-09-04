@@ -407,13 +407,22 @@ class _HomePageState extends State<HomePage> {
                                         ]),
                                       ),
                                       child: Center(
-                                        child: Image.asset(
-                                          'assets/images/pardie${pointController.level.value}.png',
-                                          width: changeCurrentWidth(
-                                              pointController.level.value),
-                                          height: changeCurrentHeight(
-                                              pointController.level.value),
-                                          fit: BoxFit.fill,
+                                        child: Padding(
+                                          padding: (pointController
+                                                          .level.value ==
+                                                      1 ||
+                                                  pointController.level.value ==
+                                                      3)
+                                              ? const EdgeInsets.only(top: 8.0)
+                                              : const EdgeInsets.only(top: 0.0),
+                                          child: Image.asset(
+                                            'assets/images/pardie${pointController.level.value}.png',
+                                            width: changeCurrentWidth(
+                                                pointController.level.value),
+                                            height: changeCurrentHeight(
+                                                pointController.level.value),
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -483,18 +492,30 @@ class _HomePageState extends State<HomePage> {
                                     Positioned(
                                       left: (pointController.level.value != 5)
                                           ? (pointController.level.value != 4)
-                                              ? 35.w
+                                              ? (pointController.level.value !=
+                                                      3)
+                                                  ? 30.w
+                                                  : 35.w
                                               : 24.w
                                           : 14.w,
                                       top: (pointController.level.value != 5)
                                           ? 42.h
-                                          : 31.h,
-                                      child: Image.asset(
-                                        'assets/images/lv${pointController.level.value + 1}s.png',
+                                          : 32,
+                                      child: Container(
+                                        constraints:
+                                            (pointController.level.value == 5)
+                                                ? BoxConstraints(
+                                                    minWidth: 91, // 최소 너비
+                                                    minHeight: 60, // 최소 높이
+                                                  )
+                                                : BoxConstraints(),
                                         width: changeNextWidth(
                                             pointController.level.value),
                                         height: changeNextHeight(
                                             pointController.level.value),
+                                        child: Image.asset(
+                                          'assets/images/lv${pointController.level.value + 1}s.png',
+                                        ),
                                       ),
                                     )
                                   ],
@@ -690,13 +711,13 @@ class _HomePageState extends State<HomePage> {
   double changeCurrentWidth(int level) {
     switch (level) {
       case 1:
-        return 70;
+        return 60;
       case 2:
         return 76;
       case 3:
         return 86.59;
       case 4:
-        return 93.02;
+        return 88.02;
       default:
         return 106.16;
     }
@@ -705,13 +726,13 @@ class _HomePageState extends State<HomePage> {
   double changeCurrentHeight(int level) {
     switch (level) {
       case 1:
-        return 69.14;
+        return 59.14;
       case 2:
         return 80.14;
       case 3:
         return 96;
       case 4:
-        return 103;
+        return 98;
       default:
         return 100;
     }
@@ -728,7 +749,7 @@ class _HomePageState extends State<HomePage> {
       case 4:
         return 78;
       default:
-        return 91;
+        return 91.w;
     }
   }
 
@@ -743,7 +764,7 @@ class _HomePageState extends State<HomePage> {
       case 4:
         return 69.31;
       default:
-        return 60;
+        return 60.h;
     }
   }
 }
