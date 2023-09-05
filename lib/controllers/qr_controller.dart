@@ -56,7 +56,7 @@ class QRController extends GetxController {
         bool hasScanned = await userController.hasAlreadyScannedToday(
           userController.userInfo.value  ,result.value?.code); //찍은적 없으면 hasScanned는 false
         DateTime currentTime = DateTime.now(); //QR찍었을 때 시간
-        print('HAS SCANNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+        print('HAS SCANNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!59');
         print(hasScanned);
 
         print("Scanned QR Code: ${result.value!.code}");
@@ -161,7 +161,7 @@ class QRController extends GetxController {
                   ]),
             ));
             isScanned = false;
-            print('HAS SCANNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!22222222');
+            print('HAS SCANNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!164');
             print(hasScanned);
           } else if (currentTime.isAfter(scheduleDueDate) &&
               result.value!.code == "https://me-qr.com/uoN4lOs1") {
@@ -347,7 +347,12 @@ class QRController extends GetxController {
           isScanned = false;
         }
         if (result.value!.code != "https://me-qr.com/uoN4lOs1") {
-          Get.dialog(Dialog(
+          Get.back();
+          bController.selectedIndex.value = 0;
+          print(bController.selectedIndex);
+          Get.dialog(
+            barrierDismissible: false,
+            Dialog(
             backgroundColor: const Color(0xFF1A1A1A),
             child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -393,7 +398,7 @@ class QRController extends GetxController {
                             gradient: const LinearGradient(
                               begin: Alignment(1.00, -0.03),
                               end: Alignment(-1, 0.03),
-                              colors: [Color(0xFF5262F5), Color(0xFF7B3FEF)],
+                              colors: [ Color(0xFF7B3FEF),Color(0xFF5262F5),],
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
