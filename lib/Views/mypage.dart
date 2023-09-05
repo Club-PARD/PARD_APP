@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -222,11 +223,11 @@ class _MyPageState extends State<MyPage> {
                                 onChanged: (value) async {
                                   userController.onOff.value =
                                       !userController.onOff.value!;
-                                  print(controller.onOff.value);
                                   await FirebaseFirestore.instance
                                       .collection('users')
                                       .doc(uid)
                                       .update({'onOff': value});
+                                      AppSettings.openAppSettings(); //스위치 누르면 앱 설정으로 이동
                                 },
                               );
                             }),
