@@ -3,8 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pard_app/component/bottom.dart';
-import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
@@ -56,12 +54,7 @@ class _MyPageState extends State<MyPage> {
     /** push_notification controller 가져온다  */
     return Scaffold(
       backgroundColor: const Color.fromRGBO(26, 26, 26, 1),
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(26, 26, 26, 1),
-        automaticallyImplyLeading: false,
-        title: Text('마이 페이지', style: headlineLarge),
-        centerTitle: true,
-      ),
+      extendBody: true,
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -70,11 +63,9 @@ class _MyPageState extends State<MyPage> {
                 GestureDetector(
                   onTap: launchFeedback,
                   child: SizedBox(
-                    width: 375.w,
-                    height: 76.h,
-                   
-                    child: Image.asset('assets/images/banner.png')
-                  ),
+                      width: double.infinity,
+                      height: 76.h,
+                      child: Image.asset('assets/images/banner.png')),
                 ),
                 Column(
                   children: [
@@ -91,6 +82,10 @@ class _MyPageState extends State<MyPage> {
                       height: 8.h,
                     ),
                     Container(
+                      constraints: BoxConstraints(
+                        minWidth: 327,
+                        minHeight: 96,
+                      ),
                       width: 327.w,
                       height: 96.h,
                       decoration: ShapeDecoration(
@@ -109,69 +104,75 @@ class _MyPageState extends State<MyPage> {
                               SizedBox(
                                 width: 24.w,
                               ),
-                              Container(
-                                width: 42.w,
-                                height: 30.h,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12.w, vertical: 4.h),
-                                decoration: ShapeDecoration(
-                                  color: const Color(0xFF5262F5),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                              IntrinsicWidth(
+                                child: Container(
+                                  // width: 42.w,
+                                  height: 30.h,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w, vertical: 4.h),
+                                  decoration: ShapeDecoration(
+                                    color: const Color(0xFF5262F5),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                   ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                      /** generation값으로 대체 */
-                                      '${userController.userInfo.value!.generation}기',
-                                      style: titleMedium),
+                                  child: Center(
+                                    child: Text(
+                                        /** generation값으로 대체 */
+                                        '${userController.userInfo.value!.generation}기',
+                                        style: titleMedium.copyWith(height: 0)),
+                                  ),
                                 ),
                               ),
                               SizedBox(
                                 width: 8.w,
                               ),
-                              Container(
-                                width: 79.w,
-                                height: 30.h,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12.w, vertical: 4.h),
-                                decoration: ShapeDecoration(
-                                  gradient: const LinearGradient(
-                                    begin: Alignment(1.00, -0.03),
-                                    end: Alignment(-1, 0.03),
-                                    colors: [
-                                      Color(0xFF7B3FEF),
-                                      Color(0xFF5262F5),
-                                    ],
+                              IntrinsicWidth(
+                                child: Container(
+                                  // width: 79.w,
+                                  height: 30.h,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w, vertical: 4.h),
+                                  decoration: ShapeDecoration(
+                                    gradient: const LinearGradient(
+                                      begin: Alignment(1.00, -0.03),
+                                      end: Alignment(-1, 0.03),
+                                      colors: [
+                                        Color(0xFF7B3FEF),
+                                        Color(0xFF5262F5),
+                                      ],
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                                  child: Center(
+                                    child: Text(
+                                        '${userController.userInfo.value!.part} 파트',
+                                        style: titleMedium.copyWith(height: 0)),
                                   ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                      '${userController.userInfo.value!.part} 파트',
-                                      style: titleMedium),
                                 ),
                               ),
                               SizedBox(
                                 width: 8.w,
                               ),
-                              Container(
-                                width: 70.w,
-                                height: 30.h,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12.w, vertical: 4.h),
-                                decoration: ShapeDecoration(
-                                  color: const Color(0xFF7B3EEF),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                              IntrinsicWidth(
+                                child: Container(
+                                  // width: 70.w,
+                                  height: 30.h,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w, vertical: 4.h),
+                                  decoration: ShapeDecoration(
+                                    color: const Color(0xFF7B3EEF),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                   ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                      '${userController.userInfo.value!.member}',
-                                      style: titleMedium),
+                                  child: Center(
+                                    child: Text(
+                                        '${userController.userInfo.value!.member}',
+                                        style: titleMedium.copyWith(height: 0)),
+                                  ),
                                 ),
                               ),
                             ],
@@ -182,7 +183,7 @@ class _MyPageState extends State<MyPage> {
                           Padding(
                             padding: EdgeInsets.only(left: 24.w),
                             child: Text(
-                                '${userController.userInfo.value!.name}',
+                                '${userController.userInfo.value!.name} 님',
                                 style: displayMedium),
                           ),
                         ],
@@ -261,7 +262,7 @@ class _MyPageState extends State<MyPage> {
                             child: Text('개인정보 처리방침', style: headlineSmall),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 24.w),
+                            padding: EdgeInsets.only(right: 10.w),
                             child: IconButton(
                                 onPressed: () {
                                   launchPrivateInformation();
@@ -269,6 +270,7 @@ class _MyPageState extends State<MyPage> {
                                 icon: const Icon(
                                   Icons.arrow_forward_ios_outlined,
                                   color: Color.fromRGBO(228, 228, 228, 1),
+                                  size: 20,
                                 )),
                           )
                         ],
@@ -289,7 +291,7 @@ class _MyPageState extends State<MyPage> {
                             child: Text('서비스 이용약관', style: headlineSmall),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 24.w),
+                            padding: EdgeInsets.only(right: 10.w),
                             child: IconButton(
                                 onPressed: () {
                                   launchServiceInformation();
@@ -297,6 +299,7 @@ class _MyPageState extends State<MyPage> {
                                 icon: const Icon(
                                   Icons.arrow_forward_ios_outlined,
                                   color: Color.fromRGBO(228, 228, 228, 1),
+                                  size: 20,
                                 )),
                           )
                         ],
@@ -331,7 +334,7 @@ class _MyPageState extends State<MyPage> {
                             child: Text('로그아웃', style: headlineSmall),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 24.w),
+                            padding: EdgeInsets.only(right: 10.w),
                             child: IconButton(
                                 onPressed: () {
                                   setState(() {
@@ -450,9 +453,7 @@ class _MyPageState extends State<MyPage> {
                                                                 child:
                                                                     TextButton(
                                                                         onPressed:
-                                                                            () {
-                                                                          
-                                                                        },
+                                                                            () {},
                                                                         child:
                                                                             Text(
                                                                           '확인',
@@ -481,6 +482,7 @@ class _MyPageState extends State<MyPage> {
                                 icon: const Icon(
                                   Icons.arrow_forward_ios_outlined,
                                   color: Color.fromRGBO(228, 228, 228, 1),
+                                  size: 20,
                                 )),
                           )
                         ],
@@ -501,7 +503,7 @@ class _MyPageState extends State<MyPage> {
                             child: Text('탈퇴하기', style: headlineSmall),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 24.w),
+                            padding: EdgeInsets.only(right: 10.w),
                             child: IconButton(
                                 onPressed: () {
                                   setState(() {
@@ -676,6 +678,7 @@ class _MyPageState extends State<MyPage> {
                                 icon: const Icon(
                                   Icons.arrow_forward_ios_outlined,
                                   color: Color.fromRGBO(228, 228, 228, 1),
+                                  size: 20,
                                 )),
                           )
                         ],
@@ -683,12 +686,14 @@ class _MyPageState extends State<MyPage> {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 20.h,
+                ),
               ],
             ),
           )
         ],
       ),
-      // bottomNavigationBar: BottomBar(),
     );
   }
 }
