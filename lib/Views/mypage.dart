@@ -67,7 +67,7 @@ class _MyPageState extends State<MyPage> {
                   child: SizedBox(
                       width: double.infinity,
                       height: 76.h,
-                      child: Image.asset('assets/images/banner.png')),
+                      child: Image.asset('assets/images/banner.png', fit: BoxFit.fill,)),
                 ),
                 Column(
                   children: [
