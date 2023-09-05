@@ -22,9 +22,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
           .data()?['onOff'];
   print('onOff ------------------------------ : $onOff');
   print('******************백그라운드 시작***********************');
-  final pushController = PushNotificationController(); // 셋팅 메소드
+  if(onOff! == true){{
+    final pushController = PushNotificationController(); // 셋팅 메소드
   await pushController.setupFlutterNotifications();
-  if(onOff! == true){pushController.showFlutterNotification(message);} // 로컬노티
+  pushController.showFlutterNotification(message); // 로컬노티
+  } 
+}
 }
 
 Future<void> main() async {
@@ -44,6 +47,7 @@ Future<void> main() async {
   Get.put(PushNotificationController());
   /** pushNotificationController에 있는것들 사용한다 */
   await PushNotificationController.to.setupFlutterNotifications();
+  
 
   FirebaseMessaging.onMessage
       .listen(PushNotificationController.to.showFlutterNotification);

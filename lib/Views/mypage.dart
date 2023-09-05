@@ -218,10 +218,10 @@ class _MyPageState extends State<MyPage> {
                             padding: EdgeInsets.only(right: 24.w),
                             child: Obx(() {
                               return Switch(
-                                value: controller.onOff.value,
+                                value: userController.onOff.value!,
                                 onChanged: (value) async {
-                                  controller.onOff.value =
-                                      !controller.onOff.value;
+                                  userController.onOff.value =
+                                      !userController.onOff.value!;
                                   print(controller.onOff.value);
                                   await FirebaseFirestore.instance
                                       .collection('users')
