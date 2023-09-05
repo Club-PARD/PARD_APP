@@ -82,7 +82,7 @@ class _MyPageState extends State<MyPage> {
                       height: 8.h,
                     ),
                     Container(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         minWidth: 327,
                         minHeight: 96,
                       ),
@@ -217,11 +217,11 @@ class _MyPageState extends State<MyPage> {
                             padding: EdgeInsets.only(right: 24.w),
                             child: Obx(() {
                               return Switch(
-                                value: userController.userInfo.value!.onOff ?? true,
+                                value: controller.onOff.value,
                                 onChanged: (value) async {
                                   controller.onOff.value =
-                                      !userController.userInfo.value!.onOff!;
-                                  print(userController.userInfo.value!.part);
+                                      !controller.onOff.value;
+                                  print(controller.onOff.value);
                                   await FirebaseFirestore.instance
                                       .collection('users')
                                       .doc(uid)
