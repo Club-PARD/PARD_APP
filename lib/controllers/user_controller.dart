@@ -218,14 +218,13 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
 
   //최신 출석 timeStamp 구했고, 값이 있으면 오늘 날짜와 비교해서 오늘 찍은 기록이 있으면 true 반환
   if (latestAttend != null) {
-    DateTime latestAttendDateTime = latestAttend.toDate(); // Convert Timestamp to DateTime
+    DateTime latestAttendDateTime = latestAttend.toDate(); 
     DateTime now = DateTime.now();
     
-    // Normalize the DateTime objects to just compare the date parts
     DateTime latestAttendDate = DateTime(latestAttendDateTime.year, latestAttendDateTime.month, latestAttendDateTime.day);
     DateTime currentDate = DateTime(now.year, now.month, now.day);
     
-    // Compare
+    
     if (latestAttendDate.isAtSameMomentAs(currentDate)) {
       return true;
     }
