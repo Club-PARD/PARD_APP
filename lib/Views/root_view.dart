@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,7 +6,6 @@ import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/component/bottom.dart';
 import 'package:pard_app/component/fixed_appbar.dart';
 import 'package:pard_app/component/home_endDrawer.dart';
-import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/controllers/bottombar_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';

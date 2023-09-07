@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
-import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
@@ -70,7 +69,10 @@ class _MyPageState extends State<MyPage> {
                     child: SizedBox(
                         width: double.infinity,
                         height: 76.h,
-                        child: Image.asset('assets/images/banner.png')),
+                        child: Image.asset(
+                          'assets/images/banner.png',
+                          fit: BoxFit.fill,
+                        )),
                   ),
                   Column(
                     children: [
@@ -87,7 +89,7 @@ class _MyPageState extends State<MyPage> {
                         height: 8.h,
                       ),
                       Container(
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           minWidth: 327,
                           minHeight: 96,
                         ),
@@ -226,15 +228,16 @@ class _MyPageState extends State<MyPage> {
                               padding: EdgeInsets.only(right: 24.w),
                               child: Obx(() {
                                 return Switch(
-                                  value: controller.onOff.value,
+                                  value: userController.onOff.value!,
                                   onChanged: (value) async {
-                                    controller.onOff.value =
-                                        !controller.onOff.value;
-                                    print(controller.onOff.value);
+                                    userController.onOff.value =
+                                        !userController.onOff.value!;
+                                    print(userController.onOff.value);
                                     await FirebaseFirestore.instance
                                         .collection('users')
                                         .doc(uid)
                                         .update({'onOff': value});
+                                    AppSettings.openAppSettings();
                                   },
                                 );
                               }),
