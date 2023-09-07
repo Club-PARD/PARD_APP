@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:pard_app/Views/home_schedule_view.dart';
-import 'package:pard_app/component/fixed_appbar.dart';
-import 'package:pard_app/component/home_endDrawer.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
@@ -163,547 +161,596 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  constraints: BoxConstraints(
-                    minWidth: 375, // 최소 너비
-                    minHeight: 270, // 최소 높이
-                  ),
-                  width: 375.w,
-                  height: 281.h,
-                  decoration: const ShapeDecoration(
-                    color: Color(0xFF242424),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        bottomRight: Radius.circular(40),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: backgroundColor,
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    constraints: BoxConstraints(
+                      minWidth: 375, // 최소 너비
+                      minHeight: 270, // 최소 높이
+                    ),
+                    width: 375.w,
+                    height: 281.h,
+                    decoration: const ShapeDecoration(
+                      color: Color(0xFF242424),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40),
+                        ),
                       ),
                     ),
-                  ),
-                  child: Column(
-                    children: [
-                      // if(userController.deviceName.value == "iPHONE")
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(width: 24.w),
-                          RichText(
-                            text: TextSpan(
-                              style: displaySmall,
-                              children: <TextSpan>[
-                                const TextSpan(text: '안녕하세요, '),
-                                TextSpan(
-                                  text: userController.userInfo.value!.name,
-                                  style: displayMedium.copyWith(
-                                      color: const Color(0XFF5262F5)),
-                                ),
-                                const TextSpan(text: '님\n오늘도 PARD에서 함께 협업해요!'),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 24.w,
-                          ),
-                          IntrinsicWidth(
-                            child: Container(
-                              // width: 50.w,
-                              height: 30.h,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 4.h),
-                              decoration: ShapeDecoration(
-                                color: const Color(0xFF5262F5),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                    /** generation값으로 대체 */
-                                    '${userController.userInfo.value?.generation}기'
-                                        .toString(),
-                                    style: titleMedium.copyWith(height: 0)),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          IntrinsicWidth(
-                            child: Container(
-                              // width: (userController
-                              //             .userInfo.value!.part!.length <=
-                              //         2)
-                              //     ? 70.w
-                              //     : 90.w,
-                              height: 30.h,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 4.h),
-                              decoration: ShapeDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment(1.00, -0.03),
-                                  end: Alignment(-1, 0.03),
-                                  colors: [
-                                    Color(0xFF7B3FEF),
-                                    Color(0xFF5262F5),
-                                  ],
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                    /** part값으로 대체 */
-                                    '${userController.userInfo.value!.part} 파트',
-                                    style: titleMedium.copyWith(height: 0)),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          IntrinsicWidth(
-                            child: Container(
-                              // width: 80.w,
-                              height: 30.h,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 4.h),
-                              decoration: ShapeDecoration(
-                                color: const Color(0xFF7B3EEF),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                    /** member값으로 대체 */
-                                    '${userController.userInfo.value!.member}',
-                                    style: titleMedium.copyWith(height: 0)),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                          Builder(
-                              key: questionDialogKey,
-                              builder: (BuildContext questionDialogContext) {
-                                return InkWell(
-                                  onTap: () {
-                                    showOverlay(context);
-                                  },
-                                  child: Image.asset(
-                                    'assets/images/question.png',
-                                    fit: BoxFit.fill,
-                                    width: 24,
-                                    height: 24,
+                    child: Column(
+                      children: [
+                        // if(userController.deviceName.value == "iPHONE")
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(width: 24.w),
+                            RichText(
+                              text: TextSpan(
+                                style: displaySmall,
+                                children: <TextSpan>[
+                                  const TextSpan(text: '안녕하세요, '),
+                                  TextSpan(
+                                    text: userController.userInfo.value!.name,
+                                    style: displayMedium.copyWith(
+                                        color: const Color(0XFF5262F5)),
                                   ),
-                                );
-                              }),
-                          SizedBox(
-                            width: 24.w,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-
-                      /** 캐릭터 Row로 나중에 point 정보로 캐릭터들 변경해야함*/
-/** -------------------------- 여기부터 ---------------------------------------------------- */
-                      Obx(
-                        () => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  const TextSpan(
+                                      text: '님\n오늘도 PARD에서 함께 협업해요!'),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
                               width: 24.w,
                             ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                // 현재 캐릭터
-                                Stack(
-                                  children: [
-                                    Container(
-                                      constraints: BoxConstraints(
-                                        minWidth: 120, // 최소 너비
-                                        minHeight: 120, // 최소 높이
-                                      ),
-                                      width: 120.h,
-                                      height: 120.h,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.white.withOpacity(0.1),
-                                            blurRadius: 12,
-                                            offset: const Offset(0, -1),
-                                            spreadRadius: 3,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      constraints: BoxConstraints(
-                                        minWidth: 120, // 최소 너비
-                                        minHeight: 120, // 최소 높이
-                                      ),
-                                      width: 120.h,
-                                      height: 120.h,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFF2A2A2A),
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                    ),
-                                    Container(
-                                      constraints: BoxConstraints(
-                                        minWidth: 120, // 최소 너비
-                                        minHeight: 120, // 최소 높이
-                                      ),
-                                      width: 120.h,
-                                      height: 120.h,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: GradientBoxBorder(
-                                          width: 1.w,
-                                          gradient: LinearGradient(colors: [
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .onSecondary,
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                          ]),
-                                        ),
-                                        gradient: LinearGradient(colors: [
-                                          Theme.of(context)
-                                              .colorScheme
-                                              .onSecondary
-                                              .withOpacity(0.1),
-                                          Theme.of(context)
-                                              .colorScheme
-                                              .secondary
-                                              .withOpacity(0.1),
-                                        ]),
-                                      ),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: (pointController
-                                                          .level.value ==
-                                                      1 ||
-                                                  pointController.level.value ==
-                                                      3)
-                                              ? const EdgeInsets.only(top: 8.0)
-                                              : const EdgeInsets.only(top: 0.0),
-                                          child: Image.asset(
-                                            'assets/images/pardie${pointController.level.value}.png',
-                                            width: changeCurrentWidth(
-                                                pointController.level.value),
-                                            height: changeCurrentHeight(
-                                                pointController.level.value),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Container(
-                                  constraints: BoxConstraints(
-                                    minWidth: 60, // 최소 너비
-                                    minHeight: 12, // 최소 높이
+                            IntrinsicWidth(
+                              child: Container(
+                                // width: 50.w,
+                                height: 30.h,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w, vertical: 4.h),
+                                decoration: ShapeDecoration(
+                                  color: const Color(0xFF5262F5),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
-                                  width: 60.w,
-                                  height: 12.h,
-                                  child: Image.asset(
-                                    'assets/images/level${pointController.level.value}.png',
-                                    fit: BoxFit.fill,
-                                  ),
-                                )
-                              ],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                      /** generation값으로 대체 */
+                                      '${userController.userInfo.value?.generation}기'
+                                          .toString(),
+                                      style: titleMedium.copyWith(height: 0)),
+                                ),
+                              ),
                             ),
-                            Expanded(child: Container()),
-                            Image.asset(
-                              'assets/images/triangle.png',
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            IntrinsicWidth(
+                              child: Container(
+                                // width: (userController
+                                //             .userInfo.value!.part!.length <=
+                                //         2)
+                                //     ? 70.w
+                                //     : 90.w,
+                                height: 30.h,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w, vertical: 4.h),
+                                decoration: ShapeDecoration(
+                                  gradient: const LinearGradient(
+                                    begin: Alignment(1.00, -0.03),
+                                    end: Alignment(-1, 0.03),
+                                    colors: [
+                                      Color(0xFF7B3FEF),
+                                      Color(0xFF5262F5),
+                                    ],
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                      /** part값으로 대체 */
+                                      '${userController.userInfo.value!.part} 파트',
+                                      style: titleMedium.copyWith(height: 0)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            IntrinsicWidth(
+                              child: Container(
+                                // width: 80.w,
+                                height: 30.h,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w, vertical: 4.h),
+                                decoration: ShapeDecoration(
+                                  color: const Color(0xFF7B3EEF),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                      /** member값으로 대체 */
+                                      '${userController.userInfo.value!.member}',
+                                      style: titleMedium.copyWith(height: 0)),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Builder(
+                                key: questionDialogKey,
+                                builder: (BuildContext questionDialogContext) {
+                                  return InkWell(
+                                    onTap: () {
+                                      showOverlay(context);
+                                    },
+                                    child: Image.asset(
+                                      'assets/images/question.png',
+                                      fit: BoxFit.fill,
+                                      width: 24,
+                                      height: 24,
+                                    ),
+                                  );
+                                }),
+                            SizedBox(
                               width: 24.w,
-                              height: 24.h,
                             ),
-                            Expanded(child: Container()),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Stack(
-                                  children: [
-                                    Container(
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+
+                        /** 캐릭터 Row로 나중에 point 정보로 캐릭터들 변경해야함*/
+                        /** -------------------------- 여기부터 ---------------------------------------------------- */
+                        Obx(
+                          () => Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                width: 24.w,
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  // 현재 캐릭터
+                                  Stack(
+                                    children: [
+                                      Container(
                                         constraints: BoxConstraints(
                                           minWidth: 120, // 최소 너비
                                           minHeight: 120, // 최소 높이
                                         ),
                                         width: 120.h,
                                         height: 120.h,
-                                        child: Image.asset(
-                                          'assets/images/Frame.png',
-                                          width: 120,
-                                          height: 120,
-                                          fit: BoxFit.fill,
-                                        )),
-                                    if (pointController.level.value != 5)
-                                      Positioned(
-                                        left: 17.w,
-                                        top: 20.h,
-                                        child: Container(
-                                          constraints: BoxConstraints(
-                                            minWidth: 88, // 최소 너비
-                                            minHeight: 12, // 최소 높이
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.white.withOpacity(0.1),
+                                              blurRadius: 12,
+                                              offset: const Offset(0, -1),
+                                              spreadRadius: 3,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        constraints: BoxConstraints(
+                                          minWidth: 120, // 최소 너비
+                                          minHeight: 120, // 최소 높이
+                                        ),
+                                        width: 120.h,
+                                        height: 120.h,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFF2A2A2A),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        ),
+                                      ),
+                                      Container(
+                                        constraints: BoxConstraints(
+                                          minWidth: 120, // 최소 너비
+                                          minHeight: 120, // 최소 높이
+                                        ),
+                                        width: 120.h,
+                                        height: 120.h,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          border: GradientBoxBorder(
+                                            width: 1.w,
+                                            gradient: LinearGradient(colors: [
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary,
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ]),
                                           ),
-                                          width: 88.w,
-                                          height: 12.h,
-                                          child: Image.asset(
-                                            'assets/images/NEXT_LEVEL.png',
-                                            fit: BoxFit.fill,
+                                          gradient: LinearGradient(colors: [
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .onSecondary
+                                                .withOpacity(0.1),
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .secondary
+                                                .withOpacity(0.1),
+                                          ]),
+                                        ),
+                                        child: Center(
+                                          child: Padding(
+                                            padding:
+                                                (pointController.level.value ==
+                                                            1 ||
+                                                        pointController
+                                                                .level.value ==
+                                                            3)
+                                                    ? const EdgeInsets.only(
+                                                        top: 8.0)
+                                                    : const EdgeInsets.only(
+                                                        top: 0.0),
+                                            child: Image.asset(
+                                              'assets/images/pardie${pointController.level.value}.png',
+                                              width: changeCurrentWidth(
+                                                  pointController.level.value),
+                                              height: changeCurrentHeight(
+                                                  pointController.level.value),
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    Positioned(
-                                      left: (pointController.level.value != 5)
-                                          ? (pointController.level.value != 4)
-                                              ? (pointController.level.value !=
-                                                      3)
-                                                  ? 30.w
-                                                  : 35.w
-                                              : 24.w
-                                          : 14.w,
-                                      top: (pointController.level.value != 5)
-                                          ? 42.h
-                                          : 32,
-                                      child: Container(
-                                        constraints:
-                                            (pointController.level.value == 5)
-                                                ? BoxConstraints(
-                                                    minWidth: 91, // 최소 너비
-                                                    minHeight: 60, // 최소 높이
-                                                  )
-                                                : BoxConstraints(),
-                                        width: changeNextWidth(
-                                            pointController.level.value),
-                                        height: changeNextHeight(
-                                            pointController.level.value),
-                                        child: Image.asset(
-                                          'assets/images/lv${pointController.level.value + 1}s.png',
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Container(
-                                  constraints: BoxConstraints(
-                                    minWidth: 60, // 최소 너비
-                                    minHeight: 12, // 최소 높이
+                                    ],
                                   ),
-                                  width: 60.w,
-                                  height: 12.h,
-                                  child: Image.asset(
-                                    'assets/images/n_level${pointController.level.value + 1}.png',
-                                    fit: BoxFit.fill,
+                                  SizedBox(
+                                    height: 8.h,
                                   ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              width: 24.w,
-                            ),
+                                  Container(
+                                    constraints: BoxConstraints(
+                                      minWidth: 60, // 최소 너비
+                                      minHeight: 12, // 최소 높이
+                                    ),
+                                    width: 60.w,
+                                    height: 12.h,
+                                    child: Image.asset(
+                                      'assets/images/level${pointController.level.value}.png',
+                                      fit: BoxFit.fill,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Expanded(child: Container()),
+                              ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxWidth: 24, // 최소 너비
+                                  maxHeight: 24, // 최소 높이
+                                ),
+                                child: Image.asset(
+                                  'assets/images/triangle.png',
+                                  width: 24.w,
+                                  height: 24.h,
+                                ),
+                              ),
+                              Expanded(child: Container()),
+                              // 다음 캐릭터
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    constraints: BoxConstraints(
+                                      minWidth: 120,
+                                      minHeight: 120,
+                                    ),
+                                    width: 120.w,
+                                    height: 120.h,
+                                    child: Image.asset(
+                                      'assets/images/next_lv${pointController.level.value + 1}.png',
+                                    ),
+                                  ),
+                                  // Stack(
+                                  //   children: [
+                                  //     Container(
+                                  //         constraints: BoxConstraints(
+                                  //           minWidth: 120, // 최소 너비
+                                  //           minHeight: 120, // 최소 높이
+                                  //         ),
+                                  //         width: 120.h,
+                                  //         height: 120.h,
+                                  //         child: Image.asset(
+                                  //           'assets/images/Frame.png',
+                                  //           width: 120,
+                                  //           height: 120,
+                                  //           fit: BoxFit.fill,
+                                  //         )),
+                                  //     if (pointController.level.value != 5)
+                                  //       Positioned(
+                                  //         left: 17.w,
+                                  //         top: 20.h,
+                                  //         child: Container(
+                                  //           constraints: BoxConstraints(
+                                  //             minWidth: 88, // 최소 너비
+                                  //             minHeight: 12, // 최소 높이
+                                  //           ),
+                                  //           width: 88.w,
+                                  //           height: 12.h,
+                                  //           child: Image.asset(
+                                  //             'assets/images/NEXT_LEVEL.png',
+                                  //             fit: BoxFit.fill,
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //     Positioned(
+                                  //       left: (pointController.level.value != 5)
+                                  //           ? (pointController.level.value != 4)
+                                  //               ? (pointController
+                                  //                           .level.value !=
+                                  //                       3)
+                                  //                   ? 30.w
+                                  //                   : 35.w
+                                  //               : 24.w
+                                  //           : 14.w,
+                                  //       top: (pointController.level.value != 5)
+                                  //           ? 42.h
+                                  //           : 32,
+                                  //       child: Container(
+                                  //         constraints:
+                                  //             (pointController.level.value == 5)
+                                  //                 ? BoxConstraints(
+                                  //                     minWidth: 91, // 최소 너비
+                                  //                     minHeight: 60, // 최소 높이
+                                  //                   )
+                                  //                 : BoxConstraints(),
+                                  //         width: changeNextWidth(
+                                  //             pointController.level.value),
+                                  //         height: changeNextHeight(
+                                  //             pointController.level.value),
+                                  //         child: Image.asset(
+                                  //           'assets/images/lv${pointController.level.value + 1}s.png',
+                                  //         ),
+                                  //       ),
+                                  //     )
+                                  //   ],
+                                  // ),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  Container(
+                                    constraints: BoxConstraints(
+                                      minWidth: 60, // 최소 너비
+                                      minHeight: 12, // 최소 높이
+                                    ),
+                                    width: 60.w,
+                                    height: 12.h,
+                                    child: Image.asset(
+                                      'assets/images/n_level${pointController.level.value + 1}.png',
+                                      fit: BoxFit.fill,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              // 여기까지
+                              SizedBox(
+                                width: 24.w,
+                              ),
+                            ],
+                          ),
+                        ),
+                        /** -------------------------- 여기까지 이미지 ---------------------------------------------------- */
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  Container(
+                    constraints: BoxConstraints(
+                      minWidth: 327, // 최소 너비
+                      minHeight: 130, // 최소 높이
+                    ),
+                    padding: EdgeInsets.only(left: 24.w, right: 12.w),
+                    width: 327.w,
+                    height: 140.h,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFF2A2A2A),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
+                                style: headlineLarge),
+                            TextButton(
+                                onPressed: () {
+                                  Get.toNamed('/mypoint');
+                                },
+                                child: Text('더보기',
+                                    style: titleMedium.copyWith(
+                                        decoration: TextDecoration.underline,
+                                        color: grayScale[10]))),
                           ],
                         ),
-                      ),
-                      /** -------------------------- 여기까지 이미지 ---------------------------------------------------- */
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                Container(
-                  constraints: BoxConstraints(
-                    minWidth: 327, // 최소 너비
-                    minHeight: 130, // 최소 높이
-                  ),
-                  width: 327.w,
-                  height: 140.h,
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFF2A2A2A),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 24.w,
-                          ),
-                          Text('🏄🏻‍♂️ PARDNERSHIP 🏄🏻‍♂️ ',
-                              style: headlineLarge),
-                          const Spacer(),
-                          TextButton(
-                              onPressed: () {
-                                Get.toNamed('/mypoint');
-                              },
-                              child: Text('더보기',
-                                  style: titleMedium.copyWith(
-                                      decoration: TextDecoration.underline,
-                                      color: grayScale[30]))),
-                          SizedBox(
-                            width: 20.w,
-                          )
-                        ],
-                      ),
-                      Container(
-                          width: 279.w, height: 1.h, color: grayScale[30]),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 163.5.w,
-                            child: Column(
-                              children: [
-                                Text('파드 포인트', style: titleMedium),
-                                SizedBox(
-                                  height: 8.h,
+                        Divider(
+                          color: grayScale[30],
+                          height: 0,
+                          thickness: 1,
+                          endIndent: 14.w,
+                        ),
+                        // Container(height: 1.h, color: grayScale[30]),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 12.0.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                width: 70.w,
+                                child: Column(
+                                  children: [
+                                    Text('파드 포인트', style: titleMedium),
+                                    SizedBox(
+                                      height: 8.h,
+                                    ),
+                                    /** User의 point로 변경 */
+                                    Obx(
+                                      () => Text(
+                                        '+${pointController.points.value}점',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayMedium!
+                                            .copyWith(color: primaryGreen),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                /** User의 point로 변경 */
-                                Obx(
-                                  () => Text(
-                                    '+${pointController.points.value}점',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayMedium!
-                                        .copyWith(color: primaryGreen),
-                                  ),
+                              ),
+                              Container(
+                                  width: 1.w,
+                                  height: 44.h,
+                                  color: grayScale[30]),
+                              SizedBox(
+                                width: 70.w,
+                                child: Column(
+                                  children: [
+                                    Text('벌점', style: titleMedium),
+                                    SizedBox(
+                                      height: 8.h,
+                                    ),
+                                    /** User의 point로 변경 */
+                                    Obx(
+                                      () => Text(
+                                        '-${pointController.beePoints.value}점',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayMedium!
+                                            .copyWith(color: errorRed),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          Container(
-                              width: 1.w, height: 44.h, color: grayScale[30]),
-                          SizedBox(
-                            width: 162.5.w,
-                            child: Column(
-                              children: [
-                                Text('벌점', style: titleMedium),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                /** User의 point로 변경 */
-                                Obx(
-                                  () => Text(
-                                    '-${pointController.beePoints.value}점',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayMedium!
-                                        .copyWith(color: errorRed),
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  Container(
+                    constraints: BoxConstraints(
+                      minWidth: 327, // 최소 너비
+                      minHeight: 162, // 최소 높이
+                    ),
+                    width: 327.w,
+                    height: 162.h,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFF2A2A2A),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 24.w, right: 12.w),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('🗓 UPCOMING EVENT 🗓 ',
+                                      style: headlineLarge),
+                                  TextButton(
+                                      onPressed: () {
+                                        Get.toNamed('/schedule');
+                                      },
+                                      child: Text('더보기',
+                                          style: titleMedium.copyWith(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color: grayScale[10],
+                                          ))),
+                                ],
+                              ),
+                              Divider(
+                                color: grayScale[30],
+                                height: 0,
+                                thickness: 1,
+                                endIndent: 14.w,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                Container(
-                  constraints: BoxConstraints(
-                    minWidth: 327, // 최소 너비
-                    minHeight: 162, // 최소 높이
-                  ),
-                  width: 327.w,
-                  height: 162.h,
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFF2A2A2A),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 24.w,
+                        ),
+
+                        // Container(
+                        //     width: 279.w, height: 1.h, color: grayScale[30]),
+                        Container(
+                          constraints: BoxConstraints(
+                            minWidth: 275,
+                            minHeight: 100,
                           ),
-                          Text('🗓 UPCOMING EVENT 🗓 ', style: headlineLarge),
-                          const Spacer(),
-                          TextButton(
-                              onPressed: () {
-                                Get.toNamed('/schedule');
-                              },
-                              child: Text('더보기',
-                                  style: titleMedium.copyWith(
-                                    decoration: TextDecoration.underline,
-                                    color: grayScale[30],
-                                  ))),
-                          SizedBox(
-                            width: 20.w,
-                          )
-                        ],
-                      ),
-                      Container(
-                          width: 279.w, height: 1.h, color: grayScale[30]),
-                      SizedBox(
-                        width: 275.w,
-                        height: 100.h,
-                        child: HomeSchedule(),
-                      )
-                    ],
+                          width: 275.w,
+                          height: 100.h,
+                          child: HomeSchedule(),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-              ],
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -735,36 +782,6 @@ class _HomePageState extends State<HomePage> {
         return 98;
       default:
         return 100;
-    }
-  }
-
-  double changeNextWidth(int level) {
-    switch (level) {
-      case 1:
-        return 56.1;
-      case 2:
-        return 54.67;
-      case 3:
-        return 60;
-      case 4:
-        return 78;
-      default:
-        return 91.w;
-    }
-  }
-
-  double changeNextHeight(int level) {
-    switch (level) {
-      case 1:
-        return 59.17;
-      case 2:
-        return 64;
-      case 3:
-        return 68.3;
-      case 4:
-        return 69.31;
-      default:
-        return 60.h;
     }
   }
 }

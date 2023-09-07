@@ -24,62 +24,66 @@ class RootVeiw extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(BottomBarController());
     return Obx(
-      () => Scaffold(
-        backgroundColor: backgroundColor,
-        endDrawer: const HomeEndDrawer(),
-        appBar: BottomBarController.to.selectedIndex.value == 0
-            ? const HomeFixedBar()
-            : AppBar(
-                backgroundColor: const Color.fromRGBO(26, 26, 26, 1),
-                automaticallyImplyLeading: false,
-                title: Text('마이 페이지', style: headlineLarge),
-                centerTitle: true,
-                actions: [Container()],
-              ),
-        body: tabPages[BottomBarController.to.selectedIndex.value],
-        floatingActionButton: Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            gradient: BottomBarController.to.selectedIndex.value == 0
-                ? const LinearGradient(
-                    colors: [
-                      Color(0xFF5262F5),
-                      Color(0xFF7B3FEF),
-                    ],
-                  )
-                : null,
-            color: BottomBarController.to.selectedIndex.value == 1
-                ? grayScale[30]
-                : null,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 8.r,
-                color: Colors.white.withOpacity(0.25),
-              ),
-            ],
-          ),
-          child: FloatingActionButton(
-            onPressed: () {
-              if (BottomBarController.to.selectedIndex.value != 1) {
-                Get.toNamed('/qr');
-              }
-            },
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            child: SizedBox(
-              width: 40,
-              height: 40,
-              child: Image.asset(
-                'assets/images/qr.png',
-                fit: BoxFit.fill,
+      () => WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          backgroundColor: backgroundColor,
+          endDrawer: const HomeEndDrawer(),
+          appBar: BottomBarController.to.selectedIndex.value == 0
+              ? const HomeFixedBar()
+              : AppBar(
+                  backgroundColor: const Color.fromRGBO(26, 26, 26, 1),
+                  automaticallyImplyLeading: false,
+                  title: Text('마이 페이지', style: headlineLarge),
+                  centerTitle: true,
+                  actions: [Container()],
+                ),
+          body: tabPages[BottomBarController.to.selectedIndex.value],
+          floatingActionButton: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              gradient: BottomBarController.to.selectedIndex.value == 0
+                  ? const LinearGradient(
+                      colors: [
+                        Color(0xFF5262F5),
+                        Color(0xFF7B3FEF),
+                      ],
+                    )
+                  : null,
+              color: BottomBarController.to.selectedIndex.value == 1
+                  ? grayScale[30]
+                  : null,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 8.r,
+                  color: Colors.white.withOpacity(0.25),
+                ),
+              ],
+            ),
+            child: FloatingActionButton(
+              onPressed: () {
+                if (BottomBarController.to.selectedIndex.value != 1) {
+                  Get.toNamed('/qr');
+                }
+              },
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              child: SizedBox(
+                width: 40,
+                height: 40,
+                child: Image.asset(
+                  'assets/images/qr.png',
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: BottomBar(),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomBar(),
       ),
     );
   }
