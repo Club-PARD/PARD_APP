@@ -16,17 +16,13 @@ import 'package:pard_app/my_app.dart';
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   final UserController userController = Get.put(UserController());
-  await Firebase.initializeApp();
-  String? uid = userController.userInfo.value?.uid;
-  bool? onOff =
-      (await FirebaseFirestore.instance.collection('users').doc(uid).get())
-          .data()?['onOff'];
-  print('onOff ------------------------------ : $onOff');
   print('******************백그라운드 시작***********************');
-  /** 안드로이드에서만 나오고 ios는 안나옴 */
-  final pushController = PushNotificationController(); // 셋팅 메소드
+    
+    final pushController = PushNotificationController(); // 셋팅 메소드
   await pushController.setupFlutterNotifications();
   pushController.showFlutterNotification(message); // 로컬노티
+  
+
 }
 
 Future<void> main() async {
@@ -46,6 +42,7 @@ Future<void> main() async {
   Get.put(PushNotificationController());
   /** pushNotificationController에 있는것들 사용한다 */
   await PushNotificationController.to.setupFlutterNotifications();
+  
 
   FirebaseMessaging.onMessage
       .listen(PushNotificationController.to.showFlutterNotification);

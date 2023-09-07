@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minWidth: 375, // 최소 너비
                     minHeight: 270, // 최소 높이
                   ),
@@ -344,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                                 Stack(
                                   children: [
                                     Container(
-                                      constraints: BoxConstraints(
+                                      constraints: const BoxConstraints(
                                         minWidth: 120, // 최소 너비
                                         minHeight: 120, // 최소 높이
                                       ),
@@ -364,7 +364,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Container(
-                                      constraints: BoxConstraints(
+                                      constraints: const BoxConstraints(
                                         minWidth: 120, // 최소 너비
                                         minHeight: 120, // 최소 높이
                                       ),
@@ -376,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Container(
-                                      constraints: BoxConstraints(
+                                      constraints: const BoxConstraints(
                                         minWidth: 120, // 최소 너비
                                         minHeight: 120, // 최소 높이
                                       ),
@@ -432,7 +432,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 8.h,
                                 ),
                                 Container(
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     minWidth: 60, // 최소 너비
                                     minHeight: 12, // 최소 높이
                                   ),
@@ -460,7 +460,7 @@ class _HomePageState extends State<HomePage> {
                                 Stack(
                                   children: [
                                     Container(
-                                        constraints: BoxConstraints(
+                                        constraints: const BoxConstraints(
                                           minWidth: 120, // 최소 너비
                                           minHeight: 120, // 최소 높이
                                         ),
@@ -477,7 +477,7 @@ class _HomePageState extends State<HomePage> {
                                         left: 17.w,
                                         top: 20.h,
                                         child: Container(
-                                          constraints: BoxConstraints(
+                                          constraints: const BoxConstraints(
                                             minWidth: 88, // 최소 너비
                                             minHeight: 12, // 최소 높이
                                           ),
@@ -504,11 +504,11 @@ class _HomePageState extends State<HomePage> {
                                       child: Container(
                                         constraints:
                                             (pointController.level.value == 5)
-                                                ? BoxConstraints(
+                                                ? const BoxConstraints(
                                                     minWidth: 91, // 최소 너비
                                                     minHeight: 60, // 최소 높이
                                                   )
-                                                : BoxConstraints(),
+                                                : const BoxConstraints(),
                                         width: changeNextWidth(
                                             pointController.level.value),
                                         height: changeNextHeight(
@@ -524,7 +524,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 8.h,
                                 ),
                                 Container(
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     minWidth: 60, // 최소 너비
                                     minHeight: 12, // 최소 높이
                                   ),
@@ -551,7 +551,7 @@ class _HomePageState extends State<HomePage> {
                   height: 24.h,
                 ),
                 Container(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minWidth: 327, // 최소 너비
                     minHeight: 130, // 최소 높이
                   ),
@@ -582,8 +582,9 @@ class _HomePageState extends State<HomePage> {
                               },
                               child: Text('더보기',
                                   style: titleMedium.copyWith(
-                                      decoration: TextDecoration.underline,
-                                      color: grayScale[30]))),
+                                    decoration: TextDecoration.underline,
+                                    color: grayScale[10]
+                                  ))),
                           SizedBox(
                             width: 20.w,
                           )
@@ -649,7 +650,7 @@ class _HomePageState extends State<HomePage> {
                   height: 24.h,
                 ),
                 Container(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minWidth: 327, // 최소 너비
                     minHeight: 162, // 최소 높이
                   ),
@@ -680,7 +681,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text('더보기',
                                   style: titleMedium.copyWith(
                                     decoration: TextDecoration.underline,
-                                    color: grayScale[30],
+                                    color: grayScale[10],
                                   ))),
                           SizedBox(
                             width: 20.w,

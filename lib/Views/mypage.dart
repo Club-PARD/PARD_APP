@@ -1,8 +1,10 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
@@ -65,7 +67,7 @@ class _MyPageState extends State<MyPage> {
                   child: SizedBox(
                       width: double.infinity,
                       height: 76.h,
-                      child: Image.asset('assets/images/banner.png')),
+                      child: Image.asset('assets/images/banner.png', fit: BoxFit.fill,)),
                 ),
                 Column(
                   children: [
@@ -82,7 +84,7 @@ class _MyPageState extends State<MyPage> {
                       height: 8.h,
                     ),
                     Container(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         minWidth: 327,
                         minHeight: 96,
                       ),
@@ -217,15 +219,15 @@ class _MyPageState extends State<MyPage> {
                             padding: EdgeInsets.only(right: 24.w),
                             child: Obx(() {
                               return Switch(
-                                value: controller.onOff.value,
+                                value: userController.onOff.value!,
                                 onChanged: (value) async {
-                                  controller.onOff.value =
-                                      !controller.onOff.value;
-                                  print(controller.onOff.value);
+                                  userController.onOff.value =
+                                      !userController.onOff.value!;
                                   await FirebaseFirestore.instance
                                       .collection('users')
                                       .doc(uid)
                                       .update({'onOff': value});
+                                      AppSettings.openAppSettings(); //스위치 누르면 앱 설정으로 이동
                                 },
                               );
                             }),
@@ -437,10 +439,11 @@ class _MyPageState extends State<MyPage> {
                                                                         -1,
                                                                         0.03),
                                                                     colors: [
+                                                                      
                                                                       Color(
+                                                                          0xFF7B3FEF),
+                                                                          Color(
                                                                           0xFF5262F5),
-                                                                      Color(
-                                                                          0xFF7B3FEF)
                                                                     ],
                                                                   ),
                                                                   shape:
@@ -453,7 +456,9 @@ class _MyPageState extends State<MyPage> {
                                                                 child:
                                                                     TextButton(
                                                                         onPressed:
-                                                                            () {},
+                                                                            () {
+                                                                              AuthController().signOut();
+                                                                            },
                                                                         child:
                                                                             Text(
                                                                           '확인',
