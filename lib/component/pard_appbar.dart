@@ -10,8 +10,8 @@ class PardAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? trailing;
   final bool automaticallyImplyLeading;
 
-  PardAppBar(
-    this.title, {
+  const PardAppBar(
+    this.title, {super.key, 
     this.function,
     this.leading,
     this.trailing,
@@ -29,6 +29,8 @@ class PardAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         leading: leading ??
             IconButton(
+              splashColor: Colors.transparent,
+ highlightColor: Colors.transparent,
               icon: Icon(
                 Icons.chevron_left,
                 color: Colors.white,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
+import 'package:pard_app/controllers/bottombar_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
@@ -50,6 +51,7 @@ void launchFeedback() async {
 class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
+    final BottomBarController bottomController = Get.find();
     final controller = PushNotificationController.to;
     final UserController userController = Get.put(UserController());
     late String? uid = userController.userInfo.value?.uid;
@@ -65,15 +67,19 @@ class _MyPageState extends State<MyPage> {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: launchFeedback,
-                    child: SizedBox(
-                        width: double.infinity,
-                        height: 76.h,
-                        child: Image.asset(
-                          'assets/images/banner.png',
-                          fit: BoxFit.fill,
-                        )),
-                  ),
+                      onTap: launchFeedback,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints.expand(
+                          height: 90.h,
+                        ),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Image.asset(
+                            'assets/images/newBanner.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      )),
                   Column(
                     children: [
                       SizedBox(height: 24.h),
@@ -455,10 +461,9 @@ class _MyPageState extends State<MyPage> {
                                                                           -1,
                                                                           0.03),
                                                                       colors: [
-                                                                        
                                                                         Color(
                                                                             0xFF7B3FEF),
-                                                                            Color(
+                                                                        Color(
                                                                             0xFF5262F5),
                                                                       ],
                                                                     ),
@@ -473,6 +478,7 @@ class _MyPageState extends State<MyPage> {
                                                                       TextButton(
                                                                           onPressed:
                                                                               () {
+                                                                           bottomController.selectedIndex.value = 0; //로그아웃하고 들어올 때 index 0으로 하기
                                                                             AuthController().signOut();
                                                                           },
                                                                           child:
@@ -663,10 +669,9 @@ class _MyPageState extends State<MyPage> {
                                                                           -1,
                                                                           0.03),
                                                                   colors: [
-                                                                    
                                                                     Color(
                                                                         0xFF7B3FEF),
-                                                                        Color(
+                                                                    Color(
                                                                         0xFF5262F5),
                                                                   ],
                                                                 ),

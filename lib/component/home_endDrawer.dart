@@ -35,7 +35,7 @@ void launchPardWebURL() async {
 
 void launchNotion() async {
   final Uri pardNotion = Uri.parse(
-      'https://pardhgu.notion.site/PARD-1-a26b1363b86a4740936a92e254876205');
+      'https://pard-notice.oopy.io/');
   try {
     await launchUrl(pardNotion);
   } catch (e) {
@@ -55,7 +55,7 @@ void launchSeminar() async {
 
 void launchPMNotion() async {
   final Uri pardPMNotion = Uri.parse(
-      'https://mercurial-nymphea-2ab.notion.site/PARD-1-3ea9e2fa106e4323a539e9a377c2d106');
+      'https://pard-notice.oopy.io/pm');
   try {
     await launchUrl(pardPMNotion);
   } catch (e) {
@@ -65,7 +65,7 @@ void launchPMNotion() async {
 
 void launchDesignNotion() async {
   final Uri pardDesignNotion = Uri.parse(
-      'https://pardhgu.notion.site/PARD-1-a3ea2c327c944fac8651af8143b5ec0c');
+      'https://pard-notice.oopy.io/design');
   try {
     await launchUrl(pardDesignNotion);
   } catch (e) {
@@ -75,7 +75,7 @@ void launchDesignNotion() async {
 
 void launchWebNotion() async {
   final Uri pardWebNotion =
-      Uri.parse('https://pardhgu.notion.site/bb6cc47609c844efab77c8910338dca2');
+      Uri.parse('https://pard-notice.oopy.io/web');
   try {
     await launchUrl(pardWebNotion);
   } catch (e) {
@@ -85,7 +85,7 @@ void launchWebNotion() async {
 
 void launchAppNotion() async {
   final Uri pardAppNotionUrl = Uri.parse(
-      'https://pardhgu.notion.site/PARD-1-79c6436b9f9243b3a4b5e1ef5e04ff23');
+      'https://pard-notice.oopy.io/ios');
   try {
     await launchUrl(pardAppNotionUrl);
   } catch (e) {
@@ -144,8 +144,11 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   _areItemsVisible = !_areItemsVisible;
                 });
               },
+              
               child: Container(
+                height: 60.h,
                 padding: EdgeInsets.only(left: 24.w),
+                color: _areItemsVisible ? const Color(0xFF3D3D3D) : const Color(0XFF2A2A2A),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -163,6 +166,8 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                       ],
                     ),
                     IconButton(
+                      splashColor: Colors.transparent,
+ highlightColor: Colors.transparent,
                       icon: Icon(
                         _areItemsVisible
                             ? Icons.keyboard_arrow_down_sharp
