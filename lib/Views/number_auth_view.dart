@@ -126,7 +126,7 @@ class NumberAuthView extends StatelessWidget {
                   ),
                   SizedBox(
                       width: 327.w,
-                      height: 16.h,
+                      height: 26.h,
                       child: Text(
                         phoneVerificationController
                                         .isCorrectPhoneNumber.value !=
@@ -144,7 +144,7 @@ class NumberAuthView extends StatelessWidget {
                         ),
                       )),
                   SizedBox(
-                    height: 24.h,
+                    height: 14.h,
                   ),
                   SizedBox(
                     width: 327.w,
@@ -204,7 +204,7 @@ class NumberAuthView extends StatelessWidget {
                   ),
                   SizedBox(
                       width: 327.w,
-                      height: 16.h,
+                      height: 26.h,
                       child: Text(
                         phoneVerificationController.isCorrectCode.value !=
                                     null &&
@@ -221,7 +221,7 @@ class NumberAuthView extends StatelessWidget {
                         ),
                       )),
                   SizedBox(
-                    height: 232.h,
+                    height: 222.h,
                   ),
                   GestureDetector(
                       child: Container(
