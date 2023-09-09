@@ -455,10 +455,11 @@ class _MyPageState extends State<MyPage> {
                                                                           -1,
                                                                           0.03),
                                                                       colors: [
+                                                                        
                                                                         Color(
+                                                                            0xFF7B3FEF),
+                                                                            Color(
                                                                             0xFF5262F5),
-                                                                        Color(
-                                                                            0xFF7B3FEF)
                                                                       ],
                                                                     ),
                                                                     shape:
@@ -662,10 +663,11 @@ class _MyPageState extends State<MyPage> {
                                                                           -1,
                                                                           0.03),
                                                                   colors: [
+                                                                    
                                                                     Color(
+                                                                        0xFF7B3FEF),
+                                                                        Color(
                                                                         0xFF5262F5),
-                                                                    Color(
-                                                                        0xFF7B3FEF)
                                                                   ],
                                                                 ),
                                                                 shape:
