@@ -19,7 +19,8 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       isMaster: json['isMaster'] as bool?,
       lastLogin: dateTimeFromTimestamp(json['lastLogin'] as Timestamp?),
       attend: json['attend'] as Map<String, dynamic>?,
-      onOff:json['onOff'] as bool?
+      fcmToken: json['fcmToken'] as String?,
+      onOff: json['onOff'] as bool?,
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -33,7 +34,8 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'generation': instance.generation,
       'isAdmin': instance.isAdmin,
       'isMaster': instance.isMaster,
+      'onOff': instance.onOff,
       'lastLogin': instance.lastLogin?.toIso8601String(),
       'attend': instance.attend,
-      'onOff' : instance.onOff,
+      'fcmToken': instance.fcmToken,
     };
