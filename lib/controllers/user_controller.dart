@@ -96,8 +96,8 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
     print(e);
   }
 }
-//FcmToken 파베에 업데이트
 
+//FcmToken 파베에 업데이트
  Future<void> updateFcmToken(UserModel user,String token) async {
   var pushController = Get.find<PushNotificationController>();
     fcmToken.value = token;
@@ -173,6 +173,16 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
     }
   } 
 
+  Future<void> AddAttendInfo(String attend) async {
+  final userDocument = FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
+  
+  await userDocument.update({
+    'attendInfo': FieldValue.arrayUnion([attend])
+  });
+}
+
+
+
 
   //휴대폰 기종 파악
   Future<void> getDeviceInfo() async {
@@ -208,8 +218,8 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
     if (pointsArray != null && pointsArray.isNotEmpty) {
       var latestPoint = pointsArray.last;  
       
-      if (latestPoint is Map && latestPoint.containsKey('timeStamp')) {
-        latestAttend = latestPoint['timeStamp'];
+      if (latestPoint is Map && latestPoint.containsKey('timestamp')) {
+        latestAttend = latestPoint['timestamp'];
       }
     }else if(pointsArray == null){
       print('pointsArray가 null');

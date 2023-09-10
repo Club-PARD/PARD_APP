@@ -226,7 +226,7 @@ class PointController extends GetxController {
     Map<String, dynamic> newPoint = {
       'digit': attendPoint,
       'reason': '정상출석',
-      'timeStamp': currentTime,
+      'timestamp': currentTime,
       'type': '출결'
     };
 
@@ -259,7 +259,7 @@ class PointController extends GetxController {
     Map<String, dynamic> newPoint = {
       'digit': attendPoint,
       'reason': '지각',
-      'timeStamp': currentTime,
+      'timestamp': currentTime,
       'type': '출결'
     };
 

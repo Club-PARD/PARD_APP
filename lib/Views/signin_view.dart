@@ -44,7 +44,6 @@ class SignInView extends StatelessWidget {
                 Image.asset(
                   'assets/images/logo_image_cutted.png',
                   width: 375.w,
-                  height: 178.h,
                 ),
                 SizedBox(
                   height: 162.h,
