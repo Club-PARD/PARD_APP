@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -23,18 +22,17 @@ class MyPointView extends StatefulWidget {
 
 class _MyPointViewState extends State<MyPointView> {
   final PointController pointController = Get.put(PointController());
+  final formatter = NumberFormat("#,##0.##");
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      PointController pointController = Get.put(PointController());
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
     });
   }
 
-  // final PointController pointController = Get.find<PointController>();
   @override
   Widget build(BuildContext context) {
     final GlobalKey buttonKey = GlobalKey();
@@ -75,9 +73,9 @@ class _MyPointViewState extends State<MyPointView> {
                       return const CircularProgressIndicator(); // 로딩 처리
                     }
 
-                    // RxMap을 Map<UserModel, int>으로 변환
-                    final Map<UserModel, int> userPointsMap =
-                        Map<UserModel, int>.from(rxUserPointsMap);
+                    // RxMap을 Map<UserModel, double>으로 변환
+                    final Map<UserModel, double> userPointsMap =
+                        Map<UserModel, double>.from(rxUserPointsMap);
 
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -184,7 +182,7 @@ class _MyPointViewState extends State<MyPointView> {
   Widget rankWithTopIcon(String top, context, UserModel user) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: 92.w,
+        // maxWidth: 92.w,
         maxHeight: 49.h,
       ),
       child: Row(
@@ -299,7 +297,7 @@ class _MyPointViewState extends State<MyPointView> {
                       ),
                       Obx(
                         () => Text(
-                          '+${pointController.points.value}점',
+                          '+${formatter.format(pointController.points.value)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!
@@ -327,7 +325,7 @@ class _MyPointViewState extends State<MyPointView> {
                       ),
                       Obx(
                         () => Text(
-                          '-${pointController.beePoints.value}점',
+                          '${formatter.format(pointController.beePoints.value)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!
@@ -405,7 +403,8 @@ class _MyPointViewState extends State<MyPointView> {
     String type = pointData['type'];
     String reason = pointData['reason'];
     String date = formatTimestamp(pointData['timestamp']);
-    int digit = pointData['digit'];
+    double digit = pointData['digit'].toDouble();
+    String formattedDigit = formatter.format(digit);
     bool isBeePoint = false;
 
     if (type == '세미나 지각' ||
@@ -519,7 +518,9 @@ class _MyPointViewState extends State<MyPointView> {
                   height: 8.h,
                 ),
                 Text(
-                  isBeePoint ? '$date | -$digit점' : '$date | +$digit점',
+                  isBeePoint
+                      ? '$date | $formattedDigit점'
+                      : '$date | +$formattedDigit점',
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pard_app/Views/home_view.dart';
 import 'package:pard_app/Views/my_point_view.dart';
 import 'package:pard_app/Views/number_auth_view.dart';
 import 'package:pard_app/Views/overall_ranking_view.dart';
