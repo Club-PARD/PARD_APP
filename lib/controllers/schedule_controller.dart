@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pard_app/controllers/user_controller.dart';
 
 import 'package:pard_app/model/schedule_model/schedule_model.dart';
 
 class ScheduleController extends GetxController {
+  final UserController userController = Get.put(UserController());
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   RxList<ScheduleModel> upcomingSchedules = <ScheduleModel>[].obs;
@@ -14,7 +16,7 @@ class ScheduleController extends GetxController {
   void onInit() {
     super.onInit();
 
-    getSchedules('앱');
+    getSchedules('${userController.userInfo.value!.part}');
   }
 
   Future<void> getSchedules(String userPart) async {
@@ -28,22 +30,18 @@ class ScheduleController extends GetxController {
 
       for (var scheduleDoc in schedulesSnapshot.docs) {
         final scheduleData = scheduleDoc.data();
-        final sid = scheduleDoc.id; 
+        final sid = scheduleDoc.id;
         print('sid : $sid');
-       
-
 
         if (scheduleData['part'] == userPart || scheduleData['part'] == '전체') {
           final schedule = ScheduleModel(
-            Map<String, int>.from(scheduleData['attend']),
-            scheduleData['title'],
-            scheduleData['description'],
-            (scheduleData['dueDate'] as Timestamp).toDate(),
-            scheduleData['place'],
-            scheduleData['part'],
-            now.isAfter((scheduleData['dueDate'] as Timestamp).toDate()),
-            sid
-          );
+              scheduleData['title'],
+              scheduleData['description'],
+              (scheduleData['dueDate'] as Timestamp).toDate(),
+              scheduleData['place'],
+              scheduleData['part'],
+              now.isAfter((scheduleData['dueDate'] as Timestamp).toDate()),
+              sid);
 
           if (schedule.previous) {
             pastSchedules.add(schedule);
