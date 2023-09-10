@@ -218,8 +218,8 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
     if (pointsArray != null && pointsArray.isNotEmpty) {
       var latestPoint = pointsArray.last;  
       
-      if (latestPoint is Map && latestPoint.containsKey('timeStamp')) {
-        latestAttend = latestPoint['timeStamp'];
+      if (latestPoint is Map && latestPoint.containsKey('timestamp')) {
+        latestAttend = latestPoint['timestamp'];
       }
     }else if(pointsArray == null){
       print('pointsArray가 null');
