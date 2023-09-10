@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/utilities/color_style.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:pard_app/utilities/text_style.dart';
 
 class TosAgreement extends StatelessWidget {
   final String pipStatement;
@@ -133,21 +135,13 @@ class TosDescription extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              GradientText(
                 string2,
-                style: TextStyle(
-                  foreground: Paint()
-                    ..shader = LinearGradient(
-                      colors: [
-                        Theme.of(context).colorScheme.onSecondary,
-                        Theme.of(context).colorScheme.secondary,
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ).createShader(Rect.fromLTWH(
-                        0, 0, 327.w, 68.h)), // Adjust the Rect as needed
-                  fontSize: 14.sp,
-                ),
+                style: headlineSmall,
+                colors: const [
+                  primaryBlue,
+                  primaryPurple,
+                ],
               ),
               Text(
                 string3,
