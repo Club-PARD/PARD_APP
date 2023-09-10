@@ -15,7 +15,7 @@ class BottomBar extends StatelessWidget {
       () => Container(
         decoration: BoxDecoration(
           color: const Color(0xFF2A2A2A),
-          borderRadius: BorderRadius.vertical(
+          borderRadius: const BorderRadius.vertical(
             top: Radius.circular(16.0),
           ),
           boxShadow: [
@@ -23,12 +23,12 @@ class BottomBar extends StatelessWidget {
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 8,
-              offset: Offset(0, -2),
+              offset: const Offset(0, -2),
             ),
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.vertical(
+          borderRadius: const BorderRadius.vertical(
             top: Radius.circular(16.0),
           ),
           child: BottomNavigationBar(

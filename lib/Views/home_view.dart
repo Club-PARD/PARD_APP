@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
                                   height: 12.5.h,
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 375, // 최소 너비
                       minHeight: 270, // 최소 높이
                     ),
@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                                         color: const Color(0XFF5262F5)),
                                   ),
                                   const TextSpan(
-                                      text: '님\n오늘도 PARD에서 함께 협업해요!'),
+                                      text: ' 님\n오늘도 PARD에서 함께 협업해요!'),
                                 ],
                               ),
                             ),
@@ -345,7 +345,7 @@ class _HomePageState extends State<HomePage> {
                                   Stack(
                                     children: [
                                       Container(
-                                        constraints: BoxConstraints(
+                                        constraints: const BoxConstraints(
                                           minWidth: 120, // 최소 너비
                                           minHeight: 120, // 최소 높이
                                         ),
@@ -366,7 +366,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       Container(
-                                        constraints: BoxConstraints(
+                                        constraints: const BoxConstraints(
                                           minWidth: 120, // 최소 너비
                                           minHeight: 120, // 최소 높이
                                         ),
@@ -379,7 +379,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       Container(
-                                        constraints: BoxConstraints(
+                                        constraints: const BoxConstraints(
                                           minWidth: 120, // 최소 너비
                                           minHeight: 120, // 최소 높이
                                         ),
@@ -439,7 +439,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 8.h,
                                   ),
                                   Container(
-                                    constraints: BoxConstraints(
+                                    constraints: const BoxConstraints(
                                       minWidth: 60, // 최소 너비
                                       minHeight: 12, // 최소 높이
                                     ),
@@ -454,7 +454,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Expanded(child: Container()),
                               ConstrainedBox(
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                   maxWidth: 24, // 최소 너비
                                   maxHeight: 24, // 최소 높이
                                 ),
@@ -472,7 +472,7 @@ class _HomePageState extends State<HomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    constraints: BoxConstraints(
+                                    constraints: const BoxConstraints(
                                       minWidth: 120,
                                       minHeight: 120,
                                     ),
@@ -550,7 +550,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 8.h,
                                   ),
                                   Container(
-                                    constraints: BoxConstraints(
+                                    constraints: const BoxConstraints(
                                       minWidth: 60, // 최소 너비
                                       minHeight: 12, // 최소 높이
                                     ),
@@ -578,7 +578,7 @@ class _HomePageState extends State<HomePage> {
                     height: 24.h,
                   ),
                   Container(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 327, // 최소 너비
                       minHeight: 130, // 최소 높이
                     ),
@@ -681,7 +681,7 @@ class _HomePageState extends State<HomePage> {
                     height: 24.h,
                   ),
                   Container(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 327, // 최소 너비
                       minHeight: 162, // 최소 높이
                     ),
@@ -732,7 +732,7 @@ class _HomePageState extends State<HomePage> {
                         // Container(
                         //     width: 279.w, height: 1.h, color: grayScale[30]),
                         Container(
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                             minWidth: 275,
                             minHeight: 100,
                           ),
