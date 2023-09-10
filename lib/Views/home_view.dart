@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:intl/intl.dart';
 import 'package:pard_app/Views/home_schedule_view.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   final UserController userController = Get.put(UserController());
   final ScheduleController scheduleController = Get.put(ScheduleController());
   final GlobalKey questionDialogKey = GlobalKey();
+  final formatter = NumberFormat("#,##0.##");
 
   bool showContainer = false;
   OverlayEntry? overlayEntry;
@@ -482,70 +484,6 @@ class _HomePageState extends State<HomePage> {
                                       'assets/images/next_lv${pointController.level.value + 1}.png',
                                     ),
                                   ),
-                                  // Stack(
-                                  //   children: [
-                                  //     Container(
-                                  //         constraints: BoxConstraints(
-                                  //           minWidth: 120, // 최소 너비
-                                  //           minHeight: 120, // 최소 높이
-                                  //         ),
-                                  //         width: 120.h,
-                                  //         height: 120.h,
-                                  //         child: Image.asset(
-                                  //           'assets/images/Frame.png',
-                                  //           width: 120,
-                                  //           height: 120,
-                                  //           fit: BoxFit.fill,
-                                  //         )),
-                                  //     if (pointController.level.value != 5)
-                                  //       Positioned(
-                                  //         left: 17.w,
-                                  //         top: 20.h,
-                                  //         child: Container(
-                                  //           constraints: BoxConstraints(
-                                  //             minWidth: 88, // 최소 너비
-                                  //             minHeight: 12, // 최소 높이
-                                  //           ),
-                                  //           width: 88.w,
-                                  //           height: 12.h,
-                                  //           child: Image.asset(
-                                  //             'assets/images/NEXT_LEVEL.png',
-                                  //             fit: BoxFit.fill,
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //     Positioned(
-                                  //       left: (pointController.level.value != 5)
-                                  //           ? (pointController.level.value != 4)
-                                  //               ? (pointController
-                                  //                           .level.value !=
-                                  //                       3)
-                                  //                   ? 30.w
-                                  //                   : 35.w
-                                  //               : 24.w
-                                  //           : 14.w,
-                                  //       top: (pointController.level.value != 5)
-                                  //           ? 42.h
-                                  //           : 32,
-                                  //       child: Container(
-                                  //         constraints:
-                                  //             (pointController.level.value == 5)
-                                  //                 ? BoxConstraints(
-                                  //                     minWidth: 91, // 최소 너비
-                                  //                     minHeight: 60, // 최소 높이
-                                  //                   )
-                                  //                 : BoxConstraints(),
-                                  //         width: changeNextWidth(
-                                  //             pointController.level.value),
-                                  //         height: changeNextHeight(
-                                  //             pointController.level.value),
-                                  //         child: Image.asset(
-                                  //           'assets/images/lv${pointController.level.value + 1}s.png',
-                                  //         ),
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  // ),
                                   SizedBox(
                                     height: 8.h,
                                   ),
@@ -636,7 +574,7 @@ class _HomePageState extends State<HomePage> {
                                     /** User의 point로 변경 */
                                     Obx(
                                       () => Text(
-                                        '+${pointController.points.value}점',
+                                        '+${formatter.format(pointController.points.value)}점',
                                         style: Theme.of(context)
                                             .textTheme
                                             .displayMedium!
@@ -661,7 +599,7 @@ class _HomePageState extends State<HomePage> {
                                     /** User의 point로 변경 */
                                     Obx(
                                       () => Text(
-                                        '-${pointController.beePoints.value}점',
+                                        '${formatter.format(pointController.beePoints.value)}점',
                                         style: Theme.of(context)
                                             .textTheme
                                             .displayMedium!

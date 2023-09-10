@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 
 class PointController extends GetxController {
   final UserController _userController = Get.put(UserController());
-  RxMap userPointsMap = {}.obs; // UserModel, int
+  final AuthController _authController = Get.put(AuthController());
+  RxMap userPointsMap = {}.obs; // UserModel, double
   Rx<PointModel?> rxPointModel = Rx<PointModel?>(null);
-  RxInt points = 0.obs;
-  RxInt beePoints = 0.obs;
+  RxDouble points = 0.0.obs;
+  RxDouble beePoints = 0.0.obs;
   RxInt level = 1.obs;
 
   @override
@@ -27,13 +29,13 @@ class PointController extends GetxController {
     QuerySnapshot querySnapshot =
         await usersCollection.where('pid', isNotEqualTo: '').get();
 
-    Map<UserModel, int> resultMap = {};
+    Map<UserModel, double> resultMap = {};
 
     await Future.forEach(querySnapshot.docs, (doc) async {
       Map<String, dynamic> userData = doc.data() as Map<String, dynamic>;
       UserModel user = UserModel.fromJson(userData);
 
-      int totalPoints = 0;
+      double totalPoints = 0.0;
 
       String pid = userData['pid'];
 
@@ -50,7 +52,12 @@ class PointController extends GetxController {
           List<dynamic> pointsList = pointsData['points'];
           for (var point in pointsList) {
             if (point is Map<String, dynamic> && point.containsKey('digit')) {
-              totalPoints += point['digit'] as int;
+              if (point['digit'] is int) {
+                totalPoints += (point['digit'] as int).toDouble();
+              } else if (point['digit'] is double) {
+                totalPoints += point['digit'] as double;
+              }
+              // totalPoints += point['digit'] as double;
             }
           }
         }
@@ -61,7 +68,12 @@ class PointController extends GetxController {
           for (var beePoint in beePointsList) {
             if (beePoint is Map<String, dynamic> &&
                 beePoint.containsKey('digit')) {
-              totalPoints -= beePoint['digit'] as int;
+              if (beePoint['digit'] is int) {
+                totalPoints += (beePoint['digit'] as int).toDouble();
+              } else if (beePoint['digit'] is double) {
+                totalPoints += beePoint['digit'] as double;
+              }
+              // totalPoints -= beePoint['digit'] as double;
             }
           }
         }
@@ -84,48 +96,60 @@ class PointController extends GetxController {
   int getCurrentUserRank() {
     User? currentUser = FirebaseAuth.instance.currentUser;
 
-    if (currentUser != null) {
-      final Map<UserModel, int> userPointsMapCopy = Map.from(userPointsMap);
-      List<UserModel> sortedUsers = userPointsMapCopy.keys.toList();
-      sortedUsers.sort(
-          (a, b) => userPointsMapCopy[b]!.compareTo(userPointsMapCopy[a]!));
+    // if (currentUser != null) {
+    final Map<UserModel, double> userPointsMapCopy = Map.from(userPointsMap);
+    List<UserModel> sortedUsers = userPointsMapCopy.keys.toList();
+    sortedUsers
+        .sort((a, b) => userPointsMapCopy[b]!.compareTo(userPointsMapCopy[a]!));
 
-      int currentUserIndex =
-          sortedUsers.indexWhere((user) => user.email == currentUser.email);
-      if (currentUserIndex != -1) {
-        return currentUserIndex + 1;
-      } else {
-        return -1;
-      }
+    int currentUserIndex =
+        sortedUsers.indexWhere((user) => user.email == currentUser?.email);
+    if (currentUserIndex != -1) {
+      return currentUserIndex + 1;
     } else {
-      return -2;
+      return -1; // 파트 내에서 해당 유저를 찾지 못한 경우
     }
+    // } else {
+    //   return 0; // 로그인된 유저가 없는 경우
+    // }
   }
 
   // 현재 유저의 파트 내 등수를 반환하는 함수
   int getCurrentUserPartRank() {
-    User? currentUser = FirebaseAuth.instance.currentUser;
+    final Map<UserModel, double> userPointsMapCopy = Map.from(userPointsMap);
 
-    if (currentUser != null) {
-      _userController.getUserInfoByEmail(currentUser.email!);
-      UserModel? currentUserModel = _userController.userInfo.value;
+    List<MapEntry<UserModel, double>> sortedEntries =
+        userPointsMapCopy.entries.toList();
 
-      final Map<UserModel, int> userPointsMapCopy = Map.from(userPointsMap);
-      List<UserModel> sortedUsers = userPointsMapCopy.keys.toList();
-      sortedUsers.sort(
-          (a, b) => userPointsMapCopy[b]!.compareTo(userPointsMapCopy[a]!));
+    sortedEntries.sort((entry1, entry2) {
+      int pointsComparison = entry2.value.compareTo(entry1.value);
 
-      int currentUserIndex =
-          sortedUsers.indexWhere((user) => user.part == currentUserModel!.part);
-
-      if (currentUserIndex != -1) {
-        return currentUserIndex + 1;
-      } else {
-        return -1; // 파트 내에서 해당 유저를 찾지 못한 경우
+      if (pointsComparison == 0) {
+        // 포인트가 같을 경우 이름을 기준으로 내림차순으로 정렬
+        return entry2.key.name!.compareTo(entry1.key.name!);
       }
-    } else {
-      return -2; // 로그인된 유저가 없는 경우
+
+      return pointsComparison;
+    });
+
+    // 정렬된 결과를 다시 Map으로 변환
+    final Map<UserModel, double> sortedUserPointsMap =
+        Map.fromEntries(sortedEntries);
+
+    // 정렬된 결과를 사용하여 출력 또는 다른 작업 수행
+    int rank = 1;
+    int currentUserIndex = 0;
+
+    for (var entry in sortedUserPointsMap.entries) {
+      if (entry.key.part == _userController.userInfo.value!.part) {
+        print('Rank $rank: ${entry.key.name}, Points: ${entry.value}');
+        if (entry.key.name == _userController.userInfo.value!.name) {
+          currentUserIndex = rank;
+        }
+        rank++;
+      }
     }
+    return currentUserIndex;
   }
 
   // 현재 유저의 포인트 & 벌점를 가져오는 함수
@@ -152,8 +176,8 @@ class PointController extends GetxController {
           PointModel pointModel = PointModel.fromJson(
               pointsSnapshot.data() as Map<String, dynamic>);
 
-          int totalPoints = 0;
-          int totalBeePoints = 0;
+          double totalPoints = 0;
+          double totalBeePoints = 0;
 
           if (pointModel.points != null) {
             for (var point in pointModel.points!) {
@@ -163,7 +187,7 @@ class PointController extends GetxController {
 
           if (pointModel.beePoints != null) {
             for (var beePoint in pointModel.beePoints!) {
-              totalBeePoints += (beePoint['digit'] ?? 0) as int;
+              totalBeePoints += (beePoint['digit'] ?? 0) as double;
             }
           }
 
@@ -172,7 +196,7 @@ class PointController extends GetxController {
           beePoints.value = totalBeePoints;
 
           // 레벨 계산
-          int calculatedPoints = totalPoints - totalBeePoints;
+          double calculatedPoints = totalPoints - totalBeePoints;
           if (calculatedPoints >= 0 && calculatedPoints <= 25) {
             level.value = 1;
           } else if (calculatedPoints <= 50) {
@@ -189,68 +213,69 @@ class PointController extends GetxController {
     }
   }
 
- // QR 찍었을 때 점수 추가
-Future<void> attendQR(UserModel user, int attendPoint) async {
-  String? pid = user.pid;
-  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid); //user's pid
+  // QR 찍었을 때 점수 추가
+  Future<void> attendQR(UserModel user, int attendPoint) async {
+    String? pid = user.pid;
+    DocumentReference pointsRef =
+        FirebaseFirestore.instance.collection('points').doc(pid); //user's pid
 
-  // Fetch the current points data
-  DocumentSnapshot pointsSnapshot = await pointsRef.get();
-  Timestamp currentTime = Timestamp.fromDate(DateTime.now());
+    // Fetch the current points data
+    DocumentSnapshot pointsSnapshot = await pointsRef.get();
+    Timestamp currentTime = Timestamp.fromDate(DateTime.now());
 
-  Map<String, dynamic> newPoint = {
-    'digit': attendPoint,
-    'reason': '정상출석',
-    'timeStamp': currentTime,
-    'type':'출결'
-  };
+    Map<String, dynamic> newPoint = {
+      'digit': attendPoint,
+      'reason': '정상출석',
+      'timeStamp': currentTime,
+      'type': '출결'
+    };
 
-  if (pointsSnapshot.exists) {
-    Map<String, dynamic> existingPoints = pointsSnapshot.data() as Map<String, dynamic>;
-    await pointsRef.update({
-      'points': FieldValue.arrayUnion([newPoint])
-    });
-  } else {
-    await pointsRef.set({
-      'points': [newPoint]
-    });
+    if (pointsSnapshot.exists) {
+      Map<String, dynamic> existingPoints =
+          pointsSnapshot.data() as Map<String, dynamic>;
+      await pointsRef.update({
+        'points': FieldValue.arrayUnion([newPoint])
+      });
+    } else {
+      await pointsRef.set({
+        'points': [newPoint]
+      });
+    }
+
+    fetchAndSortUserPoints();
+    fetchCurrentUserPoints();
   }
-
-  fetchAndSortUserPoints();
-  fetchCurrentUserPoints();
-}
-
 
 //QR 지각했을 때
-Future<void> lateQR(UserModel user, int attendPoint) async {
-  String? pid = user.pid;
-  DocumentReference pointsRef = FirebaseFirestore.instance.collection('points').doc(pid); //user's pid
+  Future<void> lateQR(UserModel user, int attendPoint) async {
+    String? pid = user.pid;
+    DocumentReference pointsRef =
+        FirebaseFirestore.instance.collection('points').doc(pid); //user's pid
 
-  // Fetch the current points data
-  DocumentSnapshot pointsSnapshot = await pointsRef.get();
-  Timestamp currentTime = Timestamp.fromDate(DateTime.now());
+    // Fetch the current points data
+    DocumentSnapshot pointsSnapshot = await pointsRef.get();
+    Timestamp currentTime = Timestamp.fromDate(DateTime.now());
 
-  Map<String, dynamic> newPoint = {
-    'digit': attendPoint,
-    'reason': '지각',
-    'timeStamp': currentTime,
-    'type':'출결'
-  };
+    Map<String, dynamic> newPoint = {
+      'digit': attendPoint,
+      'reason': '지각',
+      'timeStamp': currentTime,
+      'type': '출결'
+    };
 
-  if (pointsSnapshot.exists) {
-    Map<String, dynamic> existingPoints = pointsSnapshot.data() as Map<String, dynamic>;
-    await pointsRef.update({
-      'points': FieldValue.arrayUnion([newPoint])
-    });
-  } else {
-    await pointsRef.set({
-      'points': [newPoint]
-    });
+    if (pointsSnapshot.exists) {
+      Map<String, dynamic> existingPoints =
+          pointsSnapshot.data() as Map<String, dynamic>;
+      await pointsRef.update({
+        'points': FieldValue.arrayUnion([newPoint])
+      });
+    } else {
+      await pointsRef.set({
+        'points': [newPoint]
+      });
+    }
+
+    fetchAndSortUserPoints();
+    fetchCurrentUserPoints();
   }
-
-  fetchAndSortUserPoints();
-  fetchCurrentUserPoints();
-}
-
-
 }
