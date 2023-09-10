@@ -4,13 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeBar extends StatefulWidget {
-  const HomeBar({super.key});
+class HomeEndDrawer extends StatefulWidget {
+  const HomeEndDrawer({super.key});
 
   @override
-  State<HomeBar> createState() => _HomeBarState();
+  State<HomeEndDrawer> createState() => _HomeEndDrawerState();
 }
 
 void launchInstaURL() async {
@@ -102,7 +103,7 @@ void launchServerNotion() async {
   }
 }
 
-class _HomeBarState extends State<HomeBar> {
+class _HomeEndDrawerState extends State<HomeEndDrawer> {
   bool _areItemsVisible = false;
 
   @override
@@ -120,9 +121,22 @@ class _HomeBarState extends State<HomeBar> {
               decoration: const BoxDecoration(
                 color: Color(0XFF2A2A2A),
               ),
-              child: Text('공지 및 자료',
-                  style: headlineMedium.copyWith(
-                      color: const Color.fromRGBO(82, 98, 245, 1))),
+              child: GradientText(
+                '공지 및 자료',
+                style: headlineMedium,
+                colors: const [
+                  primaryBlue,
+                  primaryPurple,
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8.h,
+            ),
+            Divider(
+              thickness: 0.5,
+              height: 0,
+              color: grayScale[30],
             ),
             GestureDetector(
               onTap: () {
@@ -133,15 +147,21 @@ class _HomeBarState extends State<HomeBar> {
               child: Container(
                 padding: EdgeInsets.only(left: 24.w),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(
-                      'assets/images/Notion.png',
-                      width: 22.w,
-                      height: 22.h,
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/Notion.png',
+                          width: 22.w,
+                          height: 22.h,
+                        ),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Text('PARD 노션', style: headlineSmall),
+                      ],
                     ),
-                    Text('PARD 노션', style: headlineSmall),
-                    SizedBox(width: 40.w),
                     IconButton(
                       icon: Icon(
                         _areItemsVisible
@@ -250,6 +270,11 @@ class _HomeBarState extends State<HomeBar> {
                 },
               )
             ],
+            Divider(
+              thickness: 0.5,
+              height: 0,
+              color: grayScale[30],
+            ),
             SizedBox(
               height: 32.h,
             ),
@@ -262,10 +287,23 @@ class _HomeBarState extends State<HomeBar> {
                 decoration: const BoxDecoration(
                   color: Color(0XFF2A2A2A),
                 ),
-                child: Text('피드백',
-                    style: headlineMedium.copyWith(
-                        color: const Color.fromRGBO(82, 98, 245, 1))),
+                child: GradientText(
+                  '피드백',
+                  style: headlineMedium,
+                  colors: const [
+                    primaryBlue,
+                    primaryPurple,
+                  ],
+                ),
               ),
+            ),
+            SizedBox(
+              height: 8.h,
+            ),
+            Divider(
+              thickness: 0.5,
+              height: 0,
+              color: grayScale[30],
             ),
             InkWell(
               onTap: launchSeminar,
@@ -290,15 +328,33 @@ class _HomeBarState extends State<HomeBar> {
                 ),
               ),
             ),
+            Divider(
+              thickness: 0.5,
+              height: 0,
+              color: grayScale[30],
+            ),
             SizedBox(height: 32.h),
             Container(
               padding: EdgeInsets.only(left: 20.w),
               decoration: const BoxDecoration(
                 color: Color(0XFF2A2A2A),
               ),
-              child: Text('공식 채널',
-                  style: headlineMedium.copyWith(
-                      color: const Color.fromRGBO(82, 98, 245, 1))),
+              child: GradientText(
+                '공식 채널',
+                style: headlineMedium,
+                colors: const [
+                  primaryBlue,
+                  primaryPurple,
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8.h,
+            ),
+            Divider(
+              thickness: 0.5,
+              height: 0,
+              color: grayScale[30],
             ),
             SizedBox(
               width: 200.w,
@@ -327,8 +383,10 @@ class _HomeBarState extends State<HomeBar> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 1.h,
+                  Divider(
+                    thickness: 0.5,
+                    height: 0,
+                    color: grayScale[30],
                   ),
                   SizedBox(
                     height: 60.h,
@@ -349,6 +407,11 @@ class _HomeBarState extends State<HomeBar> {
                         ],
                       ),
                     ),
+                  ),
+                  Divider(
+                    thickness: 0.5,
+                    height: 0,
+                    color: grayScale[30],
                   ),
                 ],
               ),

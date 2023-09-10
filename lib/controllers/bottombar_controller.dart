@@ -3,24 +3,17 @@ import 'package:get/get.dart';
 class BottomBarController extends GetxController {
   static BottomBarController get to => Get.find();
 
-  final RxInt selectedIndex = 0.obs;
-  // var fbSelect = false.obs;
+  final RxInt _selectedIndex = 0.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  RxInt get selectedIndex => _selectedIndex;
 
   void onItemTapped(int index) {
-    selectedIndex(index);
-    // selectedIndex.value = index;
-    // fbSelect.value = (index == 1);
+    _selectedIndex(index);
     print(index);
-
-    // switch (index) {
-    //   case 0:
-    //     Get.offNamed('/home');
-    //     break;
-    //   case 2:
-    //     Get.offNamed('/mypage');
-    //     break;
-    //   default:
-    //      Get.offNamed('/home');
-    // }
   }
 }

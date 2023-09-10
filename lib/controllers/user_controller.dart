@@ -191,4 +191,48 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
       print("디바이스 모델명 불러오기 실패: $e");
     }
   }
+
+  Future<bool> hasAlreadyScannedToday(UserModel? user,String? qrCode) async { //찍은 qrCode 받아서
+  String? pid = user?.pid;
+  Timestamp? latestAttend;
+  var pointsRef = await FirebaseFirestore.instance.collection('points').doc(pid).get(); //points collection에서 user의 pid찾아서 pointsRef로 저장
+  print('hasAlreadyScanned에서 주현의 pid : $pid');
+  print('hasAlreadyScanned에서 pid로 불러온 firestore: $pointsRef');
+
+   Map<String, dynamic>? data = pointsRef.data();
+   //pid안에 map에 points라는 배열 있으면 해당 배열 pointsArray에 저장
+  if (data != null && data.containsKey('points')) {
+    List<dynamic>? pointsArray = data['points'];
+    
+    // timeStamp라는 것 가지고 있다면 가장 최신꺼 가져옴
+    if (pointsArray != null && pointsArray.isNotEmpty) {
+      var latestPoint = pointsArray.last;  
+      
+      if (latestPoint is Map && latestPoint.containsKey('timeStamp')) {
+        latestAttend = latestPoint['timeStamp'];
+      }
+    }else if(pointsArray == null){
+      print('pointsArray가 null');
+    }
+  }
+
+  //최신 출석 timeStamp 구했고, 값이 있으면 오늘 날짜와 비교해서 오늘 찍은 기록이 있으면 true 반환
+  if (latestAttend != null) {
+    DateTime latestAttendDateTime = latestAttend.toDate(); 
+    DateTime now = DateTime.now();
+    
+    DateTime latestAttendDate = DateTime(latestAttendDateTime.year, latestAttendDateTime.month, latestAttendDateTime.day);
+    DateTime currentDate = DateTime(now.year, now.month, now.day);
+    
+    
+    if (latestAttendDate.isAtSameMomentAs(currentDate)) {
+      return true;
+    }
+  }
+
+  //아니면 false 반환
+  return false;
+  }
+
 }
+

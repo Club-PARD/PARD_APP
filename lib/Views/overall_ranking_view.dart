@@ -57,7 +57,7 @@ class OverallRankingView extends StatelessWidget {
 
         return Container(
           width: double.infinity,
-          height: userPointsMap.length * 70,
+          height: userPointsMap.length * 63.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             color: containerBackgroundColor,
