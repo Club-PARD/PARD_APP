@@ -28,13 +28,11 @@ class _MyPointViewState extends State<MyPointView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      PointController pointController = Get.put(PointController());
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
     });
   }
 
-  // final PointController pointController = Get.find<PointController>();
   @override
   Widget build(BuildContext context) {
     final GlobalKey buttonKey = GlobalKey();

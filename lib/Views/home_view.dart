@@ -28,6 +28,15 @@ class _HomePageState extends State<HomePage> {
   bool showContainer = false;
   OverlayEntry? overlayEntry;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      pointController.fetchAndSortUserPoints();
+      pointController.fetchCurrentUserPoints();
+    });
+  }
+
   void showOverlay(BuildContext context) async {
     await PushNotificationController.to.setupFlutterNotifications();
     final RenderBox renderBox =

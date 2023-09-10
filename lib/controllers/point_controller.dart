@@ -15,12 +15,12 @@ class PointController extends GetxController {
   RxDouble beePoints = 0.0.obs;
   RxInt level = 1.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchAndSortUserPoints();
-    fetchCurrentUserPoints();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   fetchAndSortUserPoints();
+  //   fetchCurrentUserPoints();
+  // }
 
   // 모든 멤버의 포인트를 계산하고 내림차순으로 정렬
   Future<void> fetchAndSortUserPoints() async {
