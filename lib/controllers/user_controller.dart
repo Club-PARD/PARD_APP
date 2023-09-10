@@ -96,8 +96,8 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
     print(e);
   }
 }
-//FcmToken 파베에 업데이트
 
+//FcmToken 파베에 업데이트
  Future<void> updateFcmToken(UserModel user,String token) async {
   var pushController = Get.find<PushNotificationController>();
     fcmToken.value = token;
@@ -172,6 +172,16 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
       print(e);
     }
   } 
+
+  Future<void> AddAttendInfo(String attend) async {
+  final userDocument = FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
+  
+  await userDocument.update({
+    'attendInfo': FieldValue.arrayUnion([attend])
+  });
+}
+
+
 
 
   //휴대폰 기종 파악

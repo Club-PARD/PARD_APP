@@ -6,6 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:pard_app/utilities/color_style.dart';
+import 'package:pard_app/utilities/text_style.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'auth_controller.dart';
 
 class PhoneVerificationController extends GetxController {
@@ -103,9 +106,9 @@ class PhoneVerificationController extends GetxController {
   //인증번호 인증성공 토스트 메시지
   void codeValidationSnackBar(BuildContext context, String text) {
     final snackBar = Positioned(
-      top: 620.h,
-      left: 0,
-      right: 0,
+      bottom: 152.h,
+      left: 16.w,
+      right: 16.w,
       child: Container(
         height: 40.h,
         width: 343.w,
@@ -130,23 +133,14 @@ class PhoneVerificationController extends GetxController {
         ),
         child: Material(
           type: MaterialType.transparency,
-          child: Text(
-            text,
-            style: TextStyle(
-              foreground: Paint()
-                ..shader = LinearGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.onSecondary,
-                    Theme.of(context).colorScheme.secondary,
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ).createShader(Rect.fromLTRB(0, 0, 323.w, 40.h)),
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              height: 18.h / 14.h,
-            ),
-          ),
+          child: GradientText(
+                text,
+                style: headlineSmall,
+                colors: const [
+                  primaryBlue,
+                  primaryPurple,
+                ],
+              ),
         ),
       ),
     );
