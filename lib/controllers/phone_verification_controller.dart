@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/component/code_snackbar.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:pard_app/utilities/color_style.dart';
@@ -20,6 +21,7 @@ class PhoneVerificationController extends GetxController {
   Rx<String> verificationCodeFromAuth = ''.obs; //전송된 인증번호
   Rx<bool?> isCorrectPhoneNumber = Rx(null); //올바른 전화번호 체크
   Rx<bool?> isCorrectCode = Rx(null); //올바른 인증번호 체크
+  Rx<Widget> snackBar = Container(height: 40.h,).obs;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //입력한 전화번호가 데이터베이스에 있는지 확인
@@ -56,20 +58,17 @@ class PhoneVerificationController extends GetxController {
       codeAutoRetrievalTimeout: (String verficationId) {},
       phoneNumber: '+82${phoneTextFormField.substring(1).replaceAll('-', '')}',
       verificationCompleted: (verificationCompleted) async {
-        // String verificationId = verificationCompleted as String;
-        // verificationCompleter.complete(verificationId);
         print("번호 인증 성공");
       },
       verificationFailed: (verificationFailed) async {
-        // verificationCompleter.completeError(verificationFailed.code);
         print(verificationFailed.code);
         print("인증번호 전송 실패");
       },
       codeSent: (verificationId, resendingToken) async {
-        // verificationCompleter.complete(verificationId);
-        // codeCompleter.complete(verificationId); // Complete the codeCompleter
         verificationCodeFromAuth.value = verificationId;
-        codeValidationSnackBar(context, '인증번호를 발송했어요.');
+        snackBar.value = const CodeSnackBar('인증번호를 발송했어요.').build(context);
+        await Future.delayed(const Duration(seconds: 3));
+        snackBar.value = Container(height: 40.h);
         print("인증번호 전송 완료");
       },
     );
@@ -95,7 +94,9 @@ class PhoneVerificationController extends GetxController {
         String uid = findedUID.value!;
         await _userController.saveEmail(uid, email);
         // 토스트 메시지 출력
-        codeValidationSnackBar(context, '인증번호가 확인되었어요.');
+        snackBar.value = const CodeSnackBar('인증번호가 확인되었어요.').build(context);
+        await Future.delayed(const Duration(seconds: 3));
+        snackBar.value = Container(height: 40.h);
         print('인증성공');
       }
     } else {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/component/code_snackbar.dart';
 import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/component/verification_textfield.dart';
 import 'package:pard_app/controllers/phone_verification_controller.dart';
@@ -221,7 +222,11 @@ class NumberAuthView extends StatelessWidget {
                         ),
                       )),
                   SizedBox(
-                    height: 222.h,
+                    height: 172.h,
+                  ),
+                  phoneVerificationController.snackBar.value,
+                  SizedBox(
+                    height: 10.h,
                   ),
                   GestureDetector(
                       child: Container(
