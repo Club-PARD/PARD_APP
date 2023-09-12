@@ -59,7 +59,7 @@ class OverallRankingView extends StatelessWidget {
 
         return Container(
           constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.85,
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
           ),
           width: double.infinity,
           height: userPointsMap.length * 63.h,
