@@ -69,11 +69,11 @@ class _MyPageState extends State<MyPage> {
                   GestureDetector(
                       onTap: launchFeedback,
                       child: ConstrainedBox(
-                        constraints: BoxConstraints.expand(
-                          height: 90.h,
+                        constraints: const BoxConstraints.expand(
+                          height: 80,
                         ),
                         child: SizedBox(
-                          width: double.infinity,
+                           width: double.infinity,
                           child: Image.asset(
                             'assets/images/newBanner.png',
                             fit: BoxFit.fill,

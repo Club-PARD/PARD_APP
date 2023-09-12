@@ -13,7 +13,7 @@ class UserController extends GetxController {
   Rx<String?> deviceName = Rx<String?>(null); 
   Rx<String?> deviceVersion = Rx<String?>(null);
   Rx<String?> fcmToken = Rx<String?>(null);
-  Rx<bool?> onOff = Rx<bool?>(true);
+  late Rx<bool?> onOff = Rx<bool?>(null);
   Rx<String?> uid = Rx<String?>(null);
   late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
   
@@ -27,6 +27,7 @@ class UserController extends GetxController {
         Map<String, dynamic> userData = querySnapshot.docs.first.data();
 
         UserModel user = UserModel.fromJson(userData);
+        onOff.value = user.onOff; 
 
         print('사용자 정보:');
         print('uid: ${user.uid}');
