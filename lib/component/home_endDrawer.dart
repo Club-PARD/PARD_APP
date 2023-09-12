@@ -95,7 +95,7 @@ void launchAppNotion() async {
 
 void launchServerNotion() async {
   final Uri pardServerNotionUrl =
-      Uri.parse('https://pardhgu.notion.site/c32944fa18d042caa150a1ba1de306bd');
+      Uri.parse('https://pard-notice.oopy.io/server');
   try {
     await launchUrl(pardServerNotionUrl);
   } catch (e) {

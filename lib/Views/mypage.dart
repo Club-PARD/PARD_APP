@@ -70,7 +70,7 @@ class _MyPageState extends State<MyPage> {
                       onTap: launchFeedback,
                       child: ConstrainedBox(
                         constraints: const BoxConstraints.expand(
-                          height: 90,
+                          height: 80,
                         ),
                         child: SizedBox(
                            width: double.infinity,
