@@ -8,6 +8,7 @@ import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
+import 'package:pard_app/model/point_model/point_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 
@@ -340,8 +341,17 @@ class _HomePageState extends State<HomePage> {
 
                         /** 캐릭터 Row로 나중에 point 정보로 캐릭터들 변경해야함*/
                         /** -------------------------- 여기부터 ---------------------------------------------------- */
-                        Obx(
-                          () => Row(
+                        Obx(() {
+                          PointModel? pointModel =
+                              pointController.rxPointModel.value;
+
+                          if (pointModel == null) {
+                            return const CircularProgressIndicator(
+                              color: primaryBlue,
+                            ); // 로딩 처리
+                          }
+
+                          return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               SizedBox(
@@ -423,22 +433,18 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: Center(
                                           child: Padding(
-                                            padding:
-                                                (pointController.level.value ==
-                                                            1 ||
-                                                        pointController
-                                                                .level.value ==
-                                                            3)
-                                                    ? const EdgeInsets.only(
-                                                        top: 8.0)
-                                                    : const EdgeInsets.only(
-                                                        top: 0.0),
+                                            padding: (pointModel!.level == 1 ||
+                                                    pointModel.level == 3)
+                                                ? const EdgeInsets.only(
+                                                    top: 8.0)
+                                                : const EdgeInsets.only(
+                                                    top: 0.0),
                                             child: Image.asset(
-                                              'assets/images/pardie${pointController.level.value}.png',
+                                              'assets/images/pardie${pointModel.level}.png',
                                               width: changeCurrentWidth(
-                                                  pointController.level.value),
+                                                  pointModel.level!),
                                               height: changeCurrentHeight(
-                                                  pointController.level.value),
+                                                  pointModel.level!),
                                               fit: BoxFit.fill,
                                             ),
                                           ),
@@ -457,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                                     width: 60.w,
                                     height: 12.h,
                                     child: Image.asset(
-                                      'assets/images/level${pointController.level.value}.png',
+                                      'assets/images/level${pointModel.level}.png',
                                       fit: BoxFit.fill,
                                     ),
                                   )
@@ -490,7 +496,7 @@ class _HomePageState extends State<HomePage> {
                                     width: 120.w,
                                     height: 120.h,
                                     child: Image.asset(
-                                      'assets/images/next_lv${pointController.level.value + 1}.png',
+                                      'assets/images/next_lv${pointModel.level! + 1}.png',
                                     ),
                                   ),
                                   SizedBox(
@@ -504,7 +510,7 @@ class _HomePageState extends State<HomePage> {
                                     width: 60.w,
                                     height: 12.h,
                                     child: Image.asset(
-                                      'assets/images/n_level${pointController.level.value + 1}.png',
+                                      'assets/images/n_level${pointModel.level! + 1}.png',
                                       fit: BoxFit.fill,
                                     ),
                                   )
@@ -515,8 +521,8 @@ class _HomePageState extends State<HomePage> {
                                 width: 24.w,
                               ),
                             ],
-                          ),
-                        ),
+                          );
+                        }),
                         /** -------------------------- 여기까지 이미지 ---------------------------------------------------- */
                       ],
                     ),
@@ -582,13 +588,23 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     /** User의 point로 변경 */
                                     Obx(
-                                      () => Text(
-                                        '+${formatter.format(pointController.points.value)}점',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displayMedium!
-                                            .copyWith(color: primaryGreen),
-                                      ),
+                                      () {
+                                        PointModel? pointModel =
+                                            pointController.rxPointModel.value;
+
+                                        if (pointModel == null) {
+                                          return const CircularProgressIndicator(
+                                            color: primaryBlue,
+                                          ); // 로딩 처리
+                                        }
+                                        return Text(
+                                          '+${formatter.format(pointModel!.currentPoints)}점',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayMedium!
+                                              .copyWith(color: primaryGreen),
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
@@ -607,14 +623,24 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     /** User의 point로 변경 */
                                     Obx(
-                                      () => Text(
-                                        '${formatter.format(pointController.beePoints.value)}점',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displayMedium!
-                                            .copyWith(color: errorRed),
-                                      ),
-                                    ),
+                                      () {
+                                        PointModel? pointModel =
+                                            pointController.rxPointModel.value;
+
+                                        if (pointModel == null) {
+                                          return const CircularProgressIndicator(
+                                            color: primaryBlue,
+                                          ); // 로딩 처리
+                                        }
+                                        return Text(
+                                          '${formatter.format(pointModel!.currentBeePoints)}점',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayMedium!
+                                              .copyWith(color: errorRed),
+                                        );
+                                      },
+                                    )
                                   ],
                                 ),
                               ),

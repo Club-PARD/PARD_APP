@@ -10,6 +10,9 @@ class PointModel {
   String? pid;
   List<Map>? points;
   List<Map>? beePoints;
+  double? currentPoints;
+  double? currentBeePoints;
+  int? level;
 
   factory PointModel.fromJson(Map<String, dynamic> json) =>
       _$PointModelFromJson(json);

@@ -11,16 +11,8 @@ class PointController extends GetxController {
   final AuthController _authController = Get.put(AuthController());
   RxMap userPointsMap = {}.obs; // UserModel, double
   Rx<PointModel?> rxPointModel = Rx<PointModel?>(null);
-  RxDouble points = 0.0.obs;
-  RxDouble beePoints = 0.0.obs;
-  RxInt level = 1.obs;
-
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   fetchAndSortUserPoints();
-  //   fetchCurrentUserPoints();
-  // }
+  RxInt currentUserRank = 0.obs;
+  RxInt currentUserPartRank = 0.obs;
 
   // 모든 멤버의 포인트를 계산하고 내림차순으로 정렬
   Future<void> fetchAndSortUserPoints() async {
@@ -93,7 +85,7 @@ class PointController extends GetxController {
   }
 
   // 현재 유저의 등수를 반환하는 함수
-  int getCurrentUserRank() {
+  Future<void> getCurrentUserRank() async {
     User? currentUser = FirebaseAuth.instance.currentUser;
 
     // if (currentUser != null) {
@@ -105,17 +97,12 @@ class PointController extends GetxController {
     int currentUserIndex =
         sortedUsers.indexWhere((user) => user.email == currentUser?.email);
     if (currentUserIndex != -1) {
-      return currentUserIndex + 1;
-    } else {
-      return -1; // 파트 내에서 해당 유저를 찾지 못한 경우
+      currentUserRank.value = currentUserIndex + 1;
     }
-    // } else {
-    //   return 0; // 로그인된 유저가 없는 경우
-    // }
   }
 
   // 현재 유저의 파트 내 등수를 반환하는 함수
-  int getCurrentUserPartRank() {
+  getCurrentUserPartRank() async {
     final Map<UserModel, double> userPointsMapCopy = Map.from(userPointsMap);
 
     List<MapEntry<UserModel, double>> sortedEntries =
@@ -149,7 +136,8 @@ class PointController extends GetxController {
         rank++;
       }
     }
-    return currentUserIndex;
+
+    currentUserPartRank.value = currentUserIndex;
   }
 
   // 현재 유저의 포인트 & 벌점를 가져오는 함수
@@ -191,23 +179,24 @@ class PointController extends GetxController {
             }
           }
 
-          rxPointModel.value = pointModel;
-          points.value = totalPoints;
-          beePoints.value = totalBeePoints;
+          pointModel.currentPoints = totalPoints;
+          pointModel.currentBeePoints = totalBeePoints;
 
           // 레벨 계산
           double calculatedPoints = totalPoints - totalBeePoints;
           if (calculatedPoints >= 0 && calculatedPoints <= 25) {
-            level.value = 1;
+            pointModel.level = 1;
           } else if (calculatedPoints <= 50) {
-            level.value = 2;
+            pointModel.level = 2;
           } else if (calculatedPoints <= 75) {
-            level.value = 3;
+            pointModel.level = 3;
           } else if (calculatedPoints <= 100) {
-            level.value = 4;
+            pointModel.level = 4;
           } else {
-            level.value = 5;
+            pointModel.level = 5;
           }
+
+          rxPointModel.value = pointModel;
         }
       }
     }
