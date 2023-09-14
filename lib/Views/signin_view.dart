@@ -2,17 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
+import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
 
+  Future<void> loadData(BuildContext context) async {
+    final PointController pointController = Get.put(PointController());
+    await pointController.fetchAndSortUserPoints();
+    await pointController.fetchCurrentUserPoints();
+    await pointController.getCurrentUserRank();
+    await pointController.getCurrentUserPartRank();
+  }
+
   @override
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
     final UserController userController = Get.put(UserController());
     authController.checkPreviousLogin();
+    loadData(context);
 
     return WillPopScope(
       onWillPop: () async => false,

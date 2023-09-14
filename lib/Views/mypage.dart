@@ -68,12 +68,10 @@ class _MyPageState extends State<MyPage> {
                 children: [
                   GestureDetector(
                       onTap: launchFeedback,
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints.expand(
-                          height: 80,
-                        ),
+                      child: AspectRatio(
+                        aspectRatio: 375 / 76,
                         child: SizedBox(
-                           width: double.infinity,
+                          width: double.infinity,
                           child: Image.asset(
                             'assets/images/newBanner.png',
                             fit: BoxFit.fill,
@@ -478,7 +476,8 @@ class _MyPageState extends State<MyPage> {
                                                                       TextButton(
                                                                           onPressed:
                                                                               () {
-                                                                           bottomController.selectedIndex.value = 0; //로그아웃하고 들어올 때 index 0으로 하기
+                                                                            bottomController.selectedIndex.value =
+                                                                                0; //로그아웃하고 들어올 때 index 0으로 하기
                                                                             AuthController().signOut();
                                                                           },
                                                                           child:

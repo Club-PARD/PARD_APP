@@ -50,7 +50,9 @@ class OverallRankingView extends StatelessWidget {
             pointController.userPointsMap;
 
         if (rxUserPointsMap.isEmpty) {
-          return CircularProgressIndicator(); // 로딩 처리
+          return CircularProgressIndicator(
+            color: primaryBlue,
+          ); // 로딩 처리
         }
 
         // RxMap을 Map<UserModel, int>으로 변환

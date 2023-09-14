@@ -30,14 +30,14 @@ class _MyPointViewState extends State<MyPointView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
+      pointController.getCurrentUserRank();
+      pointController.getCurrentUserPartRank();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey buttonKey = GlobalKey();
-    int currentUserRank = pointController.getCurrentUserRank();
-    int currentUserPartRank = pointController.getCurrentUserPartRank();
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -70,7 +70,9 @@ class _MyPointViewState extends State<MyPointView> {
                         pointController.userPointsMap;
 
                     if (rxUserPointsMap.isEmpty) {
-                      return const CircularProgressIndicator(); // 로딩 처리
+                      return const CircularProgressIndicator(
+                        color: primaryBlue,
+                      ); // 로딩 처리
                     }
 
                     // RxMap을 Map<UserModel, double>으로 변환
@@ -104,22 +106,24 @@ class _MyPointViewState extends State<MyPointView> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          rankWithText(
-                            '파트 내 랭킹',
-                            context,
-                            currentUserRank,
-                            currentUserPartRank,
-                          ),
-                          rankWithText(
-                            '전체 랭킹',
-                            context,
-                            currentUserRank,
-                            currentUserPartRank,
-                          ),
-                        ],
+                      Obx(
+                        () => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            rankWithText(
+                              '파트 내 랭킹',
+                              context,
+                              pointController.currentUserRank.value,
+                              pointController.currentUserPartRank.value,
+                            ),
+                            rankWithText(
+                              '전체 랭킹',
+                              context,
+                              pointController.currentUserRank.value,
+                              pointController.currentUserPartRank.value,
+                            ),
+                          ],
+                        ),
                       ),
                       TextButton(
                         onPressed: () {
@@ -295,15 +299,23 @@ class _MyPointViewState extends State<MyPointView> {
                       SizedBox(
                         height: 8.h,
                       ),
-                      Obx(
-                        () => Text(
-                          '+${formatter.format(pointController.points.value)}점',
+                      Obx(() {
+                        PointModel? pointModel =
+                            pointController.rxPointModel.value;
+
+                        if (pointModel == null) {
+                          return const CircularProgressIndicator(
+                            color: primaryBlue,
+                          ); // 로딩 처리
+                        }
+                        return Text(
+                          '+${formatter.format(pointModel.currentPoints)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!
                               .copyWith(color: primaryGreen),
-                        ),
-                      ),
+                        );
+                      }),
                     ],
                   ),
                 ),
@@ -323,15 +335,22 @@ class _MyPointViewState extends State<MyPointView> {
                       SizedBox(
                         height: 8.h,
                       ),
-                      Obx(
-                        () => Text(
-                          '${formatter.format(pointController.beePoints.value)}점',
+                      Obx(() {
+                        PointModel? pointModel =
+                            pointController.rxPointModel.value;
+                        if (pointModel == null) {
+                          return const CircularProgressIndicator(
+                            color: primaryBlue,
+                          ); // 로딩 처리
+                        }
+                        return Text(
+                          '${formatter.format(pointModel.currentBeePoints)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!
                               .copyWith(color: errorRed),
-                        ),
-                      ),
+                        );
+                      }),
                     ],
                   ),
                 ),
