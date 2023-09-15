@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/juhyun/Desktop/pardapp2/PARD_APP/linux"
+    "cmake.sourceDirectory": "/Users/juhyun/Desktop/pardapp2/PARD_APP/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
