@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthController extends GetxController {
   final UserController _userController = Get.put(UserController());
@@ -16,7 +19,7 @@ class AuthController extends GetxController {
   RxBool isAgree = false.obs;
   RxBool isLogin = true.obs;
 
-  Rx<FlutterSecureStorage> sStorage = FlutterSecureStorage().obs;
+  Rx<FlutterSecureStorage> sStorage = const FlutterSecureStorage().obs;
 
   checkPreviousLogin() async {
     String? email = await sStorage.value.read(key: 'login');
@@ -60,14 +63,56 @@ class AuthController extends GetxController {
             await sStorage.value.write(
                 key: 'login', value: user.email!);
             Get.toNamed('/home');
-          } else
+          } else {
             Get.toNamed('/tos');
+          }
         }
       }
     } catch (error) {
       print("Google Sign-In Error: $error");
     }
   }
+
+  Future<void> signInWithApple() async {
+  try {
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      webAuthenticationOptions: WebAuthenticationOptions(
+        clientId: "com.login.flutter-firebase-sns-login.web",
+        redirectUri: Uri.parse(
+            "https://evergreen-glory-sagittarius.glitch.me/callbacks/sign_in_with_apple"),
+      ),
+    );
+
+    final oauthCredential = OAuthProvider("apple.com").credential(
+      idToken: appleCredential.identityToken,
+      accessToken: appleCredential.authorizationCode,
+    );
+
+    final UserCredential authResult = 
+        await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+    final User? user = authResult.user;
+
+    if (user != null) {
+      userEmail.value = user.email;
+      bool isUserExists = await _userController.isVerifyUserByEmail(user.email!);
+      if (isUserExists) {
+        await _userController.updateTimeByEmail(user.email!);
+        await _userController.getUserInfoByEmail(user.email!);
+        await sStorage.value.write(key: 'login', value: user.email!);
+        Get.toNamed('/home'); //로그인 성공했으면 home으로
+      } else {
+        Get.back(); //아니면 back
+      }
+    }
+  } catch (error) {
+    print("Apple 로그인 실패: $error");
+  }
+}
+
 
   //로그아웃
   Future<void> signOut() async {

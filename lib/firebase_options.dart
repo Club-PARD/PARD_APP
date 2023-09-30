@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDYuSzECIeL4af0rwUdUC0Y4xH6bVLBR60',
-    appId: '1:676828935630:android:cd84d5445726a3f205a79f',
+    appId: '1:676828935630:android:5686c689052676dc05a79f',
     messagingSenderId: '676828935630',
     projectId: 'pard-app-project',
     storageBucket: 'pard-app-project.appspot.com',
