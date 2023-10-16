@@ -81,7 +81,7 @@ class AuthController extends GetxController {
         AppleIDAuthorizationScopes.fullName,
       ],
       webAuthenticationOptions: WebAuthenticationOptions(
-        clientId: "com.login.flutter-firebase-sns-login.web",
+        clientId: "com.pard.service",
         redirectUri: Uri.parse(
             "https://evergreen-glory-sagittarius.glitch.me/callbacks/sign_in_with_apple"),
       ),
@@ -96,18 +96,14 @@ class AuthController extends GetxController {
         await FirebaseAuth.instance.signInWithCredential(oauthCredential);
     final User? user = authResult.user;
 
-    if (user != null) {
-      userEmail.value = user.email;
-      bool isUserExists = await _userController.isVerifyUserByEmail(user.email!);
-      if (isUserExists) {
-        await _userController.updateTimeByEmail(user.email!);
-        await _userController.getUserInfoByEmail(user.email!);
-        await sStorage.value.write(key: 'login', value: user.email!);
-        Get.toNamed('/home'); //로그인 성공했으면 home으로
-      } else {
-        Get.back(); //아니면 back
-      }
-    }
+    // if (user != null) {
+    //   if (appleCredential.givenName != null && appleCredential.givenName!.isNotEmpty) {
+    //     await sStorage.value.write(key: 'name', value: appleCredential.givenName!);
+        Get.toNamed('/home');
+//       } else {
+// Get.toNamed('/tos');      }
+
+    //}
   } catch (error) {
     print("Apple 로그인 실패: $error");
   }
