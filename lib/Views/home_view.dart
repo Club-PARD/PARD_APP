@@ -284,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Text(
                                       /** part값으로 대체 */
-                                      '${userController.userInfo.value!.part} 파트',
+                                      '${userController.userInfo.value!.part}',
                                       style: titleMedium.copyWith(height: 0)),
                                 ),
                               ),
