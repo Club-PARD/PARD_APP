@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,6 +13,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 class AuthController extends GetxController {
   final UserController _userController = Get.put(UserController());
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Rx<String?> userEmail = Rx<String?>(null); // 1차적으로 이메일 저장(휴대폰 인증 전 필요)
   Rx<User?> user = Rx<User?>(null);
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -75,6 +77,7 @@ class AuthController extends GetxController {
 
   Future<void> signInWithApple() async {
   try {
+    //앱에서 애플 로그인 창을 호출하고, apple계정의 credential을 가져온다.
     final appleCredential = await SignInWithApple.getAppleIDCredential(
       scopes: [
         AppleIDAuthorizationScopes.email,
@@ -87,27 +90,61 @@ class AuthController extends GetxController {
       ),
     );
 
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('givenName: ${appleCredential.givenName}');
+    print('familyName: ${appleCredential.familyName}');
+    print('email: ${appleCredential.email}');
+
+//그 credential을 넣어서 OAuth를 생성
     final oauthCredential = OAuthProvider("apple.com").credential(
       idToken: appleCredential.identityToken,
       accessToken: appleCredential.authorizationCode,
     );
 
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    print('-------APPLE ID오ㅏ EMAIL확인------------');
+    
+    //OAuth를 넣어서 firebase유저 생성
     final UserCredential authResult = 
-        await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+        await _auth.signInWithCredential(oauthCredential);
     final User? user = authResult.user;
+    
+    DocumentSnapshot? userDoc = await _firestore.collection('users').doc(user?.uid).get();
+    if (user != null) {
+      userEmail.value = appleCredential.email;  //애플에서 받아온 email을 Rx email에 넣는다
+          // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
+          print('-------------------USER EMAIL ----------------');
+          print(userEmail.value);
+          print(user.uid);
+          print(userDoc.data());
+bool isUserExists =
+              await _userController.isVerifyUserByEmail(appleCredential.email!);
+          if (isUserExists) {
+            await _userController.updateTimeByEmail(appleCredential.email!);
+            await _userController.getUserInfoByEmail(appleCredential.email!);
+            await sStorage.value.write(
+                key: 'login', value: appleCredential.email!);
+            Get.toNamed('/home');
+          } else {
+            Get.toNamed('/tos');
+          }    
+        }
+    } catch (error) {
+      print("Apple Sign-In Error: $error");
+    }
 
-    // if (user != null) {
-    //   if (appleCredential.givenName != null && appleCredential.givenName!.isNotEmpty) {
-    //     await sStorage.value.write(key: 'name', value: appleCredential.givenName!);
-        Get.toNamed('/home');
-//       } else {
-// Get.toNamed('/tos');      }
-
-    //}
-  } catch (error) {
-    print("Apple 로그인 실패: $error");
   }
-}
+
+   
 
 
   //로그아웃
