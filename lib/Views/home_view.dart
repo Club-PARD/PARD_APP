@@ -598,7 +598,12 @@ class _HomePageState extends State<HomePage> {
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          (pointModel.currentPoints == 0)
+                                          (userController.userInfo.value
+                                                          ?.member ==
+                                                      '잔잔파도' ||
+                                                  userController.userInfo.value
+                                                          ?.member ==
+                                                      '운영진')
                                               ? '-'
                                               : '+${formatter.format(pointModel!.currentPoints)}점',
                                           style: Theme.of(context)
@@ -635,7 +640,12 @@ class _HomePageState extends State<HomePage> {
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          (pointModel.currentBeePoints == 0)
+                                          (userController.userInfo.value
+                                                          ?.member ==
+                                                      '잔잔파도' ||
+                                                  userController.userInfo.value
+                                                          ?.member ==
+                                                      '운영진')
                                               ? '-'
                                               : '${formatter.format(pointModel!.currentBeePoints)}점',
                                           style: Theme.of(context)
