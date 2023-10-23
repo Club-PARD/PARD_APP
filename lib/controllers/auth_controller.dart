@@ -1,14 +1,19 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthController extends GetxController {
   final UserController _userController = Get.put(UserController());
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Rx<String?> userEmail = Rx<String?>(null); // 1차적으로 이메일 저장(휴대폰 인증 전 필요)
   Rx<User?> user = Rx<User?>(null);
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -16,7 +21,7 @@ class AuthController extends GetxController {
   RxBool isAgree = false.obs;
   RxBool isLogin = true.obs;
 
-  Rx<FlutterSecureStorage> sStorage = FlutterSecureStorage().obs;
+  Rx<FlutterSecureStorage> sStorage = const FlutterSecureStorage().obs;
 
   checkPreviousLogin() async {
     String? email = await sStorage.value.read(key: 'login');
@@ -60,14 +65,62 @@ class AuthController extends GetxController {
             await sStorage.value.write(
                 key: 'login', value: user.email!);
             Get.toNamed('/home');
-          } else
+          } else {
             Get.toNamed('/tos');
+          }
         }
       }
     } catch (error) {
       print("Google Sign-In Error: $error");
     }
   }
+
+  Future<void> signInWithApple() async {
+  try {
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      webAuthenticationOptions: WebAuthenticationOptions(
+        clientId: "com.pard.service",
+        redirectUri: Uri.parse(
+            "https://evergreen-glory-sagittarius.glitch.me/callbacks/sign_in_with_apple"),
+      ),
+    );
+
+    final oauthCredential = OAuthProvider("apple.com").credential(
+      idToken: appleCredential.identityToken,
+      accessToken: appleCredential.authorizationCode,
+    );
+
+    final UserCredential authResult = 
+        await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+    final User? user = authResult.user;
+    
+    if (user != null) {
+      userEmail.value = appleCredential.email;  //애플에서 받아온 email을 Rx email에 넣는다
+          // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
+          print('-------------------USER EMAIL ----------------');
+          print(userEmail.value);
+bool isUserExists =
+              await _userController.isVerifyUserByEmail(appleCredential.email!);
+          if (isUserExists) {
+            await _userController.updateTimeByEmail(appleCredential.email!);
+            await _userController.getUserInfoByEmail(appleCredential.email!);
+            await sStorage.value.write(
+                key: 'login', value: appleCredential.email!);
+            Get.toNamed('/home');
+          } else {
+            Get.toNamed('/tos');
+          }    
+        }
+    } catch (error) {
+      print("Apple Sign-In Error: $error");
+    }
+  }
+
+
 
   //로그아웃
   Future<void> signOut() async {

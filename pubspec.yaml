@@ -57,6 +57,7 @@ dependencies:
   auto_size_text: ^3.0.0
   flutter_native_splash: ^2.3.2
   app_settings: ^5.0.0
+  sign_in_with_apple: ^5.0.0
 
 dev_dependencies:
   flutter_test:

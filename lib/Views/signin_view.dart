@@ -54,8 +54,53 @@ class SignInView extends StatelessWidget {
                   width: 375.w,
                 ),
                 SizedBox(
-                  height: 162.h,
+                  height: 110.h,
                 ),
+                if (!authController.isLogin.value)
+                  GestureDetector(
+                      child: Container(
+                        width: 327.w,
+                        height: 56.h,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [
+                                Theme.of(context).colorScheme.onSecondary,
+                                Theme.of(context).colorScheme.secondary,
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/apple.png',
+                              height: 22.h,
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            Text(
+                              'Apple로 로그인',
+                              style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600,
+                                  height: 24.h / 18.h,
+                                  color: whiteScale[100]),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () async {
+                        await userController.getDeviceInfo();
+                        print(
+                            '디바이스 명: ${userController.deviceName}, 디바이스 버전: ${userController.deviceVersion}');
+                        authController.signInWithApple();
+                      }),
+                      SizedBox(height: 16.h,),
                 if (!authController.isLogin.value)
                   GestureDetector(
                       child: Container(
