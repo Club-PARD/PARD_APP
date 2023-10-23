@@ -284,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Text(
                                       /** part값으로 대체 */
-                                      '${userController.userInfo.value!.part} 파트',
+                                      '${userController.userInfo.value!.part}',
                                       style: titleMedium.copyWith(height: 0)),
                                 ),
                               ),
@@ -598,7 +598,9 @@ class _HomePageState extends State<HomePage> {
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          '+${formatter.format(pointModel!.currentPoints)}점',
+                                          (pointModel.currentPoints == 0)
+                                              ? '-'
+                                              : '+${formatter.format(pointModel!.currentPoints)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!
@@ -633,7 +635,9 @@ class _HomePageState extends State<HomePage> {
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          '${formatter.format(pointModel!.currentBeePoints)}점',
+                                          (pointModel.currentBeePoints == 0)
+                                              ? '-'
+                                              : '${formatter.format(pointModel!.currentBeePoints)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!

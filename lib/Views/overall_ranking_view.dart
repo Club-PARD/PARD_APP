@@ -33,7 +33,7 @@ class OverallRankingView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 16.h,
+                height: 8.h,
               ),
               infiniteRankScroll(context),
             ],
@@ -123,7 +123,7 @@ class OverallRankingView extends StatelessWidget {
                   ),
                   SizedBox(width: 4.w),
                   Text(
-                    '${user.part}파트',
+                    '${user.part}',
                     style: titleSmall.copyWith(
                       color: grayScale[30],
                     ),
@@ -188,7 +188,7 @@ class OverallRankingView extends StatelessWidget {
               ),
               SizedBox(width: 4.w),
               Text(
-                '${user.part}파트',
+                '${user.part}',
                 style: titleSmall.copyWith(
                   color: grayScale[30],
                 ),

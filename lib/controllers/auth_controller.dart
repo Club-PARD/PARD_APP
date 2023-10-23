@@ -120,25 +120,7 @@ class AuthController extends GetxController {
     
     DocumentSnapshot? userDoc = await _firestore.collection('users').doc(user?.uid).get();
     if (user != null) {
-        if(appleCredential.email != null){
-           await _firestore.collection('users').doc(user.uid).set({
-        'email': appleCredential.email,
-    });
-    userEmail.value = appleCredential.email;  //애플에서 받아온 email을 Rx email에 넣는다
-        }
-
-        String? userEmailFromFirestore;
-if (appleCredential.email == null) {
-    DocumentSnapshot userDoc = await _firestore.collection('users').doc(user.uid).get();
-    if (userDoc.exists) {
-        final Map<String, dynamic>? dataMap = userDoc.data() as Map<String, dynamic>?;
-        userEmailFromFirestore = dataMap?['email'] as String?;
-    }
-      userEmail.value = userEmailFromFirestore;
-}
-
-
-     // userEmail.value = appleCredential.email;  //애플에서 받아온 email을 Rx email에 넣는다
+      userEmail.value = appleCredential.email;  //애플에서 받아온 email을 Rx email에 넣는다
           // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
           print('-------------------USER EMAIL ----------------');
           print(userEmail.value);
