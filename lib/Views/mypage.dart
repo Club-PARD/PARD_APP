@@ -160,7 +160,7 @@ class _MyPageState extends State<MyPage> {
                                     ),
                                     child: Center(
                                       child: Text(
-                                          '${userController.userInfo.value!.part} 파트',
+                                          '${userController.userInfo.value!.part}',
                                           style:
                                               titleMedium.copyWith(height: 0)),
                                     ),

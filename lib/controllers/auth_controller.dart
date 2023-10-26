@@ -77,7 +77,6 @@ class AuthController extends GetxController {
 
   Future<void> signInWithApple() async {
   try {
-    //앱에서 애플 로그인 창을 호출하고, apple계정의 credential을 가져온다.
     final appleCredential = await SignInWithApple.getAppleIDCredential(
       scopes: [
         AppleIDAuthorizationScopes.email,
@@ -90,42 +89,20 @@ class AuthController extends GetxController {
       ),
     );
 
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('givenName: ${appleCredential.givenName}');
-    print('familyName: ${appleCredential.familyName}');
-    print('email: ${appleCredential.email}');
-
-//그 credential을 넣어서 OAuth를 생성
     final oauthCredential = OAuthProvider("apple.com").credential(
       idToken: appleCredential.identityToken,
       accessToken: appleCredential.authorizationCode,
     );
 
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    print('-------APPLE ID오ㅏ EMAIL확인------------');
-    
-    //OAuth를 넣어서 firebase유저 생성
     final UserCredential authResult = 
-        await _auth.signInWithCredential(oauthCredential);
+        await FirebaseAuth.instance.signInWithCredential(oauthCredential);
     final User? user = authResult.user;
     
-    DocumentSnapshot? userDoc = await _firestore.collection('users').doc(user?.uid).get();
     if (user != null) {
       userEmail.value = appleCredential.email;  //애플에서 받아온 email을 Rx email에 넣는다
           // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
           print('-------------------USER EMAIL ----------------');
           print(userEmail.value);
-          print(user.uid);
-          print(userDoc.data());
 bool isUserExists =
               await _userController.isVerifyUserByEmail(appleCredential.email!);
           if (isUserExists) {
@@ -143,7 +120,6 @@ bool isUserExists =
     }
   }
 
-   
 
 
   //로그아웃
