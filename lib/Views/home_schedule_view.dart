@@ -67,10 +67,11 @@ class HomeSchedule extends StatelessWidget {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // description -> place로 대체
                         Text(
-                          firstSchedule.description.length > 20
-                              ? '${firstSchedule.description.substring(0, 20)}...'
-                              : firstSchedule.description,
+                          firstSchedule.place.length > 20
+                              ? '${firstSchedule.place.substring(0, 20)}...'
+                              : firstSchedule.place,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleLarge,

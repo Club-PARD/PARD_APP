@@ -15,7 +15,6 @@ class ScheduleController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     getSchedules('${userController.userInfo.value!.part}');
   }
 
@@ -36,12 +35,12 @@ class ScheduleController extends GetxController {
         if (scheduleData['part'] == userPart || scheduleData['part'] == '전체') {
           final schedule = ScheduleModel(
               scheduleData['title'],
-              scheduleData['description'],
               (scheduleData['dueDate'] as Timestamp).toDate(),
               scheduleData['place'],
               scheduleData['part'],
               now.isAfter((scheduleData['dueDate'] as Timestamp).toDate()),
-              sid);
+              sid,
+              scheduleData['type']);
 
           if (schedule.previous) {
             pastSchedules.add(schedule);
@@ -51,6 +50,7 @@ class ScheduleController extends GetxController {
         }
       }
       pastSchedules = pastSchedules.reversed.toList().obs;
+      print('upcomingSchedules : $upcomingSchedules');
     } catch (e) {
       if (kDebugMode) {
         print('Error fetching schedules: $e');

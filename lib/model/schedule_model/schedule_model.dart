@@ -4,16 +4,16 @@ part 'schedule_model.g.dart';
 
 @JsonSerializable()
 class ScheduleModel {
-  ScheduleModel(this.title, this.description, this.dueDate, this.place,
-      this.part, this.previous, this.sid);
+  ScheduleModel(this.title, this.dueDate, this.place, this.part, this.previous,
+      this.sid, this.type);
 
   String title;
-  String description;
   DateTime dueDate;
   String place;
   String part;
   bool previous;
   String sid;
+  bool type;
 
   factory ScheduleModel.fromJson(Map<String, dynamic> json) =>
       _$ScheduleModelFromJson(json);
