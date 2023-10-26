@@ -320,7 +320,9 @@ class _MyPointViewState extends State<MyPointView> {
                                   userController.userInfo.value?.member ==
                                       '운영진')
                               ? '-'
-                              : '+${formatter.format(pointModel.currentPoints)}점',
+                              : (pointModel.currentPoints == 0)
+                                  ? '${formatter.format(pointModel.currentPoints)}점'
+                                  : '+${formatter.format(pointModel.currentPoints)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!

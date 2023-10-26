@@ -131,7 +131,7 @@ class PointController extends GetxController {
 
     for (var entry in sortedUserPointsMap.entries) {
       if (entry.key.part == _userController.userInfo.value!.part) {
-        // print('Rank $rank: ${entry.key.name}, Points: ${entry.value}');
+        print('Rank $rank: ${entry.key.name}, Points: ${entry.value}');
         if (entry.key.name == _userController.userInfo.value!.name) {
           currentUserIndex = rank;
         }
