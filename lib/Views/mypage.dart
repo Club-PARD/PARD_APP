@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
+  
 
   @override
   State<MyPage> createState() => _MyPageState();
@@ -653,10 +654,16 @@ class _MyPageState extends State<MyPage> {
                                                                   child:
                                                                       TextButton(
                                                                           onPressed:
-                                                                              () {
+                                                                              () async {
                                                                             bottomController.selectedIndex.value =
                                                                                 0; //로그아웃하고 들어올 때 index 0으로 하기
-                                                                            AuthController().signOut();
+                                                
+                                                                            if (uid !=
+                                                                                null) {
+                                                                              AuthController().deleteUserFieldsExceptEmailAndPhone();
+                                                                            } else {
+                                                                              print("UID is null");
+                                                                            }
                                                                           },
                                                                           child:
                                                                               Text(
