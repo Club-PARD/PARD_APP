@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,13 +9,13 @@ class UserController extends GetxController {
   final CollectionReference<Map<String, dynamic>> usersCollection =
       FirebaseFirestore.instance.collection('users');
   Rx<UserModel?> userInfo = Rx<UserModel?>(null);
-  Rx<String?> deviceName = Rx<String?>(null); 
+  Rx<String?> deviceName = Rx<String?>(null);
   Rx<String?> deviceVersion = Rx<String?>(null);
   Rx<String?> fcmToken = Rx<String?>(null);
   late Rx<bool?> onOff = Rx<bool?>(null);
   Rx<String?> uid = Rx<String?>(null);
-  late final FirebaseMessaging firebaseMessaging =FirebaseMessaging.instance;
-  
+  late final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+
   //user모델 가져오기(by 이메일)
   Future<void> getUserInfoByEmail(String email) async {
     try {
@@ -27,7 +26,7 @@ class UserController extends GetxController {
         Map<String, dynamic> userData = querySnapshot.docs.first.data();
 
         UserModel user = UserModel.fromJson(userData);
-        onOff.value = user.onOff; 
+        onOff.value = user.onOff;
 
         print('사용자 정보:');
         print('uid: ${user.uid}');
@@ -46,9 +45,8 @@ class UserController extends GetxController {
         print('onOff : ${user.onOff}');
         userInfo.value = user;
 
-String? token = PushNotificationController.to.fcmTokenUser.value;
-    await updateFcmToken(user, token);  
-
+        String? token = PushNotificationController.to.fcmTokenUser.value;
+        await updateFcmToken(user, token);
       } else {
         print('사용자 정보 없음');
       }
@@ -77,36 +75,33 @@ String? token = PushNotificationController.to.fcmTokenUser.value;
     });
   }
 
-
-  Future<void> saveOnOff(String uid,bool onOff) async {
-    
+  Future<void> saveOnOff(String uid, bool onOff) async {
     await FirebaseFirestore.instance.collection('users').doc(uid).update({
       'onOff': onOff,
     });
   }
 
-  
+  Future<void> updateAttend(UserModel user, String? qrCode) async {
+    final currentTime = DateTime.now().toIso8601String();
+    final userDocument =
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
 
-Future<void> updateAttend(UserModel user, String? qrCode) async {
-  final currentTime = DateTime.now().toIso8601String(); 
-  final userDocument = FirebaseFirestore.instance.collection('users').doc(user.uid);
-
-  try {
-    await userDocument.update({
-      'attend': {qrCode: currentTime}
-    });
-  } catch (e) {
-    print(e);
+    try {
+      await userDocument.update({
+        'attend': {qrCode: currentTime}
+      });
+    } catch (e) {
+      print(e);
+    }
   }
-}
 
 //FcmToken 파베에 업데이트
- Future<void> updateFcmToken(UserModel user,String token) async {
-  var pushController = Get.find<PushNotificationController>();
+  Future<void> updateFcmToken(UserModel user, String token) async {
+    var pushController = Get.find<PushNotificationController>();
     fcmToken.value = token;
     final usersCollection = FirebaseFirestore.instance.collection('users');
-  print('11111111111111111111111');
-   print("FcmToken is: ${pushController.fcmTokenUser.value}");
+    print('11111111111111111111111');
+    print("FcmToken is: ${pushController.fcmTokenUser.value}");
     try {
       print('11111111111111111111111');
       print(userInfo.value?.uid);
@@ -115,9 +110,7 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
     } catch (e) {
       print("Failed to update fcmToken: $e");
     }
-}
-
-
+  }
 
   //로그인 기록 업데이트(by 이메일) - 휴대폰 인증 성공시, 휴대폰 인증 완료 후 다시 로그인 할 때,
   Future<void> updateTimeByEmail(String email) async {
@@ -150,42 +143,40 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
       await userDoc.reference.update({
         'lastLogin': currentTime,
         'attend': <String, dynamic>{},
-        
-      }
-      );
+      });
       print('유저세팅성공 $email');
     } else {
       print('사용자를 찾을 수 없습니다: $email');
     }
-  } 
+  }
 
   Future<void> AddAttend(String sid, String attend) async {
-    final userDocument = FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
-    
+    final userDocument =
+        FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
+
     try {
       final userSnapshot = await userDocument.get();
       if (userSnapshot.exists) {
-        Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
-        
+        Map<String, dynamic> userData =
+            userSnapshot.data() as Map<String, dynamic>;
+
         userData['attend'] ??= <String, dynamic>{};
         userData['attend'][sid] = attend;
         await userDocument.update({'attend': userData['attend']});
       }
-    } catch(e) {
+    } catch (e) {
       print(e);
     }
-  } 
+  }
 
   Future<void> AddAttendInfo(String attend) async {
-  final userDocument = FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
-  
-  await userDocument.update({
-    'attendInfo': FieldValue.arrayUnion([attend])
-  });
-}
+    final userDocument =
+        FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
 
-
-
+    await userDocument.update({
+      'attendInfo': FieldValue.arrayUnion([attend])
+    });
+  }
 
   //휴대폰 기종 파악
   Future<void> getDeviceInfo() async {
@@ -205,47 +196,49 @@ Future<void> updateAttend(UserModel user, String? qrCode) async {
     }
   }
 
-  Future<bool> hasAlreadyScannedToday(UserModel? user,String? qrCode) async { //찍은 qrCode 받아서
-  String? pid = user?.pid;
-  Timestamp? latestAttend;
-  var pointsRef = await FirebaseFirestore.instance.collection('points').doc(pid).get(); //points collection에서 user의 pid찾아서 pointsRef로 저장
-  print('hasAlreadyScanned에서 주현의 pid : $pid');
-  print('hasAlreadyScanned에서 pid로 불러온 firestore: $pointsRef');
+  Future<bool> hasAlreadyScannedToday(UserModel? user, String? qrCode) async {
+    //찍은 qrCode 받아서
+    String? pid = user?.pid;
+    Timestamp? latestAttend;
+    var pointsRef = await FirebaseFirestore.instance
+        .collection('points')
+        .doc(pid)
+        .get(); //points collection에서 user의 pid찾아서 pointsRef로 저장
+    print('hasAlreadyScanned에서 주현의 pid : $pid');
+    print('hasAlreadyScanned에서 pid로 불러온 firestore: $pointsRef');
 
-   Map<String, dynamic>? data = pointsRef.data();
-   //pid안에 map에 points라는 배열 있으면 해당 배열 pointsArray에 저장
-  if (data != null && data.containsKey('points')) {
-    List<dynamic>? pointsArray = data['points'];
-    
-    // timeStamp라는 것 가지고 있다면 가장 최신꺼 가져옴
-    if (pointsArray != null && pointsArray.isNotEmpty) {
-      var latestPoint = pointsArray.last;  
-      
-      if (latestPoint is Map && latestPoint.containsKey('timestamp')) {
-        latestAttend = latestPoint['timestamp'];
+    Map<String, dynamic>? data = pointsRef.data();
+    //pid안에 map에 points라는 배열 있으면 해당 배열 pointsArray에 저장
+    if (data != null && data.containsKey('points')) {
+      List<dynamic>? pointsArray = data['points'];
+
+      // timeStamp라는 것 가지고 있다면 가장 최신꺼 가져옴
+      if (pointsArray != null && pointsArray.isNotEmpty) {
+        var latestPoint = pointsArray.last;
+
+        if (latestPoint is Map && latestPoint.containsKey('timestamp')) {
+          latestAttend = latestPoint['timestamp'];
+        }
+      } else if (pointsArray == null) {
+        print('pointsArray가 null');
       }
-    }else if(pointsArray == null){
-      print('pointsArray가 null');
     }
-  }
 
-  //최신 출석 timeStamp 구했고, 값이 있으면 오늘 날짜와 비교해서 오늘 찍은 기록이 있으면 true 반환
-  if (latestAttend != null) {
-    DateTime latestAttendDateTime = latestAttend.toDate(); 
-    DateTime now = DateTime.now();
-    
-    DateTime latestAttendDate = DateTime(latestAttendDateTime.year, latestAttendDateTime.month, latestAttendDateTime.day);
-    DateTime currentDate = DateTime(now.year, now.month, now.day);
-    
-    
-    if (latestAttendDate.isAtSameMomentAs(currentDate)) {
-      return true;
+    //최신 출석 timeStamp 구했고, 값이 있으면 오늘 날짜와 비교해서 오늘 찍은 기록이 있으면 true 반환
+    if (latestAttend != null) {
+      DateTime latestAttendDateTime = latestAttend.toDate();
+      DateTime now = DateTime.now();
+
+      DateTime latestAttendDate = DateTime(latestAttendDateTime.year,
+          latestAttendDateTime.month, latestAttendDateTime.day);
+      DateTime currentDate = DateTime(now.year, now.month, now.day);
+
+      if (latestAttendDate.isAtSameMomentAs(currentDate)) {
+        return true;
+      }
     }
-  }
 
-  //아니면 false 반환
-  return false;
+    //아니면 false 반환
+    return false;
   }
-
 }
-

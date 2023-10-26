@@ -32,6 +32,7 @@ class _MyPointViewState extends State<MyPointView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
+      print('---------------my point view()');
       pointController.getCurrentUserRank();
       pointController.getCurrentUserPartRank();
     });

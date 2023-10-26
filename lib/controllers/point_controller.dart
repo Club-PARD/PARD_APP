@@ -87,16 +87,14 @@ class PointController extends GetxController {
   /////////////////////////////////////////////////////////////
   // 현재 유저의 등수를 반환하는 함수
   Future<void> getCurrentUserRank() async {
-    User? currentUser = FirebaseAuth.instance.currentUser;
-
-    // if (currentUser != null) {
     final Map<UserModel, double> userPointsMapCopy = Map.from(userPointsMap);
     List<UserModel> sortedUsers = userPointsMapCopy.keys.toList();
+
     sortedUsers
         .sort((a, b) => userPointsMapCopy[b]!.compareTo(userPointsMapCopy[a]!));
 
-    int currentUserIndex =
-        sortedUsers.indexWhere((user) => user.email == currentUser?.email);
+    int currentUserIndex = sortedUsers.indexWhere(
+        (user) => user.email == _userController.userInfo.value!.email);
     if (currentUserIndex != -1) {
       currentUserRank.value = currentUserIndex + 1;
     }
@@ -151,8 +149,11 @@ class PointController extends GetxController {
       // users 컬렉션에서 해당 이메일에 해당하는 문서를 찾기
       QuerySnapshot userSnapshot = await FirebaseFirestore.instance
           .collection('users')
-          .where('email', isEqualTo: currentUser.email)
+          .where('email', isEqualTo: _userController.userInfo.value!.email)
           .get();
+
+      print(
+          'fetchCurrentUserPoints() 함수 실행: ${_userController.userInfo.value!.email}');
 
       if (userSnapshot.docs.isNotEmpty) {
         String pid = userSnapshot.docs[0]['pid'];

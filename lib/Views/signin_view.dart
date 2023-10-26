@@ -13,6 +13,7 @@ class SignInView extends StatelessWidget {
     final PointController pointController = Get.put(PointController());
     await pointController.fetchAndSortUserPoints();
     await pointController.fetchCurrentUserPoints();
+    print('---------------sign in view()');
     await pointController.getCurrentUserRank();
     await pointController.getCurrentUserPartRank();
   }
@@ -100,7 +101,9 @@ class SignInView extends StatelessWidget {
                             '디바이스 명: ${userController.deviceName}, 디바이스 버전: ${userController.deviceVersion}');
                         authController.signInWithApple();
                       }),
-                      SizedBox(height: 16.h,),
+                SizedBox(
+                  height: 16.h,
+                ),
                 if (!authController.isLogin.value)
                   GestureDetector(
                       child: Container(
