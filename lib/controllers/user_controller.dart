@@ -143,6 +143,7 @@ class UserController extends GetxController {
       await userDoc.reference.update({
         'lastLogin': currentTime,
         'attend': <String, dynamic>{},
+        'onOff': true,
       });
       print('유저세팅성공 $email');
     } else {
