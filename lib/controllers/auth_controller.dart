@@ -89,27 +89,44 @@ class AuthController extends GetxController {
       ),
     );
 
+          userEmail.value = appleCredential.email;  //애플에서 받아온 email을 Rx email에 넣는다
+
     final oauthCredential = OAuthProvider("apple.com").credential(
       idToken: appleCredential.identityToken,
       accessToken: appleCredential.authorizationCode,
     );
+
+    if(appleCredential.email == null){
+    List<String> jwt = appleCredential.identityToken?.split('.') ?? [];
+    String payload = jwt[1];
+    payload = base64.normalize(payload);
+
+    final List<int> jsonData = base64.decode(payload);
+    final userInfo = jsonDecode(utf8.decode(jsonData));
+    print('--------------DECODED USERINFO-----------------');
+    print(userInfo);
+    String email = userInfo['email'];
+    print('-----------DECODED Email----------------------');
+    print(email);
+    userEmail.value = email;
+    }
 
     final UserCredential authResult = 
         await FirebaseAuth.instance.signInWithCredential(oauthCredential);
     final User? user = authResult.user;
     
     if (user != null) {
-      userEmail.value = appleCredential.email;  //애플에서 받아온 email을 Rx email에 넣는다
           // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
           print('-------------------USER EMAIL ----------------');
+          print(appleCredential.identityToken);
           print(userEmail.value);
 bool isUserExists =
-              await _userController.isVerifyUserByEmail(appleCredential.email!);
+              await _userController.isVerifyUserByEmail(userEmail.value!);
           if (isUserExists) {
-            await _userController.updateTimeByEmail(appleCredential.email!);
-            await _userController.getUserInfoByEmail(appleCredential.email!);
+            await _userController.updateTimeByEmail(userEmail.value!);
+            await _userController.getUserInfoByEmail(userEmail.value!);
             await sStorage.value.write(
-                key: 'login', value: appleCredential.email!);
+                key: 'login', value: userEmail.value!);
             Get.toNamed('/home');
           } else {
             Get.toNamed('/tos');
