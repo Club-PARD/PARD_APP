@@ -6,6 +6,7 @@ import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/component/verification_textfield.dart';
 import 'package:pard_app/controllers/phone_verification_controller.dart';
 import 'package:pard_app/component/tos_statement.dart';
+import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,6 +22,7 @@ class NumberAuthView extends StatelessWidget {
         Get.put(PhoneVerificationController());
     final UserController userController = Get.put(UserController());
     final AuthController authController = Get.put(AuthController());
+    final PointController pointController = Get.put(PointController());
     final FocusNode phoneFocus = FocusNode();
     final FocusNode codeFocus = FocusNode();
 
@@ -273,6 +275,8 @@ class NumberAuthView extends StatelessWidget {
                           await authController.sStorage.value.write(
                               key: 'login',
                               value: authController.userEmail.value!);
+                          await pointController.fetchAndSortUserPoints();
+                          await pointController.fetchCurrentUserPoints();
                           await Get.toNamed('/home');
                         }
                       }),
@@ -281,7 +285,8 @@ class NumberAuthView extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      launchUrl(Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSdXG9ZFrKHz2n5K42r249IYneuJ4urArmYtxs6qv_13IwtO4g/viewform?usp=sf_link'));
+                      launchUrl(Uri.parse(
+                          'https://docs.google.com/forms/d/e/1FAIpQLSdXG9ZFrKHz2n5K42r249IYneuJ4urArmYtxs6qv_13IwtO4g/viewform?usp=sf_link'));
                     },
                     child: Text(
                       '회원 인증에 실패하셨나요?',
