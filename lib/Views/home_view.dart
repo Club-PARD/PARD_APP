@@ -605,7 +605,9 @@ class _HomePageState extends State<HomePage> {
                                                           ?.member ==
                                                       '운영진')
                                               ? '-'
-                                              : '+${formatter.format(pointModel!.currentPoints)}점',
+                                              : (pointModel.currentPoints == 0)
+                                                  ? '${formatter.format(pointModel.currentPoints)}점'
+                                                  : '+${formatter.format(pointModel.currentPoints)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!
