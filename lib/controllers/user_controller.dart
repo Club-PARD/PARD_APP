@@ -40,7 +40,7 @@ class UserController extends GetxController {
         print('isAdmin: ${user.isAdmin}');
         print('isMaster: ${user.isMaster}');
         print('lastLogin: ${user.lastLogin}');
-        print('pid: ${user.email}');
+        print('pid: ${user.pid}');
         print('attend: ${user.attend}');
         print('fcmToken : ${user.fcmToken}');
         print('onOff : ${user.onOff}');
@@ -84,6 +84,8 @@ String? token = PushNotificationController.to.fcmTokenUser.value;
       'onOff': onOff,
     });
   }
+
+  
 
 Future<void> updateAttend(UserModel user, String? qrCode) async {
   final currentTime = DateTime.now().toIso8601String(); 
