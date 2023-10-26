@@ -147,30 +147,20 @@ class AuthController extends GetxController {
   Future<void> deleteUserFieldsExceptEmailAndPhone() async {
     print('----------------------------탈퇴하기 uid------------------------');
     print(uid);
-    _firestore;   //파이어스토어 인스턴스 가져옴
+    // _firestore; //파이어스토어 인스턴스 가져옴
 
-  await _firestore.collection('users').doc(uid).update({
-    'name': '',
-    'part': '',
-    'member': '',
-    'generation': '',
-     'isAdmin': false,
-    'isMaster': false,
-    'lastLogin': Timestamp.fromMillisecondsSinceEpoch(0),
-    'attend': {},
-    'attendInfo':{},
-    'fcmToken': '',
-    'onOff': false,
-  });
+    await _firestore
+        .collection('points')
+        .doc(_userController.userInfo.value!.pid)
+        .delete();
+    await _firestore.collection('users').doc(uid).delete();
 
-  await _auth.currentUser?.delete();
-      await sStorage.value.deleteAll();
-      await _auth.signOut();
-      await _googleSignIn.signOut();
-      Get.offAllNamed('/');
-}
-
-
+    await _auth.currentUser?.delete();
+    await sStorage.value.deleteAll();
+    await _auth.signOut();
+    await _googleSignIn.signOut();
+    Get.offAllNamed('/');
+  }
 
   //로그아웃
   Future<void> signOut() async {
