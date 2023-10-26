@@ -20,7 +20,7 @@ class PushNotificationController extends GetxController {
   //fcm 기본 설정
   Future<void> setupFlutterNotifications() async {
     //device token얻기 
-    fcmToken = await firebaseMessaging.getToken();
+    // fcmToken = await firebaseMessaging.getToken();
     
     //안드로이드 백그라운드 채널
     channel = const AndroidNotificationChannel(
