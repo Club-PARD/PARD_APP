@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
+      print('---------------home_view()');
     });
   }
 
