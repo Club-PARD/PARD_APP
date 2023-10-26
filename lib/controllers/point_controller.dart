@@ -144,65 +144,68 @@ class PointController extends GetxController {
   // 현재 유저의 포인트 & 벌점를 가져오는 함수
   Future<void> fetchCurrentUserPoints() async {
     User? currentUser = FirebaseAuth.instance.currentUser;
-
-    if (currentUser != null) {
-      // users 컬렉션에서 해당 이메일에 해당하는 문서를 찾기
-      QuerySnapshot userSnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: _userController.userInfo.value!.email)
-          .get();
-
-      print(
-          'fetchCurrentUserPoints() 함수 실행: ${_userController.userInfo.value!.email}');
-
-      if (userSnapshot.docs.isNotEmpty) {
-        String pid = userSnapshot.docs[0]['pid'];
-
-        // points 컬렉션에서 해당 pid에 해당하는 문서 가져오기
-        DocumentSnapshot pointsSnapshot = await FirebaseFirestore.instance
-            .collection('points')
-            .doc(pid)
+    try {
+      if (currentUser != null) {
+        // users 컬렉션에서 해당 이메일에 해당하는 문서를 찾기
+        QuerySnapshot userSnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: _userController.userInfo.value!.email)
             .get();
 
-        if (pointsSnapshot.exists) {
-          PointModel pointModel = PointModel.fromJson(
-              pointsSnapshot.data() as Map<String, dynamic>);
+        print(
+            'fetchCurrentUserPoints() 함수 실행: ${_userController.userInfo.value!.email}');
 
-          double totalPoints = 0;
-          double totalBeePoints = 0;
+        if (userSnapshot.docs.isNotEmpty) {
+          String pid = userSnapshot.docs[0]['pid'];
 
-          if (pointModel.points != null) {
-            for (var point in pointModel.points!) {
-              totalPoints += (point['digit'] ?? 0) as int;
+          // points 컬렉션에서 해당 pid에 해당하는 문서 가져오기
+          DocumentSnapshot pointsSnapshot = await FirebaseFirestore.instance
+              .collection('points')
+              .doc(pid)
+              .get();
+
+          if (pointsSnapshot.exists) {
+            PointModel pointModel = PointModel.fromJson(
+                pointsSnapshot.data() as Map<String, dynamic>);
+
+            double totalPoints = 0;
+            double totalBeePoints = 0;
+
+            if (pointModel.points != null) {
+              for (var point in pointModel.points!) {
+                totalPoints += (point['digit'] ?? 0) as int;
+              }
             }
-          }
 
-          if (pointModel.beePoints != null) {
-            for (var beePoint in pointModel.beePoints!) {
-              totalBeePoints += (beePoint['digit'] ?? 0) as int;
+            if (pointModel.beePoints != null) {
+              for (var beePoint in pointModel.beePoints!) {
+                totalBeePoints += (beePoint['digit'] ?? 0) as int;
+              }
             }
+
+            pointModel.currentPoints = totalPoints;
+            pointModel.currentBeePoints = totalBeePoints;
+
+            // 레벨 계산
+            double calculatedPoints = totalPoints - totalBeePoints;
+            if (calculatedPoints >= 0 && calculatedPoints <= 25) {
+              pointModel.level = 1;
+            } else if (calculatedPoints <= 50) {
+              pointModel.level = 2;
+            } else if (calculatedPoints <= 75) {
+              pointModel.level = 3;
+            } else if (calculatedPoints <= 90) {
+              pointModel.level = 4;
+            } else {
+              pointModel.level = 5;
+            }
+
+            rxPointModel.value = pointModel;
           }
-
-          pointModel.currentPoints = totalPoints;
-          pointModel.currentBeePoints = totalBeePoints;
-
-          // 레벨 계산
-          double calculatedPoints = totalPoints - totalBeePoints;
-          if (calculatedPoints >= 0 && calculatedPoints <= 25) {
-            pointModel.level = 1;
-          } else if (calculatedPoints <= 50) {
-            pointModel.level = 2;
-          } else if (calculatedPoints <= 75) {
-            pointModel.level = 3;
-          } else if (calculatedPoints <= 90) {
-            pointModel.level = 4;
-          } else {
-            pointModel.level = 5;
-          }
-
-          rxPointModel.value = pointModel;
         }
       }
+    } catch (e) {
+      print('fetch: $e');
     }
   }
 
