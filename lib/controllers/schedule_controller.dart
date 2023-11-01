@@ -15,9 +15,9 @@ class ScheduleController extends GetxController {
   RxList<ScheduleModel> pastSchedules = <ScheduleModel>[].obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
-    getSchedules('${_userController.userInfo.value!.part}');
+    await getSchedules('${_userController.userInfo.value!.part}');
   }
 
   Future<void> getSchedules(String userPart) async {

@@ -46,9 +46,7 @@ class MyApp extends StatelessWidget {
               name: '/qr',
               page: () => QRScan(),
               transition: Transition.downToUp),
-          GetPage(name: '/schedule', page: () => SchedulerScreen())
-          // GetPage(name: '/first', page: () => FirstNamedPage()),
-          // GetPage(name: '/second', page: () => SecondNamedPage()),
+          GetPage(name: '/schedule', page: () => SchedulerScreen()),
         ],
       ),
     );

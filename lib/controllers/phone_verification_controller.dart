@@ -17,6 +17,7 @@ class PhoneVerificationController extends GetxController {
   final AuthController _authController = Get.put(AuthController());
   final UserController _userController = Get.put(UserController());
   final ErrorController _errorController = Get.put(ErrorController());
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   RxString phoneTextFormField = ''.obs; //입력된 전화번호
   RxString codeTextFormField = ''.obs; //입력된 인증번호
   Rx<String?> findedUID = Rx<String?>(null);
@@ -26,7 +27,25 @@ class PhoneVerificationController extends GetxController {
   Rx<Widget> snackBar = Container(
     height: 40.h,
   ).obs;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Timer
+  RxInt seconds = 60.obs;
+  RxBool isTimerRunning = false.obs;
+  Rx<Timer> timer = Timer.periodic(const Duration(seconds: 1), (timer) {}).obs;
+
+  void startTimer() {
+    isTimerRunning.value = true;
+    timer.value = Timer.periodic(const Duration(seconds: 1), (timer) {
+      seconds.value--;
+      if (seconds.value == 0) stopTimer();
+    });
+  }
+
+  void stopTimer() {
+    isTimerRunning.value = false;
+    seconds.value = 60;
+    timer.value.cancel();
+  }
 
   //입력한 전화번호가 데이터베이스에 있는지 확인
   Future<bool> isVerifyPhoneNumber(String inputNumber) async {

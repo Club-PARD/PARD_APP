@@ -183,7 +183,7 @@ class AuthController extends GetxController {
       await sStorage.value.deleteAll();
       await _auth.signOut();
       await _googleSignIn.signOut();
-      Get.offAllNamed('/');
+      Get.offAllNamed('/', predicate: (route) => Get.currentRoute == '/');
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
@@ -198,7 +198,7 @@ class AuthController extends GetxController {
     try {
       await _auth.signOut();
       await sStorage.value.delete(key: 'login');
-      Get.offAllNamed('/');
+      Get.offAllNamed('/', predicate: (route) => Get.currentRoute == '/');
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
