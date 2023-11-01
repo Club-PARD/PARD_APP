@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pard_app/controllers/error_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 
 import 'package:pard_app/model/schedule_model/schedule_model.dart';
 
 class ScheduleController extends GetxController {
-  final UserController userController = Get.put(UserController());
+  final UserController _userController = Get.put(UserController());
+  final ErrorController _errorController = Get.put(ErrorController());
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   RxList<ScheduleModel> upcomingSchedules = <ScheduleModel>[].obs;
@@ -15,7 +17,7 @@ class ScheduleController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getSchedules('${userController.userInfo.value!.part}');
+    getSchedules('${_userController.userInfo.value!.part}');
   }
 
   Future<void> getSchedules(String userPart) async {
@@ -55,6 +57,11 @@ class ScheduleController extends GetxController {
       if (kDebugMode) {
         print('Error fetching schedules: $e');
       }
+      await _errorController.writeErrorLog(
+        e.toString(),
+        _userController.userInfo.value!.phone ?? 'none',
+        'getSchedules()',
+      );
     }
   }
 }

@@ -12,7 +12,7 @@ class SignInView extends StatelessWidget {
   Future<void> loadData(BuildContext context) async {
     final PointController pointController = Get.put(PointController());
     await pointController.fetchAndSortUserPoints();
-    await pointController.fetchCurrentUserPoints();
+    // await pointController.fetchCurrentUserPoints();
     print('---------------sign in view()');
     // await pointController.getCurrentUserRank();
     // await pointController.getCurrentUserPartRank();

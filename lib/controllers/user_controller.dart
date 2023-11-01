@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/error_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 
 class UserController extends GetxController {
+  final ErrorController _errorController = Get.put(ErrorController());
   final CollectionReference<Map<String, dynamic>> usersCollection =
       FirebaseFirestore.instance.collection('users');
   Rx<UserModel?> userInfo = Rx<UserModel?>(null);
@@ -50,8 +52,13 @@ class UserController extends GetxController {
       } else {
         print('사용자 정보 없음');
       }
-    } catch (error) {
-      print("Error while fetching user info: $error");
+    } catch (e) {
+      print("Error while fetching user info: $e");
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'getUserInfoByEmail()',
+      );
     }
   }
 
@@ -62,23 +69,44 @@ class UserController extends GetxController {
           await usersCollection.where('email', isEqualTo: email).get();
 
       return querySnapshot.docs.isNotEmpty;
-    } catch (error) {
-      print("Error while verifying user by email: $error");
+    } catch (e) {
+      print("Error while verifying user by email: $e");
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'isVerifyUserByEmail()',
+      );
       return false;
     }
   }
 
   //이메일 저장(휴대폰 인증 성공시 사용 함수)
   Future<void> saveEmail(String uid, String email) async {
-    await FirebaseFirestore.instance.collection('users').doc(uid).update({
-      'email': email,
-    });
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(uid).update({
+        'email': email,
+      });
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'saveEmail()',
+      );
+    }
   }
 
   Future<void> saveOnOff(String uid, bool onOff) async {
-    await FirebaseFirestore.instance.collection('users').doc(uid).update({
-      'onOff': onOff,
-    });
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(uid).update({
+        'onOff': onOff,
+      });
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'saveOnOff()',
+      );
+    }
   }
 
   Future<void> updateAttend(UserModel user, String? qrCode) async {
@@ -92,6 +120,11 @@ class UserController extends GetxController {
       });
     } catch (e) {
       print(e);
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'updateAttend()',
+      );
     }
   }
 
@@ -109,6 +142,11 @@ class UserController extends GetxController {
       print("fcmToken updated in Firestore");
     } catch (e) {
       print("Failed to update fcmToken: $e");
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'updateFcmToken()',
+      );
     }
   }
 
@@ -116,42 +154,57 @@ class UserController extends GetxController {
   Future<void> updateTimeByEmail(String email) async {
     final currentTime = Timestamp.now();
 
-    final usersCollection = FirebaseFirestore.instance.collection('users');
-    final querySnapshot =
-        await usersCollection.where('email', isEqualTo: email).get();
+    try {
+      final usersCollection = FirebaseFirestore.instance.collection('users');
+      final querySnapshot =
+          await usersCollection.where('email', isEqualTo: email).get();
 
-    if (querySnapshot.docs.isNotEmpty) {
-      final userDoc = querySnapshot.docs.first;
-      await userDoc.reference.update({
-        'lastLogin': currentTime,
-      });
-    } else {
-      print('사용자를 찾을 수 없습니다: $email');
+      if (querySnapshot.docs.isNotEmpty) {
+        final userDoc = querySnapshot.docs.first;
+        await userDoc.reference.update({
+          'lastLogin': currentTime,
+        });
+      } else {
+        print('사용자를 찾을 수 없습니다: $email');
+      }
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'updateTimeByEmail()',
+      );
     }
   }
 
   //휴대폰 인증 성공시
   Future<void> setUserByEmail(String email) async {
     final currentTime = Timestamp.now();
+    try {
+      final usersCollection = FirebaseFirestore.instance.collection('users');
+      final querySnapshot =
+          await usersCollection.where('email', isEqualTo: email).get();
 
-    final usersCollection = FirebaseFirestore.instance.collection('users');
-    final querySnapshot =
-        await usersCollection.where('email', isEqualTo: email).get();
-
-    if (querySnapshot.docs.isNotEmpty) {
-      final userDoc = querySnapshot.docs.first;
-      await userDoc.reference.update({
-        'lastLogin': currentTime,
-        'attend': <String, dynamic>{},
-        'onOff': true,
-      });
-      print('유저세팅성공 $email');
-    } else {
-      print('사용자를 찾을 수 없습니다: $email');
+      if (querySnapshot.docs.isNotEmpty) {
+        final userDoc = querySnapshot.docs.first;
+        await userDoc.reference.update({
+          'lastLogin': currentTime,
+          'attend': <String, dynamic>{},
+          'onOff': true,
+        });
+        print('유저세팅성공 $email');
+      } else {
+        print('사용자를 찾을 수 없습니다: $email');
+      }
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'setUserByEmail()',
+      );
     }
   }
 
-  Future<void> AddAttend(String sid, String attend) async {
+  Future<void> addAttend(String sid, String attend) async {
     final userDocument =
         FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
 
@@ -167,16 +220,28 @@ class UserController extends GetxController {
       }
     } catch (e) {
       print(e);
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'addAttend()',
+      );
     }
   }
 
-  Future<void> AddAttendInfo(String attend) async {
+  Future<void> addAttendInfo(String attend) async {
     final userDocument =
         FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
-
-    await userDocument.update({
-      'attendInfo': FieldValue.arrayUnion([attend])
-    });
+    try {
+      await userDocument.update({
+        'attendInfo': FieldValue.arrayUnion([attend])
+      });
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'addAttendInfo()',
+      );
+    }
   }
 
   //휴대폰 기종 파악
@@ -194,6 +259,11 @@ class UserController extends GetxController {
       }
     } catch (e) {
       print("디바이스 모델명 불러오기 실패: $e");
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'getDeviceInfo()',
+      );
     }
   }
 
@@ -210,35 +280,42 @@ class UserController extends GetxController {
 
     Map<String, dynamic>? data = pointsRef.data();
     //pid안에 map에 points라는 배열 있으면 해당 배열 pointsArray에 저장
-    if (data != null && data.containsKey('points')) {
-      List<dynamic>? pointsArray = data['points'];
+    try {
+      if (data != null && data.containsKey('points')) {
+        List<dynamic>? pointsArray = data['points'];
 
-      // timeStamp라는 것 가지고 있다면 가장 최신꺼 가져옴
-      if (pointsArray != null && pointsArray.isNotEmpty) {
-        var latestPoint = pointsArray.last;
+        // timeStamp라는 것 가지고 있다면 가장 최신꺼 가져옴
+        if (pointsArray != null && pointsArray.isNotEmpty) {
+          var latestPoint = pointsArray.last;
 
-        if (latestPoint is Map && latestPoint.containsKey('timestamp')) {
-          latestAttend = latestPoint['timestamp'];
+          if (latestPoint is Map && latestPoint.containsKey('timestamp')) {
+            latestAttend = latestPoint['timestamp'];
+          }
+        } else if (pointsArray == null) {
+          print('pointsArray가 null');
         }
-      } else if (pointsArray == null) {
-        print('pointsArray가 null');
       }
-    }
 
-    //최신 출석 timeStamp 구했고, 값이 있으면 오늘 날짜와 비교해서 오늘 찍은 기록이 있으면 true 반환
-    if (latestAttend != null) {
-      DateTime latestAttendDateTime = latestAttend.toDate();
-      DateTime now = DateTime.now();
+      //최신 출석 timeStamp 구했고, 값이 있으면 오늘 날짜와 비교해서 오늘 찍은 기록이 있으면 true 반환
+      if (latestAttend != null) {
+        DateTime latestAttendDateTime = latestAttend.toDate();
+        DateTime now = DateTime.now();
 
-      DateTime latestAttendDate = DateTime(latestAttendDateTime.year,
-          latestAttendDateTime.month, latestAttendDateTime.day);
-      DateTime currentDate = DateTime(now.year, now.month, now.day);
+        DateTime latestAttendDate = DateTime(latestAttendDateTime.year,
+            latestAttendDateTime.month, latestAttendDateTime.day);
+        DateTime currentDate = DateTime(now.year, now.month, now.day);
 
-      if (latestAttendDate.isAtSameMomentAs(currentDate)) {
-        return true;
+        if (latestAttendDate.isAtSameMomentAs(currentDate)) {
+          return true;
+        }
       }
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value!.phone ?? 'none',
+        'hasAlreadyScannedToday()',
+      );
     }
-
     //아니면 false 반환
     return false;
   }
