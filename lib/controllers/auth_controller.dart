@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jose/jose.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -22,6 +25,43 @@ class AuthController extends GetxController {
   RxBool isLogin = true.obs;
 
   Rx<FlutterSecureStorage> sStorage = const FlutterSecureStorage().obs;
+
+  // apple signout위한 Client_secret
+//   Future<String> createClientSecret() async {
+//   final expirationDate = DateTime.now().add(const Duration(days: 30));
+//   final jwtHeader = {'kid': '8V2VG5Q57T', 'alg': 'ES256'};
+
+//   // JWT payload
+//   final claims = JsonWebTokenClaims.fromJson({
+//     'iss': 'S65HTAH6VL',
+//     'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
+//     'exp': expirationDate.millisecondsSinceEpoch ~/ 1000,
+//     'aud': 'https://appleid.apple.com',
+//     'sub': 'com.pard.pardOfficial',
+//   });
+
+//   // Load the private key
+//   final privateKey = await getPrivateKey('/Users/juhyun/Downloads/AuthKey_8V2VG5Q57T.p8');
+
+//   // Create a JSON Web Signature (JWS)
+//   final jwsBuilder = JsonWebSignatureBuilder();
+//   jwsBuilder.jsonContent = claims.toJson();
+//   jwsBuilder.setProtectedHeader('alg', 'ES256');
+//   jwsBuilder.addRecipient(privateKey, algorithm: 'ES256');
+//   final signedToken = jwsBuilder.build();
+
+//   return signedToken.toCompactSerialization();
+// }
+
+Future<JsonWebKey> getPrivateKey(String path) async {
+  final directory = await getApplicationDocumentsDirectory();
+  final file = File('${directory.path}/$path');
+  final String privateKeyString = await file.readAsString();
+
+  // Parse the private key
+  final keyJson = JsonWebKey.fromPem(privateKeyString);
+  return keyJson;
+}
 
   checkPreviousLogin() async {
     final prefs = await SharedPreferences.getInstance();
@@ -102,6 +142,7 @@ class AuthController extends GetxController {
         idToken: appleCredential.identityToken,
         accessToken: appleCredential.authorizationCode,
       );
+      
 
       if (appleCredential.email == null) {
         List<String> jwt = appleCredential.identityToken?.split('.') ?? [];
@@ -145,10 +186,6 @@ class AuthController extends GetxController {
 
   //탈퇴하기
   Future<void> deleteUserFieldsExceptEmailAndPhone() async {
-    print('----------------------------탈퇴하기 uid------------------------');
-    print(uid);
-    // _firestore; //파이어스토어 인스턴스 가져옴
-
     await _firestore
         .collection('points')
         .doc(_userController.userInfo.value!.pid)
