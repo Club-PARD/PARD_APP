@@ -14,8 +14,8 @@ class SignInView extends StatelessWidget {
     await pointController.fetchAndSortUserPoints();
     await pointController.fetchCurrentUserPoints();
     print('---------------sign in view()');
-    await pointController.getCurrentUserRank();
-    await pointController.getCurrentUserPartRank();
+    // await pointController.getCurrentUserRank();
+    // await pointController.getCurrentUserPartRank();
   }
 
   @override

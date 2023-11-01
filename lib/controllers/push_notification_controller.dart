@@ -19,9 +19,9 @@ class PushNotificationController extends GetxController {
 
   //fcm 기본 설정
   Future<void> setupFlutterNotifications() async {
-    //device token얻기 
+    //device token얻기
     // fcmToken = await firebaseMessaging.getToken();
-    
+
     //안드로이드 백그라운드 채널
     channel = const AndroidNotificationChannel(
       'high_importance_channel', // id
@@ -56,10 +56,7 @@ class PushNotificationController extends GetxController {
     // 토큰 요청
     getToken();
 
-    print('********#&#*&*#&%*#&*%#');
-    print(uid);
-    print(fcmToken);
-    print(userController.userInfo.value);
+    print('setupFlutterNotifications()');
   }
 
   Future<void> getToken() async {
@@ -67,17 +64,9 @@ class PushNotificationController extends GetxController {
     fcmTokenUser.value = await firebaseMessaging.getToken() ?? '';
 
     // /**공지 받으려면 기기의 토큰 받아와야 한다 */
-    print("--------TOKEN--------------");
-    print('');
-    print('');
-    print('');
-    print('');
-    print('');
-    print('');
-    print('');
-    print('');
+    print("--------------TOKEN--------------");
     print(fcmToken);
-    print("--------TOKEN--------------");
+    print("--------------TOKEN--------------");
   }
 
   /// FCM이 notification으로 올 경우
@@ -97,7 +86,7 @@ class PushNotificationController extends GetxController {
     print('onOff : ${onOff!}');
 
     if (notification != null && android != null) {
-      // 웹이 아니면서 안드로이드이고, 알림이 있는경우, user의 파베에 저장된 onOff의 값이 true일경우 
+      // 웹이 아니면서 안드로이드이고, 알림이 있는경우, user의 파베에 저장된 onOff의 값이 true일경우
       flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
