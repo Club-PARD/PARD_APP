@@ -102,7 +102,7 @@ class PointController extends GetxController {
 
   /////////////////////////////////////////////////////////////
   // 현재 유저의 파트 내 등수를 반환하는 함수
-  getCurrentUserPartRank() async {
+  Future<void> getCurrentUserPartRank() async {
     final Map<UserModel, double> userPointsMapCopy = Map.from(userPointsMap);
 
     List<MapEntry<UserModel, double>> sortedEntries =
