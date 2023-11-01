@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jose/jose.dart';
+import 'package:pard_app/controllers/error_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,74 +15,47 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthController extends GetxController {
   final UserController _userController = Get.put(UserController());
+  final ErrorController _errorController = Get.put(ErrorController());
   late String? uid = _userController.userInfo.value?.uid;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  Rx<String?> userEmail = Rx<String?>(null); // 1차적으로 이메일 저장(휴대폰 인증 전 필요)
-  Rx<User?> user = Rx<User?>(null);
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  Rx<FlutterSecureStorage> sStorage = const FlutterSecureStorage().obs;
+  Rx<String?> userEmail = Rx<String?>(null); // 1차적으로 이메일 저장(휴대폰 인증 전 필요)
+  Rx<User?> user = Rx<User?>(null);
   RxBool isAgree = false.obs;
   RxBool isLogin = true.obs;
 
-  Rx<FlutterSecureStorage> sStorage = const FlutterSecureStorage().obs;
-
-  // apple signout위한 Client_secret
-//   Future<String> createClientSecret() async {
-//   final expirationDate = DateTime.now().add(const Duration(days: 30));
-//   final jwtHeader = {'kid': '8V2VG5Q57T', 'alg': 'ES256'};
-
-//   // JWT payload
-//   final claims = JsonWebTokenClaims.fromJson({
-//     'iss': 'S65HTAH6VL',
-//     'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
-//     'exp': expirationDate.millisecondsSinceEpoch ~/ 1000,
-//     'aud': 'https://appleid.apple.com',
-//     'sub': 'com.pard.pardOfficial',
-//   });
-
-//   // Load the private key
-//   final privateKey = await getPrivateKey('/Users/juhyun/Downloads/AuthKey_8V2VG5Q57T.p8');
-
-//   // Create a JSON Web Signature (JWS)
-//   final jwsBuilder = JsonWebSignatureBuilder();
-//   jwsBuilder.jsonContent = claims.toJson();
-//   jwsBuilder.setProtectedHeader('alg', 'ES256');
-//   jwsBuilder.addRecipient(privateKey, algorithm: 'ES256');
-//   final signedToken = jwsBuilder.build();
-
-//   return signedToken.toCompactSerialization();
-// }
-
-Future<JsonWebKey> getPrivateKey(String path) async {
-  final directory = await getApplicationDocumentsDirectory();
-  final file = File('${directory.path}/$path');
-  final String privateKeyString = await file.readAsString();
-
-  // Parse the private key
-  final keyJson = JsonWebKey.fromPem(privateKeyString);
-  return keyJson;
-}
 
   checkPreviousLogin() async {
-    final prefs = await SharedPreferences.getInstance();
+    try {
+      final prefs = await SharedPreferences.getInstance();
 
-    if (prefs.getBool('first_run') ?? true) {
-      await sStorage.value.deleteAll();
-      prefs.setBool('first_run', false);
-    }
+      // 첫 앱 실행인지 구분
+      if (prefs.getBool('first_run') ?? true) {
+        await sStorage.value.deleteAll();
+        prefs.setBool('first_run', false);
+      }
 
-    String? email = await sStorage.value.read(key: 'login');
-    userEmail.value = email;
-    print('checkPreviousLogin() ${userEmail.value}');
-    if (email == null || !await _userController.isVerifyUserByEmail(email)) {
-      print('로그인 이력 없음: 로그인 필요');
-      isLogin.value = false;
-    } else {
-      await _userController.getUserInfoByEmail(email);
-      await _userController.updateTimeByEmail(email);
-      Get.offAllNamed('/home');
-      isLogin.value = true;
+      String? email = await sStorage.value.read(key: 'login');
+      userEmail.value = email;
+      print('checkPreviousLogin() ${userEmail.value}');
+      if (email == null || !await _userController.isVerifyUserByEmail(email)) {
+        print('로그인 이력 없음: 로그인 필요');
+        isLogin.value = false;
+      } else {
+        await _userController.getUserInfoByEmail(email);
+        await _userController.updateTimeByEmail(email);
+        Get.offAllNamed('/home');
+        isLogin.value = true;
+      }
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        _userController.userInfo.value!.phone ?? 'none',
+        'checkPreviousLogin()',
+      );
     }
   }
 
@@ -117,8 +91,12 @@ Future<JsonWebKey> getPrivateKey(String path) async {
           }
         }
       }
-    } catch (error) {
-      print("Google Sign-In Error: $error");
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        _userController.userInfo.value!.phone ?? 'none',
+        'signInWithGoogle()',
+      );
     }
   }
 
@@ -142,7 +120,7 @@ Future<JsonWebKey> getPrivateKey(String path) async {
         idToken: appleCredential.identityToken,
         accessToken: appleCredential.authorizationCode,
       );
-      
+      final String thirdPartyCode = appleCredential.authorizationCode;
 
       if (appleCredential.email == null) {
         List<String> jwt = appleCredential.identityToken?.split('.') ?? [];
@@ -179,24 +157,40 @@ Future<JsonWebKey> getPrivateKey(String path) async {
           Get.toNamed('/tos');
         }
       }
-    } catch (error) {
-      print("Apple Sign-In Error: $error");
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        _userController.userInfo.value!.phone ?? 'none',
+        'signInWithApple()',
+      );
     }
   }
 
   //탈퇴하기
-  Future<void> deleteUserFieldsExceptEmailAndPhone() async {
-    await _firestore
-        .collection('points')
-        .doc(_userController.userInfo.value!.pid)
-        .delete();
-    await _firestore.collection('users').doc(uid).delete();
+  Future<void> deleteUserFields() async {
+    try {
+      print('----------------------------탈퇴하기 uid------------------------');
+      print(uid);
 
-    await _auth.currentUser?.delete();
-    await sStorage.value.deleteAll();
-    await _auth.signOut();
-    await _googleSignIn.signOut();
-    Get.offAllNamed('/');
+      // _firestore; //파이어스토어 인스턴스 가져옴
+      await _firestore
+          .collection('points')
+          .doc(_userController.userInfo.value!.pid)
+          .delete();
+      await _firestore.collection('users').doc(uid).delete();
+
+      await _auth.currentUser?.delete();
+      await sStorage.value.deleteAll();
+      await _auth.signOut();
+      await _googleSignIn.signOut();
+      Get.offAllNamed('/');
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        _userController.userInfo.value!.phone ?? 'none',
+        'deleteUserFields()',
+      );
+    }
   }
 
   //로그아웃
@@ -205,8 +199,12 @@ Future<JsonWebKey> getPrivateKey(String path) async {
       await _auth.signOut();
       await sStorage.value.delete(key: 'login');
       Get.offAllNamed('/');
-    } catch (error) {
-      print('Sign Out Error: $error');
+    } catch (e) {
+      await _errorController.writeErrorLog(
+        e.toString(),
+        _userController.userInfo.value!.phone ?? 'none',
+        'signOut()',
+      );
     }
   }
 }

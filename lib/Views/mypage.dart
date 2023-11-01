@@ -13,7 +13,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
-  
 
   @override
   State<MyPage> createState() => _MyPageState();
@@ -580,7 +579,8 @@ class _MyPageState extends State<MyPage> {
                                                                 color: const Color(
                                                                     0xFF5262F5),
                                                               )),
-                                                          Text('회원 탈퇴 후 개인정보, 점수 등의\n 데이터가 삭제되며 복구할 수 없습니다.\n 정말 삭제하시겠습니까?',
+                                                          Text(
+                                                              '회원 탈퇴 후 개인정보, 점수 등의\n 데이터가 삭제되며 복구할 수 없습니다.\n 정말 삭제하시겠습니까?',
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
@@ -655,12 +655,13 @@ class _MyPageState extends State<MyPage> {
                                                                       TextButton(
                                                                           onPressed:
                                                                               () async {
+                                                                                AppSettings.openAppSettings();
                                                                             bottomController.selectedIndex.value =
                                                                                 0; //로그아웃하고 들어올 때 index 0으로 하기
-                                                
+
                                                                             if (uid !=
                                                                                 null) {
-                                                                              AuthController().deleteUserFieldsExceptEmailAndPhone();
+                                                                              AuthController().deleteUserFields();
                                                                             } else {
                                                                               print("UID is null");
                                                                             }
