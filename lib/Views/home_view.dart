@@ -32,11 +32,13 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      pointController.fetchAndSortUserPoints();
-      pointController.fetchCurrentUserPoints();
-      print('---------------home_view()');
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    pointController.fetchAndSortUserPoints();
+    pointController.fetchCurrentUserPoints();
+    print('---------------home_view()');
+    pointController.getCurrentUserPartRank();
+    pointController.getCurrentUserRank();
+    // });
   }
 
   void showOverlay(BuildContext context) async {
