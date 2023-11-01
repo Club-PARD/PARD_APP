@@ -82,22 +82,28 @@ class NumberAuthView extends StatelessWidget {
                             phoneFocus.unfocus();
                             print(phoneVerificationController
                                 .phoneTextFormField.value);
-                            phoneVerificationController
-                                    .isCorrectPhoneNumber.value =
-                                await phoneVerificationController
-                                    .isVerifyPhoneNumber(
-                                        phoneVerificationController
-                                            .phoneTextFormField.value);
+                            // Timer
                             if (phoneVerificationController
-                                        .isCorrectPhoneNumber.value !=
-                                    null &&
-                                phoneVerificationController
-                                        .isCorrectPhoneNumber.value ==
-                                    true) {
-                              await phoneVerificationController
-                                  .sendPhoneNumber(context);
-                              print(
-                                  '인증번호: ${phoneVerificationController.verificationCodeFromAuth.value}');
+                                    .isTimerRunning.value ==
+                                false) {
+                              phoneVerificationController.startTimer();
+                              phoneVerificationController
+                                      .isCorrectPhoneNumber.value =
+                                  await phoneVerificationController
+                                      .isVerifyPhoneNumber(
+                                          phoneVerificationController
+                                              .phoneTextFormField.value);
+                              if (phoneVerificationController
+                                          .isCorrectPhoneNumber.value !=
+                                      null &&
+                                  phoneVerificationController
+                                          .isCorrectPhoneNumber.value ==
+                                      true) {
+                                await phoneVerificationController
+                                    .sendPhoneNumber(context);
+                                print(
+                                    '인증번호: ${phoneVerificationController.verificationCodeFromAuth.value}');
+                              }
                             }
                           },
                           child: Container(
@@ -114,7 +120,9 @@ class NumberAuthView extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                '인증번호 받기',
+                                phoneVerificationController.isTimerRunning.value
+                                    ? '${phoneVerificationController.seconds.value}s'
+                                    : '인증번호 받기',
                                 style:
                                     Theme.of(context).textTheme.headlineSmall,
                               ),
