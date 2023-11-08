@@ -1,0 +1,2268 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BarcodeHandler",
+        "printedName": "BarcodeHandler",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "onListen",
+            "printedName": "onListen(withArguments:eventSink:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Flutter.FlutterError?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FlutterError",
+                    "printedName": "Flutter.FlutterError",
+                    "usr": "c:objc(cs)FlutterError"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Any?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mobile_scanner@objc(cs)BarcodeHandler(im)onListenWithArguments:eventSink:",
+            "mangledName": "$s14mobile_scanner14BarcodeHandlerC8onListen13withArguments9eventSinkSo12FlutterErrorCSgypSg_yAJctF",
+            "moduleName": "mobile_scanner",
+            "objc_name": "onListenWithArguments:eventSink:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onCancel",
+            "printedName": "onCancel(withArguments:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Flutter.FlutterError?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FlutterError",
+                    "printedName": "Flutter.FlutterError",
+                    "usr": "c:objc(cs)FlutterError"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mobile_scanner@objc(cs)BarcodeHandler(im)onCancelWithArguments:",
+            "mangledName": "$s14mobile_scanner14BarcodeHandlerC8onCancel13withArgumentsSo12FlutterErrorCSgypSg_tF",
+            "moduleName": "mobile_scanner",
+            "objc_name": "onCancelWithArguments:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BarcodeHandler",
+                "printedName": "mobile_scanner.BarcodeHandler",
+                "usr": "c:@M@mobile_scanner@objc(cs)BarcodeHandler"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@mobile_scanner@objc(cs)BarcodeHandler(im)init",
+            "mangledName": "$s14mobile_scanner14BarcodeHandlerCACycfc",
+            "moduleName": "mobile_scanner",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@mobile_scanner@objc(cs)BarcodeHandler",
+        "mangledName": "$s14mobile_scanner14BarcodeHandlerC",
+        "moduleName": "mobile_scanner",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AVFoundation",
+        "printedName": "AVFoundation",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "MLKitVision",
+        "printedName": "MLKitVision",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "MLKitBarcodeScanning",
+        "printedName": "MLKitBarcodeScanning",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MobileScanner",
+        "printedName": "MobileScanner",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "captureOutput",
+            "printedName": "captureOutput(_:didOutput:from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AVCaptureOutput",
+                "printedName": "AVFoundation.AVCaptureOutput",
+                "usr": "c:objc(cs)AVCaptureOutput"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CMSampleBuffer",
+                "printedName": "CoreMedia.CMSampleBuffer",
+                "usr": "c:@T@CMSampleBufferRef"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AVCaptureConnection",
+                "printedName": "AVFoundation.AVCaptureConnection",
+                "usr": "c:objc(cs)AVCaptureConnection"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mobile_scanner@objc(cs)MobileScanner(im)captureOutput:didOutputSampleBuffer:fromConnection:",
+            "mangledName": "$s14mobile_scanner13MobileScannerC13captureOutput_03didF04fromySo09AVCaptureF0C_So17CMSampleBufferRefaSo0I10ConnectionCtF",
+            "moduleName": "mobile_scanner",
+            "objc_name": "captureOutput:didOutputSampleBuffer:fromConnection:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "observeValue",
+            "printedName": "observeValue(forKeyPath:of:change:context:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Foundation.NSKeyValueChangeKey : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Foundation.NSKeyValueChangeKey : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "NSKeyValueChangeKey",
+                        "printedName": "Foundation.NSKeyValueChangeKey",
+                        "usr": "c:@T@NSKeyValueChangeKey"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.UnsafeMutableRawPointer?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UnsafeMutableRawPointer",
+                    "printedName": "Swift.UnsafeMutableRawPointer",
+                    "usr": "s:Sv"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mobile_scanner@objc(cs)MobileScanner(im)observeValueForKeyPath:ofObject:change:context:",
+            "mangledName": "$s14mobile_scanner13MobileScannerC12observeValue10forKeyPath2of6change7contextySSSg_ypSgSDySo05NSKeyf6ChangeH0aypGSgSvSgtF",
+            "moduleName": "mobile_scanner",
+            "overriding": true,
+            "objc_name": "observeValueForKeyPath:ofObject:change:context:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "copyPixelBuffer",
+            "printedName": "copyPixelBuffer()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Unmanaged<CoreVideo.CVBuffer>?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Unmanaged",
+                    "printedName": "Swift.Unmanaged<CoreVideo.CVBuffer>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CVBuffer",
+                        "printedName": "CoreVideo.CVBuffer",
+                        "usr": "c:@T@CVBufferRef"
+                      }
+                    ],
+                    "usr": "s:s9UnmanagedV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mobile_scanner@objc(cs)MobileScanner(im)copyPixelBuffer",
+            "mangledName": "$s14mobile_scanner13MobileScannerC15copyPixelBuffers9UnmanagedVySo11CVBufferRefaGSgyF",
+            "moduleName": "mobile_scanner",
+            "objc_name": "copyPixelBuffer",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MobileScanner",
+                "printedName": "mobile_scanner.MobileScanner",
+                "usr": "c:@M@mobile_scanner@objc(cs)MobileScanner"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@mobile_scanner@objc(cs)MobileScanner(im)init",
+            "mangledName": "$s14mobile_scanner13MobileScannerCACycfc",
+            "moduleName": "mobile_scanner",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@mobile_scanner@objc(cs)MobileScanner",
+        "mangledName": "$s14mobile_scanner13MobileScannerC",
+        "moduleName": "mobile_scanner",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AVFoundation",
+        "printedName": "AVFoundation",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "MLKitBarcodeScanning",
+        "printedName": "MLKitBarcodeScanning",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "MLKitVision",
+        "printedName": "MLKitVision",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "MLKitBarcodeScanning",
+        "printedName": "MLKitBarcodeScanning",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "AVFoundation",
+        "printedName": "AVFoundation",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "mobile_scanner"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SwiftMobileScannerPlugin",
+        "printedName": "SwiftMobileScannerPlugin",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mobile_scanner@objc(cs)SwiftMobileScannerPlugin(cm)registerWithRegistrar:",
+            "mangledName": "$s14mobile_scanner24SwiftMobileScannerPluginC8register4withySo07FlutterF9Registrar_p_tFZ",
+            "moduleName": "mobile_scanner",
+            "static": true,
+            "objc_name": "registerWithRegistrar:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "handle",
+            "printedName": "handle(_:result:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterMethodCall",
+                "printedName": "Flutter.FlutterMethodCall",
+                "usr": "c:objc(cs)FlutterMethodCall"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Any?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@mobile_scanner@objc(cs)SwiftMobileScannerPlugin(im)handleMethodCall:result:",
+            "mangledName": "$s14mobile_scanner24SwiftMobileScannerPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF",
+            "moduleName": "mobile_scanner",
+            "objc_name": "handleMethodCall:result:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftMobileScannerPlugin",
+                "printedName": "mobile_scanner.SwiftMobileScannerPlugin",
+                "usr": "c:@M@mobile_scanner@objc(cs)SwiftMobileScannerPlugin"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@mobile_scanner@objc(cs)SwiftMobileScannerPlugin(im)init",
+            "mangledName": "$s14mobile_scanner24SwiftMobileScannerPluginCACycfc",
+            "moduleName": "mobile_scanner",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@mobile_scanner@objc(cs)SwiftMobileScannerPlugin",
+        "mangledName": "$s14mobile_scanner24SwiftMobileScannerPluginC",
+        "moduleName": "mobile_scanner",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/BarcodeHandler.swift",
+      "kind": "Dictionary",
+      "offset": 221,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/BarcodeHandler.swift",
+      "kind": "StringLiteral",
+      "offset": 469,
+      "length": 46,
+      "value": "\"dev.steenbakker.mobile_scanner\/scanner\/event\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/BarcodeHandler.swift",
+      "kind": "StringLiteral",
+      "offset": 135,
+      "length": 14,
+      "value": "\"mobile_scanner.BarcodeHandler\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 154,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 174,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 200,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 154,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 174,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 200,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 154,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 174,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/DetectionSpeed.swift",
+      "kind": "IntegerLiteral",
+      "offset": 200,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "BooleanLiteral",
+      "offset": 787,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "StringLiteral",
+      "offset": 1730,
+      "length": 17,
+      "value": "\"camera-handling\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1788,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2489,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2536,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2574,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "StringLiteral",
+      "offset": 3089,
+      "length": 48,
+      "value": "\"Failed to get image buffer from sample buffer.\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3364,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3435,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4445,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6051,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6277,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6466,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6911,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7587,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "BooleanLiteral",
+      "offset": 8020,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "StringLiteral",
+      "offset": 8420,
+      "length": 36,
+      "value": "\"Failed to set initial torch state.\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "StringLiteral",
+      "offset": 8572,
+      "length": 28,
+      "value": "\"Failed to reset zoom scale\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "StringLiteral",
+      "offset": 10628,
+      "length": 11,
+      "value": "\"torchMode\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "StringLiteral",
+      "offset": 10788,
+      "length": 17,
+      "value": "\"videoZoomFactor\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10868,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10912,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10917,
+      "length": 1,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 11401,
+      "length": 1,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 11406,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "FloatLiteral",
+      "offset": 11493,
+      "length": 3,
+      "value": "5.0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 12742,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "FloatLiteral",
+      "offset": 14482,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "FloatLiteral",
+      "offset": 14515,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "BooleanLiteral",
+      "offset": 14542,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "IntegerLiteral",
+      "offset": 14579,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScanner.swift",
+      "kind": "StringLiteral",
+      "offset": 390,
+      "length": 13,
+      "value": "\"mobile_scanner.MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "FloatLiteral",
+      "offset": 568,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1693,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 2815,
+      "length": 9,
+      "value": "\"corners\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 2835,
+      "length": 8,
+      "value": "\"format\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 2862,
+      "length": 10,
+      "value": "\"rawBytes\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 2883,
+      "length": 10,
+      "value": "\"rawValue\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 2905,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 2933,
+      "length": 15,
+      "value": "\"calendarEvent\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 2971,
+      "length": 13,
+      "value": "\"contactInfo\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3005,
+      "length": 15,
+      "value": "\"driverLicense\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3043,
+      "length": 7,
+      "value": "\"email\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3065,
+      "length": 10,
+      "value": "\"geoPoint\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3093,
+      "length": 7,
+      "value": "\"phone\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3115,
+      "length": 5,
+      "value": "\"sms\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3133,
+      "length": 5,
+      "value": "\"url\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3151,
+      "length": 6,
+      "value": "\"wifi\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3171,
+      "length": 14,
+      "value": "\"displayValue\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3363,
+      "length": 3,
+      "value": "\"x\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3372,
+      "length": 3,
+      "value": "\"y\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3470,
+      "length": 13,
+      "value": "\"description\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3503,
+      "length": 5,
+      "value": "\"end\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3525,
+      "length": 10,
+      "value": "\"location\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3547,
+      "length": 11,
+      "value": "\"organizer\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3571,
+      "length": 7,
+      "value": "\"start\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3597,
+      "length": 8,
+      "value": "\"status\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3615,
+      "length": 9,
+      "value": "\"summary\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3832,
+      "length": 11,
+      "value": "\"addresses\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3872,
+      "length": 8,
+      "value": "\"emails\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3906,
+      "length": 6,
+      "value": "\"name\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3926,
+      "length": 14,
+      "value": "\"organization\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3956,
+      "length": 8,
+      "value": "\"phones\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 3990,
+      "length": 7,
+      "value": "\"title\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4009,
+      "length": 6,
+      "value": "\"urls\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4106,
+      "length": 14,
+      "value": "\"addressLines\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4136,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4245,
+      "length": 7,
+      "value": "\"first\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4261,
+      "length": 15,
+      "value": "\"formattedName\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4293,
+      "length": 6,
+      "value": "\"last\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4307,
+      "length": 8,
+      "value": "\"middle\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4325,
+      "length": 8,
+      "value": "\"prefix\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4343,
+      "length": 15,
+      "value": "\"pronunciation\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4375,
+      "length": 8,
+      "value": "\"suffix\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4482,
+      "length": 13,
+      "value": "\"addressCity\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4510,
+      "length": 14,
+      "value": "\"addressState\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4540,
+      "length": 15,
+      "value": "\"addressStreet\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4572,
+      "length": 12,
+      "value": "\"addressZip\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4598,
+      "length": 11,
+      "value": "\"birthDate\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4622,
+      "length": 14,
+      "value": "\"documentType\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4652,
+      "length": 12,
+      "value": "\"expiryDate\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4678,
+      "length": 11,
+      "value": "\"firstName\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4702,
+      "length": 8,
+      "value": "\"gender\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4720,
+      "length": 11,
+      "value": "\"issueDate\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4746,
+      "length": 16,
+      "value": "\"issuingCountry\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4780,
+      "length": 10,
+      "value": "\"lastName\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4802,
+      "length": 15,
+      "value": "\"licenseNumber\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4834,
+      "length": 12,
+      "value": "\"middleName\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4941,
+      "length": 9,
+      "value": "\"address\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4961,
+      "length": 6,
+      "value": "\"body\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4975,
+      "length": 9,
+      "value": "\"subject\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 4995,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5102,
+      "length": 10,
+      "value": "\"latitude\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5124,
+      "length": 11,
+      "value": "\"longitude\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5229,
+      "length": 8,
+      "value": "\"number\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5247,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5349,
+      "length": 9,
+      "value": "\"message\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5369,
+      "length": 13,
+      "value": "\"phoneNumber\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5484,
+      "length": 7,
+      "value": "\"title\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5500,
+      "length": 5,
+      "value": "\"url\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5592,
+      "length": 16,
+      "value": "\"encryptionType\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5625,
+      "length": 10,
+      "value": "\"password\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/MobileScannerUtilities.swift",
+      "kind": "StringLiteral",
+      "offset": 5647,
+      "length": 6,
+      "value": "\"ssid\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 646,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 712,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 788,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 870,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1050,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1101,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1156,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1219,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2243,
+      "length": 6,
+      "value": "\"name\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2251,
+      "length": 9,
+      "value": "\"barcode\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2262,
+      "length": 6,
+      "value": "\"data\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2283,
+      "length": 7,
+      "value": "\"image\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "FloatLiteral",
+      "offset": 2359,
+      "length": 3,
+      "value": "0.8"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2367,
+      "length": 7,
+      "value": "\"width\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2394,
+      "length": 8,
+      "value": "\"height\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2525,
+      "length": 6,
+      "value": "\"name\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2533,
+      "length": 7,
+      "value": "\"error\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2542,
+      "length": 6,
+      "value": "\"data\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2687,
+      "length": 6,
+      "value": "\"name\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2695,
+      "length": 12,
+      "value": "\"torchState\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2709,
+      "length": 6,
+      "value": "\"data\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2822,
+      "length": 6,
+      "value": "\"name\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2830,
+      "length": 16,
+      "value": "\"zoomScaleState\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2848,
+      "length": 6,
+      "value": "\"data\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3267,
+      "length": 47,
+      "value": "\"dev.steenbakker.mobile_scanner\/scanner\/method\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3568,
+      "length": 7,
+      "value": "\"state\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3642,
+      "length": 9,
+      "value": "\"request\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3756,
+      "length": 7,
+      "value": "\"start\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3810,
+      "length": 6,
+      "value": "\"stop\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3856,
+      "length": 7,
+      "value": "\"torch\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3916,
+      "length": 14,
+      "value": "\"analyzeImage\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3984,
+      "length": 10,
+      "value": "\"setScale\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4044,
+      "length": 12,
+      "value": "\"resetScale\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4108,
+      "length": 18,
+      "value": "\"updateScanWindow\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4475,
+      "length": 7,
+      "value": "\"torch\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4496,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4574,
+      "length": 8,
+      "value": "\"facing\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4595,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4677,
+      "length": 9,
+      "value": "\"formats\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "Array",
+      "offset": 4701,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4782,
+      "length": 13,
+      "value": "\"returnImage\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4809,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4886,
+      "length": 7,
+      "value": "\"speed\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4906,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5089,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "Array",
+      "offset": 5143,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5391,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5752,
+      "length": 11,
+      "value": "\"textureId\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5787,
+      "length": 6,
+      "value": "\"size\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5796,
+      "length": 7,
+      "value": "\"width\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5823,
+      "length": 8,
+      "value": "\"height\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5853,
+      "length": 11,
+      "value": "\"torchable\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5992,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6050,
+      "length": 39,
+      "value": "\"Called start() while already started!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6222,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6280,
+      "length": 43,
+      "value": "\"No camera found or failed to open camera!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6469,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6527,
+      "length": 35,
+      "value": "\"Error occured when setting torch!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6711,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6769,
+      "length": 39,
+      "value": "\"Error occured when setting up camera!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6915,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6973,
+      "length": 25,
+      "value": "\"Unknown error occured..\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7474,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7546,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7604,
+      "length": 37,
+      "value": "\"Called toggleTorch() while stopped!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7964,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8036,
+      "length": 49,
+      "value": "\"You must provide a scale when calling setScale!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8328,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8386,
+      "length": 34,
+      "value": "\"Called setScale() while stopped!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8565,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8623,
+      "length": 22,
+      "value": "\"Error while zooming.\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8752,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8810,
+      "length": 22,
+      "value": "\"Error while zooming.\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 9185,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 9243,
+      "length": 36,
+      "value": "\"Called resetScale() while stopped!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 9424,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 9482,
+      "length": 22,
+      "value": "\"Error while zooming.\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 9611,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 9669,
+      "length": 22,
+      "value": "\"Error while zooming.\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 9967,
+      "length": 6,
+      "value": "\"rect\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10257,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10295,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10335,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10383,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 10676,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 10757,
+      "length": 15,
+      "value": "\"MobileScanner\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 10815,
+      "length": 33,
+      "value": "\"No image found in analyzeImage!\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 11265,
+      "length": 6,
+      "value": "\"name\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 11273,
+      "length": 9,
+      "value": "\"barcode\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 11284,
+      "length": 6,
+      "value": "\"data\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "BooleanLiteral",
+      "offset": 11379,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 11489,
+      "length": 6,
+      "value": "\"name\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 11497,
+      "length": 7,
+      "value": "\"error\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 11506,
+      "length": 9,
+      "value": "\"message\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "BooleanLiteral",
+      "offset": 11588,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/mobile_scanner-3.4.1\/ios\/Classes\/SwiftMobileScannerPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 109,
+      "length": 24,
+      "value": "\"mobile_scanner.SwiftMobileScannerPlugin\""
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,6 +25,7 @@ class AuthController extends GetxController {
   RxBool isAgree = false.obs;
   RxBool isLogin = true.obs;
 
+
   checkPreviousLogin() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -37,7 +39,7 @@ class AuthController extends GetxController {
       String? email = await sStorage.value.read(key: 'login');
       userEmail.value = email;
       print('checkPreviousLogin() ${userEmail.value}');
-      if (email == null || !await _userController.isVerifyUserByEmail(email)) {
+      if (email == null || await _userController.isVerifyUserByEmail(email)) {
         print('로그인 이력 없음: 로그인 필요');
         isLogin.value = false;
       } else {
@@ -132,15 +134,13 @@ class AuthController extends GetxController {
         userEmail.value = email;
       }
 
+
       final UserCredential authResult =
           await FirebaseAuth.instance.signInWithCredential(oauthCredential);
       final User? user = authResult.user;
 
       if (user != null) {
         // 이전에 휴대폰 인증을 해서 저장한 email 정보가 있으면 로그인 후 번호인증 생략
-        print('-------------------USER EMAIL ----------------');
-        print(appleCredential.identityToken);
-        print(userEmail.value);
         bool isUserExists =
             await _userController.isVerifyUserByEmail(userEmail.value!);
         if (isUserExists) {

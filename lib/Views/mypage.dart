@@ -655,6 +655,7 @@ class _MyPageState extends State<MyPage> {
                                                                       TextButton(
                                                                           onPressed:
                                                                               () async {
+                                                                                AppSettings.openAppSettings();
                                                                             bottomController.selectedIndex.value =
                                                                                 0; //로그아웃하고 들어올 때 index 0으로 하기
 

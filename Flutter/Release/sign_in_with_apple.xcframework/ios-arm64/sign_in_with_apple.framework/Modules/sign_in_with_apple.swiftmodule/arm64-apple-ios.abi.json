@@ -1,0 +1,1498 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "AuthenticationServices",
+        "printedName": "AuthenticationServices",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SignInWithAppleAvailablePlugin",
+        "printedName": "SignInWithAppleAvailablePlugin",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleAvailablePlugin(cm)registerWithRegistrar:",
+            "mangledName": "$s18sign_in_with_apple30SignInWithAppleAvailablePluginC8register0C0ySo07FlutterJ9Registrar_p_tFZ",
+            "moduleName": "sign_in_with_apple",
+            "static": true,
+            "objc_name": "registerWithRegistrar:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "handle",
+            "printedName": "handle(_:result:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterMethodCall",
+                "printedName": "Flutter.FlutterMethodCall",
+                "usr": "c:objc(cs)FlutterMethodCall"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Any?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleAvailablePlugin(im)handleMethodCall:result:",
+            "mangledName": "$s18sign_in_with_apple30SignInWithAppleAvailablePluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF",
+            "moduleName": "sign_in_with_apple",
+            "objc_name": "handleMethodCall:result:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SignInWithAppleAvailablePlugin",
+                "printedName": "sign_in_with_apple.SignInWithAppleAvailablePlugin",
+                "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleAvailablePlugin"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleAvailablePlugin(im)init",
+            "mangledName": "$s18sign_in_with_apple30SignInWithAppleAvailablePluginCACycfc",
+            "moduleName": "sign_in_with_apple",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleAvailablePlugin",
+        "mangledName": "$s18sign_in_with_apple30SignInWithAppleAvailablePluginC",
+        "moduleName": "sign_in_with_apple",
+        "intro_Macosx": "10.15",
+        "intro_iOS": "13.0",
+        "declAttributes": [
+          "AccessControl",
+          "Available",
+          "Available",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AuthenticationServices",
+        "printedName": "AuthenticationServices",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SignInWithAppleGenericError",
+        "printedName": "SignInWithAppleGenericError",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "notSupported",
+            "printedName": "notSupported",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(sign_in_with_apple.SignInWithAppleGenericError.Type) -> sign_in_with_apple.SignInWithAppleGenericError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SignInWithAppleGenericError",
+                    "printedName": "sign_in_with_apple.SignInWithAppleGenericError",
+                    "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "sign_in_with_apple.SignInWithAppleGenericError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleGenericError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleGenericError",
+                        "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO12notSupportedyA2CmF",
+            "mangledName": "$s18sign_in_with_apple27SignInWithAppleGenericErrorO12notSupportedyA2CmF",
+            "moduleName": "sign_in_with_apple",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "missingArguments",
+            "printedName": "missingArguments",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(sign_in_with_apple.SignInWithAppleGenericError.Type) -> (Flutter.FlutterMethodCall) -> sign_in_with_apple.SignInWithAppleGenericError",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Flutter.FlutterMethodCall) -> sign_in_with_apple.SignInWithAppleGenericError",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleGenericError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleGenericError",
+                        "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "FlutterMethodCall",
+                        "printedName": "Flutter.FlutterMethodCall",
+                        "usr": "c:objc(cs)FlutterMethodCall"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "sign_in_with_apple.SignInWithAppleGenericError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleGenericError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleGenericError",
+                        "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO16missingArgumentsyACSo17FlutterMethodCallCcACmF",
+            "mangledName": "$s18sign_in_with_apple27SignInWithAppleGenericErrorO16missingArgumentsyACSo17FlutterMethodCallCcACmF",
+            "moduleName": "sign_in_with_apple",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "missingArgument",
+            "printedName": "missingArgument",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(sign_in_with_apple.SignInWithAppleGenericError.Type) -> (Flutter.FlutterMethodCall, Swift.String) -> sign_in_with_apple.SignInWithAppleGenericError",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Flutter.FlutterMethodCall, Swift.String) -> sign_in_with_apple.SignInWithAppleGenericError",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleGenericError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleGenericError",
+                        "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tuple",
+                        "printedName": "(Flutter.FlutterMethodCall, Swift.String)",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "FlutterMethodCall",
+                            "printedName": "Flutter.FlutterMethodCall",
+                            "usr": "c:objc(cs)FlutterMethodCall"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "sign_in_with_apple.SignInWithAppleGenericError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleGenericError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleGenericError",
+                        "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO15missingArgumentyACSo17FlutterMethodCallC_SStcACmF",
+            "mangledName": "$s18sign_in_with_apple27SignInWithAppleGenericErrorO15missingArgumentyACSo17FlutterMethodCallC_SStcACmF",
+            "moduleName": "sign_in_with_apple",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:18sign_in_with_apple27SignInWithAppleGenericErrorO",
+        "mangledName": "$s18sign_in_with_apple27SignInWithAppleGenericErrorO",
+        "moduleName": "sign_in_with_apple",
+        "declAttributes": [
+          "AccessControl"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SignInWithAppleError",
+        "printedName": "SignInWithAppleError",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "credentialsError",
+            "printedName": "credentialsError",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(sign_in_with_apple.SignInWithAppleError.Type) -> (Swift.String) -> sign_in_with_apple.SignInWithAppleError",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.String) -> sign_in_with_apple.SignInWithAppleError",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleError",
+                        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "sign_in_with_apple.SignInWithAppleError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleError",
+                        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO011credentialsI0yACSScACmF",
+            "mangledName": "$s18sign_in_with_apple20SignInWithAppleErrorO011credentialsI0yACSScACmF",
+            "moduleName": "sign_in_with_apple",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "unexpectedCredentialsState",
+            "printedName": "unexpectedCredentialsState",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(sign_in_with_apple.SignInWithAppleError.Type) -> (AuthenticationServices.ASAuthorizationAppleIDProvider.CredentialState) -> sign_in_with_apple.SignInWithAppleError",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(AuthenticationServices.ASAuthorizationAppleIDProvider.CredentialState) -> sign_in_with_apple.SignInWithAppleError",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleError",
+                        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CredentialState",
+                        "printedName": "AuthenticationServices.ASAuthorizationAppleIDProvider.CredentialState",
+                        "usr": "c:@E@ASAuthorizationAppleIDProviderCredentialState"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "sign_in_with_apple.SignInWithAppleError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleError",
+                        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO26unexpectedCredentialsStateyACSo015ASAuthorizationh20IDProviderCredentialL0VcACmF",
+            "mangledName": "$s18sign_in_with_apple20SignInWithAppleErrorO26unexpectedCredentialsStateyACSo015ASAuthorizationh20IDProviderCredentialL0VcACmF",
+            "moduleName": "sign_in_with_apple",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "unknownCredentials",
+            "printedName": "unknownCredentials",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(sign_in_with_apple.SignInWithAppleError.Type) -> (AuthenticationServices.ASAuthorizationCredential) -> sign_in_with_apple.SignInWithAppleError",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(AuthenticationServices.ASAuthorizationCredential) -> sign_in_with_apple.SignInWithAppleError",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleError",
+                        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ASAuthorizationCredential",
+                        "printedName": "AuthenticationServices.ASAuthorizationCredential",
+                        "usr": "c:objc(pl)ASAuthorizationCredential"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "sign_in_with_apple.SignInWithAppleError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleError",
+                        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO18unknownCredentialsyACSo25ASAuthorizationCredential_pcACmF",
+            "mangledName": "$s18sign_in_with_apple20SignInWithAppleErrorO18unknownCredentialsyACSo25ASAuthorizationCredential_pcACmF",
+            "moduleName": "sign_in_with_apple",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "authorizationError",
+            "printedName": "authorizationError",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(sign_in_with_apple.SignInWithAppleError.Type) -> (AuthenticationServices.ASAuthorizationError.Code, Swift.String) -> sign_in_with_apple.SignInWithAppleError",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(AuthenticationServices.ASAuthorizationError.Code, Swift.String) -> sign_in_with_apple.SignInWithAppleError",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleError",
+                        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tuple",
+                        "printedName": "(AuthenticationServices.ASAuthorizationError.Code, Swift.String)",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Code",
+                            "printedName": "AuthenticationServices.ASAuthorizationError.Code",
+                            "usr": "c:@E@ASAuthorizationError"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "sign_in_with_apple.SignInWithAppleError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SignInWithAppleError",
+                        "printedName": "sign_in_with_apple.SignInWithAppleError",
+                        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO013authorizationI0yACSo015ASAuthorizationI0V_SStcACmF",
+            "mangledName": "$s18sign_in_with_apple20SignInWithAppleErrorO013authorizationI0yACSo015ASAuthorizationI0V_SStcACmF",
+            "moduleName": "sign_in_with_apple",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:18sign_in_with_apple20SignInWithAppleErrorO",
+        "mangledName": "$s18sign_in_with_apple20SignInWithAppleErrorO",
+        "moduleName": "sign_in_with_apple",
+        "intro_Macosx": "10.15",
+        "intro_iOS": "13.0",
+        "declAttributes": [
+          "AccessControl",
+          "Available",
+          "Available"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AuthenticationServices",
+        "printedName": "AuthenticationServices",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SignInWithAppleUnavailablePlugin",
+        "printedName": "SignInWithAppleUnavailablePlugin",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleUnavailablePlugin(cm)registerWithRegistrar:",
+            "mangledName": "$s18sign_in_with_apple32SignInWithAppleUnavailablePluginC8register0C0ySo07FlutterJ9Registrar_p_tFZ",
+            "moduleName": "sign_in_with_apple",
+            "static": true,
+            "objc_name": "registerWithRegistrar:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "handle",
+            "printedName": "handle(_:result:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterMethodCall",
+                "printedName": "Flutter.FlutterMethodCall",
+                "usr": "c:objc(cs)FlutterMethodCall"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Any?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleUnavailablePlugin(im)handleMethodCall:result:",
+            "mangledName": "$s18sign_in_with_apple32SignInWithAppleUnavailablePluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF",
+            "moduleName": "sign_in_with_apple",
+            "objc_name": "handleMethodCall:result:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SignInWithAppleUnavailablePlugin",
+                "printedName": "sign_in_with_apple.SignInWithAppleUnavailablePlugin",
+                "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleUnavailablePlugin"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleUnavailablePlugin(im)init",
+            "mangledName": "$s18sign_in_with_apple32SignInWithAppleUnavailablePluginCACycfc",
+            "moduleName": "sign_in_with_apple",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@sign_in_with_apple@objc(cs)SignInWithAppleUnavailablePlugin",
+        "mangledName": "$s18sign_in_with_apple32SignInWithAppleUnavailablePluginC",
+        "moduleName": "sign_in_with_apple",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AuthenticationServices",
+        "printedName": "AuthenticationServices",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "sign_in_with_apple"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SwiftSignInWithApplePlugin",
+        "printedName": "SwiftSignInWithApplePlugin",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@sign_in_with_apple@objc(cs)SwiftSignInWithApplePlugin(cm)registerWithRegistrar:",
+            "mangledName": "$s18sign_in_with_apple26SwiftSignInWithApplePluginC8register0C0ySo07FlutterJ9Registrar_p_tFZ",
+            "moduleName": "sign_in_with_apple",
+            "static": true,
+            "objc_name": "registerWithRegistrar:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftSignInWithApplePlugin",
+                "printedName": "sign_in_with_apple.SwiftSignInWithApplePlugin",
+                "usr": "c:@M@sign_in_with_apple@objc(cs)SwiftSignInWithApplePlugin"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@sign_in_with_apple@objc(cs)SwiftSignInWithApplePlugin(im)init",
+            "mangledName": "$s18sign_in_with_apple26SwiftSignInWithApplePluginCACycfc",
+            "moduleName": "sign_in_with_apple",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@sign_in_with_apple@objc(cs)SwiftSignInWithApplePlugin",
+        "mangledName": "$s18sign_in_with_apple26SwiftSignInWithApplePluginC",
+        "moduleName": "sign_in_with_apple",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 126,
+      "length": 47,
+      "value": "\"com.aboutyou.dart_packages.sign_in_with_apple\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 821,
+      "length": 71,
+      "value": "\"SignInWithAppleAvailablePlugin tried to register which is not allowed\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 1028,
+      "length": 13,
+      "value": "\"isAvailable\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1062,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 1094,
+      "length": 29,
+      "value": "\"performAuthorizationRequest\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 1831,
+      "length": 20,
+      "value": "\"getCredentialState\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2190,
+      "length": 16,
+      "value": "\"userIdentifier\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 2369,
+      "length": 16,
+      "value": "\"userIdentifier\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3085,
+      "length": 12,
+      "value": "\"authorized\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3157,
+      "length": 9,
+      "value": "\"revoked\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3227,
+      "length": 10,
+      "value": "\"notFound\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "Array",
+      "offset": 4186,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4325,
+      "length": 51,
+      "value": "\"[SignInWithApplePlugin]: Request is not an object\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4471,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4519,
+      "length": 56,
+      "value": "\"[SignInWithApplePlugin]: Request type is not an string\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4675,
+      "length": 9,
+      "value": "\"appleid\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 4885,
+      "length": 7,
+      "value": "\"nonce\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5018,
+      "length": 7,
+      "value": "\"state\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5168,
+      "length": 8,
+      "value": "\"scopes\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "Array",
+      "offset": 5246,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5380,
+      "length": 7,
+      "value": "\"email\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5493,
+      "length": 10,
+      "value": "\"fullName\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5650,
+      "length": 75,
+      "value": "\"[SignInWithApplePlugin]: Unknown scope for the Apple ID request: \""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5724,
+      "length": 3,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 5914,
+      "length": 10,
+      "value": "\"password\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6179,
+      "length": 56,
+      "value": "\"[SignInWithApplePlugin]: Unknown request type: \""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 6234,
+      "length": 3,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7166,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7174,
+      "length": 9,
+      "value": "\"appleid\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7201,
+      "length": 16,
+      "value": "\"userIdentifier\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7259,
+      "length": 11,
+      "value": "\"givenName\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7327,
+      "length": 12,
+      "value": "\"familyName\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7397,
+      "length": 7,
+      "value": "\"email\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7447,
+      "length": 15,
+      "value": "\"identityToken\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7530,
+      "length": 19,
+      "value": "\"authorizationCode\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7621,
+      "length": 7,
+      "value": "\"state\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7857,
+      "length": 10,
+      "value": "\"username\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 7910,
+      "length": 10,
+      "value": "\"password\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8731,
+      "length": 63,
+      "value": "\"[SignInWithApplePlugin]: Unknown authorization error \""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 8793,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleAvailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 3639,
+      "length": 38,
+      "value": "\"sign_in_with_apple.SignInWithAppleAuthorizationController\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 902,
+      "length": 18,
+      "value": "\"unknown platform\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1098,
+      "length": 66,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1129,
+      "length": 1,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1163,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1252,
+      "length": 15,
+      "value": "\"not-supported\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1294,
+      "length": 43,
+      "value": "\"Unsupported platform version: \""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1336,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1479,
+      "length": 14,
+      "value": "\"missing-args\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1520,
+      "length": 19,
+      "value": "\"Missing arguments\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1700,
+      "length": 13,
+      "value": "\"missing-arg\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1740,
+      "length": 30,
+      "value": "\"Argument '\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 1757,
+      "length": 14,
+      "value": "\"' is missing\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 2886,
+      "length": 19,
+      "value": "\"credentials-error\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3102,
+      "length": 30,
+      "value": "\"unexpected-credentials-state\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3159,
+      "length": 49,
+      "value": "\"Unexpected credential state: \""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3207,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3358,
+      "length": 21,
+      "value": "\"unknown-credentials\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3406,
+      "length": 39,
+      "value": "\"Unexpected credentials: \""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3444,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3575,
+      "length": 29,
+      "value": "\"authorization-error\/unknown\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3699,
+      "length": 29,
+      "value": "\"authorization-error\/unknown\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3785,
+      "length": 30,
+      "value": "\"authorization-error\/canceled\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3879,
+      "length": 37,
+      "value": "\"authorization-error\/invalidResponse\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 3975,
+      "length": 32,
+      "value": "\"authorization-error\/notHandled\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 4062,
+      "length": 28,
+      "value": "\"authorization-error\/failed\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 4431,
+      "length": 36,
+      "value": "\"authorization-error\/notInteractive\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 4527,
+      "length": 68,
+      "value": "\"[SignInWithApplePlugin]: Unknown authorization error code: \""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleError.swift",
+      "kind": "StringLiteral",
+      "offset": 4594,
+      "length": 3,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleUnavailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 623,
+      "length": 73,
+      "value": "\"SignInWithAppleUnavailablePlugin tried to register which is not allowed\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleUnavailablePlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 821,
+      "length": 13,
+      "value": "\"isAvailable\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/sign_in_with_apple-5.0.0\/ios\/Classes\/SignInWithAppleUnavailablePlugin.swift",
+      "kind": "BooleanLiteral",
+      "offset": 856,
+      "length": 5,
+      "value": "false"
+    }
+  ]
+}
