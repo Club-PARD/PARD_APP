@@ -1,0 +1,41 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name sign_in_with_apple
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AuthenticationServices
+import Flutter
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+@_exported import sign_in_with_apple
+@objc @_inheritsConvenienceInitializers @available(iOS 13.0, macOS 10.15, *)
+public class SignInWithAppleAvailablePlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum SignInWithAppleGenericError {
+  case notSupported
+  case missingArguments(Flutter.FlutterMethodCall)
+  case missingArgument(Flutter.FlutterMethodCall, Swift.String)
+}
+@available(iOS 13.0, macOS 10.15, *)
+public enum SignInWithAppleError {
+  case credentialsError(Swift.String)
+  case unexpectedCredentialsState(AuthenticationServices.ASAuthorizationAppleIDProvider.CredentialState)
+  case unknownCredentials(any AuthenticationServices.ASAuthorizationCredential)
+  case authorizationError(AuthenticationServices.ASAuthorizationError.Code, Swift.String)
+}
+@objc @_inheritsConvenienceInitializers public class SignInWithAppleUnavailablePlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class SwiftSignInWithApplePlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc override dynamic public init()
+  @objc deinit
+}

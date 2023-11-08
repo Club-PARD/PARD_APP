@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
     print('---------------home_view()');
     pointController.getCurrentUserPartRank();
     pointController.getCurrentUserRank();
+
     // });
   }
 
@@ -436,7 +437,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: Center(
                                           child: Padding(
-                                            padding: (pointModel!.level == 1 ||
+                                            padding: (pointModel.level == 1 ||
                                                     pointModel.level == 3)
                                                 ? const EdgeInsets.only(
                                                     top: 8.0)
@@ -652,7 +653,7 @@ class _HomePageState extends State<HomePage> {
                                                           ?.member ==
                                                       '운영진')
                                               ? '-'
-                                              : '${formatter.format(pointModel!.currentBeePoints)}점',
+                                              : '${formatter.format(pointModel.currentBeePoints)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!

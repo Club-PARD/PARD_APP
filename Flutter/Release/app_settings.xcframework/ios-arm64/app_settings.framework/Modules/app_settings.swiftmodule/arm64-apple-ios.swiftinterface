@@ -1,0 +1,17 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name app_settings
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Flutter
+import StoreKit
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+@_exported import app_settings
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class AppSettingsPlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin, UIKit.UIWindowSceneDelegate {
+  @_Concurrency.MainActor(unsafe) @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @_Concurrency.MainActor(unsafe) @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init()
+  @objc deinit
+}
