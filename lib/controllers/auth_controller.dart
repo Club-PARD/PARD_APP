@@ -25,7 +25,6 @@ class AuthController extends GetxController {
   RxBool isAgree = false.obs;
   RxBool isLogin = true.obs;
 
-
   checkPreviousLogin() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -39,13 +38,15 @@ class AuthController extends GetxController {
       String? email = await sStorage.value.read(key: 'login');
       userEmail.value = email;
       print('checkPreviousLogin() ${userEmail.value}');
-      if (email == null || await _userController.isVerifyUserByEmail(email)) {
+      if (email == null ||
+          (await _userController.isVerifyUserByEmail(email) == false)) {
         print('로그인 이력 없음: 로그인 필요');
         isLogin.value = false;
       } else {
+        print("auth_controller: ${_userController.hashCode}");
         await _userController.getUserInfoByEmail(email);
         await _userController.updateTimeByEmail(email);
-        Get.offAllNamed('/home');
+        Get.toNamed('/home');
         isLogin.value = true;
       }
     } catch (e) {
@@ -133,7 +134,6 @@ class AuthController extends GetxController {
         print(email);
         userEmail.value = email;
       }
-
 
       final UserCredential authResult =
           await FirebaseAuth.instance.signInWithCredential(oauthCredential);
