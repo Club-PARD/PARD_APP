@@ -8,6 +8,7 @@ import 'package:gradient_borders/gradient_borders.dart';
 import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/component/point_policy_dialog.dart';
 import 'package:pard_app/controllers/point_controller.dart';
+import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
@@ -22,6 +23,7 @@ class MyPointView extends StatefulWidget {
 
 class _MyPointViewState extends State<MyPointView> {
   final PointController pointController = Get.put(PointController());
+  final UserController userController = Get.put(UserController());
   final formatter = NumberFormat("#,##0.##");
 
   @override
@@ -30,6 +32,7 @@ class _MyPointViewState extends State<MyPointView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
+      print('---------------my point view()');
       pointController.getCurrentUserRank();
       pointController.getCurrentUserPartRank();
     });
@@ -201,7 +204,7 @@ class _MyPointViewState extends State<MyPointView> {
             children: [
               // TODO: 유저 데이터 가져오기
               Text(
-                '${user.part} 파트',
+                '${user.part}',
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall!
@@ -249,7 +252,12 @@ class _MyPointViewState extends State<MyPointView> {
           ),
           SizedBox(height: 8.h),
           Text(
-            (text == '파트 내 랭킹') ? '$currentUserPartRank위' : '$currentUserRank위',
+            (userController.userInfo.value?.member == '잔잔파도' ||
+                    userController.userInfo.value?.member == '운영진')
+                ? '- 위'
+                : (text == '파트 내 랭킹')
+                    ? '$currentUserPartRank위'
+                    : '$currentUserRank위',
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge!
@@ -309,7 +317,13 @@ class _MyPointViewState extends State<MyPointView> {
                           ); // 로딩 처리
                         }
                         return Text(
-                          '+${formatter.format(pointModel.currentPoints)}점',
+                          (userController.userInfo.value?.member == '잔잔파도' ||
+                                  userController.userInfo.value?.member ==
+                                      '운영진')
+                              ? '-'
+                              : (pointModel.currentPoints == 0)
+                                  ? '${formatter.format(pointModel.currentPoints)}점'
+                                  : '+${formatter.format(pointModel.currentPoints)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!
@@ -344,7 +358,11 @@ class _MyPointViewState extends State<MyPointView> {
                           ); // 로딩 처리
                         }
                         return Text(
-                          '${formatter.format(pointModel.currentBeePoints)}점',
+                          (userController.userInfo.value?.member == '잔잔파도' ||
+                                  userController.userInfo.value?.member ==
+                                      '운영진')
+                              ? '-'
+                              : '${formatter.format(pointModel.currentBeePoints)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!

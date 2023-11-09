@@ -78,10 +78,11 @@ class ScheduleContainer extends StatelessWidget {
               Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // description -> place로 대체
                     Text(
-                      schedule.description.length > 20
-                          ? '${schedule.description.substring(0, 20)}...'
-                          : schedule.description,
+                      schedule.place.length > 20
+                          ? '${schedule.place.substring(0, 20)}...'
+                          : schedule.place,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: isPast
@@ -107,7 +108,8 @@ class ScheduleContainer extends StatelessWidget {
 
   String _calculateDday(DateTime dueDate) {
     final now = DateTime.now();
-    final difference = dueDate.difference(now);
+    final today = DateTime(now.year, now.month, now.day);
+    final difference = dueDate.difference(today);
 
     if (difference.isNegative) {
       return '';

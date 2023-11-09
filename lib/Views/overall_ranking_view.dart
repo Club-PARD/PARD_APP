@@ -17,9 +17,7 @@ class OverallRankingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: PardAppBar(
-        '전체 랭킹',
-      ),
+      appBar: const PardAppBar('전체 랭킹'),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
@@ -33,7 +31,7 @@ class OverallRankingView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 16.h,
+                height: 8.h,
               ),
               infiniteRankScroll(context),
             ],
@@ -50,7 +48,7 @@ class OverallRankingView extends StatelessWidget {
             pointController.userPointsMap;
 
         if (rxUserPointsMap.isEmpty) {
-          return CircularProgressIndicator(
+          return const CircularProgressIndicator(
             color: primaryBlue,
           ); // 로딩 처리
         }
@@ -123,7 +121,7 @@ class OverallRankingView extends StatelessWidget {
                   ),
                   SizedBox(width: 4.w),
                   Text(
-                    '${user.part}파트',
+                    '${user.part}',
                     style: titleSmall.copyWith(
                       color: grayScale[30],
                     ),
@@ -133,7 +131,7 @@ class OverallRankingView extends StatelessWidget {
               SizedBox(height: 4.h),
             ],
           ),
-          Expanded(
+          const Expanded(
             child: SizedBox(),
           ),
           Column(
@@ -188,14 +186,14 @@ class OverallRankingView extends StatelessWidget {
               ),
               SizedBox(width: 4.w),
               Text(
-                '${user.part}파트',
+                '${user.part}',
                 style: titleSmall.copyWith(
                   color: grayScale[30],
                 ),
               ),
             ],
           ),
-          Expanded(
+          const Expanded(
             child: SizedBox(),
           ),
           Text(

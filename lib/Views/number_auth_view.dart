@@ -6,6 +6,7 @@ import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/component/verification_textfield.dart';
 import 'package:pard_app/controllers/phone_verification_controller.dart';
 import 'package:pard_app/component/tos_statement.dart';
+import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,6 +22,7 @@ class NumberAuthView extends StatelessWidget {
         Get.put(PhoneVerificationController());
     final UserController userController = Get.put(UserController());
     final AuthController authController = Get.put(AuthController());
+    final PointController pointController = Get.put(PointController());
     final FocusNode phoneFocus = FocusNode();
     final FocusNode codeFocus = FocusNode();
 
@@ -37,7 +39,7 @@ class NumberAuthView extends StatelessWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Theme.of(context).colorScheme.background,
-          appBar: PardAppBar('PARD 회원인증'),
+          appBar: const PardAppBar('PARD 회원인증'),
           body: Obx(
             () => Center(
               child: Column(
@@ -80,22 +82,28 @@ class NumberAuthView extends StatelessWidget {
                             phoneFocus.unfocus();
                             print(phoneVerificationController
                                 .phoneTextFormField.value);
-                            phoneVerificationController
-                                    .isCorrectPhoneNumber.value =
-                                await phoneVerificationController
-                                    .isVerifyPhoneNumber(
-                                        phoneVerificationController
-                                            .phoneTextFormField.value);
+                            // Timer
                             if (phoneVerificationController
-                                        .isCorrectPhoneNumber.value !=
-                                    null &&
-                                phoneVerificationController
-                                        .isCorrectPhoneNumber.value ==
-                                    true) {
-                              await phoneVerificationController
-                                  .sendPhoneNumber(context);
-                              print(
-                                  '인증번호: ${phoneVerificationController.verificationCodeFromAuth.value}');
+                                    .isTimerRunning.value ==
+                                false) {
+                              phoneVerificationController.startTimer();
+                              phoneVerificationController
+                                      .isCorrectPhoneNumber.value =
+                                  await phoneVerificationController
+                                      .isVerifyPhoneNumber(
+                                          phoneVerificationController
+                                              .phoneTextFormField.value);
+                              if (phoneVerificationController
+                                          .isCorrectPhoneNumber.value !=
+                                      null &&
+                                  phoneVerificationController
+                                          .isCorrectPhoneNumber.value ==
+                                      true) {
+                                await phoneVerificationController
+                                    .sendPhoneNumber(context);
+                                print(
+                                    '인증번호: ${phoneVerificationController.verificationCodeFromAuth.value}');
+                              }
                             }
                           },
                           child: Container(
@@ -112,7 +120,9 @@ class NumberAuthView extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                '인증번호 받기',
+                                phoneVerificationController.isTimerRunning.value
+                                    ? '${phoneVerificationController.seconds.value}s'
+                                    : '인증번호 받기',
                                 style:
                                     Theme.of(context).textTheme.headlineSmall,
                               ),
@@ -273,6 +283,8 @@ class NumberAuthView extends StatelessWidget {
                           await authController.sStorage.value.write(
                               key: 'login',
                               value: authController.userEmail.value!);
+                          await pointController.fetchAndSortUserPoints();
+                          await pointController.fetchCurrentUserPoints();
                           await Get.toNamed('/home');
                         }
                       }),
@@ -281,7 +293,8 @@ class NumberAuthView extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      launchUrl(Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSdXG9ZFrKHz2n5K42r249IYneuJ4urArmYtxs6qv_13IwtO4g/viewform?usp=sf_link'));
+                      launchUrl(Uri.parse(
+                          'https://docs.google.com/forms/d/e/1FAIpQLSdXG9ZFrKHz2n5K42r249IYneuJ4urArmYtxs6qv_13IwtO4g/viewform?usp=sf_link'));
                     },
                     child: Text(
                       '회원 인증에 실패하셨나요?',

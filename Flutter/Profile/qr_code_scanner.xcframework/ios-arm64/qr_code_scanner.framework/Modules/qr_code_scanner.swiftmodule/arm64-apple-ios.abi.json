@@ -1,0 +1,1353 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "qr_code_scanner",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "MTBBarcodeScanner",
+        "printedName": "MTBBarcodeScanner",
+        "declKind": "Import",
+        "moduleName": "qr_code_scanner"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "QRView",
+        "printedName": "QRView",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(withFrame:withRegistrar:withId:params:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "QRView",
+                "printedName": "qr_code_scanner.QRView",
+                "usr": "c:@M@qr_code_scanner@objc(cs)QRView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int64",
+                "printedName": "Swift.Int64",
+                "usr": "s:s5Int64V"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15qr_code_scanner6QRViewC9withFrame0E9Registrar0E2Id6paramsACSo6CGRectV_So013FlutterPluginG0_ps5Int64VSDySSypGtcfc",
+            "mangledName": "$s15qr_code_scanner6QRViewC9withFrame0E9Registrar0E2Id6paramsACSo6CGRectV_So013FlutterPluginG0_ps5Int64VSDySSypGtcfc",
+            "moduleName": "qr_code_scanner",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "view",
+            "printedName": "view()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIView",
+                "printedName": "UIKit.UIView",
+                "usr": "c:objc(cs)UIView"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@qr_code_scanner@objc(cs)QRView(im)view",
+            "mangledName": "$s15qr_code_scanner6QRViewC4viewSo6UIViewCyF",
+            "moduleName": "qr_code_scanner",
+            "objc_name": "view",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "QRView",
+                "printedName": "qr_code_scanner.QRView",
+                "usr": "c:@M@qr_code_scanner@objc(cs)QRView"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@qr_code_scanner@objc(cs)QRView(im)init",
+            "mangledName": "$s15qr_code_scanner6QRViewCACycfc",
+            "moduleName": "qr_code_scanner",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@qr_code_scanner@objc(cs)QRView",
+        "mangledName": "$s15qr_code_scanner6QRViewC",
+        "moduleName": "qr_code_scanner",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "qr_code_scanner",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "QRViewFactory",
+        "printedName": "QRViewFactory",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(withRegistrar:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "QRViewFactory",
+                "printedName": "qr_code_scanner.QRViewFactory",
+                "usr": "c:@M@qr_code_scanner@objc(cs)QRViewFactory"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15qr_code_scanner13QRViewFactoryC13withRegistrarACSo013FlutterPluginG0_p_tcfc",
+            "mangledName": "$s15qr_code_scanner13QRViewFactoryC13withRegistrarACSo013FlutterPluginG0_p_tcfc",
+            "moduleName": "qr_code_scanner",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "create",
+            "printedName": "create(withFrame:viewIdentifier:arguments:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPlatformView",
+                "printedName": "Flutter.FlutterPlatformView",
+                "usr": "c:objc(pl)FlutterPlatformView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int64",
+                "printedName": "Swift.Int64",
+                "usr": "s:s5Int64V"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@qr_code_scanner@objc(cs)QRViewFactory(im)createWithFrame:viewIdentifier:arguments:",
+            "mangledName": "$s15qr_code_scanner13QRViewFactoryC6create9withFrame14viewIdentifier9argumentsSo19FlutterPlatformView_pSo6CGRectV_s5Int64VypSgtF",
+            "moduleName": "qr_code_scanner",
+            "objc_name": "createWithFrame:viewIdentifier:arguments:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "createArgsCodec",
+            "printedName": "createArgsCodec()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Flutter.FlutterMessageCodec & ObjectiveC.NSObjectProtocol"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@qr_code_scanner@objc(cs)QRViewFactory(im)createArgsCodec",
+            "mangledName": "$s15qr_code_scanner13QRViewFactoryC15createArgsCodecSo014FlutterMessageH0_So8NSObjectpyF",
+            "moduleName": "qr_code_scanner",
+            "objc_name": "createArgsCodec",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "QRViewFactory",
+                "printedName": "qr_code_scanner.QRViewFactory",
+                "usr": "c:@M@qr_code_scanner@objc(cs)QRViewFactory"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@qr_code_scanner@objc(cs)QRViewFactory(im)init",
+            "mangledName": "$s15qr_code_scanner13QRViewFactoryCACycfc",
+            "moduleName": "qr_code_scanner",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@qr_code_scanner@objc(cs)QRViewFactory",
+        "mangledName": "$s15qr_code_scanner13QRViewFactoryC",
+        "moduleName": "qr_code_scanner",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "qr_code_scanner"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "qr_code_scanner"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SwiftFlutterQrPlugin",
+        "printedName": "SwiftFlutterQrPlugin",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftFlutterQrPlugin",
+                "printedName": "qr_code_scanner.SwiftFlutterQrPlugin",
+                "usr": "c:@M@qr_code_scanner@objc(cs)SwiftFlutterQrPlugin"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15qr_code_scanner20SwiftFlutterQrPluginC4withACSo0eG9Registrar_p_tcfc",
+            "mangledName": "$s15qr_code_scanner20SwiftFlutterQrPluginC4withACSo0eG9Registrar_p_tcfc",
+            "moduleName": "qr_code_scanner",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@qr_code_scanner@objc(cs)SwiftFlutterQrPlugin(cm)registerWithRegistrar:",
+            "mangledName": "$s15qr_code_scanner20SwiftFlutterQrPluginC8register4withySo0eG9Registrar_p_tFZ",
+            "moduleName": "qr_code_scanner",
+            "static": true,
+            "objc_name": "registerWithRegistrar:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "applicationDidEnterBackground",
+            "printedName": "applicationDidEnterBackground(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIApplication",
+                "printedName": "UIKit.UIApplication",
+                "usr": "c:objc(cs)UIApplication"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@qr_code_scanner@objc(cs)SwiftFlutterQrPlugin(im)applicationDidEnterBackground:",
+            "mangledName": "$s15qr_code_scanner20SwiftFlutterQrPluginC29applicationDidEnterBackgroundyySo13UIApplicationCF",
+            "moduleName": "qr_code_scanner",
+            "objc_name": "applicationDidEnterBackground:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "applicationWillTerminate",
+            "printedName": "applicationWillTerminate(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIApplication",
+                "printedName": "UIKit.UIApplication",
+                "usr": "c:objc(cs)UIApplication"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@qr_code_scanner@objc(cs)SwiftFlutterQrPlugin(im)applicationWillTerminate:",
+            "mangledName": "$s15qr_code_scanner20SwiftFlutterQrPluginC24applicationWillTerminateyySo13UIApplicationCF",
+            "moduleName": "qr_code_scanner",
+            "objc_name": "applicationWillTerminate:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftFlutterQrPlugin",
+                "printedName": "qr_code_scanner.SwiftFlutterQrPlugin",
+                "usr": "c:@M@qr_code_scanner@objc(cs)SwiftFlutterQrPlugin"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@qr_code_scanner@objc(cs)SwiftFlutterQrPlugin(im)init",
+            "mangledName": "$s15qr_code_scanner20SwiftFlutterQrPluginCACycfc",
+            "moduleName": "qr_code_scanner",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@qr_code_scanner@objc(cs)SwiftFlutterQrPlugin",
+        "mangledName": "$s15qr_code_scanner20SwiftFlutterQrPluginC",
+        "moduleName": "qr_code_scanner",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 515,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 563,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 608,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 657,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 706,
+      "length": 1,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 756,
+      "length": 1,
+      "value": "5"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 809,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 856,
+      "length": 1,
+      "value": "7"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 904,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 962,
+      "length": 1,
+      "value": "9"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1007,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1057,
+      "length": 2,
+      "value": "11"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1103,
+      "length": 2,
+      "value": "12"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1149,
+      "length": 2,
+      "value": "13"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1195,
+      "length": 2,
+      "value": "14"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1244,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 1581,
+      "length": 14,
+      "value": "\"cameraFacing\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 1674,
+      "length": 44,
+      "value": "\"net.touchcapture.qr.flutterqr\/qrview_\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 1717,
+      "length": 42,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2049,
+      "length": 15,
+      "value": "\"setDimensions\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2253,
+      "length": 7,
+      "value": "\"width\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2265,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2326,
+      "length": 8,
+      "value": "\"height\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2339,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2407,
+      "length": 15,
+      "value": "\"scanAreaWidth\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2427,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2496,
+      "length": 16,
+      "value": "\"scanAreaHeight\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2517,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2586,
+      "length": 16,
+      "value": "\"scanAreaOffset\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2607,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2631,
+      "length": 11,
+      "value": "\"startScan\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2740,
+      "length": 12,
+      "value": "\"flipCamera\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2820,
+      "length": 13,
+      "value": "\"toggleFlash\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2902,
+      "length": 13,
+      "value": "\"pauseCamera\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 2984,
+      "length": 12,
+      "value": "\"stopCamera\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 3064,
+      "length": 14,
+      "value": "\"resumeCamera\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 3148,
+      "length": 15,
+      "value": "\"getCameraInfo\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 3234,
+      "length": 14,
+      "value": "\"getFlashInfo\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 3318,
+      "length": 19,
+      "value": "\"getSystemFeatures\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3812,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3818,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4447,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4470,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4605,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4645,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4777,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4921,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "Array",
+      "offset": 5236,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 5526,
+      "length": 17,
+      "value": "\"onPermissionSet\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 6076,
+      "length": 7,
+      "value": "\"AZTEC\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 6214,
+      "length": 9,
+      "value": "\"CODE_39\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 6354,
+      "length": 9,
+      "value": "\"CODE_93\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 6495,
+      "length": 10,
+      "value": "\"CODE_128\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 6640,
+      "length": 13,
+      "value": "\"DATA_MATRIX\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 6782,
+      "length": 7,
+      "value": "\"EAN_8\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 6919,
+      "length": 8,
+      "value": "\"EAN_13\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 7143,
+      "length": 5,
+      "value": "\"ITF\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 7279,
+      "length": 9,
+      "value": "\"PDF_417\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 7415,
+      "length": 9,
+      "value": "\"QR_CODE\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 7553,
+      "length": 7,
+      "value": "\"UPC_E\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 9301,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 9321,
+      "length": 10,
+      "value": "\"rawBytes\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 9501,
+      "length": 6,
+      "value": "\"code\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 9522,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 9624,
+      "length": 6,
+      "value": "\"code\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 9645,
+      "length": 6,
+      "value": "\"type\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 9665,
+      "length": 10,
+      "value": "\"rawBytes\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 9858,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 9968,
+      "length": 15,
+      "value": "\"onRecognizeQR\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 10232,
+      "length": 15,
+      "value": "\"unknown-error\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 10258,
+      "length": 26,
+      "value": "\"Unable to start scanning\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 11061,
+      "length": 5,
+      "value": "\"404\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 11077,
+      "length": 26,
+      "value": "\"No barcode scanner found\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 11288,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 11351,
+      "length": 24,
+      "value": "\"cameraInformationError\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 11386,
+      "length": 33,
+      "value": "\"Could not get flash information\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 11726,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 11789,
+      "length": 5,
+      "value": "\"404\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 11805,
+      "length": 36,
+      "value": "\"This device doesn't support flash\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 11909,
+      "length": 5,
+      "value": "\"404\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 11925,
+      "length": 26,
+      "value": "\"No barcode scanner found\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 12199,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 12256,
+      "length": 5,
+      "value": "\"404\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 12272,
+      "length": 26,
+      "value": "\"No barcode scanner found\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 12550,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 12607,
+      "length": 5,
+      "value": "\"404\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 12623,
+      "length": 26,
+      "value": "\"No barcode scanner found\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 12821,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 12863,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 12950,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 12990,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 13079,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 13157,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 13245,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 13326,
+      "length": 16,
+      "value": "\"hasFrontCamera\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 13379,
+      "length": 15,
+      "value": "\"hasBackCamera\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 13430,
+      "length": 10,
+      "value": "\"hasFlash\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 13473,
+      "length": 14,
+      "value": "\"activeCamera\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 13571,
+      "length": 5,
+      "value": "\"404\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRView.swift",
+      "kind": "StringLiteral",
+      "offset": 141,
+      "length": 6,
+      "value": "\"qr_code_scanner.QRView\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/QRViewFactory.swift",
+      "kind": "StringLiteral",
+      "offset": 123,
+      "length": 13,
+      "value": "\"qr_code_scanner.QRViewFactory\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/SwiftFlutterQrPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 275,
+      "length": 38,
+      "value": "\"net.touchcapture.qr.flutterqr\/qrview\""
+    },
+    {
+      "filePath": "\/Users\/juhyun\/.pub-cache\/hosted\/pub.dev\/qr_code_scanner-1.0.1\/ios\/Classes\/SwiftFlutterQrPlugin.swift",
+      "kind": "StringLiteral",
+      "offset": 42,
+      "length": 20,
+      "value": "\"qr_code_scanner.SwiftFlutterQrPlugin\""
+    }
+  ]
+}

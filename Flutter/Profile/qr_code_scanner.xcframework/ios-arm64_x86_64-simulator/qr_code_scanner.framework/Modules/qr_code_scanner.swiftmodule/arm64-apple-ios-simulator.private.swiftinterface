@@ -1,0 +1,30 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 effective-4.1.50 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4 -enforce-exclusivity=checked -Onone -module-name qr_code_scanner
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Flutter
+import Foundation
+import MTBBarcodeScanner
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+@_exported import qr_code_scanner
+@objc public class QRView : ObjectiveC.NSObject, Flutter.FlutterPlatformView {
+  public init(withFrame frame: CoreFoundation.CGRect, withRegistrar registrar: any Flutter.FlutterPluginRegistrar, withId id: Swift.Int64, params: Swift.Dictionary<Swift.String, Any>)
+  @objc deinit
+  @objc public func view() -> UIKit.UIView
+}
+@objc public class QRViewFactory : ObjectiveC.NSObject, Flutter.FlutterPlatformViewFactory {
+  public init(withRegistrar registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public func create(withFrame frame: CoreFoundation.CGRect, viewIdentifier viewId: Swift.Int64, arguments args: Any?) -> any Flutter.FlutterPlatformView
+  @objc public func createArgsCodec() -> any Flutter.FlutterMessageCodec & ObjectiveC.NSObjectProtocol
+  @objc deinit
+}
+@objc public class SwiftFlutterQrPlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  public init(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public func applicationDidEnterBackground(_ application: UIKit.UIApplication)
+  @objc public func applicationWillTerminate(_ application: UIKit.UIApplication)
+  @objc deinit
+}

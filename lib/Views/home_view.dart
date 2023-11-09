@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
-  final UserController userController = Get.put(UserController());
+  final UserController userController = Get.find<UserController>();
   final ScheduleController scheduleController = Get.put(ScheduleController());
   final GlobalKey questionDialogKey = GlobalKey();
   final formatter = NumberFormat("#,##0.##");
@@ -35,6 +35,9 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
+      print('---------------home_view()');
+      pointController.getCurrentUserPartRank();
+      pointController.getCurrentUserRank();
     });
   }
 
@@ -173,6 +176,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("home_view: ${userController.hashCode}");
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -208,19 +212,21 @@ class _HomePageState extends State<HomePage> {
                         Row(
                           children: [
                             SizedBox(width: 24.w),
-                            RichText(
-                              text: TextSpan(
-                                style: displaySmall,
-                                children: <TextSpan>[
-                                  const TextSpan(text: '안녕하세요, '),
-                                  TextSpan(
-                                    text: userController.userInfo.value!.name,
-                                    style: displayMedium.copyWith(
-                                        color: const Color(0XFF5262F5)),
-                                  ),
-                                  const TextSpan(
-                                      text: ' 님\n오늘도 PARD에서 함께 협업해요!'),
-                                ],
+                            Obx(
+                              () => RichText(
+                                text: TextSpan(
+                                  style: displaySmall,
+                                  children: <TextSpan>[
+                                    const TextSpan(text: '안녕하세요, '),
+                                    TextSpan(
+                                      text: userController.userInfo.value!.name,
+                                      style: displayMedium.copyWith(
+                                          color: const Color(0XFF5262F5)),
+                                    ),
+                                    const TextSpan(
+                                        text: ' 님\n오늘도 PARD에서 함께 협업해요!'),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -260,11 +266,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                             IntrinsicWidth(
                               child: Container(
-                                // width: (userController
-                                //             .userInfo.value!.part!.length <=
-                                //         2)
-                                //     ? 70.w
-                                //     : 90.w,
                                 height: 30.h,
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 12.w, vertical: 4.h),
@@ -282,10 +283,12 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 child: Center(
-                                  child: Text(
-                                      /** part값으로 대체 */
-                                      '${userController.userInfo.value!.part} 파트',
-                                      style: titleMedium.copyWith(height: 0)),
+                                  child: Obx(
+                                    () => Text(
+                                        /** part값으로 대체 */
+                                        '${userController.userInfo.value!.part}',
+                                        style: titleMedium.copyWith(height: 0)),
+                                  ),
                                 ),
                               ),
                             ),
@@ -305,10 +308,12 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 child: Center(
-                                  child: Text(
-                                      /** member값으로 대체 */
-                                      '${userController.userInfo.value!.member}',
-                                      style: titleMedium.copyWith(height: 0)),
+                                  child: Obx(
+                                    () => Text(
+                                        /** member값으로 대체 */
+                                        '${userController.userInfo.value!.member}',
+                                        style: titleMedium.copyWith(height: 0)),
+                                  ),
                                 ),
                               ),
                             ),
@@ -433,7 +438,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: Center(
                                           child: Padding(
-                                            padding: (pointModel!.level == 1 ||
+                                            padding: (pointModel.level == 1 ||
                                                     pointModel.level == 3)
                                                 ? const EdgeInsets.only(
                                                     top: 8.0)
@@ -598,7 +603,16 @@ class _HomePageState extends State<HomePage> {
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          '+${formatter.format(pointModel!.currentPoints)}점',
+                                          (userController.userInfo.value
+                                                          ?.member ==
+                                                      '잔잔파도' ||
+                                                  userController.userInfo.value
+                                                          ?.member ==
+                                                      '운영진')
+                                              ? '-'
+                                              : (pointModel.currentPoints == 0)
+                                                  ? '${formatter.format(pointModel.currentPoints)}점'
+                                                  : '+${formatter.format(pointModel.currentPoints)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!
@@ -633,7 +647,14 @@ class _HomePageState extends State<HomePage> {
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          '${formatter.format(pointModel!.currentBeePoints)}점',
+                                          (userController.userInfo.value
+                                                          ?.member ==
+                                                      '잔잔파도' ||
+                                                  userController.userInfo.value
+                                                          ?.member ==
+                                                      '운영진')
+                                              ? '-'
+                                              : '${formatter.format(pointModel.currentBeePoints)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!

@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:pard_app/controllers/bottombar_controller.dart';
@@ -34,7 +35,7 @@ Future<void> main() async {
   } catch (error) {
     print("실패 : $error");
   }
-
+  FirebaseMessaging.instance.requestPermission();
   Get.put(PushNotificationController());
   /** pushNotificationController에 있는것들 사용한다 */
   await PushNotificationController.to.setupFlutterNotifications();
@@ -43,6 +44,7 @@ Future<void> main() async {
       .listen(PushNotificationController.to.showFlutterNotification);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+UserController.init();
   Get.put(BottomBarController());
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());

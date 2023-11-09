@@ -1,22 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pard_app/controllers/error_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 
 import 'package:pard_app/model/schedule_model/schedule_model.dart';
 
 class ScheduleController extends GetxController {
-  final UserController userController = Get.put(UserController());
+  final UserController _userController = Get.put(UserController());
+  final ErrorController _errorController = Get.put(ErrorController());
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   RxList<ScheduleModel> upcomingSchedules = <ScheduleModel>[].obs;
   RxList<ScheduleModel> pastSchedules = <ScheduleModel>[].obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
-
-    getSchedules('${userController.userInfo.value!.part}');
+    await getSchedules('${_userController.userInfo.value?.part}');
   }
 
   Future<void> getSchedules(String userPart) async {
@@ -36,12 +37,12 @@ class ScheduleController extends GetxController {
         if (scheduleData['part'] == userPart || scheduleData['part'] == '전체') {
           final schedule = ScheduleModel(
               scheduleData['title'],
-              scheduleData['description'],
               (scheduleData['dueDate'] as Timestamp).toDate(),
               scheduleData['place'],
               scheduleData['part'],
               now.isAfter((scheduleData['dueDate'] as Timestamp).toDate()),
-              sid);
+              sid,
+              scheduleData['type']);
 
           if (schedule.previous) {
             pastSchedules.add(schedule);
@@ -51,10 +52,16 @@ class ScheduleController extends GetxController {
         }
       }
       pastSchedules = pastSchedules.reversed.toList().obs;
+      print('upcomingSchedules : $upcomingSchedules');
     } catch (e) {
       if (kDebugMode) {
         print('Error fetching schedules: $e');
       }
+      await _errorController.writeErrorLog(
+        e.toString(),
+        _userController.userInfo.value!.phone ?? 'none',
+        'getSchedules()',
+      );
     }
   }
 }

@@ -1,0 +1,30 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name mobile_scanner
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import Flutter
+import Foundation
+import MLKitBarcodeScanning
+import MLKitVision
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+@_exported import mobile_scanner
+@objc @_hasMissingDesignatedInitializers public class BarcodeHandler : ObjectiveC.NSObject, Flutter.FlutterStreamHandler {
+  @objc public func onListen(withArguments arguments: Any?, eventSink: @escaping Flutter.FlutterEventSink) -> Flutter.FlutterError?
+  @objc public func onCancel(withArguments arguments: Any?) -> Flutter.FlutterError?
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers public class MobileScanner : ObjectiveC.NSObject, AVFoundation.AVCaptureVideoDataOutputSampleBufferDelegate, Flutter.FlutterTexture {
+  @objc public func captureOutput(_ output: AVFoundation.AVCaptureOutput, didOutput sampleBuffer: CoreMedia.CMSampleBuffer, from connection: AVFoundation.AVCaptureConnection)
+  @objc override dynamic public func observeValue(forKeyPath keyPath: Swift.String?, of object: Any?, change: [Foundation.NSKeyValueChangeKey : Any]?, context: Swift.UnsafeMutableRawPointer?)
+  @objc public func copyPixelBuffer() -> Swift.Unmanaged<CoreVideo.CVPixelBuffer>?
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers public class SwiftMobileScannerPlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @objc deinit
+}

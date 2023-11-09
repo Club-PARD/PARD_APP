@@ -160,7 +160,7 @@ class _MyPageState extends State<MyPage> {
                                     ),
                                     child: Center(
                                       child: Text(
-                                          '${userController.userInfo.value!.part} 파트',
+                                          '${userController.userInfo.value!.part}',
                                           style:
                                               titleMedium.copyWith(height: 0)),
                                     ),
@@ -515,7 +515,7 @@ class _MyPageState extends State<MyPage> {
                       ),
                       Container(
                         width: 327.w,
-                        height: 50.h,
+                        height: 70.h,
                         decoration: const BoxDecoration(
                           color: Color(0xFF2A2A2A),
                         ),
@@ -525,7 +525,7 @@ class _MyPageState extends State<MyPage> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(left: 24.w),
-                              child: Text('탈퇴하기', style: headlineSmall),
+                              child: Text('회원탈퇴', style: headlineSmall),
                             ),
                             Padding(
                               padding: EdgeInsets.only(right: 10.w),
@@ -570,7 +570,7 @@ class _MyPageState extends State<MyPage> {
                                                                 .spaceAround,
                                                         children: [
                                                           SizedBox(
-                                                            height: 24.h,
+                                                            height: 10.h,
                                                           ),
                                                           Text('회원탈퇴',
                                                               style:
@@ -579,124 +579,105 @@ class _MyPageState extends State<MyPage> {
                                                                 color: const Color(
                                                                     0xFF5262F5),
                                                               )),
-                                                          Text.rich(
-                                                            TextSpan(
-                                                              children: [
-                                                                const TextSpan(
-                                                                  text:
-                                                                      '회원 탈퇴를 원하시면\n공식 계정(',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        'Pretendard',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    height:
-                                                                        1.29,
+                                                          Text(
+                                                              '회원 탈퇴 후 개인정보, 점수 등의\n 데이터가 삭제되며 복구할 수 없습니다.\n 정말 삭제하시겠습니까?',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style:
+                                                                  titleLarge),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceAround,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 20.w,
+                                                              ),
+                                                              Container(
+                                                                width: 116.w,
+                                                                height: 44.h,
+                                                                decoration:
+                                                                    ShapeDecoration(
+                                                                  color: const Color(
+                                                                      0xFF2A2A2A),
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            30),
                                                                   ),
                                                                 ),
-                                                                TextSpan(
-                                                                  text:
-                                                                      'official@we-pard.com',
-                                                                  style: titleLarge
-                                                                      .copyWith(
-                                                                    decoration:
-                                                                        TextDecoration
-                                                                            .underline,
-                                                                    color: const Color(
-                                                                        0xFF5262F5),
-                                                                  ),
-                                                                  recognizer:
-                                                                      TapGestureRecognizer()
-                                                                        ..onTap =
-                                                                            () async {
-                                                                          final Uri
-                                                                              url =
-                                                                              Uri.parse('https://we-pard.com/');
-                                                                          if (await canLaunchUrl(
-                                                                              url)) {
-                                                                            await launchUrl(url);
-                                                                          } else {
-                                                                            throw 'Could not launch $url';
-                                                                          }
+                                                                child:
+                                                                    TextButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          Get.back();
                                                                         },
-                                                                ),
-                                                                const TextSpan(
-                                                                  text:
-                                                                      ')으로\n메일을 보내주세요. ',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        'Pretendard',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    height:
-                                                                        1.29,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 20.w,
-                                                          ),
-                                                          Container(
-                                                              width: 252.w,
-                                                              height: 44.h,
-                                                              decoration:
-                                                                  ShapeDecoration(
-                                                                gradient:
-                                                                    const LinearGradient(
-                                                                  begin:
-                                                                      Alignment(
+                                                                        child:
+                                                                            Text(
+                                                                          '취소',
+                                                                          style:
+                                                                              headlineMedium.copyWith(
+                                                                            color:
+                                                                                const Color(0xFFA2A2A2),
+                                                                          ),
+                                                                        )),
+                                                              ),
+                                                              Container(
+                                                                  width: 116.w,
+                                                                  height: 44.h,
+                                                                  decoration:
+                                                                      ShapeDecoration(
+                                                                    gradient:
+                                                                        const LinearGradient(
+                                                                      begin: Alignment(
                                                                           1.00,
                                                                           -0.03),
-                                                                  end:
-                                                                      Alignment(
+                                                                      end: Alignment(
                                                                           -1,
                                                                           0.03),
-                                                                  colors: [
-                                                                    Color(
-                                                                        0xFF7B3FEF),
-                                                                    Color(
-                                                                        0xFF5262F5),
-                                                                  ],
-                                                                ),
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              30),
-                                                                ),
-                                                              ),
-                                                              child: TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    Get.back();
-                                                                  },
-                                                                  child: Text(
-                                                                    '확인',
-                                                                    style: headlineMedium
-                                                                        .copyWith(
-                                                                      color: Colors
-                                                                          .white,
+                                                                      colors: [
+                                                                        Color(
+                                                                            0xFF7B3FEF),
+                                                                        Color(
+                                                                            0xFF5262F5),
+                                                                      ],
                                                                     ),
-                                                                  ))),
-                                                          SizedBox(
-                                                            width: 20.w,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              30),
+                                                                    ),
+                                                                  ),
+                                                                  child:
+                                                                      TextButton(
+                                                                          onPressed:
+                                                                              () async {
+                                                                                AppSettings.openAppSettings();
+                                                                            bottomController.selectedIndex.value =
+                                                                                0; //로그아웃하고 들어올 때 index 0으로 하기
+
+                                                                            if (uid !=
+                                                                                null) {
+                                                                              AuthController().deleteUserFields();
+                                                                            } else {
+                                                                              print("UID is null");
+                                                                            }
+                                                                          },
+                                                                          child:
+                                                                              Text(
+                                                                            '확인',
+                                                                            style:
+                                                                                headlineMedium.copyWith(
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                          ))),
+                                                              SizedBox(
+                                                                width: 20.w,
+                                                              ),
+                                                            ],
                                                           ),
                                                           SizedBox(
                                                             height: 24.h,

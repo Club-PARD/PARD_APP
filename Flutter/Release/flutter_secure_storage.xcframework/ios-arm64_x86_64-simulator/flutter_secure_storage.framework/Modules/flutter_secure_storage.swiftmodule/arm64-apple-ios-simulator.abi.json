@@ -1,0 +1,1856 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "flutter_secure_storage",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "FlutterSecureStorage",
+        "printedName": "FlutterSecureStorage",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "containsKey",
+            "printedName": "containsKey(key:groupId:accountName:synchronizable:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22flutter_secure_storage20FlutterSecureStorageC11containsKey3key7groupId11accountName14synchronizableSbSS_SSSgAISbSgtF",
+            "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC11containsKey3key7groupId11accountName14synchronizableSbSS_SSSgAISbSgtF",
+            "moduleName": "flutter_secure_storage",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "readAll",
+            "printedName": "readAll(groupId:accountName:synchronizable:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterSecureStorageResponse",
+                "printedName": "flutter_secure_storage.FlutterSecureStorage.FlutterSecureStorageResponse",
+                "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22flutter_secure_storage20FlutterSecureStorageC7readAll7groupId11accountName14synchronizableAC0deF8ResponseVSSSg_AJSbSgtF",
+            "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC7readAll7groupId11accountName14synchronizableAC0deF8ResponseVSSSg_AJSbSgtF",
+            "moduleName": "flutter_secure_storage",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "read",
+            "printedName": "read(key:groupId:accountName:synchronizable:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterSecureStorageResponse",
+                "printedName": "flutter_secure_storage.FlutterSecureStorage.FlutterSecureStorageResponse",
+                "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22flutter_secure_storage20FlutterSecureStorageC4read3key7groupId11accountName14synchronizableAC0deF8ResponseVSS_SSSgAKSbSgtF",
+            "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC4read3key7groupId11accountName14synchronizableAC0deF8ResponseVSS_SSSgAKSbSgtF",
+            "moduleName": "flutter_secure_storage",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "deleteAll",
+            "printedName": "deleteAll(groupId:accountName:synchronizable:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int32",
+                "printedName": "Swift.Int32",
+                "usr": "s:s5Int32V"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22flutter_secure_storage20FlutterSecureStorageC9deleteAll7groupId11accountName14synchronizables5Int32VSSSg_AJSbSgtF",
+            "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC9deleteAll7groupId11accountName14synchronizables5Int32VSSSg_AJSbSgtF",
+            "moduleName": "flutter_secure_storage",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "delete",
+            "printedName": "delete(key:groupId:accountName:synchronizable:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int32",
+                "printedName": "Swift.Int32",
+                "usr": "s:s5Int32V"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22flutter_secure_storage20FlutterSecureStorageC6delete3key7groupId11accountName14synchronizables5Int32VSS_SSSgAKSbSgtF",
+            "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC6delete3key7groupId11accountName14synchronizables5Int32VSS_SSSgAKSbSgtF",
+            "moduleName": "flutter_secure_storage",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "write",
+            "printedName": "write(key:value:groupId:accountName:synchronizable:accessibility:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int32",
+                "printedName": "Swift.Int32",
+                "usr": "s:s5Int32V"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22flutter_secure_storage20FlutterSecureStorageC5write3key5value7groupId11accountName14synchronizable13accessibilitys5Int32VSS_S2SSgAMSbSgAMtF",
+            "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC5write3key5value7groupId11accountName14synchronizable13accessibilitys5Int32VSS_S2SSgAMSbSgAMtF",
+            "moduleName": "flutter_secure_storage",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "FlutterSecureStorageResponse",
+            "printedName": "FlutterSecureStorageResponse",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "status",
+                "printedName": "status",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int32?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int32",
+                        "printedName": "Swift.Int32",
+                        "usr": "s:s5Int32V"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6statuss5Int32VSgvp",
+                "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6statuss5Int32VSgvp",
+                "moduleName": "flutter_secure_storage",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage"
+                ],
+                "fixedbinaryorder": 0,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Int32?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Int32",
+                            "printedName": "Swift.Int32",
+                            "usr": "s:s5Int32V"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6statuss5Int32VSgvg",
+                    "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6statuss5Int32VSgvg",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Int32?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Int32",
+                            "printedName": "Swift.Int32",
+                            "usr": "s:s5Int32V"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6statuss5Int32VSgvs",
+                    "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6statuss5Int32VSgvs",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6statuss5Int32VSgvM",
+                    "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6statuss5Int32VSgvM",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "value",
+                "printedName": "value",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV5valueypSgvp",
+                "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV5valueypSgvp",
+                "moduleName": "flutter_secure_storage",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage"
+                ],
+                "fixedbinaryorder": 1,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Any?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV5valueypSgvg",
+                    "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV5valueypSgvg",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Any?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV5valueypSgvs",
+                    "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV5valueypSgvs",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV5valueypSgvM",
+                    "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV5valueypSgvM",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(status:value:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FlutterSecureStorageResponse",
+                    "printedName": "flutter_secure_storage.FlutterSecureStorage.FlutterSecureStorageResponse",
+                    "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int32?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int32",
+                        "printedName": "Swift.Int32",
+                        "usr": "s:s5Int32V"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6status5valueAEs5Int32VSg_ypSgtcfc",
+                "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV6status5valueAEs5Int32VSg_ypSgtcfc",
+                "moduleName": "flutter_secure_storage",
+                "implicit": true,
+                "init_kind": "Designated"
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FlutterSecureStorageResponse",
+                    "printedName": "flutter_secure_storage.FlutterSecureStorage.FlutterSecureStorageResponse",
+                    "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseVAEycfc",
+                "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseVAEycfc",
+                "moduleName": "flutter_secure_storage",
+                "implicit": true,
+                "init_kind": "Designated"
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV",
+            "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC0deF8ResponseV",
+            "moduleName": "flutter_secure_storage",
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterSecureStorage",
+                "printedName": "flutter_secure_storage.FlutterSecureStorage",
+                "usr": "s:22flutter_secure_storage20FlutterSecureStorageC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:22flutter_secure_storage20FlutterSecureStorageCACycfc",
+            "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageCACycfc",
+            "moduleName": "flutter_secure_storage",
+            "implicit": true,
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:22flutter_secure_storage20FlutterSecureStorageC",
+        "mangledName": "$s22flutter_secure_storage20FlutterSecureStorageC",
+        "moduleName": "flutter_secure_storage",
+        "isOpen": true
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "flutter_secure_storage",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SwiftFlutterSecureStoragePlugin",
+        "printedName": "SwiftFlutterSecureStoragePlugin",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@flutter_secure_storage@objc(cs)SwiftFlutterSecureStoragePlugin(cm)registerWithRegistrar:",
+            "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC8register4withySo0eH9Registrar_p_tFZ",
+            "moduleName": "flutter_secure_storage",
+            "static": true,
+            "objc_name": "registerWithRegistrar:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "handle",
+            "printedName": "handle(_:result:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterMethodCall",
+                "printedName": "Flutter.FlutterMethodCall",
+                "usr": "c:objc(cs)FlutterMethodCall"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Any?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@flutter_secure_storage@objc(cs)SwiftFlutterSecureStoragePlugin(im)handleMethodCall:result:",
+            "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC6handle_6resultySo0E10MethodCallC_yypSgctF",
+            "moduleName": "flutter_secure_storage",
+            "isOpen": true,
+            "objc_name": "handleMethodCall:result:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "FlutterSecureStorageRequest",
+            "printedName": "FlutterSecureStorageRequest",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "accountName",
+                "printedName": "accountName",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountNameSSSgvp",
+                "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountNameSSSgvp",
+                "moduleName": "flutter_secure_storage",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage"
+                ],
+                "fixedbinaryorder": 0,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountNameSSSgvg",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountNameSSSgvg",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountNameSSSgvs",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountNameSSSgvs",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountNameSSSgvM",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountNameSSSgvM",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "groupId",
+                "printedName": "groupId",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV7groupIdSSSgvp",
+                "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV7groupIdSSSgvp",
+                "moduleName": "flutter_secure_storage",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage"
+                ],
+                "fixedbinaryorder": 1,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV7groupIdSSSgvg",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV7groupIdSSSgvg",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV7groupIdSSSgvs",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV7groupIdSSSgvs",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV7groupIdSSSgvM",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV7groupIdSSSgvM",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "synchronizable",
+                "printedName": "synchronizable",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Bool?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV14synchronizableSbSgvp",
+                "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV14synchronizableSbSgvp",
+                "moduleName": "flutter_secure_storage",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage"
+                ],
+                "fixedbinaryorder": 2,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Bool?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Bool",
+                            "printedName": "Swift.Bool",
+                            "usr": "s:Sb"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV14synchronizableSbSgvg",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV14synchronizableSbSgvg",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Bool?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Bool",
+                            "printedName": "Swift.Bool",
+                            "usr": "s:Sb"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV14synchronizableSbSgvs",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV14synchronizableSbSgvs",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV14synchronizableSbSgvM",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV14synchronizableSbSgvM",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "accessibility",
+                "printedName": "accessibility",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV13accessibilitySSSgvp",
+                "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV13accessibilitySSSgvp",
+                "moduleName": "flutter_secure_storage",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage"
+                ],
+                "fixedbinaryorder": 3,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV13accessibilitySSSgvg",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV13accessibilitySSSgvg",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV13accessibilitySSSgvs",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV13accessibilitySSSgvs",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV13accessibilitySSSgvM",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV13accessibilitySSSgvM",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "key",
+                "printedName": "key",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV3keySSSgvp",
+                "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV3keySSSgvp",
+                "moduleName": "flutter_secure_storage",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage"
+                ],
+                "fixedbinaryorder": 4,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV3keySSSgvg",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV3keySSSgvg",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV3keySSSgvs",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV3keySSSgvs",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV3keySSSgvM",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV3keySSSgvM",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "value",
+                "printedName": "value",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV5valueSSSgvp",
+                "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV5valueSSSgvp",
+                "moduleName": "flutter_secure_storage",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage"
+                ],
+                "fixedbinaryorder": 5,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV5valueSSSgvg",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV5valueSSSgvg",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV5valueSSSgvs",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV5valueSSSgvs",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV5valueSSSgvM",
+                    "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV5valueSSSgvM",
+                    "moduleName": "flutter_secure_storage",
+                    "implicit": true,
+                    "declAttributes": [
+                      "Transparent"
+                    ],
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(accountName:groupId:synchronizable:accessibility:key:value:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FlutterSecureStorageRequest",
+                    "printedName": "flutter_secure_storage.SwiftFlutterSecureStoragePlugin.FlutterSecureStorageRequest",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Bool?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountName7groupId14synchronizable13accessibility3key5valueAESSSg_ALSbSgA3Ltcfc",
+                "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV11accountName7groupId14synchronizable13accessibility3key5valueAESSSg_ALSbSgA3Ltcfc",
+                "moduleName": "flutter_secure_storage",
+                "implicit": true,
+                "init_kind": "Designated"
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FlutterSecureStorageRequest",
+                    "printedName": "flutter_secure_storage.SwiftFlutterSecureStoragePlugin.FlutterSecureStorageRequest",
+                    "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestVAEycfc",
+                "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestVAEycfc",
+                "moduleName": "flutter_secure_storage",
+                "implicit": true,
+                "init_kind": "Designated"
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV",
+            "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC0efG7RequestV",
+            "moduleName": "flutter_secure_storage",
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SwiftFlutterSecureStoragePlugin",
+                "printedName": "flutter_secure_storage.SwiftFlutterSecureStoragePlugin",
+                "usr": "c:@M@flutter_secure_storage@objc(cs)SwiftFlutterSecureStoragePlugin"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@flutter_secure_storage@objc(cs)SwiftFlutterSecureStoragePlugin(im)init",
+            "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginCACycfc",
+            "moduleName": "flutter_secure_storage",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@flutter_secure_storage@objc(cs)SwiftFlutterSecureStoragePlugin",
+        "mangledName": "$s22flutter_secure_storage31SwiftFlutterSecureStoragePluginC",
+        "moduleName": "flutter_secure_storage",
+        "isOpen": true,
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": []
+}

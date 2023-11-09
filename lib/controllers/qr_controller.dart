@@ -232,9 +232,9 @@ class QRController extends GetxController {
                                   child: TextButton(
                                       onPressed: () async {
                                         Get.back();
-                                        userController.AddAttend(sid, '출');
+                                        userController.addAttend(sid, '출');
                                         await pointController.attendQR(user, 6);
-                                        await userController.AddAttendInfo('출');
+                                        await userController.addAttendInfo('출');
                                       },
                                       child: Text(
                                         '세미나 입장하기',
@@ -329,9 +329,9 @@ class QRController extends GetxController {
                                   ),
                                   child: TextButton(
                                       onPressed: () async {
-                                        userController.AddAttend(sid, "지");
+                                        userController.addAttend(sid, "지");
                                         await pointController.lateQR(user, 4);
-                                        await userController.AddAttendInfo('지');
+                                        await userController.addAttendInfo('지');
                                         Get.back();
                                       },
                                       child: Text(
