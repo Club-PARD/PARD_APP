@@ -45,7 +45,7 @@ void launchNotion() async {
 
 void launchSeminar() async {
   final Uri SeminarFeedback = Uri.parse(
-      'https://docs.google.com/forms/d/e/1FAIpQLSdvXT0iaH6dXNdzsSf-eZuLcgcrTD5c8Upw3LfTKitixUp3uw/viewform?usp=sf_link');
+      'https://pardhgu.notion.site/14a9a3087aaa4859ae0c0dcbaf001aee?pvs=4');
   try {
     await launchUrl(SeminarFeedback);
   } catch (e) {
