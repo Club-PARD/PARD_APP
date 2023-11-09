@@ -18,6 +18,10 @@ class UserController extends GetxController {
   Rx<String?> uid = Rx<String?>(null);
   late final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
+  static void init() {
+    Get.put(UserController());
+  }
+
   //user모델 가져오기(by 이메일)
   Future<void> getUserInfoByEmail(String email) async {
     try {
@@ -67,8 +71,9 @@ class UserController extends GetxController {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await usersCollection.where('email', isEqualTo: email).get();
-
+          
       return querySnapshot.docs.isNotEmpty;
+      //true 반환
     } catch (e) {
       print("Error while verifying user by email: $e");
       await _errorController.writeErrorLog(

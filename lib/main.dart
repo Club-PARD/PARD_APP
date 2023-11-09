@@ -35,15 +35,16 @@ Future<void> main() async {
   } catch (error) {
     print("실패 : $error");
   }
-  // FirebaseMessaging.instance.requestPermission();
+  FirebaseMessaging.instance.requestPermission();
   Get.put(PushNotificationController());
   /** pushNotificationController에 있는것들 사용한다 */
   await PushNotificationController.to.setupFlutterNotifications();
 
-  // FirebaseMessaging.onMessage
-  //     .listen(PushNotificationController.to.showFlutterNotification);
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onMessage
+      .listen(PushNotificationController.to.showFlutterNotification);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+UserController.init();
   Get.put(BottomBarController());
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());

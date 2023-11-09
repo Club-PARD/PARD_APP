@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
-  final UserController userController = Get.put(UserController());
+  final UserController userController = Get.find();
   final ScheduleController scheduleController = Get.put(ScheduleController());
   final GlobalKey questionDialogKey = GlobalKey();
   final formatter = NumberFormat("#,##0.##");
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
     print('---------------home_view()');
     pointController.getCurrentUserPartRank();
     pointController.getCurrentUserRank();
-
+    print('user: ${userController.userInfo.value}');
     // });
   }
 
@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                                 children: <TextSpan>[
                                   const TextSpan(text: '안녕하세요, '),
                                   TextSpan(
-                                    text: userController.userInfo.value!.name,
+                                    text: userController.userInfo.value?.name,
                                     style: displayMedium.copyWith(
                                         color: const Color(0XFF5262F5)),
                                   ),
@@ -288,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Text(
                                       /** part값으로 대체 */
-                                      '${userController.userInfo.value!.part}',
+                                      '${userController.userInfo.value?.part}',
                                       style: titleMedium.copyWith(height: 0)),
                                 ),
                               ),
@@ -311,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Text(
                                       /** member값으로 대체 */
-                                      '${userController.userInfo.value!.member}',
+                                      '${userController.userInfo.value?.member}',
                                       style: titleMedium.copyWith(height: 0)),
                                 ),
                               ),

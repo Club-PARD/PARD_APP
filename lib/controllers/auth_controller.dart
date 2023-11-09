@@ -35,11 +35,10 @@ class AuthController extends GetxController {
         await sStorage.value.deleteAll();
         prefs.setBool('first_run', false);
       }
-
       String? email = await sStorage.value.read(key: 'login');
       userEmail.value = email;
       print('checkPreviousLogin() ${userEmail.value}');
-      if (email == null || await _userController.isVerifyUserByEmail(email)) {
+      if (email == null || (await _userController.isVerifyUserByEmail(email) == false)) {
         print('로그인 이력 없음: 로그인 필요');
         isLogin.value = false;
       } else {
