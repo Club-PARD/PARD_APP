@@ -34,7 +34,6 @@ class AuthController extends GetxController {
         await sStorage.value.deleteAll();
         prefs.setBool('first_run', false);
       }
-
       String? email = await sStorage.value.read(key: 'login');
       userEmail.value = email;
       print('checkPreviousLogin() ${userEmail.value}');
@@ -120,20 +119,20 @@ class AuthController extends GetxController {
         accessToken: appleCredential.authorizationCode,
       );
 
-      if (appleCredential.email == null) {
-        List<String> jwt = appleCredential.identityToken?.split('.') ?? [];
-        String payload = jwt[1];
-        payload = base64.normalize(payload);
+      // if (appleCredential.email == null) {
+      //   List<String> jwt = appleCredential.identityToken?.split('.') ?? [];
+      //   String payload = jwt[1];
+      //   payload = base64.normalize(payload);
 
-        final List<int> jsonData = base64.decode(payload);
-        final userInfo = jsonDecode(utf8.decode(jsonData));
-        print('--------------DECODED USERINFO-----------------');
-        print(userInfo);
-        String email = userInfo['email'];
-        print('-----------DECODED Email----------------------');
-        print(email);
-        userEmail.value = email;
-      }
+      //   final List<int> jsonData = base64.decode(payload);
+      //   final userInfo = jsonDecode(utf8.decode(jsonData));
+      //   print('--------------DECODED USERINFO-----------------');
+      //   print(userInfo);
+      //   String email = userInfo['email'];
+      //   print('-----------DECODED Email----------------------');
+      //   print(email);
+      //   userEmail.value = email;
+      // }
 
       final UserCredential authResult =
           await FirebaseAuth.instance.signInWithCredential(oauthCredential);

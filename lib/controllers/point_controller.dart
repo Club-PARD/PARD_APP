@@ -158,9 +158,6 @@ class PointController extends GetxController {
           .where('email', isEqualTo: _authController.userEmail.value)
           .get();
 
-      print(
-          'fetchCurrentUserPoints() 함수 실행: ${_authController.userEmail.value}');
-
       if (userSnapshot.docs.isNotEmpty) {
         String pid = userSnapshot.docs[0]['pid'];
 

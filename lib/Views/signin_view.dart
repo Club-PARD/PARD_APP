@@ -9,21 +9,21 @@ import 'package:pard_app/utilities/color_style.dart';
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
 
-  Future<void> loadData(BuildContext context) async {
-    final PointController pointController = Get.put(PointController());
-    await pointController.fetchAndSortUserPoints();
-    // await pointController.fetchCurrentUserPoints();
-    print('---------------sign in view()');
-    // await pointController.getCurrentUserRank();
-    // await pointController.getCurrentUserPartRank();
-  }
+  // Future<void> loadData(BuildContext context) async {
+  //   final PointController pointController = Get.put(PointController());
+  //   // await pointController.fetchAndSortUserPoints();
+  //   // await pointController.fetchCurrentUserPoints();
+  //   print('---------------sign in view()');
+  //   // await pointController.getCurrentUserRank();
+  //   // await pointController.getCurrentUserPartRank();
+  // }
 
   @override
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
     final UserController userController = Get.put(UserController());
     authController.checkPreviousLogin();
-    loadData(context);
+    // loadData(context);
 
     return WillPopScope(
       onWillPop: () async => false,
