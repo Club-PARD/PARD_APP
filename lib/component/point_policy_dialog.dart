@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';

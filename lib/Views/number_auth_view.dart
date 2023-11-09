@@ -39,7 +39,7 @@ class NumberAuthView extends StatelessWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Theme.of(context).colorScheme.background,
-          appBar: PardAppBar('PARD 회원인증'),
+          appBar: const PardAppBar('PARD 회원인증'),
           body: Obx(
             () => Center(
               child: Column(

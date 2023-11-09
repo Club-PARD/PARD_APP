@@ -266,11 +266,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                             IntrinsicWidth(
                               child: Container(
-                                // width: (userController
-                                //             .userInfo.value!.part!.length <=
-                                //         2)
-                                //     ? 70.w
-                                //     : 90.w,
                                 height: 30.h,
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 12.w, vertical: 4.h),

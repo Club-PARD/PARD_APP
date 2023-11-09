@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pard_app/utilities/color_style.dart';
 
 class HomeFixedBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeFixedBar({super.key});

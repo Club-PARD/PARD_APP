@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -152,9 +150,10 @@ class AuthController extends GetxController {
         }
       }
     } catch (e) {
+      print(e);
       await _errorController.writeErrorLog(
         e.toString(),
-        _userController.userInfo.value!.phone ?? 'none',
+        _userController.userInfo.value?.phone ?? 'none',
         'signInWithApple()',
       );
     }
