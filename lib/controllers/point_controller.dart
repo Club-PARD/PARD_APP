@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/error_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
@@ -7,6 +8,7 @@ import 'package:pard_app/model/user_model/user_model.dart';
 
 class PointController extends GetxController {
   final UserController _userController = Get.put(UserController());
+  final AuthController _authController = Get.put(AuthController());
   final ErrorController _errorController = Get.put(ErrorController());
   RxMap userPointsMap = {}.obs; // Data Type: UserModel, Double
   Rx<PointModel?> rxPointModel = Rx<PointModel?>(null);
@@ -85,8 +87,8 @@ class PointController extends GetxController {
       sortedUsers.sort(
           (a, b) => userPointsMapCopy[b]!.compareTo(userPointsMapCopy[a]!));
 
-      int currentUserIndex = sortedUsers.indexWhere(
-          (user) => user.email == _userController.userInfo.value!.email);
+      int currentUserIndex = sortedUsers
+          .indexWhere((user) => user.email == _authController.userEmail.value);
       if (currentUserIndex != -1) {
         currentUserRank.value = currentUserIndex + 1;
       }
@@ -153,11 +155,11 @@ class PointController extends GetxController {
       // users 컬렉션에서 해당 이메일에 해당하는 문서를 찾기
       QuerySnapshot userSnapshot = await FirebaseFirestore.instance
           .collection('users')
-          .where('email', isEqualTo: _userController.userInfo.value!.email)
+          .where('email', isEqualTo: _authController.userEmail.value)
           .get();
 
       print(
-          'fetchCurrentUserPoints() 함수 실행: ${_userController.userInfo.value!.email}');
+          'fetchCurrentUserPoints() 함수 실행: ${_authController.userEmail.value}');
 
       if (userSnapshot.docs.isNotEmpty) {
         String pid = userSnapshot.docs[0]['pid'];
