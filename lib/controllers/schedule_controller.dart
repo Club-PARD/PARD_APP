@@ -35,11 +35,13 @@ class ScheduleController extends GetxController {
         print('sid : $sid');
 
         if (scheduleData['part'] == userPart || scheduleData['part'] == '전체') {
+          // "title" 필드에서 "파트"라는 단어를 제외하고 값을 가져옴
+        final part = scheduleData['part'].replaceAll('파트', '').trim();
           final schedule = ScheduleModel(
               scheduleData['title'],
               (scheduleData['dueDate'] as Timestamp).toDate(),
               scheduleData['place'],
-              scheduleData['part'],
+              part,
               now.isAfter((scheduleData['dueDate'] as Timestamp).toDate()),
               sid,
               scheduleData['type']);
