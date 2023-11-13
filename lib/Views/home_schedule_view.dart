@@ -100,7 +100,8 @@ class HomeSchedule extends StatelessWidget {
 
   String _calculateDday(DateTime dueDate) {
     final now = DateTime.now();
-    final difference = dueDate.difference(now);
+    final today = DateTime(now.year, now.month, now.day);
+    final difference = dueDate.difference(today);
 
     if (difference.isNegative) {
       return '';

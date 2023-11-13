@@ -59,7 +59,7 @@ class PushNotificationController extends GetxController {
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
-        userController.userInfo.value!.phone ?? 'none',
+        userController.userInfo.value?.phone ?? 'none',
         'setupFlutterNotifications()',
       );
     }
@@ -77,7 +77,7 @@ class PushNotificationController extends GetxController {
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
-        userController.userInfo.value!.phone ?? 'none',
+        userController.userInfo.value?.phone ?? 'none',
         'getToken()',
       );
     }
