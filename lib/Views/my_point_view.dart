@@ -22,7 +22,7 @@ class MyPointView extends StatefulWidget {
 }
 
 class _MyPointViewState extends State<MyPointView> {
-  final PointController pointController = Get.put(PointController());
+  final PointController pointController = Get.find<PointController>();
   final UserController userController = Get.put(UserController());
   final formatter = NumberFormat("#,##0.##");
 
@@ -30,9 +30,9 @@ class _MyPointViewState extends State<MyPointView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      print('---------------my point view()');
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
-      print('---------------my point view()');
       pointController.getCurrentUserRank();
       pointController.getCurrentUserPartRank();
     });
@@ -41,6 +41,7 @@ class _MyPointViewState extends State<MyPointView> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey buttonKey = GlobalKey();
+    print('fffffffffff ${pointController.hashCode}');
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -110,23 +111,25 @@ class _MyPointViewState extends State<MyPointView> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Obx(
-                        () => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            rankWithText(
-                              '파트 내 랭킹',
-                              context,
-                              pointController.currentUserRank.value,
-                              pointController.currentUserPartRank.value,
-                            ),
-                            rankWithText(
-                              '전체 랭킹',
-                              context,
-                              pointController.currentUserRank.value,
-                              pointController.currentUserPartRank.value,
-                            ),
-                          ],
-                        ),
+                        () {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              rankWithText(
+                                '파트 내 랭킹',
+                                context,
+                                pointController.currentUserRank.value,
+                                pointController.currentUserPartRank.value,
+                              ),
+                              rankWithText(
+                                '전체 랭킹',
+                                context,
+                                pointController.currentUserRank.value,
+                                pointController.currentUserPartRank.value,
+                              ),
+                            ],
+                          );
+                        },
                       ),
                       TextButton(
                         onPressed: () {
@@ -251,17 +254,21 @@ class _MyPointViewState extends State<MyPointView> {
                 .copyWith(color: grayScale[10]),
           ),
           SizedBox(height: 8.h),
-          Text(
-            (userController.userInfo.value?.member == '잔잔파도' ||
-                    userController.userInfo.value?.member == '운영진')
-                ? '- 위'
-                : (text == '파트 내 랭킹')
-                    ? '$currentUserPartRank위'
-                    : '$currentUserRank위',
-            style: Theme.of(context)
-                .textTheme
-                .headlineLarge!
-                .copyWith(color: grayScale[10]),
+          Obx(
+            () {
+              return Text(
+                (userController.userInfo.value?.member == '잔잔파도' ||
+                        userController.userInfo.value?.member == '운영진')
+                    ? '- 위'
+                    : (text == '파트 내 랭킹')
+                        ? '${currentUserPartRank}위'
+                        : '${currentUserRank}위',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge!
+                    .copyWith(color: grayScale[10]),
+              );
+            },
           ),
         ],
       ),

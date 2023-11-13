@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pard_app/controllers/error_controller.dart';
+import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +12,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthController extends GetxController {
   final UserController _userController = Get.put(UserController());
+  final PointController _pointController = Get.put(PointController());
   final ErrorController _errorController = Get.put(ErrorController());
   late String? uid = _userController.userInfo.value?.uid;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -43,6 +45,8 @@ class AuthController extends GetxController {
         print("auth_controller: ${_userController.hashCode}");
         await _userController.getUserInfoByEmail(email);
         await _userController.updateTimeByEmail(email);
+        await _pointController.fetchAndSortUserPoints();
+        await _pointController.fetchCurrentUserPoints();
         Get.toNamed('/home');
         isLogin.value = true;
       }

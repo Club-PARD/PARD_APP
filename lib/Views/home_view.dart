@@ -33,9 +33,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      print('---------------home_view()');
       pointController.fetchAndSortUserPoints();
       pointController.fetchCurrentUserPoints();
-      print('---------------home_view()');
       pointController.getCurrentUserPartRank();
       pointController.getCurrentUserRank();
     });
@@ -176,7 +176,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("home_view: ${userController.hashCode}");
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(

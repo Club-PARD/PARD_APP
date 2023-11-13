@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/error_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
@@ -8,7 +7,6 @@ import 'package:pard_app/model/user_model/user_model.dart';
 
 class PointController extends GetxController {
   final UserController _userController = Get.put(UserController());
-  final AuthController _authController = Get.put(AuthController());
   final ErrorController _errorController = Get.put(ErrorController());
   RxMap userPointsMap = {}.obs; // Data Type: UserModel, Double
   Rx<PointModel?> rxPointModel = Rx<PointModel?>(null);
@@ -68,6 +66,7 @@ class PointController extends GetxController {
 
       // RxMap을 업데이트
       userPointsMap.assignAll(resultMap);
+      getCurrentUserRank();
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
@@ -87,11 +86,13 @@ class PointController extends GetxController {
       sortedUsers.sort(
           (a, b) => userPointsMapCopy[b]!.compareTo(userPointsMapCopy[a]!));
 
-      int currentUserIndex = sortedUsers
-          .indexWhere((user) => user.email == _authController.userEmail.value);
+      int currentUserIndex = sortedUsers.indexWhere(
+          (user) => user.email == _userController.userInfo.value!.email);
       if (currentUserIndex != -1) {
         currentUserRank.value = currentUserIndex + 1;
       }
+
+      print('currentUserRank: ${currentUserRank.value}');
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
@@ -104,9 +105,8 @@ class PointController extends GetxController {
   /////////////////////////////////////////////////////////////
   // 현재 유저의 파트 내 등수를 반환하는 함수
   Future<void> getCurrentUserPartRank() async {
-    final Map<UserModel, double> userPointsMapCopy = Map.from(userPointsMap);
-
     try {
+      final Map<UserModel, double> userPointsMapCopy = Map.from(userPointsMap);
       List<MapEntry<UserModel, double>> sortedEntries =
           userPointsMapCopy.entries.toList();
 
@@ -121,24 +121,19 @@ class PointController extends GetxController {
         return pointsComparison;
       });
 
-      // 정렬된 결과를 다시 Map으로 변환
-      final Map<UserModel, double> sortedUserPointsMap =
-          Map.fromEntries(sortedEntries);
+      List<MapEntry<UserModel, double>> samePartEntries = sortedEntries
+          .where(
+              (entry) => entry.key.part == _userController.userInfo.value!.part)
+          .toList();
 
-      // 정렬된 결과를 사용하여 출력 또는 다른 작업 수행
-      int rank = 1;
-      int currentUserIndex = 0;
+      int rank = samePartEntries.indexWhere(
+          (entry) => entry.key.name == _userController.userInfo.value!.name);
 
-      for (var entry in sortedUserPointsMap.entries) {
-        if (entry.key.part == _userController.userInfo.value!.part) {
-          print('Rank $rank: ${entry.key.name}, Points: ${entry.value}');
-          if (entry.key.name == _userController.userInfo.value!.name) {
-            currentUserIndex = rank;
-          }
-          rank++;
-        }
+      if (rank != -1) {
+        currentUserPartRank.value = rank + 1;
       }
-      currentUserPartRank.value = currentUserIndex;
+
+      print('currentUserPartRank: ${currentUserPartRank.value}');
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
@@ -155,17 +150,47 @@ class PointController extends GetxController {
       // users 컬렉션에서 해당 이메일에 해당하는 문서를 찾기
       QuerySnapshot userSnapshot = await FirebaseFirestore.instance
           .collection('users')
-          .where('email', isEqualTo: _authController.userEmail.value)
+          .where('email', isEqualTo: _userController.userInfo.value!.email)
           .get();
 
       if (userSnapshot.docs.isNotEmpty) {
+        String uid = userSnapshot.docs[0]['uid'];
         String pid = userSnapshot.docs[0]['pid'];
+        double totalPointsFromAttendInfo = 0;
 
         // points 컬렉션에서 해당 pid에 해당하는 문서 가져오기
         DocumentSnapshot pointsSnapshot = await FirebaseFirestore.instance
             .collection('points')
             .doc(pid)
             .get();
+
+        // users 컬렉션에서 해당 pid에 해당하는 문서 가져오기
+        DocumentSnapshot userDocumentSnapshot =
+            await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+        if (userDocumentSnapshot.exists) {
+          Map<String, dynamic> userData =
+              userDocumentSnapshot.data() as Map<String, dynamic>;
+
+          if (userData.containsKey('attendInfo')) {
+            Map<String, dynamic> attendInfo = userData['attendInfo'];
+
+            attendInfo.forEach((key, value) {
+              print('key: $key, value: $value');
+              switch (value) {
+                case '출':
+                  totalPointsFromAttendInfo += 6;
+                  break;
+                case '지':
+                  totalPointsFromAttendInfo += 4;
+                  break;
+                case '결':
+                  totalPointsFromAttendInfo += 0;
+                  break;
+              }
+            });
+          }
+        }
 
         if (pointsSnapshot.exists) {
           PointModel pointModel = PointModel.fromJson(
@@ -176,13 +201,13 @@ class PointController extends GetxController {
 
           if (pointModel.points != null) {
             for (var point in pointModel.points!) {
-              totalPoints += (point['digit'] ?? 0) as int;
+              totalPoints += (point['digit'] ?? 0);
             }
           }
 
           if (pointModel.beePoints != null) {
             for (var beePoint in pointModel.beePoints!) {
-              totalBeePoints += (beePoint['digit'] ?? 0) as int;
+              totalBeePoints += (beePoint['digit'] ?? 0);
             }
           }
 
@@ -190,14 +215,15 @@ class PointController extends GetxController {
           pointModel.currentBeePoints = totalBeePoints;
 
           // 레벨 계산
-          double calculatedPoints = totalPoints - totalBeePoints;
-          if (calculatedPoints >= 0 && calculatedPoints <= 25) {
+          double calculatedPoints = totalPoints + totalPointsFromAttendInfo;
+          print('calculatedPoints: $calculatedPoints');
+          if (calculatedPoints >= 0 && calculatedPoints <= 30) {
             pointModel.level = 1;
-          } else if (calculatedPoints <= 50) {
+          } else if (calculatedPoints <= 55) {
             pointModel.level = 2;
-          } else if (calculatedPoints <= 75) {
+          } else if (calculatedPoints <= 80) {
             pointModel.level = 3;
-          } else if (calculatedPoints <= 90) {
+          } else if (calculatedPoints <= 95) {
             pointModel.level = 4;
           } else {
             pointModel.level = 5;
