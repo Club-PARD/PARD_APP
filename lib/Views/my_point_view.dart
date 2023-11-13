@@ -454,7 +454,8 @@ class _MyPointViewState extends State<MyPointView> {
     if (type == '세미나 지각' ||
         type == '세미나 결석' ||
         type == '과제 지각' ||
-        type == '과제 결석') {
+        type == '과제 결석' ||
+        type == '벌점 조정') {
       isBeePoint = true;
     }
 
