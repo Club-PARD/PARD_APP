@@ -111,7 +111,7 @@ class PhoneVerificationController extends GetxController {
   }
 
   //인증번호 일치 확인, user정보 가져오기
-  void verifyCode(BuildContext context) async {
+  Future<void> verifyCode(BuildContext context) async {
     print(codeTextFormField.value);
     print(verificationCodeFromAuth.value);
     try {
