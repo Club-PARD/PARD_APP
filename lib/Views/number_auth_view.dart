@@ -182,9 +182,10 @@ class NumberAuthView extends StatelessWidget {
                           width: 8.w,
                         ),
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             codeFocus.unfocus();
-                            phoneVerificationController.verifyCode(context);
+                            await phoneVerificationController
+                                .verifyCode(context);
                           },
                           child: Container(
                             width: 108.w,
