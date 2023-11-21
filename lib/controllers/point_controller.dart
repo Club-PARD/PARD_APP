@@ -199,15 +199,29 @@ class PointController extends GetxController {
           double totalPoints = 0;
           double totalBeePoints = 0;
 
+          // if (pointModel.points != null) {
+          //   for (var point in pointModel.points!) {
+          //     totalPoints += (point['digit']  ?? 0);
+          //   }
+          // }
+
+          // if (pointModel.beePoints != null) {
+          //   for (var beePoint in pointModel.beePoints!) {
+          //     totalBeePoints += (beePoint['digit'] ?? 0);
+          //   }
+          // }
+
           if (pointModel.points != null) {
             for (var point in pointModel.points!) {
-              totalPoints += (point['digit'] ?? 0);
+              totalPoints +=
+                  (point['digit'] as Map<String, dynamic>)['value'] ?? 0;
             }
           }
 
           if (pointModel.beePoints != null) {
             for (var beePoint in pointModel.beePoints!) {
-              totalBeePoints += (beePoint['digit'] ?? 0);
+              totalBeePoints +=
+                  (beePoint['digit'] as Map<String, dynamic>)['value'] ?? 0;
             }
           }
 
