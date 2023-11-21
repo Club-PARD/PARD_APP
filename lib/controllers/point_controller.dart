@@ -173,23 +173,35 @@ class PointController extends GetxController {
               userDocumentSnapshot.data() as Map<String, dynamic>;
 
           if (userData.containsKey('attendInfo')) {
-            Map<String, dynamic> attendInfo = userData['attendInfo'];
+  //  List<dynamic> 으로 받아오는 경우 List를 attendInfoList에 저장
+  List<dynamic> attendInfoList = userData['attendInfo'];
 
-            attendInfo.forEach((key, value) {
-              print('key: $key, value: $value');
-              switch (value) {
-                case '출':
-                  totalPointsFromAttendInfo += 6;
-                  break;
-                case '지':
-                  totalPointsFromAttendInfo += 4;
-                  break;
-                case '결':
-                  totalPointsFromAttendInfo += 0;
-                  break;
-              }
-            });
-          }
+  // attendInfoList에 있는것 attendInfo로 각각 읽어오고
+  for (var attendInfo in attendInfoList) {
+    // attendInfo가 Map 형식인지 확인하고 점수 나눔
+    if (attendInfo is Map<String, dynamic>) {
+      attendInfo.forEach((key, value) {
+        print('key: $key, value: $value');
+        switch (value) {
+          case '출':
+            totalPointsFromAttendInfo += 6;
+            break;
+          case '지':
+            totalPointsFromAttendInfo += 4;
+            break;
+          case '결':
+            totalPointsFromAttendInfo += 0;
+            break;
+        }
+      });
+    } else {
+      // Handle the case where the element is not a Map
+      print('Error: Element is not a Map');
+    }
+  }
+}
+
+
         }
 
         if (pointsSnapshot.exists) {
@@ -242,7 +254,7 @@ class PointController extends GetxController {
   }
 
   /////////////////////////////////////////////////////////////
-  // QR 찍었을 때 점수 추가
+  // QR 찍었을 때 출석 & 찍은 시간 attendance에 등록
   Future<void> attendQR(UserModel user, int attendPoint) async {
     try {
       String? pid = user.pid;
@@ -264,11 +276,11 @@ class PointController extends GetxController {
         Map<String, dynamic> existingPoints =
             pointsSnapshot.data() as Map<String, dynamic>;
         await pointsRef.update({
-          'points': FieldValue.arrayUnion([newPoint])
+          'attendance': FieldValue.arrayUnion([newPoint])
         });
       } else {
         await pointsRef.set({
-          'points': [newPoint]
+          'attendance': [newPoint]
         });
       }
 
@@ -306,11 +318,11 @@ class PointController extends GetxController {
         Map<String, dynamic> existingPoints =
             pointsSnapshot.data() as Map<String, dynamic>;
         await pointsRef.update({
-          'points': FieldValue.arrayUnion([newPoint])
+          'attendance': FieldValue.arrayUnion([newPoint])
         });
       } else {
         await pointsRef.set({
-          'points': [newPoint]
+          'attendance': [newPoint]
         });
       }
 
