@@ -24,6 +24,7 @@ class PhoneVerificationController extends GetxController {
   Rx<String> verificationCodeFromAuth = ''.obs; //전송된 인증번호
   Rx<bool?> isCorrectPhoneNumber = Rx(null); //올바른 전화번호 체크
   Rx<bool?> isCorrectCode = Rx(null); //올바른 인증번호 체크
+  Rx<bool?> isVerifyingStart = false.obs; //인증번호 인증 체크
   Rx<Widget> snackBar = Container(
     height: 40.h,
   ).obs;
@@ -115,6 +116,7 @@ class PhoneVerificationController extends GetxController {
     print(codeTextFormField.value);
     print(verificationCodeFromAuth.value);
     try {
+      isVerifyingStart.value = true;
       PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
           verificationId: verificationCodeFromAuth.value,
           smsCode: codeTextFormField.value);
@@ -133,9 +135,11 @@ class PhoneVerificationController extends GetxController {
           snackBar.value = const CodeSnackBar('인증번호가 확인되었어요.').build(context);
           await Future.delayed(const Duration(seconds: 3));
           snackBar.value = Container(height: 40.h);
+          isVerifyingStart.value = false;
           print('인증성공');
         }
       } else {
+        isVerifyingStart.value = false;
         print('인증실패');
       }
     } catch (e) {
