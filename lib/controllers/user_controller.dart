@@ -14,7 +14,7 @@ class UserController extends GetxController {
   Rx<String?> deviceName = Rx<String?>(null);
   Rx<String?> deviceVersion = Rx<String?>(null);
   Rx<String?> fcmToken = Rx<String?>(null);
-  late Rx<bool?> onOff = Rx<bool?>(null);
+  late Rx<bool?> onOff = Rx<bool?>(true);
   Rx<String?> uid = Rx<String?>(null);
   late final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
@@ -234,20 +234,30 @@ class UserController extends GetxController {
   }
 
   Future<void> addAttendInfo(String attend) async {
-    final userDocument =
-        FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
-    try {
-      await userDocument.update({
-        'attendInfo': FieldValue.arrayUnion([attend])
-      });
-    } catch (e) {
-      await _errorController.writeErrorLog(
-        e.toString(),
-        userInfo.value!.phone ?? 'none',
-        'addAttendInfo()',
-      );
-    }
+  final userDocument =
+      FirebaseFirestore.instance.collection('users').doc(userInfo.value!.uid);
+  
+  try {
+    // Firestore에서 현재 문서를 가져옵니다.
+    DocumentSnapshot snapshot = await userDocument.get();
+
+    // attendInfo 필드의 현재 값을 가져옵니다.
+    List<dynamic> attendInfo = snapshot['attendInfo'] ?? [];
+
+    // 새로운 attend 값을 배열에 추가합니다.
+    attendInfo.add(attend);
+
+    // attendInfo 필드를 업데이트합니다.
+    await userDocument.update({'attendInfo': attendInfo});
+  } catch (e) {
+    await _errorController.writeErrorLog(
+      e.toString(),
+      userInfo.value!.phone ?? 'none',
+      'addAttendInfo()',
+    );
   }
+}
+
 
   //휴대폰 기종 파악
   Future<void> getDeviceInfo() async {
@@ -286,8 +296,8 @@ class UserController extends GetxController {
     Map<String, dynamic>? data = pointsRef.data();
     //pid안에 map에 points라는 배열 있으면 해당 배열 pointsArray에 저장
     try {
-      if (data != null && data.containsKey('points')) {
-        List<dynamic>? pointsArray = data['points'];
+      if (data != null && data.containsKey('attendance')) {
+        List<dynamic>? pointsArray = data['attendance'];
 
         // timeStamp라는 것 가지고 있다면 가장 최신꺼 가져옴
         if (pointsArray != null && pointsArray.isNotEmpty) {

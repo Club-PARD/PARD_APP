@@ -40,12 +40,12 @@ class QRController extends GetxController {
         .where('dueDate',
             isGreaterThanOrEqualTo: Timestamp.fromDate(startToday))
         .where('dueDate', isLessThanOrEqualTo: Timestamp.fromDate(endToday))
+        .where('type', isEqualTo: true)
         .get();
     //오늘 스케쥴 가져오기
     DocumentSnapshot todayScheduleDoc = scheduleSnapshot.docs.first;
     String sid = todayScheduleDoc.id; // sid추출
     DateTime scheduleDueDate = todayScheduleDoc['dueDate'].toDate();
-    print('scheduleDueDate : $scheduleDueDate');
     //qr 스캔하는지
     controller.scannedDataStream.listen((scanData) async {
       if (!isScanned) {
@@ -232,9 +232,8 @@ class QRController extends GetxController {
                                   child: TextButton(
                                       onPressed: () async {
                                         Get.back();
-                                        userController.addAttend(sid, '출');
-                                        await pointController.attendQR(user, 6);
                                         await userController.addAttendInfo('출');
+                                        await pointController.attendQR(user, 6);
                                       },
                                       child: Text(
                                         '세미나 입장하기',
@@ -329,9 +328,8 @@ class QRController extends GetxController {
                                   ),
                                   child: TextButton(
                                       onPressed: () async {
-                                        userController.addAttend(sid, "지");
-                                        await pointController.lateQR(user, 4);
                                         await userController.addAttendInfo('지');
+                                        await pointController.lateQR(user, 4);
                                         Get.back();
                                       },
                                       child: Text(

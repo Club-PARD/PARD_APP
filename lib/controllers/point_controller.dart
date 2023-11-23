@@ -243,7 +243,7 @@ class PointController extends GetxController {
   }
 
   /////////////////////////////////////////////////////////////
-  // QR 찍었을 때 점수 추가
+  // QR 찍었을 때 출석 & 찍은 시간 attendance에 등록
   Future<void> attendQR(UserModel user, int attendPoint) async {
     try {
       String? pid = user.pid;
@@ -265,11 +265,11 @@ class PointController extends GetxController {
         Map<String, dynamic> existingPoints =
             pointsSnapshot.data() as Map<String, dynamic>;
         await pointsRef.update({
-          'points': FieldValue.arrayUnion([newPoint])
+          'attendance': FieldValue.arrayUnion([newPoint])
         });
       } else {
         await pointsRef.set({
-          'points': [newPoint]
+          'attendance': [newPoint]
         });
       }
 
@@ -307,11 +307,11 @@ class PointController extends GetxController {
         Map<String, dynamic> existingPoints =
             pointsSnapshot.data() as Map<String, dynamic>;
         await pointsRef.update({
-          'points': FieldValue.arrayUnion([newPoint])
+          'attendance': FieldValue.arrayUnion([newPoint])
         });
       } else {
         await pointsRef.set({
-          'points': [newPoint]
+          'attendance': [newPoint]
         });
       }
 
