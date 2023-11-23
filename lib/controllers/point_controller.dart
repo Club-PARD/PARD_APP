@@ -168,22 +168,20 @@ class PointController extends GetxController {
             var attendInfo = userData['attendInfo'];
 
             if (attendInfo is List<dynamic>) {
-              for (var info in attendInfo) {
-                if (info is Map<String, dynamic>) {
-                  info.forEach((key, value) {
-                    print('key: $key, value: $value');
-                    switch (value) {
-                      case '출':
-                        totalPointsFromAttendInfo += 6;
-                        break;
-                      case '지':
-                        totalPointsFromAttendInfo += 4;
-                        break;
-                      case '결':
-                        totalPointsFromAttendInfo += 0;
-                        break;
-                    }
-                  });
+              for (var value in attendInfo) {
+                if (value is String) {
+                  print('value: $value');
+                  switch (value) {
+                    case '출':
+                      totalPointsFromAttendInfo += 6;
+                      break;
+                    case '지':
+                      totalPointsFromAttendInfo += 4;
+                      break;
+                    case '결':
+                      totalPointsFromAttendInfo += 0;
+                      break;
+                  }
                 }
               }
             }
@@ -217,6 +215,8 @@ class PointController extends GetxController {
 
         // 레벨 계산
         double calculatedPoints = totalPoints + totalPointsFromAttendInfo;
+        print('totalPoints: $totalPoints');
+        print('totalPointsFromAttendInfo: $totalPointsFromAttendInfo');
         print('calculatedPoints: $calculatedPoints');
         if (calculatedPoints >= 0 && calculatedPoints <= 30) {
           pointModel.level = 1;
