@@ -147,106 +147,93 @@ class PointController extends GetxController {
   // 현재 유저의 포인트 & 벌점를 가져오는 함수
   Future<void> fetchCurrentUserPoints() async {
     try {
-      // users 컬렉션에서 해당 이메일에 해당하는 문서를 찾기
-      QuerySnapshot userSnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: _userController.userInfo.value!.email)
-          .get();
+      String? uid = _userController.userInfo.value!.uid;
+      String? pid = _userController.userInfo.value!.pid;
+      double totalPointsFromAttendInfo = 0;
 
-      if (userSnapshot.docs.isNotEmpty) {
-        String uid = userSnapshot.docs[0]['uid'];
-        String pid = userSnapshot.docs[0]['pid'];
-        double totalPointsFromAttendInfo = 0;
+      // points 컬렉션에서 해당 pid에 해당하는 문서 가져오기
+      DocumentSnapshot pointsSnapshot =
+          await FirebaseFirestore.instance.collection('points').doc(pid).get();
 
-        // points 컬렉션에서 해당 pid에 해당하는 문서 가져오기
-        DocumentSnapshot pointsSnapshot = await FirebaseFirestore.instance
-            .collection('points')
-            .doc(pid)
-            .get();
-
-        // users 컬렉션에서 해당 pid에 해당하는 문서 가져오기
-        DocumentSnapshot userDocumentSnapshot =
-            await FirebaseFirestore.instance.collection('users').doc(uid).get();
-
+      // users 컬렉션에서 해당 pid에 해당하는 문서 가져오기
+      DocumentSnapshot userDocumentSnapshot =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      try {
         if (userDocumentSnapshot.exists) {
           Map<String, dynamic> userData =
               userDocumentSnapshot.data() as Map<String, dynamic>;
+          print("userData: $userData");
 
           if (userData.containsKey('attendInfo')) {
-            Map<String, dynamic> attendInfo = userData['attendInfo'];
+            var attendInfo = userData['attendInfo'];
 
-            attendInfo.forEach((key, value) {
-              print('key: $key, value: $value');
-              switch (value) {
-                case '출':
-                  totalPointsFromAttendInfo += 6;
-                  break;
-                case '지':
-                  totalPointsFromAttendInfo += 4;
-                  break;
-                case '결':
-                  totalPointsFromAttendInfo += 0;
-                  break;
+            if (attendInfo is List<dynamic>) {
+              for (var value in attendInfo) {
+                if (value is String) {
+                  print('value: $value');
+                  switch (value) {
+                    case '출':
+                      totalPointsFromAttendInfo += 6;
+                      break;
+                    case '지':
+                      totalPointsFromAttendInfo += 4;
+                      break;
+                    case '결':
+                      totalPointsFromAttendInfo += 0;
+                      break;
+                  }
+                }
               }
-            });
+            }
+          }
+        }
+      } catch (e) {
+        print('Error: $e');
+      }
+
+      if (pointsSnapshot.exists) {
+        PointModel pointModel =
+            PointModel.fromJson(pointsSnapshot.data() as Map<String, dynamic>);
+
+        double totalPoints = 0;
+        double totalBeePoints = 0;
+
+        if (pointModel.points != null) {
+          for (var point in pointModel.points!) {
+            totalPoints += (point['digit'] ?? 0);
           }
         }
 
-        if (pointsSnapshot.exists) {
-          PointModel pointModel = PointModel.fromJson(
-              pointsSnapshot.data() as Map<String, dynamic>);
-
-          double totalPoints = 0;
-          double totalBeePoints = 0;
-
-          // if (pointModel.points != null) {
-          //   for (var point in pointModel.points!) {
-          //     totalPoints += (point['digit']  ?? 0);
-          //   }
-          // }
-
-          // if (pointModel.beePoints != null) {
-          //   for (var beePoint in pointModel.beePoints!) {
-          //     totalBeePoints += (beePoint['digit'] ?? 0);
-          //   }
-          // }
-
-          if (pointModel.points != null) {
-            for (var point in pointModel.points!) {
-              totalPoints +=
-                  (point['digit'] as Map<String, dynamic>)['value'] ?? 0;
-            }
+        if (pointModel.beePoints != null) {
+          for (var beePoint in pointModel.beePoints!) {
+            totalBeePoints += (beePoint['digit'] ?? 0);
           }
-
-          if (pointModel.beePoints != null) {
-            for (var beePoint in pointModel.beePoints!) {
-              totalBeePoints +=
-                  (beePoint['digit'] as Map<String, dynamic>)['value'] ?? 0;
-            }
-          }
-
-          pointModel.currentPoints = totalPoints;
-          pointModel.currentBeePoints = totalBeePoints;
-
-          // 레벨 계산
-          double calculatedPoints = totalPoints + totalPointsFromAttendInfo;
-          print('calculatedPoints: $calculatedPoints');
-          if (calculatedPoints >= 0 && calculatedPoints <= 30) {
-            pointModel.level = 1;
-          } else if (calculatedPoints <= 55) {
-            pointModel.level = 2;
-          } else if (calculatedPoints <= 80) {
-            pointModel.level = 3;
-          } else if (calculatedPoints <= 95) {
-            pointModel.level = 4;
-          } else {
-            pointModel.level = 5;
-          }
-
-          rxPointModel.value = pointModel;
         }
+
+        pointModel.currentPoints = totalPoints;
+        pointModel.currentBeePoints = totalBeePoints;
+
+        // 레벨 계산
+        double calculatedPoints = totalPoints + totalPointsFromAttendInfo;
+        print('totalPoints: $totalPoints');
+        print('totalPointsFromAttendInfo: $totalPointsFromAttendInfo');
+        print('calculatedPoints: $calculatedPoints');
+        if (calculatedPoints >= 0 && calculatedPoints <= 30) {
+          pointModel.level = 1;
+        } else if (calculatedPoints <= 55) {
+          pointModel.level = 2;
+        } else if (calculatedPoints <= 80) {
+          pointModel.level = 3;
+        } else if (calculatedPoints <= 95) {
+          pointModel.level = 4;
+        } else {
+          pointModel.level = 5;
+        }
+
+        rxPointModel.value = pointModel;
       }
     } catch (e) {
+      print(e);
       await _errorController.writeErrorLog(
         e.toString(),
         _userController.userInfo.value!.phone ?? 'none',
@@ -256,7 +243,7 @@ class PointController extends GetxController {
   }
 
   /////////////////////////////////////////////////////////////
-  // QR 찍었을 때 점수 추가
+  // QR 찍었을 때 출석 & 찍은 시간 attendance에 등록
   Future<void> attendQR(UserModel user, int attendPoint) async {
     try {
       String? pid = user.pid;
@@ -278,11 +265,11 @@ class PointController extends GetxController {
         Map<String, dynamic> existingPoints =
             pointsSnapshot.data() as Map<String, dynamic>;
         await pointsRef.update({
-          'points': FieldValue.arrayUnion([newPoint])
+          'attendance': FieldValue.arrayUnion([newPoint])
         });
       } else {
         await pointsRef.set({
-          'points': [newPoint]
+          'attendance': [newPoint]
         });
       }
 
@@ -320,11 +307,11 @@ class PointController extends GetxController {
         Map<String, dynamic> existingPoints =
             pointsSnapshot.data() as Map<String, dynamic>;
         await pointsRef.update({
-          'points': FieldValue.arrayUnion([newPoint])
+          'attendance': FieldValue.arrayUnion([newPoint])
         });
       } else {
         await pointsRef.set({
-          'points': [newPoint]
+          'attendance': [newPoint]
         });
       }
 

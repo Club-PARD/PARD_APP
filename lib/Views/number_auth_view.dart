@@ -182,29 +182,40 @@ class NumberAuthView extends StatelessWidget {
                           width: 8.w,
                         ),
                         GestureDetector(
-                          onTap: () async {
-                            codeFocus.unfocus();
-                            await phoneVerificationController
-                                .verifyCode(context);
-                          },
+                          onTap: phoneVerificationController
+                                      .isVerifyingStart.value ==
+                                  true
+                              ? null
+                              : () async {
+                                  codeFocus.unfocus();
+                                  await phoneVerificationController
+                                      .verifyCode(context);
+                                },
                           child: Container(
                             width: 108.w,
                             height: 48.h,
                             decoration: BoxDecoration(
                               color: phoneVerificationController
-                                          .codeTextFormField.value ==
-                                      ''
+                                          .codeTextFormField.value.length <
+                                      6
                                   ? grayScale[30]
                                   : Theme.of(context).colorScheme.onSecondary,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8.w)),
                             ),
                             child: Center(
-                              child: Text(
-                                '인증번호 확인',
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
-                              ),
+                              child: phoneVerificationController
+                                          .isVerifyingStart.value ==
+                                      true
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : Text(
+                                      '인증번호 확인',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall,
+                                    ),
                             ),
                           ),
                         ),

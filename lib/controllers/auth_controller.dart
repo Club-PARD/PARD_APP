@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -121,20 +122,20 @@ class AuthController extends GetxController {
         accessToken: appleCredential.authorizationCode,
       );
 
-      // if (appleCredential.email == null) {
-      //   List<String> jwt = appleCredential.identityToken?.split('.') ?? [];
-      //   String payload = jwt[1];
-      //   payload = base64.normalize(payload);
+      if (appleCredential.email == null) {
+        List<String> jwt = appleCredential.identityToken?.split('.') ?? [];
+        String payload = jwt[1];
+        payload = base64.normalize(payload);
 
-      //   final List<int> jsonData = base64.decode(payload);
-      //   final userInfo = jsonDecode(utf8.decode(jsonData));
-      //   print('--------------DECODED USERINFO-----------------');
-      //   print(userInfo);
-      //   String email = userInfo['email'];
-      //   print('-----------DECODED Email----------------------');
-      //   print(email);
-      //   userEmail.value = email;
-      // }
+        final List<int> jsonData = base64.decode(payload);
+        final userInfo = jsonDecode(utf8.decode(jsonData));
+        print('--------------DECODED USERINFO-----------------');
+        print(userInfo);
+        String email = userInfo['email'];
+        print('-----------DECODED Email----------------------');
+        print(email);
+        userEmail.value = email;
+      }
 
       final UserCredential authResult =
           await FirebaseAuth.instance.signInWithCredential(oauthCredential);
