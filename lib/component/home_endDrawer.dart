@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,94 +15,225 @@ class HomeEndDrawer extends StatefulWidget {
   State<HomeEndDrawer> createState() => _HomeEndDrawerState();
 }
 
-void launchInstaURL() async {
-  final Uri pardInstaUrl =
-      Uri.parse('https://www.instagram.com/official_pard_/');
+final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+// 파베에 있는 insta 필드에 있는 url값 가져온다 
+Future<void> fetchInstaUrl() async {
   try {
-    await launchUrl(pardInstaUrl);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('instagram')) {
+        String url = data['instagram'];
+        if (url.isNotEmpty) {
+          final Uri instaUrl = Uri.parse(url);
+          try{
+            await launchUrl(instaUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $pardInstaUrl: $e");
+    print('Error fetching URL: $e');
   }
 }
 
-void launchPardWebURL() async {
-  final Uri pardWebUrl = Uri.parse('https://we-pard.com/');
+
+Future<void> fetchPardWebUrl() async{
   try {
-    await launchUrl(pardWebUrl);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('pardweb')) {
+        String url = data['pardweb'];
+        if (url.isNotEmpty) {
+          final Uri pardWebUrl = Uri.parse(url);
+          try{
+            await launchUrl(pardWebUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $pardWebUrl: $e");
+    print('Error fetching URL: $e');
   }
 }
 
-void launchNotion() async {
-  final Uri pardNotion = Uri.parse(
-      'https://pard-notice.oopy.io/');
+Future<void> fetchPardNotion() async{
   try {
-    await launchUrl(pardNotion);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('notion')) {
+        String url = data['notion'];
+        if (url.isNotEmpty) {
+          final Uri pardNotionUrl = Uri.parse(url);
+          try{
+            await launchUrl(pardNotionUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $pardNotion: $e");
+    print('Error fetching URL: $e');
   }
 }
 
-void launchSeminar() async {
-  final Uri SeminarFeedback = Uri.parse(
-      'https://pardhgu.notion.site/14a9a3087aaa4859ae0c0dcbaf001aee?pvs=4');
+Future<void> fetchSeminarFeedback() async{
   try {
-    await launchUrl(SeminarFeedback);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('피드백')) {
+        String url = data['피드백'];
+        if (url.isNotEmpty) {
+          final Uri pardSeminarFeedbackUrl = Uri.parse(url);
+          try{
+            await launchUrl(pardSeminarFeedbackUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $SeminarFeedback: $e");
+    print('Error fetching URL: $e');
   }
 }
 
-void launchPMNotion() async {
-  final Uri pardPMNotion = Uri.parse(
-      'https://pard-notice.oopy.io/pm');
+Future<void> fetchPMNotion() async{
   try {
-    await launchUrl(pardPMNotion);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('기획')) {
+        String url = data['기획'];
+        if (url.isNotEmpty) {
+          final Uri pardPMUrl = Uri.parse(url);
+          try{
+            await launchUrl(pardPMUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $pardPMNotion: $e");
+    print('Error fetching URL: $e');
   }
 }
 
-void launchDesignNotion() async {
-  final Uri pardDesignNotion = Uri.parse(
-      'https://pard-notice.oopy.io/design');
+Future<void> fetchDesignNotion() async{
   try {
-    await launchUrl(pardDesignNotion);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('디자인')) {
+        String url = data['디자인'];
+        if (url.isNotEmpty) {
+          final Uri pardDesignUrl = Uri.parse(url);
+          try{
+            await launchUrl(pardDesignUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $pardDesignNotion: $e");
+    print('Error fetching URL: $e');
   }
 }
 
-void launchWebNotion() async {
-  final Uri pardWebNotion =
-      Uri.parse('https://pard-notice.oopy.io/web');
+Future<void> fetchWebNotion() async{
   try {
-    await launchUrl(pardWebNotion);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('웹')) {
+        String url = data['웹'];
+        if (url.isNotEmpty) {
+          final Uri pardWebPartUrl = Uri.parse(url);
+          try{
+            await launchUrl(pardWebPartUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $pardWebNotion: $e");
+    print('Error fetching URL: $e');
   }
 }
 
-void launchAppNotion() async {
-  final Uri pardAppNotionUrl = Uri.parse(
-      'https://pard-notice.oopy.io/ios');
+Future<void> fetchiOSNotion() async{
   try {
-    await launchUrl(pardAppNotionUrl);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('iOS')) {
+        String url = data['iOS'];
+        if (url.isNotEmpty) {
+          final Uri pardiOSNotionUrl = Uri.parse(url);
+          try{
+            await launchUrl(pardiOSNotionUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $pardAppNotionUrl: $e");
+    print('Error fetching URL: $e');
   }
 }
 
-void launchServerNotion() async {
-  final Uri pardServerNotionUrl =
-      Uri.parse('https://pard-notice.oopy.io/server');
+Future<void> fetchBackendNotion() async{
   try {
-    await launchUrl(pardServerNotionUrl);
+    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+
+    for (var document in querySnapshot.docs) {
+      var data = document.data() as Map<String, dynamic>;
+      if (data.containsKey('서버')) {
+        String url = data['서버'];
+        if (url.isNotEmpty) {
+          final Uri pardBackendNotionUrl = Uri.parse(url);
+          try{
+            await launchUrl(pardBackendNotionUrl);
+          } catch (e){
+          }
+          return; 
+        }
+      }
+    }
+    print('파베에서 url 값 찾을 수 없음~~');
   } catch (e) {
-    print("Could not launch $pardServerNotionUrl: $e");
+    print('Error fetching URL: $e');
   }
 }
+
 
 class _HomeEndDrawerState extends State<HomeEndDrawer> {
   bool _areItemsVisible = false;
@@ -198,7 +330,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   ],
                 )),
                 onTap: () {
-                  launchNotion();
+                  fetchPardNotion();
                 },
               ),
               ListTile(
@@ -213,7 +345,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   ],
                 )),
                 onTap: () {
-                  launchPMNotion();
+                  fetchPMNotion();
                 },
               ),
               ListTile(
@@ -226,7 +358,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   ],
                 )),
                 onTap: () {
-                  launchDesignNotion();
+                  fetchDesignNotion();
                 },
               ),
               ListTile(
@@ -241,7 +373,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   ],
                 )),
                 onTap: () {
-                  launchServerNotion();
+                  fetchBackendNotion();
                 },
               ),
               ListTile(
@@ -256,7 +388,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   ],
                 )),
                 onTap: () {
-                  launchWebNotion();
+                  fetchWebNotion();
                 },
               ),
               ListTile(
@@ -271,7 +403,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   ],
                 )),
                 onTap: () {
-                  launchAppNotion();
+                  fetchiOSNotion();
                 },
               )
             ],
@@ -311,7 +443,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
               color: grayScale[30],
             ),
             InkWell(
-              onTap: launchSeminar,
+              onTap: fetchSeminarFeedback,
               child: SizedBox(
                 width: 200.w,
                 height: 60.h,
@@ -369,7 +501,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   SizedBox(
                     height: 60.h,
                     child: InkWell(
-                      onTap: launchInstaURL,
+                      onTap: fetchInstaUrl,
                       child: Row(
                         children: [
                           SizedBox(
@@ -396,7 +528,7 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                   SizedBox(
                     height: 60.h,
                     child: InkWell(
-                      onTap: launchPardWebURL,
+                      onTap: fetchPardWebUrl,
                       child: Row(
                         children: [
                           SizedBox(
