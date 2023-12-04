@@ -138,10 +138,8 @@ class UserController extends GetxController {
     var pushController = Get.find<PushNotificationController>();
     fcmToken.value = token;
     final usersCollection = FirebaseFirestore.instance.collection('users');
-    print('11111111111111111111111');
     print("FcmToken is: ${pushController.fcmTokenUser.value}");
     try {
-      print('11111111111111111111111');
       print(userInfo.value?.uid);
       await usersCollection.doc(user.uid).update({'fcmToken': fcmToken.value});
       print("fcmToken updated in Firestore");

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/component/code_snackbar.dart';
 import 'package:pard_app/component/pard_appbar.dart';
@@ -286,18 +287,22 @@ class NumberAuthView extends StatelessWidget {
                         ),
                       ),
                       onTap: () async {
-                        if (phoneVerificationController.isCorrectCode.value ??
-                            false) {
-                          await userController
-                              .setUserByEmail(authController.userEmail.value!);
-                          await userController.getUserInfoByEmail(
-                              authController.userEmail.value!);
-                          await authController.sStorage.value.write(
-                              key: 'login',
-                              value: authController.userEmail.value!);
-                          await pointController.fetchAndSortUserPoints();
-                          await pointController.fetchCurrentUserPoints();
-                          await Get.toNamed('/home');
+                        if (phoneVerificationController.isCorrectCode.value ?? false) {
+                          // 메인으로 들어가는 과정에서 로딩창 보여준다
+                          futureOperations() async {
+                            await userController.setUserByEmail(authController.userEmail.value!);
+                            await userController.getUserInfoByEmail(authController.userEmail.value!);
+                            await authController.sStorage.value.write(key: 'login',value: authController.userEmail.value!);
+                            await pointController.fetchAndSortUserPoints();
+                            await pointController.fetchCurrentUserPoints();
+                            await Get.toNamed('/home');
+                          }
+
+                            await showDialog(
+                            context: context,
+                            builder: (context) =>
+                                FutureProgressDialog(futureOperations()),
+                          );
                         }
                       }),
                   SizedBox(
