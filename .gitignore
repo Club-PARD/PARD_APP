@@ -46,3 +46,5 @@ app.*.map.json
 #ios
 /ios/
 ios/
+
+qr_controller_refactor.dart
