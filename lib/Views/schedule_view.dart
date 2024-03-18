@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/component/schedule_container.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
+import 'package:pard_app/controllers/spring_schedule_controller.dart';
 import 'package:pard_app/model/schedule_model/schedule_model.dart';
+import 'package:pard_app/model/schedule_model/schedule_spring_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 
 class SchedulerScreen extends StatelessWidget {
   final ScheduleController scheduleController = Get.put(ScheduleController());
+  // Spring Schedule controller 가져오기
+  final SpringScheduleController springScheduleController =
+      Get.put(SpringScheduleController());
 
   SchedulerScreen({super.key});
 
@@ -34,7 +39,7 @@ class SchedulerScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width / 24),
         children: [
-          buildSection('다가오는 일정', () => scheduleController.upcomingSchedules,
+          buildSection('다가오는 일정', () => springScheduleController.upcomingSchedules,
               displaySmall, false),
           SizedBox(
             height: MediaQuery.of(context).size.width / 34,
@@ -43,7 +48,7 @@ class SchedulerScreen extends StatelessWidget {
             color: grayScale[30],
             thickness: 1,
           ),
-          buildSection('지난 일정', () => scheduleController.pastSchedules,
+          buildSection('지난 일정', () => springScheduleController.pastSchedules,
               displaySmall, true),
         ],
       ),
@@ -52,7 +57,7 @@ class SchedulerScreen extends StatelessWidget {
 
   Widget buildSection(
       String title,
-      List<ScheduleModel> Function() getSchedules,
+      List<SpringScheduleModel> Function() getSchedules,
       TextStyle titleStyle,
       bool isPast) {
     return Column(

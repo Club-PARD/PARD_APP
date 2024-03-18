@@ -4,10 +4,15 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pard_app/component/pard_part.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
+import 'package:pard_app/controllers/spring_schedule_controller.dart';
 import 'package:pard_app/model/schedule_model/schedule_model.dart';
 
 class HomeSchedule extends StatelessWidget {
   final ScheduleController scheduleController = Get.put(ScheduleController());
+
+  // Spring Schedule controller 가져오기
+  final SpringScheduleController springScheduleController =
+      Get.put(SpringScheduleController());
 
   HomeSchedule({super.key});
 

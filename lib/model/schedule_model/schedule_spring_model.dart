@@ -1,23 +1,26 @@
-class SpringScheduleModel{
+import 'package:intl/intl.dart';
+
+class SpringScheduleModel {
   final String? title;
-  final DateTime? schedule;
+  final DateTime? scheduleDate;
   final String? content;
   final String? part;
+  final String? place;
 
-  SpringScheduleModel({required this.title, required this.schedule, required this.content, required this.part});
+  SpringScheduleModel({this.title, this.scheduleDate, this.content, this.part, this.place});
 
   factory SpringScheduleModel.fromJson(Map<String, dynamic> json) {
     return SpringScheduleModel(
       title: json['title'],
-      schedule: json['schedule'],
+      scheduleDate: DateTime.parse(json['scheduleDate']),
       content: json['content'],
       part: json['part'],
+      place: json['place'], 
     );
   }
-  Map<String, dynamic> toJson() => {
-    'title': title,
-    'schedule': schedule,
-    'content': content,
-    'part': part,
-  };
+
+  String getFormattedScheduleDate() {
+    if (scheduleDate == null) return '';
+    return DateFormat('yyyy-MM-dd HH:mm').format(scheduleDate!);
+  }
 }
