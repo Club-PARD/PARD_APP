@@ -237,7 +237,7 @@ class QRController extends GetxController {
                       ]),
                 ));
             isScanned = false;
-          } else if (currentTime.isAfter(scheduleDueDate) &&
+          } else if (currentTime.isAfter(scheduleDueDate.add(const Duration(minutes:1))) &&
               result.value!.code == "https://me-qr.com/uoN4lOs1") {
             //이미 시간 지난 오늘치 schedule과 qr찍은 시간 비교했을 때 이미 지났으면 지각
 
