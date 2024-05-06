@@ -86,21 +86,24 @@ class _MyPointViewState extends State<MyPointView> {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        rankWithTopIcon(
-                          'top1',
-                          context,
-                          userPointsMap.keys.elementAt(0),
-                        ),
-                        rankWithTopIcon(
-                          'top2',
-                          context,
-                          userPointsMap.keys.elementAt(1),
-                        ),
-                        rankWithTopIcon(
-                          'top3',
-                          context,
-                          userPointsMap.keys.elementAt(2),
-                        ),
+                        if (userPointsMap.keys.length > 0)
+                          rankWithTopIcon(
+                            'top1',
+                            context,
+                            userPointsMap.keys.elementAt(0),
+                          ),
+                        if (userPointsMap.keys.length > 1)
+                          rankWithTopIcon(
+                            'top2',
+                            context,
+                            userPointsMap.keys.elementAt(1),
+                          ),
+                        if (userPointsMap.keys.length > 2)
+                          rankWithTopIcon(
+                            'top3',
+                            context,
+                            userPointsMap.keys.elementAt(2),
+                          ),
                       ],
                     );
                   }),

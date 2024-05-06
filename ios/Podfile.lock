@@ -273,11 +273,17 @@ SPEC CHECKSUMS:
   FirebaseAppCheckInterop: 3cd914842ba46f4304050874cd284de82f154ffd
   FirebaseAuth: a66c1e14ec58f41d154a4b41ce1a23ea00ad4805
   FirebaseCore: f86a1394906b97ac445ae49c92552a9425831bed
+<<<<<<< HEAD
   FirebaseCoreInternal: 8eb002e564b533bdcf1ba011f33f2b5c10e2ed4a
   FirebaseFirestore: 5d42819d1b219bc20e91c0cc854ed562680f31da
   FirebaseInstallations: e842042ec6ac1fd2e37d7706363ebe7f662afea4
+=======
+  FirebaseCoreInternal: 2cf9202e226e3f78d2bf6d56c472686b935bfb7f
+  FirebaseFirestore: 8d9dd05bb50e0891ebe4fdd9bd0f9b9d22ea5556
+  FirebaseInstallations: 9387bf15abfc69a714f54e54f74a251264fdb79b
+>>>>>>> 3bf6f9310544b0badd4ac6bccb306b86243831e1
   FirebaseMessaging: bb2c4f6422a753038fe137d90ae7c1af57251316
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
@@ -304,6 +310,6 @@ SPEC CHECKSUMS:
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
-PODFILE CHECKSUM: 5bd855fbd115f418bd5634e0242b206af5c1cc51
+PODFILE CHECKSUM: a77f36661ffd9b8dcd5521c7c370f518c0c23b56
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.14.3
