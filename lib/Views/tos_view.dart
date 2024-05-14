@@ -18,7 +18,7 @@ class TosView extends StatelessWidget {
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Theme.of(context).colorScheme.background,
-          appBar: PardAppBar('이용약관'),
+          appBar: const PardAppBar('이용약관'),
           body: Obx(
             () => Center(
               child: Column(
@@ -54,9 +54,9 @@ class TosView extends StatelessWidget {
                   ),
                   TosAgreement(
                       '개인정보 수집 및 이용 동의(필수)',
-                      'https://pardhgu.notion.site/Pard-APP-fbccc11671d14b4d8012dd999eff7f93?pvs=4',
+                      'https://we-pard.notion.site/Pard-APP-fc37c472e47941d3958765587b57e21f?pvs=4',
                       '서비스 이용약관(필수)',
-                      'https://pardhgu.notion.site/Pard-APP-18c93fe8a2c648009e17d1ab294a4fa9?pvs=4'),
+                      'https://we-pard.notion.site/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0?pvs=4'),
                   SizedBox(
                     height: 316.h,
                   ),
