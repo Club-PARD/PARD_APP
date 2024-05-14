@@ -310,9 +310,9 @@ class QRController extends GetxController {
                                   ),
                                   child: TextButton(
                                       onPressed: () async {
+                                        Get.back();
                                         await userController.addAttendInfo('지');
                                         await pointController.lateQR(user, 4);
-                                        Get.back();
                                       },
                                       child: Text(
                                         '다음부터 안그럴게요',

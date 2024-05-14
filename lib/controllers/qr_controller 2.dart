@@ -1,461 +1,453 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:pard_app/controllers/bottombar_controller.dart';
-import 'package:pard_app/controllers/point_controller.dart';
-import 'package:pard_app/controllers/spring_schedule_controller.dart';
-import 'package:pard_app/controllers/user_controller.dart';
-import 'package:pard_app/model/schedule_model/schedule_spring_model.dart';
-import 'package:pard_app/model/user_model/user_model.dart';
-import 'package:pard_app/utilities/text_style.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:http/http.dart' as http;
+// import 'dart:developer';
 
-class QRController extends GetxController {
-  var result = Rx<Barcode?>(null); // 스캔한 결과
-  QRViewController? controller; // qr 커트롤러
-  BottomBarController bController = Get.find();
-  bool isScanned = false; // 한 번만 찍게 하려고
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  UserController userController = Get.find();
-  final PointController pointController = Get.find();
-  // SpringScheduleController에서 선언한 earliestScheduleForAll을 가져옴
-  final SpringScheduleController springScheduleController = Get.find();
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:get/get.dart';
+// import 'package:pard_app/controllers/bottombar_controller.dart';
+// import 'package:pard_app/controllers/point_controller.dart';
+// import 'package:pard_app/controllers/schedule_controller.dart';
+// import 'package:pard_app/controllers/user_controller.dart';
+// import 'package:pard_app/model/schedule_model/schedule_model.dart';
+// import 'package:pard_app/model/user_model/user_model.dart';
+// import 'package:pard_app/utilities/text_style.dart';
+// import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-// 찍은시간 서버로 보내기
-  Future<void> sendScanTimeToServer(DateTime scanTime) async {
-    var url = Uri.parse('http://172.18.129.221:8080/qr');
-    try {
-      var response = await http.post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({
-          'scanTime': scanTime.toIso8601String(), // ISO8601 형식으로 시간을 변환
-        }),
-      );
+// class QRController extends GetxController {
+//   var result = Rx<Barcode?>(null); // 스캔한 결과
+//   QRViewController? controller; // qr 커트롤러
+//   BottomBarController bController = Get.find();
+//   bool isScanned = false; // 한 번만 찍게 하려고
+//   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+//   UserController userController = Get.find();
+//   final ScheduleController scheduleController = Get.put(ScheduleController());
+//   final PointController pointController = Get.find();
 
-      if (response.statusCode == 200) {
-        // 서버로부터의 응답이 성공적인 경우
-        print('서버로 QR 찍은 시간 전송 성공');
-      } else {
-        // 서버 응답에 문제가 있는 경우
-        print('QR 찍은거 서버로 전송 실패 ');
-      }
-    } catch (e) {
-      // 요청 중 예외 발생 시
-      print('QR Controller 찍은시간 서버로 전송 중 에러 발생 : $e');
-    }
-  }
+//   void onQRViewCreated(QRViewController controller) async {
+//     this.controller = controller;
 
-  void onQRViewCreated(QRViewController controller) async {
-    this.controller = controller;
-    //오늘 qr찍었는지 확인, 스케쥴 가져오는 변수들
-    DateTime today = DateTime.now();
-    DateTime startToday = DateTime(today.year, today.month, today.day,0,0,0);
-    DateTime endToday = DateTime(today.year, today.month, today.day, 23, 59, 59);
+//     //오늘 qr찍었는지 확인, 스케쥴 가져오는 변수들
+//     DateTime today = DateTime.now();
+//     DateTime startToday = DateTime(today.year, today.month, today.day);
+//     DateTime endToday = startToday
+//         .add(const Duration(days: 1))
+//         .subtract(const Duration(seconds: 1));
 
-        SpringScheduleModel? earliestSchedule = springScheduleController.earliestScheduleForAll.value;
-        DateTime scheduleDueDate = earliestSchedule!.scheduleDate!;
-   if (scheduleDueDate.isAfter(startToday) && scheduleDueDate.isBefore(endToday)) {
-  print("QR Controller에서 받은 당일 스케줄: ${earliestSchedule.title}, 날짜: ${scheduleDueDate.toIso8601String()}");
-} else if (scheduleDueDate.isAtSameMomentAs(startToday) || scheduleDueDate.isAtSameMomentAs(endToday)) {
-  // 정확히 당일 자정이나 23:59:59와 같은 경우도 처리
-  print("QR Controller에서 받은 정확한 당일 스케줄: ${earliestSchedule.title}, 날짜: ${scheduleDueDate.toIso8601String()}");
-} else {
-  print("당일 스케줄이 없습니다.");
-}
+//     //오늘 있는 schedule가져옴
+//     QuerySnapshot scheduleSnapshot = await FirebaseFirestore.instance
+//         .collection('schedules')
+//         .where('dueDate',
+//             isGreaterThanOrEqualTo: Timestamp.fromDate(startToday))
+//         .where('dueDate', isLessThanOrEqualTo: Timestamp.fromDate(endToday))
+//         .where('type', isEqualTo: true)
+//         .get();
+//     //오늘 스케쥴 가져오기
+//     DocumentSnapshot todayScheduleDoc = scheduleSnapshot.docs.first;
+//     String sid = todayScheduleDoc.id; // sid추출
+//     DateTime scheduleDueDate = todayScheduleDoc['dueDate'].toDate();
+//     //qr 스캔하는지
+//     controller.scannedDataStream.listen((scanData) async {
+//       if (!isScanned) {
+//         // isScanned이 false일 때만 스캔 처리
+//         isScanned = true; // 스캔을 true로 설정
+//         result.value = scanData; //스캔한 결과 저장
+//         UserModel user = userController.userInfo.value!;
+//         bool hasScanned = await userController.hasAlreadyScannedToday(
+//             userController.userInfo.value,
+//             result.value?.code); //찍은적 없으면 hasScanned는 false
+//         DateTime currentTime = DateTime.now(); //QR찍었을 때 시간
+//         print('HAS SCANNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!59');
+//         print(hasScanned);
 
+//         print("Scanned QR Code: ${result.value!.code}");
+//         print("Scanned Time: $currentTime");
+//         print("Current time: $currentTime");
+//         print("Schedule Due Date: $scheduleDueDate");
 
-    //qr 스캔하는지
-    controller.scannedDataStream.listen((scanData) async {
-      if (!isScanned) {
-        // isScanned이 false일 때만 스캔 처리
-        isScanned = true; // 스캔을 true로 설정
-        result.value = scanData; //스캔한 결과 저장
-        UserModel user = userController.userInfo.value!;
-        bool hasScanned = await userController.hasAlreadyScannedToday(
-            userController.userInfo.value,
-            result.value?.code); //찍은적 없으면 hasScanned는 false
-        DateTime currentTime = DateTime.now(); //QR찍었을 때 시간        
+//         if (hasScanned) {
+//           Get.back(); //찍으면 홈으로 돌아감
+//           bController.selectedIndex.value = 0;
+//           print(bController.selectedIndex);
 
-        if (hasScanned) {
-          Get.back(); //찍으면 홈으로 돌아감
-          bController.selectedIndex.value = 0;
+//           Get.dialog(
+//               barrierDismissible: false,
+//               Dialog(
+//                 backgroundColor: const Color(0xFF1A1A1A),
+//                 child: Column(
+//                     mainAxisSize: MainAxisSize.min,
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     crossAxisAlignment: CrossAxisAlignment.center,
+//                     children: [
+//                       Container(
+//                         width: 327.w,
+//                         height: 264.h,
+//                         decoration: ShapeDecoration(
+//                           color: const Color(0xFF1A1A1A),
+//                           shape: RoundedRectangleBorder(
+//                             side: const BorderSide(
+//                                 width: 0.50, color: Color(0xFF5262F5)),
+//                             borderRadius: BorderRadius.circular(8),
+//                           ),
+//                         ),
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                           children: [
+//                             SizedBox(
+//                               height: 10.h,
+//                             ),
+//                             Text('출석체크',
+//                                 style: displaySmall.copyWith(
+//                                   color: const Color(0xFF5262F5),
+//                                 )),
+//                             SizedBox(
+//                               height: 10.h,
+//                             ),
+//                             SizedBox(
+//                               width: 56.w,
+//                               height: 58.h,
+//                               child: Image.asset(
+//                                 'assets/images/2ndQR.png',
+//                                 fit: BoxFit.fill,
+//                               ),
+//                             ),
+//                             Text('이미 출석이 완료되었어요.',
+//                                 textAlign: TextAlign.center,
+//                                 style: titleSmall.copyWith(
+//                                     color: const Color(0xFF5262F5))),
+//                             SizedBox(
+//                               height: 10.h,
+//                             ),
+//                             Container(
+//                                 width: 254.w,
+//                                 height: 44.h,
+//                                 decoration: ShapeDecoration(
+//                                   gradient: const LinearGradient(
+//                                     begin: Alignment(1.00, -0.03),
+//                                     end: Alignment(-1, 0.03),
+//                                     colors: [
+//                                       Color(0xFF7B3FEF),
+//                                       Color(0xFF5262F5),
+//                                     ],
+//                                   ),
+//                                   shape: RoundedRectangleBorder(
+//                                     borderRadius: BorderRadius.circular(30),
+//                                   ),
+//                                 ),
+//                                 child: TextButton(
+//                                     onPressed: () {
+//                                       Get.back();
+//                                     },
+//                                     child: Text(
+//                                       '세미나 입장하기',
+//                                       style: headlineMedium.copyWith(
+//                                         color: Colors.white,
+//                                       ),
+//                                     ))),
+//                             SizedBox(
+//                               height: 10.h,
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ]),
+//               ));
+//           isScanned = false;
+//         }
+//         //오늘 찍은적이 없으면
+//         else if (!hasScanned) {
+//           if (currentTime.isBefore(scheduleDueDate) &&
+//               result.value!.code == "https://me-qr.com/uoN4lOs1") {
+//             //정상출석
 
-          Get.dialog(
-              barrierDismissible: false,
-              Dialog(
-                backgroundColor: const Color(0xFF1A1A1A),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 327.w,
-                        height: 264.h,
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFF1A1A1A),
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                width: 0.50, color: Color(0xFF5262F5)),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text('출석체크',
-                                style: displaySmall.copyWith(
-                                  color: const Color(0xFF5262F5),
-                                )),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            SizedBox(
-                              width: 56.w,
-                              height: 58.h,
-                              child: Image.asset(
-                                'assets/images/2ndQR.png',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Text('이미 출석이 완료되었어요.',
-                                textAlign: TextAlign.center,
-                                style: titleSmall.copyWith(
-                                    color: const Color(0xFF5262F5))),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Container(
-                                width: 254.w,
-                                height: 44.h,
-                                decoration: ShapeDecoration(
-                                  gradient: const LinearGradient(
-                                    begin: Alignment(1.00, -0.03),
-                                    end: Alignment(-1, 0.03),
-                                    colors: [
-                                      Color(0xFF7B3FEF),
-                                      Color(0xFF5262F5),
-                                    ],
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                ),
-                                child: TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: Text(
-                                      '세미나 입장하기',
-                                      style: headlineMedium.copyWith(
-                                        color: Colors.white,
-                                      ),
-                                    ))),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-              ));
-          isScanned = false;
-        }
-        //오늘 찍은적이 없으면
-        else if (!hasScanned) {
-          if (currentTime.isBefore(scheduleDueDate) &&
-              result.value!.code == "https://me-qr.com/uoN4lOs1") {
-            //정상출석
+//             Get.back(); //찍으면 홈으로 돌아감
+//             bController.selectedIndex.value = 0;
+//             print(bController.selectedIndex);
 
-            Get.back(); //찍으면 홈으로 돌아감
-            bController.selectedIndex.value = 0;
+//             Get.dialog(
+//                 barrierDismissible: false,
+//                 Dialog(
+//                   backgroundColor: const Color(0xFF1A1A1A),
+//                   child: Column(
+//                       mainAxisSize: MainAxisSize.min,
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       crossAxisAlignment: CrossAxisAlignment.center,
+//                       children: [
+//                         Container(
+//                           width: 327.w,
+//                           height: 264.h,
+//                           decoration: ShapeDecoration(
+//                             color: const Color(0xFF1A1A1A),
+//                             shape: RoundedRectangleBorder(
+//                               side: const BorderSide(
+//                                   width: 0.50, color: Color(0xFF5262F5)),
+//                               borderRadius: BorderRadius.circular(8),
+//                             ),
+//                           ),
+//                           child: Column(
+//                             mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                             children: [
+//                               SizedBox(
+//                                 height: 10.h,
+//                               ),
+//                               Text('출석체크',
+//                                   style: displaySmall.copyWith(
+//                                     color: const Color(0xFF5262F5),
+//                                   )),
+//                               SizedBox(
+//                                 height: 10.h,
+//                               ),
+//                               SizedBox(
+//                                 width: 56.w,
+//                                 height: 58.h,
+//                                 child: Image.asset(
+//                                   'assets/images/check_success.png',
+//                                   fit: BoxFit.fill,
+//                                 ),
+//                               ),
+//                               Text('출석이 완료되었어요.',
+//                                   textAlign: TextAlign.center,
+//                                   style: titleSmall.copyWith(
+//                                     color: const Color(0xFF64C59A),
+//                                   )),
+//                               SizedBox(
+//                                 height: 10.h,
+//                               ),
+//                               Container(
+//                                   width: 254.w,
+//                                   height: 44.h,
+//                                   decoration: ShapeDecoration(
+//                                     gradient: const LinearGradient(
+//                                       begin: Alignment(1.00, -0.03),
+//                                       end: Alignment(-1, 0.03),
+//                                       colors: [
+//                                         Color(0xFF7B3FEF),
+//                                         Color(0xFF5262F5),
+//                                       ],
+//                                     ),
+//                                     shape: RoundedRectangleBorder(
+//                                       borderRadius: BorderRadius.circular(30),
+//                                     ),
+//                                   ),
+//                                   child: TextButton(
+//                                       onPressed: () async {
+//                                         Get.back();
+//                                         await userController.addAttendInfo('출');
+//                                         await pointController.attendQR(user, 6);
+//                                       },
+//                                       child: Text(
+//                                         '세미나 입장하기',
+//                                         style: headlineMedium.copyWith(
+//                                           color: Colors.white,
+//                                         ),
+//                                       ))),
+//                               SizedBox(
+//                                 height: 10.h,
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       ]),
+//                 ));
+//             isScanned = false;
+//             print('HAS SCANNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!164');
+//             print(hasScanned);
+//           } else if (currentTime.isAfter(scheduleDueDate.add(const Duration(minutes: 1))) &&
+//               result.value!.code == "https://me-qr.com/uoN4lOs1") {
+//             //이미 시간 지난 오늘치 schedule과 qr찍은 시간 비교했을 때 이미 지났으면 지각
+//             print(currentTime.isAfter(scheduleDueDate));
 
-            Get.dialog(
-                barrierDismissible: false,
-                Dialog(
-                  backgroundColor: const Color(0xFF1A1A1A),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 327.w,
-                          height: 264.h,
-                          decoration: ShapeDecoration(
-                            color: const Color(0xFF1A1A1A),
-                            shape: RoundedRectangleBorder(
-                              side: const BorderSide(
-                                  width: 0.50, color: Color(0xFF5262F5)),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text('출석체크',
-                                  style: displaySmall.copyWith(
-                                    color: const Color(0xFF5262F5),
-                                  )),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              SizedBox(
-                                width: 56.w,
-                                height: 58.h,
-                                child: Image.asset(
-                                  'assets/images/check_success.png',
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Text('출석이 완료되었어요.',
-                                  textAlign: TextAlign.center,
-                                  style: titleSmall.copyWith(
-                                    color: const Color(0xFF64C59A),
-                                  )),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Container(
-                                  width: 254.w,
-                                  height: 44.h,
-                                  decoration: ShapeDecoration(
-                                    gradient: const LinearGradient(
-                                      begin: Alignment(1.00, -0.03),
-                                      end: Alignment(-1, 0.03),
-                                      colors: [
-                                        Color(0xFF7B3FEF),
-                                        Color(0xFF5262F5),
-                                      ],
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                  ),
-                                  child: TextButton(
-                                      onPressed: () async {
-                                        Get.back();
-                                        await userController.addAttendInfo('출');
-                                        await pointController.attendQR(user, 6);
-                                      },
-                                      child: Text(
-                                        '세미나 입장하기',
-                                        style: headlineMedium.copyWith(
-                                          color: Colors.white,
-                                        ),
-                                      ))),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ]),
-                ));
-            isScanned = false;
-          } else if (currentTime.isAfter(scheduleDueDate) &&
-              result.value!.code == "https://me-qr.com/uoN4lOs1") {
-            //이미 시간 지난 오늘치 schedule과 qr찍은 시간 비교했을 때 이미 지났으면 지각
+//             Get.back(); //찍으면 홈으로 돌아감
+//             bController.selectedIndex.value = 0;
+//             print(bController.selectedIndex);
 
-            Get.back(); //찍으면 홈으로 돌아감
-            bController.selectedIndex.value = 0;
-            Get.dialog(
-                barrierDismissible: false,
-                Dialog(
-                  backgroundColor: const Color(0xFF1A1A1A),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 327.w,
-                          height: 264.h,
-                          decoration: ShapeDecoration(
-                            color: const Color(0xFF1A1A1A),
-                            shape: RoundedRectangleBorder(
-                              side: const BorderSide(
-                                  width: 0.50, color: Color(0xFF5262F5)),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text('출석체크',
-                                  style: displaySmall.copyWith(
-                                    color: const Color(0xFF5262F5),
-                                  )),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              SizedBox(
-                                width: 56.w,
-                                height: 56.h,
-                                child: Image.asset(
-                                  'assets/images/warning.png',
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Text('지각 처리되었어요',
-                                  textAlign: TextAlign.center,
-                                  style: titleSmall.copyWith(
-                                    color: const Color(0xFFFF5A5A),
-                                  )),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Container(
-                                  width: 254.w,
-                                  height: 44.h,
-                                  decoration: ShapeDecoration(
-                                    gradient: const LinearGradient(
-                                      begin: Alignment(1.00, -0.03),
-                                      end: Alignment(-1, 0.03),
-                                      colors: [
-                                        Color(0xFF7B3FEF),
-                                        Color(0xFF5262F5),
-                                      ],
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                  ),
-                                  child: TextButton(
-                                      onPressed: () async {
-                                        await userController.addAttendInfo('지');
-                                        await pointController.lateQR(user, 4);
-                                        Get.back();
-                                      },
-                                      child: Text(
-                                        '다음부터 안그럴게요',
-                                        style: headlineMedium.copyWith(
-                                          color: Colors.white,
-                                        ),
-                                      ))),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ]),
-                ));
-            isScanned = false;
-          }
-        }
-        if (result.value!.code != "https://me-qr.com/uoN4lOs1") {
-          Get.back();
-          bController.selectedIndex.value = 0;
-          Get.dialog(
-              barrierDismissible: false,
-              Dialog(
-                backgroundColor: const Color(0xFF1A1A1A),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 327.w,
-                        height: 264.h,
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFF1A1A1A),
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                width: 0.50, color: Color(0xFF5262F5)),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text('출석체크',
-                                style: displaySmall.copyWith(
-                                  color: const Color(0xFF5262F5),
-                                )),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text('유효하지 않은 QR 코드입니다.\n다시 시도해주세요.',
-                                textAlign: TextAlign.center,
-                                style: titleSmall.copyWith(
-                                  color: Colors.white,
-                                )),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Container(
-                              width: 254.w,
-                              height: 44.h,
-                              decoration: ShapeDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment(1.00, -0.03),
-                                  end: Alignment(-1, 0.03),
-                                  colors: [
-                                    Color(0xFF7B3FEF),
-                                    Color(0xFF5262F5),
-                                  ],
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                              ),
-                              child: TextButton(
-                                onPressed: () async {
-                                  Get.back();
-                                  isScanned = false; // Reset the isScanned flag
-                                },
-                                child: Text(
-                                  '확인',
-                                  style: headlineMedium.copyWith(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-              ));
-          isScanned = false;
-        }
-      }
-    });
-  }
+//             Get.dialog(
+//                 barrierDismissible: false,
+//                 Dialog(
+//                   backgroundColor: const Color(0xFF1A1A1A),
+//                   child: Column(
+//                       mainAxisSize: MainAxisSize.min,
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       crossAxisAlignment: CrossAxisAlignment.center,
+//                       children: [
+//                         Container(
+//                           width: 327.w,
+//                           height: 264.h,
+//                           decoration: ShapeDecoration(
+//                             color: const Color(0xFF1A1A1A),
+//                             shape: RoundedRectangleBorder(
+//                               side: const BorderSide(
+//                                   width: 0.50, color: Color(0xFF5262F5)),
+//                               borderRadius: BorderRadius.circular(8),
+//                             ),
+//                           ),
+//                           child: Column(
+//                             mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                             children: [
+//                               SizedBox(
+//                                 height: 10.h,
+//                               ),
+//                               Text('출석체크',
+//                                   style: displaySmall.copyWith(
+//                                     color: const Color(0xFF5262F5),
+//                                   )),
+//                               SizedBox(
+//                                 height: 10.h,
+//                               ),
+//                               SizedBox(
+//                                 width: 56.w,
+//                                 height: 56.h,
+//                                 child: Image.asset(
+//                                   'assets/images/warning.png',
+//                                   fit: BoxFit.fill,
+//                                 ),
+//                               ),
+//                               Text('지각 처리되었어요',
+//                                   textAlign: TextAlign.center,
+//                                   style: titleSmall.copyWith(
+//                                     color: const Color(0xFFFF5A5A),
+//                                   )),
+//                               SizedBox(
+//                                 height: 10.h,
+//                               ),
+//                               Container(
+//                                   width: 254.w,
+//                                   height: 44.h,
+//                                   decoration: ShapeDecoration(
+//                                     gradient: const LinearGradient(
+//                                       begin: Alignment(1.00, -0.03),
+//                                       end: Alignment(-1, 0.03),
+//                                       colors: [
+//                                         Color(0xFF7B3FEF),
+//                                         Color(0xFF5262F5),
+//                                       ],
+//                                     ),
+//                                     shape: RoundedRectangleBorder(
+//                                       borderRadius: BorderRadius.circular(30),
+//                                     ),
+//                                   ),
+//                                   child: TextButton(
+//                                       onPressed: () async {
+//                                         await userController.addAttendInfo('지');
+//                                         await pointController.lateQR(user, 4);
+//                                         Get.back();
+//                                       },
+//                                       child: Text(
+//                                         '다음부터 안그럴게요',
+//                                         style: headlineMedium.copyWith(
+//                                           color: Colors.white,
+//                                         ),
+//                                       ))),
+//                               SizedBox(
+//                                 height: 10.h,
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       ]),
+//                 ));
+//             isScanned = false;
+//           }
+//         }
+//         if (result.value!.code != "https://me-qr.com/uoN4lOs1") {
+//           Get.back();
+//           bController.selectedIndex.value = 0;
+//           print(bController.selectedIndex);
+//           Get.dialog(
+//               barrierDismissible: false,
+//               Dialog(
+//                 backgroundColor: const Color(0xFF1A1A1A),
+//                 child: Column(
+//                     mainAxisSize: MainAxisSize.min,
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     crossAxisAlignment: CrossAxisAlignment.center,
+//                     children: [
+//                       Container(
+//                         width: 327.w,
+//                         height: 264.h,
+//                         decoration: ShapeDecoration(
+//                           color: const Color(0xFF1A1A1A),
+//                           shape: RoundedRectangleBorder(
+//                             side: const BorderSide(
+//                                 width: 0.50, color: Color(0xFF5262F5)),
+//                             borderRadius: BorderRadius.circular(8),
+//                           ),
+//                         ),
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                           children: [
+//                             SizedBox(
+//                               height: 10.h,
+//                             ),
+//                             Text('출석체크',
+//                                 style: displaySmall.copyWith(
+//                                   color: const Color(0xFF5262F5),
+//                                 )),
+//                             SizedBox(
+//                               height: 10.h,
+//                             ),
+//                             Text('유효하지 않은 QR 코드입니다.\n다시 시도해주세요.',
+//                                 textAlign: TextAlign.center,
+//                                 style: titleSmall.copyWith(
+//                                   color: Colors.white,
+//                                 )),
+//                             SizedBox(
+//                               height: 10.h,
+//                             ),
+//                             Container(
+//                               width: 254.w,
+//                               height: 44.h,
+//                               decoration: ShapeDecoration(
+//                                 gradient: const LinearGradient(
+//                                   begin: Alignment(1.00, -0.03),
+//                                   end: Alignment(-1, 0.03),
+//                                   colors: [
+//                                     Color(0xFF7B3FEF),
+//                                     Color(0xFF5262F5),
+//                                   ],
+//                                 ),
+//                                 shape: RoundedRectangleBorder(
+//                                   borderRadius: BorderRadius.circular(30),
+//                                 ),
+//                               ),
+//                               child: TextButton(
+//                                 onPressed: () async {
+//                                   print("Back button pressed");
+//                                   Get.back();
+//                                   isScanned = false; // Reset the isScanned flag
+//                                 },
+//                                 child: Text(
+//                                   '확인',
+//                                   style: headlineMedium.copyWith(
+//                                     color: Colors.white,
+//                                   ),
+//                                 ),
+//                               ),
+//                             ),
+//                             SizedBox(
+//                               height: 10.h,
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ]),
+//               ));
+//           isScanned = false;
+//         }
+//       }
+//     });
+//   }
 
-  void onPermissionSet(bool p) {
-    log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
-    if (!p) {
-      Get.snackbar('Error', 'No permission');
-    }
-  }
+//   void onPermissionSet(bool p) {
+//     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
+//     if (!p) {
+//       Get.snackbar('Error', 'No permission');
+//     }
+//   }
 
-  @override
-  void onClose() {
-    controller?.dispose();
-    super.onClose();
-  }
-}
+//   @override
+//   void onClose() {
+//     controller?.dispose();
+//     super.onClose();
+//   }
+// }

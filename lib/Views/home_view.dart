@@ -11,6 +11,7 @@ import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
+import 'dart:math';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -646,19 +647,16 @@ class _HomePageState extends State<HomePage> {
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          (userController.userInfo.value
-                                                          ?.member ==
-                                                      '잔잔파도' ||
-                                                  userController.userInfo.value
-                                                          ?.member ==
-                                                      '운영진')
+                                          (userController.userInfo.value ?.member == '잔잔파도' ||
+                                           userController.userInfo.value?.member == '운영진')
                                               ? '-'
-                                              : '${formatter.format(pointModel.currentBeePoints)}점',
+                                              : '${formatter.format(pointModel.currentBeePoints?.abs())}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!
                                               .copyWith(color: errorRed),
                                         );
+
                                       },
                                     )
                                   ],
