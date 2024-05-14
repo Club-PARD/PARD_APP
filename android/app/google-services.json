@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:676828935630:android:cd84d5445726a3f205a79f",
         "android_client_info": {
-          "package_name": "com.pard.pard_app"
+          "package_name": "com.example.pard_app"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "676828935630-9she5hcbnpu6rgnps3bfqtefs7gbsro4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pard.pard_app",
+            "package_name": "com.example.pard_app",
             "certificate_hash": "978c21bb92efc93663d3e7f22ad049026cf1e104"
           }
         },
@@ -25,7 +25,7 @@
           "client_id": "676828935630-hs8ku049q0hg6mpgmscqvapr6qpbjq2m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pard.pard_app",
+            "package_name": "com.example.pard_app",
             "certificate_hash": "4d6d78ae6aa1aa21e8875a53d2f0ef1c124c4104"
           }
         },
@@ -33,7 +33,7 @@
           "client_id": "676828935630-jh6pantar801am08bq2gam2un41m313d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pard.pard_app",
+            "package_name": "com.example.pard_app",
             "certificate_hash": "1bf2a37a317ecf0455e1ea8cb0e4774aadce63ce"
           }
         },
@@ -41,7 +41,7 @@
           "client_id": "676828935630-onj0ppa8j692au48j58t0i02c4tdqtas.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pard.pard_app",
+            "package_name": "com.example.pard_app",
             "certificate_hash": "cfae6f8057d49a9196ab41116238d2ee4999b17d"
           }
         },
@@ -49,7 +49,7 @@
           "client_id": "676828935630-ou8s0d0esojfae54l0kgbu9n1qembvrn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pard.pard_app",
+            "package_name": "com.example.pard_app",
             "certificate_hash": "ebf7ebace5082b3e4f25a250f20314cecdfa0ae5"
           }
         },
@@ -74,7 +74,7 @@
               "client_id": "676828935630-kgjng4it3rdg3616d46bjk0opom69es9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.pard.pard_app",
+                "bundle_id": "com.example.pard",
                 "app_store_id": "12345678"
               }
             }
@@ -99,6 +99,30 @@
           }
         },
         {
+          "client_id": "676828935630-8lhp9egb7o5i4ufkktbjs0j6vfheuntq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pard.pard_app",
+            "certificate_hash": "1bf2a37a317ecf0455e1ea8cb0e4774aadce63ce"
+          }
+        },
+        {
+          "client_id": "676828935630-k0boup5g471ba2vul4bpig2bk8cm2pdf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pard.pard_app",
+            "certificate_hash": "cfae6f8057d49a9196ab41116238d2ee4999b17d"
+          }
+        },
+        {
+          "client_id": "676828935630-mql6871pjno9j1p6al03ukbu4ri78u06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pard.pard_app",
+            "certificate_hash": "b29fd6bc9f462dce0aa581c0f6afce8b0d46b270"
+          }
+        },
+        {
           "client_id": "676828935630-k1u2fmvmvjgeqh9vq19iqr2s3en1qcja.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -119,7 +143,7 @@
               "client_id": "676828935630-kgjng4it3rdg3616d46bjk0opom69es9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.pard.pard_app",
+                "bundle_id": "com.example.pard",
                 "app_store_id": "12345678"
               }
             }
