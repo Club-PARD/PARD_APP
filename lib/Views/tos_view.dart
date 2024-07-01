@@ -53,7 +53,7 @@ class TosView extends StatelessWidget {
                     height: 16.h,
                   ),
                   TosAgreement(
-                      '개인정보 수집 및 이용 동의(필수)',
+                      '개인정보 처리방침',
                       'https://we-pard.notion.site/Pard-APP-fc37c472e47941d3958765587b57e21f?pvs=4',
                       '서비스 이용약관(필수)',
                       'https://we-pard.notion.site/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0?pvs=4'),
