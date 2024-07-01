@@ -35,10 +35,10 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       print('---------------home_view()');
-      pointController.fetchAndSortUserPoints();
-      pointController.fetchCurrentUserPoints();
-      pointController.getCurrentUserPartRank();
-      pointController.getCurrentUserRank();
+      // pointController.fetchAndSortUserPoints();
+      // pointController.fetchCurrentUserPoints();
+      // pointController.getCurrentUserPartRank();
+      // pointController.getCurrentUserRank();
     });
   }
 

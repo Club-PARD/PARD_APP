@@ -37,7 +37,7 @@ class UserController extends GetxController {
         print('사용자 정보:');
         print('uid: ${user.uid}');
         print('name: ${user.name}');
-        print('phoneNumber: ${user.phone}');
+        // print('phoneNumber: ${user.phone}');
         print('email: ${user.email}');
         print('part: ${user.part}');
         print('member: ${user.member}');

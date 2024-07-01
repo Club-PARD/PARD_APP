@@ -11,6 +11,7 @@ import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/firebase_options.dart';
 import 'package:pard_app/my_app.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -24,7 +25,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
+  await dotenv.load(fileName: 'assets/.env');
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   try {
     await initializeDateFormatting('ko_KR', null);

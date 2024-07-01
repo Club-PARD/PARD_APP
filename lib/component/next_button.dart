@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 
 class NextButton extends StatelessWidget {
@@ -8,16 +9,20 @@ class NextButton extends StatelessWidget {
   final String route;
   final bool isNext;
   final VoidCallback? function;
+  final String token;
 
-  NextButton(
+  const NextButton(
     this.title,
     this.route,
-    this.isNext, {
+    this.isNext, 
+    this.token,{super.key, 
     this.function,
   });
 
   @override
   Widget build(BuildContext context) {
+      final SpringUserController springUserController = Get.find();
+
     return GestureDetector(
         child: Container(
           width: 327.w,
@@ -50,8 +55,9 @@ class NextButton extends StatelessWidget {
         onTap: () async {
           if (isNext) {
             if (function != null) {
-              await function;
+              function!();
             }
+            await springUserController.fetchUser(token);
             await Get.toNamed(route);
           }
         });
