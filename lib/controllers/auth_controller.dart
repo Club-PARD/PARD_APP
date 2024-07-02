@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logging/logging.dart';
 import 'package:pard_app/controllers/error_controller.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/spring_user_controller.dart';
@@ -28,6 +29,7 @@ class AuthController extends GetxController {
   Rx<User?> user = Rx<User?>(null);
   RxBool isAgree = false.obs;
   RxBool isLogin = true.obs;
+  Rx<pard_user.UserInfo?> userInfo = Rx<pard_user.UserInfo?>(null);
 
   checkPreviousLogin() async {
     try {
@@ -41,12 +43,14 @@ class AuthController extends GetxController {
       String? email = await sStorage.value.read(key: 'login');
       userEmail.value = email;
       String? token = prefs.getString('Authorization');
-      print('checkPreviousLogin() ${userEmail.value}');
+      if (token != null && token.startsWith('Authorization=')) {
+      token = token.replaceFirst('Authorization=', '');
+    }
+      print('checkPreviousLogin() $token , $email');
       if (token == null || email == null) {
         print('로그인 이력 없음: 로그인 필요');
         isLogin.value = false;
       } else {
-        print("auth_controller: ${_springUserController.hashCode}");
         await _springUserController.fetchUser(token); // 스프링 서버에서 유저 정보 가져옴
         Get.toNamed('/home');
         isLogin.value = true;
@@ -54,7 +58,7 @@ class AuthController extends GetxController {
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
-        _springUserController.userInfo.value.name,
+        _springUserController.userInfo.value?.name ?? 'none',
         'checkPreviousLogin()',
       );
     }
@@ -79,16 +83,14 @@ class AuthController extends GetxController {
         if (user != null) {
           userEmail.value = user.email;
           print(userEmail.value);
-          _springUserController.login(userEmail.value!);
          // 구글 로그인 후 서버에서 받아온 토큰을 가져옴
-          final prefs = await SharedPreferences.getInstance();
-          String? token = prefs.getString('Authorization');
+          String? token = await _springUserController.login(userEmail.value!);       
 
           if(token!=null){
-            await sStorage.value.write(key: 'Authorization', value: token); // sStorage에 토큰 저장
+            // await sStorage.value.write(key: 'Authorization', value: token); // sStorage에 토큰 저장
             pard_user.UserInfo? userInfo = await _springUserController.fetchUser(token);
             if(userInfo != null){
-              await sStorage.value.write(key: 'login', value: user.email!);
+              // await sStorage.value.write(key: 'login', value: user.email!);
               Get.toNamed('/home');
             }
           } else {
@@ -100,7 +102,7 @@ class AuthController extends GetxController {
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
-        _springUserController.userInfo.value.name,
+        _springUserController.userInfo.value?.name ?? 'none',
         'signInWithGoogle()',
       );
     }
@@ -190,7 +192,7 @@ class AuthController extends GetxController {
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
-        _springUserController.userInfo.value.name,
+        _springUserController.userInfo.value?.name ?? 'none',
         'deleteUserFields()',
       );
     }
@@ -205,7 +207,7 @@ class AuthController extends GetxController {
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
-        _springUserController.userInfo.value.name,
+        _springUserController.userInfo.value?.name ?? 'none',
         'signOut()',
       );
     }

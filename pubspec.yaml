@@ -63,6 +63,7 @@ dependencies:
   future_progress_dialog: ^0.2.1
   http: ^1.1.0
   flutter_dotenv: ^5.1.0
+  logging: ^1.2.0
 
 dev_dependencies:
   flutter_test:

@@ -34,7 +34,7 @@ class TosView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        TosCheckbox(authController.isAgree, 20.h),
+                        TosCheckbox(springUserController.isAgree, 20.h),
                         SizedBox(
                           width: 4.w,
                         ),
@@ -62,7 +62,7 @@ class TosView extends StatelessWidget {
                   SizedBox(
                     height: 316.h,
                   ),
-                  NextButton('다음', '/home', springUserController.isAgree.value,'토큰값'),
+                  NextButton('다음', '/home', springUserController.isAgree.value),
                 ],
               ),
             ),

@@ -7,6 +7,7 @@ import 'package:pard_app/Views/home_schedule_view.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
+import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
@@ -23,9 +24,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
   final UserController userController = Get.find<UserController>();
+  final SpringUserController springUserController = Get.find<SpringUserController>();
   final ScheduleController scheduleController = Get.put(ScheduleController());
   final GlobalKey questionDialogKey = GlobalKey();
   final formatter = NumberFormat("#,##0.##");
+
+  final SpringUserController _springUserController = Get.find<SpringUserController>();
 
   bool showContainer = false;
   OverlayEntry? overlayEntry;
@@ -44,6 +48,8 @@ class _HomePageState extends State<HomePage> {
 
   void showOverlay(BuildContext context) async {
     await PushNotificationController.to.setupFlutterNotifications();
+
+
     final RenderBox renderBox =
         questionDialogKey.currentContext!.findRenderObject() as RenderBox;
     final boxPosition = renderBox.localToGlobal(Offset.zero);
@@ -175,6 +181,19 @@ class _HomePageState extends State<HomePage> {
     overlayEntry = null;
   }
 
+  String getRoleString(String? role) {
+    switch (role) {
+      case 'ROLE_ADMIN':
+        return '운영진';
+      case 'ROLE_YB':
+        return '파디';
+      case 'ROLE_OB':
+        return '파도';
+      default:
+        return '청소';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -219,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                                   children: <TextSpan>[
                                     const TextSpan(text: '안녕하세요, '),
                                     TextSpan(
-                                      text: userController.userInfo.value!.name,
+                                      text: springUserController.userInfo.value?.name ?? '사용자',
                                       style: displayMedium.copyWith(
                                           color: const Color(0XFF5262F5)),
                                     ),
@@ -254,8 +273,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                      /** generation값으로 대체 */
-                                      '${userController.userInfo.value?.generation}기'
+                                      /** generation값으로 대체 null이면 0기 */
+                                      '${springUserController.userInfo.value?.generation ?? 0}기'
                                           .toString(),
                                       style: titleMedium.copyWith(height: 0)),
                                 ),
@@ -285,8 +304,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Obx(
                                     () => Text(
-                                        /** part값으로 대체 */
-                                        '${userController.userInfo.value!.part}',
+                                        /** part값으로 대체 없으면 청소해 */
+                                        springUserController.userInfo.value?.part ?? '청소',
                                         style: titleMedium.copyWith(height: 0)),
                                   ),
                                 ),
@@ -310,8 +329,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Obx(
                                     () => Text(
-                                        /** member값으로 대체 */
-                                        '${userController.userInfo.value!.member}',
+                                        /** member값으로 대체 없으면 청소부원*/
+                                        getRoleString(springUserController.userInfo.value?.role),
                                         style: titleMedium.copyWith(height: 0)),
                                   ),
                                 ),
