@@ -48,3 +48,4 @@ app.*.map.json
 ios/
 
 qr_controller_refactor.dart
+/assets/.env

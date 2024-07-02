@@ -9,10 +9,10 @@ class NextButton extends StatelessWidget {
   final bool isNext;
   final VoidCallback? function;
 
-  NextButton(
+  const NextButton(
     this.title,
     this.route,
-    this.isNext, {
+    this.isNext, {super.key, 
     this.function,
   });
 
@@ -50,7 +50,7 @@ class NextButton extends StatelessWidget {
         onTap: () async {
           if (isNext) {
             if (function != null) {
-              await function;
+              function;
             }
             await Get.toNamed(route);
           }

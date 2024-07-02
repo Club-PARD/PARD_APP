@@ -5,6 +5,7 @@ import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/component/tos_statement.dart';
 import 'package:pard_app/component/next_button.dart';
+import 'package:pard_app/controllers/spring_user_controller.dart';
 
 class TosView extends StatelessWidget {
   const TosView({super.key});
@@ -12,6 +13,7 @@ class TosView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
+    final SpringUserController springUserController = Get.put(SpringUserController());
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -32,7 +34,7 @@ class TosView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        TosCheckbox(authController.isAgree, 20.h),
+                        TosCheckbox(springUserController.isAgree, 20.h),
                         SizedBox(
                           width: 4.w,
                         ),
@@ -60,7 +62,7 @@ class TosView extends StatelessWidget {
                   SizedBox(
                     height: 316.h,
                   ),
-                  NextButton('다음', '/numberauth', authController.isAgree.value,),
+                  NextButton('다음', '/home', springUserController.isAgree.value),
                 ],
               ),
             ),

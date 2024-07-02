@@ -14,7 +14,7 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
     final UserController userController = Get.put(UserController());
-    authController.checkPreviousLogin();
+    // authController.checkPreviousLogin();
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -48,7 +48,7 @@ class SignInView extends StatelessWidget {
                 SizedBox(
                   height: 110.h,
                 ),
-                if (!authController.isLogin.value)
+                if (authController.isLogin.value)
                   GestureDetector(
                       child: Container(
                         width: 327.w,
@@ -95,7 +95,7 @@ class SignInView extends StatelessWidget {
                 SizedBox(
                   height: 16.h,
                 ),
-                if (!authController.isLogin.value)
+                if (authController.isLogin.value)
                   GestureDetector(
                       child: Container(
                         width: 327.w,
