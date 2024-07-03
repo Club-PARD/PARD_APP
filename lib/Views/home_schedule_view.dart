@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pard_app/component/pard_part.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
+import 'package:pard_app/controllers/spring_schedule_controller.dart';
 import 'package:pard_app/model/schedule_model/schedule_model.dart';
+import 'package:pard_app/model/schedule_model/schedule_response_dto.dart.dart';
 
 class HomeSchedule extends StatelessWidget {
   final ScheduleController scheduleController = Get.put(ScheduleController());
+  final SpringScheduleController springScheduleController = Get.put(SpringScheduleController());
 
   HomeSchedule({super.key});
 
@@ -17,14 +20,14 @@ class HomeSchedule extends StatelessWidget {
       width: 280.w,
       height: 100.h,
       child: Obx(() {
-        if (scheduleController.upcomingSchedules.isNotEmpty) {
-          ScheduleModel firstSchedule =
-              scheduleController.upcomingSchedules.first;
+        if (springScheduleController.upcomingSchedules.isNotEmpty) {
+          ScheduleResponseDTO firstSchedule =
+              springScheduleController.upcomingSchedules.first;
 
           final DateTime now = DateTime.now();
-          final DateTime dueDate = firstSchedule.dueDate;
-          final int dayLeft = dueDate.difference(now).inDays;
-          final dDay = _calculateDday(firstSchedule.dueDate);
+          final DateTime dueDate = firstSchedule.date;
+          final int dayLeft = firstSchedule.remaingDay ?? 0;
+          final dDay = _calculateDday(dayLeft);
           final bool isAllParts = firstSchedule.part == '전체';
 
           return Column(
@@ -57,9 +60,9 @@ class HomeSchedule extends StatelessWidget {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('일시: ${_formatDate(firstSchedule.dueDate)}',
+                        Text('일시: ${_formatDate(firstSchedule.date)}',
                             style: Theme.of(context).textTheme.titleLarge),
-                        Text('장소: ${firstSchedule.place}',
+                        Text('장소: ${firstSchedule.contentsLocation}',
                             style: Theme.of(context).textTheme.titleLarge),
                       ],
                     )
@@ -69,14 +72,14 @@ class HomeSchedule extends StatelessWidget {
                       children: [
                         // description -> place로 대체
                         Text(
-                          firstSchedule.place.length > 20
-                              ? '${firstSchedule.place.substring(0, 20)}...'
-                              : firstSchedule.place,
+                          firstSchedule.contentsLocation.length > 20
+                              ? '${firstSchedule.contentsLocation.substring(0, 20)}...'
+                              : firstSchedule.contentsLocation,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        Text('마감: ${_formatDate(firstSchedule.dueDate)}',
+                        Text('마감: ${_formatDate(firstSchedule.date)}',
                             style: Theme.of(context).textTheme.titleLarge),
                       ],
                     ),
@@ -98,16 +101,13 @@ class HomeSchedule extends StatelessWidget {
     );
   }
 
-  String _calculateDday(DateTime dueDate) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final difference = dueDate.difference(today);
+  String _calculateDday(int dayLeft) {
 
-    if (difference.isNegative) {
+
+    if (dayLeft<0) {
       return '';
-    } else if (difference.inDays > 0) {
-      final days = difference.inDays;
-      return 'D-$days';
+    } else if (dayLeft > 0) {
+      return 'D-$dayLeft';
     } else {
       return 'D-DAY';
     }

@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
   final UserController userController = Get.find<UserController>();
   final SpringUserController springUserController = Get.find<SpringUserController>();
-  final ScheduleController scheduleController = Get.put(ScheduleController());
+  // final ScheduleController scheduleController = Get.put(ScheduleController());
   final GlobalKey questionDialogKey = GlobalKey();
   final formatter = NumberFormat("#,##0.##");
 
@@ -39,10 +39,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       print('---------------home_view()');
-      // pointController.fetchAndSortUserPoints();
-      // pointController.fetchCurrentUserPoints();
-      // pointController.getCurrentUserPartRank();
-      // pointController.getCurrentUserRank();
     });
   }
 
