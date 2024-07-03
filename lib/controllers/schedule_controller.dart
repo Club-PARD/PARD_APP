@@ -17,7 +17,7 @@ class ScheduleController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getSchedules('${_userController.userInfo.value?.part}');
+    // await getSchedules('${_userController.userInfo.value?.part}');
   }
 
   Future<void> getSchedules(String userPart) async {

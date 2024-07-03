@@ -29,6 +29,7 @@ class AuthController extends GetxController {
   Rx<User?> user = Rx<User?>(null);
   RxBool isAgree = false.obs;
   RxBool isLogin = true.obs;
+  var obxToken = ''.obs; 
   Rx<pard_user.UserInfo?> userInfo = Rx<pard_user.UserInfo?>(null);
 
   checkPreviousLogin() async {
@@ -86,7 +87,11 @@ class AuthController extends GetxController {
          // 구글 로그인 후 서버에서 받아온 토큰을 가져옴
           String? token = await _springUserController.login(userEmail.value!);       
 
-          if(token!=null){
+          if (token != null) {
+            if (token.startsWith('Authorization=')) {
+              token = token.replaceFirst('Authorization=', '');
+            }
+            obxToken.value = token; 
             // await sStorage.value.write(key: 'Authorization', value: token); // sStorage에 토큰 저장
             pard_user.UserInfo? userInfo = await _springUserController.fetchUser(token);
             if(userInfo != null){

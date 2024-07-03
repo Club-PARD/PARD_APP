@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pard_app/component/pard_part.dart';
-import 'package:pard_app/model/schedule_model/schedule_model.dart';
-import 'package:pard_app/utilities/color_style.dart';
+import 'package:pard_app/model/schedule_model/schedule_response_dto.dart.dart';
 
 class ScheduleContainer extends StatelessWidget {
-  final ScheduleModel schedule;
+  final ScheduleResponseDTO schedule;
   final bool isPast;
 
   const ScheduleContainer(this.schedule, {super.key, this.isPast = false});
 
   @override
   Widget build(BuildContext context) {
-    final dDay = _calculateDday(schedule.dueDate);
+    final dDay = _calculateDday(schedule.date);
     final bool isAllParts = schedule.part == '전체';
 
     return Container(
@@ -20,7 +20,7 @@ class ScheduleContainer extends StatelessWidget {
           vertical: MediaQuery.of(context).size.width / 50),
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
       decoration: BoxDecoration(
-        color: blackScale,
+        color: Colors.black, // Replace with your blackScale color
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -31,7 +31,7 @@ class ScheduleContainer extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  PartComponent(schedule.part),
+                  PartComponent(schedule.part), // Make sure PartComponent works with part from ScheduleResponseDTO
                   const SizedBox(
                     width: 8,
                   ),
@@ -40,7 +40,7 @@ class ScheduleContainer extends StatelessWidget {
                           ? Theme.of(context)
                               .textTheme
                               .headlineLarge!
-                              .copyWith(color: grayScale[30])
+                              .copyWith(color: Colors.grey) // Replace with grayScale[30]
                           : Theme.of(context).textTheme.headlineLarge),
                 ],
               ),
@@ -49,7 +49,7 @@ class ScheduleContainer extends StatelessWidget {
                       ? Theme.of(context)
                           .textTheme
                           .titleMedium!
-                          .copyWith(color: grayScale[30])
+                          .copyWith(color: Colors.grey) // Replace with grayScale[30]
                       : Theme.of(context).textTheme.titleMedium),
             ],
           ),
@@ -58,19 +58,19 @@ class ScheduleContainer extends StatelessWidget {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('일시: ${_formatDate(schedule.dueDate)}',
+                    Text('일시: ${_formatDate(schedule.date)}',
                         style: isPast
                             ? Theme.of(context)
                                 .textTheme
                                 .titleLarge!
-                                .copyWith(color: grayScale[30])
+                                .copyWith(color: Colors.grey) // Replace with grayScale[30]
                             : Theme.of(context).textTheme.titleLarge),
-                    Text('장소: ${schedule.place}',
+                    Text('장소: ${schedule.contentsLocation}',
                         style: isPast
                             ? Theme.of(context)
                                 .textTheme
                                 .titleLarge!
-                                .copyWith(color: grayScale[30])
+                                .copyWith(color: Colors.grey) // Replace with grayScale[30]
                             : Theme.of(context).textTheme.titleLarge),
                   ],
                 )
@@ -80,24 +80,24 @@ class ScheduleContainer extends StatelessWidget {
                   children: [
                     // description -> place로 대체
                     Text(
-                      schedule.place.length > 20
-                          ? '${schedule.place.substring(0, 20)}...'
-                          : schedule.place,
+                      schedule.contentsLocation.length > 20
+                          ? '${schedule.contentsLocation.substring(0, 20)}...'
+                          : schedule.contentsLocation,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: isPast
                           ? Theme.of(context)
                               .textTheme
                               .titleLarge!
-                              .copyWith(color: grayScale[30])
+                              .copyWith(color: Colors.grey) // Replace with grayScale[30]
                           : Theme.of(context).textTheme.titleLarge,
                     ),
-                    Text('마감: ${_formatDate(schedule.dueDate)}',
+                    Text('마감: ${_formatDate(schedule.date)}',
                         style: isPast
                             ? Theme.of(context)
                                 .textTheme
                                 .titleLarge!
-                                .copyWith(color: grayScale[30])
+                                .copyWith(color: Colors.grey) // Replace with grayScale[30]
                             : Theme.of(context).textTheme.titleLarge),
                   ],
                 ),
