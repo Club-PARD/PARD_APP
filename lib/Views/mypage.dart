@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/bottombar_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
+import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -48,12 +49,25 @@ void launchFeedback() async {
   }
 }
 
+String getRoleString(String? role) {
+    switch (role) {
+      case 'ROLE_ADMIN':
+        return '운영진';
+      case 'ROLE_YB':
+        return '파디';
+      case 'ROLE_OB':
+        return '파도';
+      default:
+        return '청소';
+    }
+  }
+
 class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     final BottomBarController bottomController = Get.find();
-    final controller = PushNotificationController.to;
     final UserController userController = Get.put(UserController());
+    final SpringUserController springUserController = Get.put(SpringUserController());
     late String? uid = userController.userInfo.value?.uid;
     /** push_notification controller 가져온다  */
     return WillPopScope(
@@ -130,7 +144,7 @@ class _MyPageState extends State<MyPage> {
                                     child: Center(
                                       child: Text(
                                           /** generation값으로 대체 */
-                                          '${userController.userInfo.value!.generation}기',
+                                          '${springUserController.userInfo.value?.generation}기',
                                           style:
                                               titleMedium.copyWith(height: 0)),
                                     ),
@@ -160,7 +174,7 @@ class _MyPageState extends State<MyPage> {
                                     ),
                                     child: Center(
                                       child: Text(
-                                          '${userController.userInfo.value!.part}',
+                                          '${springUserController.userInfo.value?.part}',
                                           style:
                                               titleMedium.copyWith(height: 0)),
                                     ),
@@ -183,7 +197,7 @@ class _MyPageState extends State<MyPage> {
                                     ),
                                     child: Center(
                                       child: Text(
-                                          '${userController.userInfo.value!.member}',
+                                          getRoleString(springUserController.userInfo.value?.role),
                                           style:
                                               titleMedium.copyWith(height: 0)),
                                     ),
@@ -197,7 +211,7 @@ class _MyPageState extends State<MyPage> {
                             Padding(
                               padding: EdgeInsets.only(left: 24.w),
                               child: Text(
-                                  '${userController.userInfo.value!.name} 님',
+                                  '${springUserController.userInfo.value?.name} 님',
                                   style: displayMedium),
                             ),
                           ],

@@ -21,6 +21,7 @@ class QRController extends GetxController {
   UserController userController = Get.find();
   final ScheduleController scheduleController = Get.put(ScheduleController());
   final PointController pointController = Get.find();
+  RxString? obxToken;
 
   void onQRViewCreated(QRViewController controller) async {
     this.controller = controller;
