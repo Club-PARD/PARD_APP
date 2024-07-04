@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:pard_app/component/pard_part.dart';
 import 'package:pard_app/controllers/schedule_controller.dart';
 import 'package:pard_app/controllers/spring_schedule_controller.dart';
-import 'package:pard_app/model/schedule_model/schedule_model.dart';
 import 'package:pard_app/model/schedule_model/schedule_response_dto.dart.dart';
 
 class HomeSchedule extends StatelessWidget {
@@ -24,8 +23,6 @@ class HomeSchedule extends StatelessWidget {
           ScheduleResponseDTO firstSchedule =
               springScheduleController.upcomingSchedules.first;
 
-          final DateTime now = DateTime.now();
-          final DateTime dueDate = firstSchedule.date;
           final int dayLeft = firstSchedule.remaingDay ?? 0;
           final dDay = _calculateDday(dayLeft);
           final bool isAllParts = firstSchedule.part == '전체';
