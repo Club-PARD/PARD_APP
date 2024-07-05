@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/utilities/color_style.dart';
 
@@ -18,6 +19,7 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Rx<FlutterSecureStorage> sStorage = const FlutterSecureStorage().obs;
     return GestureDetector(
         child: Container(
           width: 327.w,
@@ -52,6 +54,7 @@ class NextButton extends StatelessWidget {
             if (function != null) {
               function;
             }
+            await sStorage.value.write(key : 'tos', value : 'agree'); // 이용약관 동의 저장
             await Get.toNamed(route);
           }
         });
