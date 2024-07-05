@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
+import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/model/schedule_model/schedule_response_dto.dart.dart';
 
 class SpringScheduleController extends GetxController {
@@ -16,6 +17,7 @@ class SpringScheduleController extends GetxController {
   var partSchedules = <ScheduleResponseDTO>[].obs;
   var isLoading = true.obs;
   AuthController authController = Get.find();
+  SpringUserController springUserController = Get.find();
 
   @override
   void onInit() {
@@ -54,9 +56,9 @@ class SpringScheduleController extends GetxController {
     var past = <ScheduleResponseDTO>[];
 
     for (var schedule in scheduleList) {
-      if (schedule.date.isBefore(DateTime.now())) {
+      if (schedule.date.isBefore(DateTime.now()) && (schedule.part.contains('전체') || schedule.part.contains(springUserController.userInfo.value?.part.replaceAll('파트', '') ?? '청소'))) {
         past.add(schedule);
-      } else {
+      } else if(schedule.date.isAfter(DateTime.now()) && (schedule.part.contains('전체') || schedule.part.contains(springUserController.userInfo.value?.part.replaceAll('파트', '') ?? '청소'))){
         upcoming.add(schedule);
       }
     }
@@ -88,6 +90,12 @@ class SpringScheduleController extends GetxController {
     } finally {
       isLoading(false);
     }
+  }
+
+  Future<ScheduleResponseDTO?> getTodaySchedule(DateTime now) async {
+    return null;
+  
+    
   }
 
 }

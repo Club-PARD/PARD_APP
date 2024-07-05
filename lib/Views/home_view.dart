@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:intl/intl.dart';
 import 'package:pard_app/Views/home_schedule_view.dart';
+import 'package:pard_app/controllers/auth_controller.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/push_notification_controller.dart';
-import 'package:pard_app/controllers/schedule_controller.dart';
+import 'package:pard_app/controllers/spring_point_controller.dart';
 import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
+import 'package:pard_app/model/point_model/user_point.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 import 'dart:math';
@@ -25,11 +27,10 @@ class _HomePageState extends State<HomePage> {
   final PointController pointController = Get.put(PointController());
   final UserController userController = Get.find<UserController>();
   final SpringUserController springUserController = Get.find<SpringUserController>();
-  // final ScheduleController scheduleController = Get.put(ScheduleController());
   final GlobalKey questionDialogKey = GlobalKey();
   final formatter = NumberFormat("#,##0.##");
-
-  final SpringUserController _springUserController = Get.find<SpringUserController>();
+  final SpringPointController springPointController = Get.put(SpringPointController());
+  final AuthController authController = Get.put(AuthController());
 
   bool showContainer = false;
   OverlayEntry? overlayEntry;
@@ -177,18 +178,6 @@ class _HomePageState extends State<HomePage> {
     overlayEntry = null;
   }
 
-  String getRoleString(String? role) {
-    switch (role) {
-      case 'ROLE_ADMIN':
-        return '운영진';
-      case 'ROLE_YB':
-        return '파디';
-      case 'ROLE_OB':
-        return '파도';
-      default:
-        return '청소';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -362,14 +351,31 @@ class _HomePageState extends State<HomePage> {
                         /** 캐릭터 Row로 나중에 point 정보로 캐릭터들 변경해야함*/
                         /** -------------------------- 여기부터 ---------------------------------------------------- */
                         Obx(() {
-                          PointModel? pointModel =
-                              pointController.rxPointModel.value;
 
-                          if (pointModel == null) {
+                          // PointModel? pointModel =
+                          //     pointController.rxPointModel.value;
+
+                          // if (pointModel == null) {
+                          //   return const CircularProgressIndicator(
+                          //     color: primaryBlue,
+                          //   ); // 로딩 처리
+                          // }
+                      
+
+                          if (springUserController.userInfo.value == null) {
                             return const CircularProgressIndicator(
                               color: primaryBlue,
                             ); // 로딩 처리
                           }
+
+                         int level = determineLevel(springUserController.userInfo.value?.pangoolPoint ?? 0);
+
+                         print('user 점수');
+                         print(springUserController.userInfo.value?.pangoolPoint);
+                         print('level');
+                          print(level);
+                          print(springUserController.userInfo.value?.totalBonus);
+                          print(springUserController.userInfo.value?.totalMinus);
 
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -453,18 +459,18 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: Center(
                                           child: Padding(
-                                            padding: (pointModel.level == 1 ||
-                                                    pointModel.level == 3)
+                                            padding: (level == 1 ||
+                                                    level == 3)
                                                 ? const EdgeInsets.only(
                                                     top: 8.0)
                                                 : const EdgeInsets.only(
                                                     top: 0.0),
                                             child: Image.asset(
-                                              'assets/images/pardie${pointModel.level}.png',
+                                              'assets/images/pardie$level.png',
                                               width: changeCurrentWidth(
-                                                  pointModel.level!),
+                                                  level),
                                               height: changeCurrentHeight(
-                                                  pointModel.level!),
+                                                  level),
                                               fit: BoxFit.fill,
                                             ),
                                           ),
@@ -483,7 +489,7 @@ class _HomePageState extends State<HomePage> {
                                     width: 60.w,
                                     height: 12.h,
                                     child: Image.asset(
-                                      'assets/images/level${pointModel.level}.png',
+                                      'assets/images/level$level.png',
                                       fit: BoxFit.fill,
                                     ),
                                   )
@@ -516,7 +522,7 @@ class _HomePageState extends State<HomePage> {
                                     width: 120.w,
                                     height: 120.h,
                                     child: Image.asset(
-                                      'assets/images/next_lv${pointModel.level! + 1}.png',
+                                      'assets/images/next_lv${level+ 1}.png',
                                     ),
                                   ),
                                   SizedBox(
@@ -530,7 +536,7 @@ class _HomePageState extends State<HomePage> {
                                     width: 60.w,
                                     height: 12.h,
                                     child: Image.asset(
-                                      'assets/images/n_level${pointModel.level! + 1}.png',
+                                      'assets/images/n_level${level+ 1}.png',
                                       fit: BoxFit.fill,
                                     ),
                                   )
@@ -609,10 +615,8 @@ class _HomePageState extends State<HomePage> {
                                     /** User의 point로 변경 */
                                     Obx(
                                       () {
-                                        PointModel? pointModel =
-                                            pointController.rxPointModel.value;
 
-                                        if (pointModel == null) {
+                                        if (springUserController.userInfo.value == null) {
                                           return const CircularProgressIndicator(
                                             color: primaryBlue,
                                           ); // 로딩 처리
@@ -625,9 +629,9 @@ class _HomePageState extends State<HomePage> {
                                                           ?.member ==
                                                       '운영진')
                                               ? '-'
-                                              : (pointModel.currentPoints == 0)
-                                                  ? '${formatter.format(pointModel.currentPoints)}점'
-                                                  : '+${formatter.format(pointModel.currentPoints)}점',
+                                              : (springUserController.userInfo.value == 0)
+                                                  ? '${formatter.format(springUserController.userInfo.value)}점'
+                                                  : '+${formatter.format(springUserController.userInfo.value)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!
@@ -653,19 +657,16 @@ class _HomePageState extends State<HomePage> {
                                     /** User의 point로 변경 */
                                     Obx(
                                       () {
-                                        PointModel? pointModel =
-                                            pointController.rxPointModel.value;
-
-                                        if (pointModel == null) {
+                                        if (springUserController.userInfo.value == null) {
                                           return const CircularProgressIndicator(
                                             color: primaryBlue,
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          (userController.userInfo.value ?.member == '잔잔파도' ||
-                                           userController.userInfo.value?.member == '운영진')
+                                          (getRoleString(springUserController.userInfo.value?.role) == '잔잔파도' ||
+                                           getRoleString(springUserController.userInfo.value?.role) == '운영진')
                                               ? '-'
-                                              : '${formatter.format(pointModel.currentBeePoints?.abs())}점',
+                                              : '${formatter.format(springUserController.userInfo.value?.totalMinus)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!
@@ -790,4 +791,34 @@ class _HomePageState extends State<HomePage> {
         return 100;
     }
   }
+
+  String getRoleString(String? role) {
+    switch (role) {
+      case 'ROLE_ADMIN':
+        return '운영진';
+      case 'ROLE_YB':
+        return '파디';
+      case 'ROLE_OB':
+        return '잔잔파도';
+      default:
+        return '청소';
+    }
+  }
+
+  int determineLevel(double pangoolPoint) {
+  if (pangoolPoint >= 0 && pangoolPoint <= 25) {
+    return 1;
+  } else if (pangoolPoint > 25 && pangoolPoint <= 50) {
+    return 2;
+  } else if (pangoolPoint > 50 && pangoolPoint <= 75) {
+    return 3;
+  } else if (pangoolPoint > 75 && pangoolPoint <= 90) {
+    return 4;
+  } else if (pangoolPoint > 90) {
+    return 5;
+  } else {
+    return 1; 
+  }
+}
+
 }

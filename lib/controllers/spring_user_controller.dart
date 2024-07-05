@@ -64,5 +64,6 @@ class SpringUserController extends GetxController {
       return null;
     }
   }
+
   }
   

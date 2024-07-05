@@ -1,27 +1,25 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:logging/logging.dart';
 import 'package:pard_app/controllers/error_controller.dart';
-import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pard_app/model/user_model/user_info_model.dart' as pard_user;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
   final UserController _userController = Get.put(UserController());
   final SpringUserController _springUserController = Get.put(SpringUserController());
-  final PointController _pointController = Get.put(PointController());
   final ErrorController _errorController = Get.put(ErrorController());
   late String? uid = _userController.userInfo.value?.uid;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Rx<FlutterSecureStorage> sStorage = const FlutterSecureStorage().obs;
@@ -71,6 +69,7 @@ class AuthController extends GetxController {
       final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
       if (googleSignInAccount != null) {
+       
         final GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
         final AuthCredential credential = GoogleAuthProvider.credential(
@@ -94,9 +93,12 @@ class AuthController extends GetxController {
             obxToken.value = token; 
             // await sStorage.value.write(key: 'Authorization', value: token); // sStorage에 토큰 저장
             pard_user.UserInfo? userInfo = await _springUserController.fetchUser(token);
-            if(userInfo != null){
+            String? tosAgreement = await sStorage.value.read(key: 'tos');
+            if (userInfo != null && tosAgreement == 'agree') {
               // await sStorage.value.write(key: 'login', value: user.email!);
               Get.toNamed('/home');
+            } else {
+              Get.toNamed('/tos');
             }
           } else {
             Get.toNamed('/tos');
@@ -105,6 +107,7 @@ class AuthController extends GetxController {
         print('로그인 실패');
       } }
     } catch (e) {
+      print(e.toString());
       await _errorController.writeErrorLog(
         e.toString(),
         _springUserController.userInfo.value?.name ?? 'none',
@@ -182,18 +185,24 @@ class AuthController extends GetxController {
       print('----------------------------탈퇴하기 uid------------------------');
       print(uid);
 
-      // _firestore; //파이어스토어 인스턴스 가져옴
-      await _firestore
-          .collection('points')
-          .doc(_userController.userInfo.value!.pid)
-          .delete();
-      await _firestore.collection('users').doc(uid).delete();
+      final response = await http.delete(
+        Uri.parse('${dotenv.env['SERVER_URL']}/v1/users'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Cookie': 'Authorization=$obxToken',
+        },
+      );
 
-      await _auth.currentUser?.delete();
-      await sStorage.value.deleteAll();
-      await _auth.signOut();
-      await _googleSignIn.signOut();
-      Get.offAllNamed('/', predicate: (route) => Get.currentRoute == '/');
+      if (response.statusCode == 200) {
+        print('User deleted successfully');
+        await sStorage.value.deleteAll();
+        await _auth.signOut();
+        await _googleSignIn.signOut();
+        Get.offAllNamed('/', predicate: (route) => Get.currentRoute == '/');
+      } else {
+        print('Failed to delete user: ${response.statusCode}');
+        throw Exception('Failed to delete user');
+      }
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
