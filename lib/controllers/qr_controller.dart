@@ -250,8 +250,7 @@ class QRController extends GetxController {
     final url = Uri.parse('${dotenv.env['SERVER_URL']}/v1/attendance/admin');
     final dto = AttendanceAdminRequestDTO(
       status: status,
-      seminar: seminar,
-      email: email,
+      seminar: seminar
     );
 
     final response = await http.post(
