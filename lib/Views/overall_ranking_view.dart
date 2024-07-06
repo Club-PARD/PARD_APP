@@ -4,13 +4,16 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/controllers/point_controller.dart';
+import 'package:pard_app/controllers/spring_point_controller.dart';
+import 'package:pard_app/model/point_model/total_rank_model.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:pard_app/utilities/text_style.dart';
 
 class OverallRankingView extends StatelessWidget {
   OverallRankingView({Key? key}) : super(key: key);
-  final PointController pointController = Get.put(PointController());
+  // final PointController pointController = Get.put(PointController());
+  final SpringPointController springPointController = Get.put(SpringPointController());
   final formatter = NumberFormat("#,##0.##");
 
   @override
@@ -44,37 +47,31 @@ class OverallRankingView extends StatelessWidget {
   Widget infiniteRankScroll(context) {
     return Obx(
       () {
-        final RxMap<dynamic, dynamic> rxUserPointsMap =
-            pointController.userPointsMap;
-
-        if (rxUserPointsMap.isEmpty) {
+        if (springPointController.isLoading.value) {
           return const CircularProgressIndicator(
             color: primaryBlue,
           ); // 로딩 처리
         }
 
-        // RxMap을 Map<UserModel, int>으로 변환
-        final Map<UserModel, double> userPointsMap =
-            Map<UserModel, double>.from(rxUserPointsMap);
+        List<RankingResponseDTO> rankingList = springPointController.rankingList.toList();
 
         return Container(
           constraints: BoxConstraints(
             maxHeight: MediaQuery.of(context).size.height * 0.8,
           ),
           width: double.infinity,
-          height: userPointsMap.length * 63.h,
+          height: rankingList.length * 63.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             color: containerBackgroundColor,
           ),
           child: ListView.builder(
             padding: EdgeInsets.zero,
-            itemCount: userPointsMap.length * 2 - 1,
+            itemCount: rankingList.length * 2 - 1,
             itemBuilder: (context, index) {
               if (index.isEven) {
-                UserModel user = userPointsMap.keys.elementAt(index ~/ 2);
-                double points = userPointsMap.values.elementAt(index ~/ 2);
-                String formattedPoints = formatter.format(points);
+                RankingResponseDTO user = rankingList[index ~/ 2];
+                String formattedPoints = formatter.format(user.totalBonus);
 
                 if (index ~/ 2 < 3) {
                   return beforeFourthTile(index ~/ 2, user, formattedPoints);
@@ -97,7 +94,7 @@ class OverallRankingView extends StatelessWidget {
     );
   }
 
-  Widget beforeFourthTile(int index, UserModel user, String points) {
+  Widget beforeFourthTile(int index, RankingResponseDTO user, String points) {
     return Padding(
       padding: EdgeInsets.fromLTRB(16.0.w, 8.h, 16.0.w, 16.0.h),
       child: Row(
@@ -114,14 +111,14 @@ class OverallRankingView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    user.name!,
+                    user.name,
                     style: headlineMedium.copyWith(
                       color: grayScale[10],
                     ),
                   ),
                   SizedBox(width: 4.w),
                   Text(
-                    '${user.part}',
+                    user.part,
                     style: titleSmall.copyWith(
                       color: grayScale[30],
                     ),
@@ -150,7 +147,7 @@ class OverallRankingView extends StatelessWidget {
     );
   }
 
-  Widget afterFourthTile(index, UserModel user, String points) {
+  Widget afterFourthTile(index, RankingResponseDTO user, String points) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 22.h),
       child: Row(
@@ -179,14 +176,14 @@ class OverallRankingView extends StatelessWidget {
           Row(
             children: [
               Text(
-                user.name!,
+                user.name,
                 style: headlineMedium.copyWith(
                   color: grayScale[10],
                 ),
               ),
               SizedBox(width: 4.w),
               Text(
-                '${user.part}',
+                user.part,
                 style: titleSmall.copyWith(
                   color: grayScale[30],
                 ),

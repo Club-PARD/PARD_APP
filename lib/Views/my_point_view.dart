@@ -13,6 +13,7 @@ import 'package:pard_app/controllers/spring_point_controller.dart';
 import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
+import 'package:pard_app/model/point_model/point_reason.dart';
 import 'package:pard_app/model/point_model/rank_point_model.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
@@ -37,10 +38,6 @@ class _MyPointViewState extends State<MyPointView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       print('---------------my point view()');
-      pointController.fetchAndSortUserPoints();
-      pointController.fetchCurrentUserPoints();
-      pointController.getCurrentUserRank();
-      pointController.getCurrentUserPartRank();
     });
   }
 
@@ -360,7 +357,7 @@ class _MyPointViewState extends State<MyPointView> {
                         height: 8.h,
                       ),
                       Obx(() {
-                        if (springUserController.userInfo.value?.totalBonus == null) {
+                        if (springUserController.userInfo.value?.totalMinus == null) {
                           return const CircularProgressIndicator(
                             color: primaryBlue,
                           ); // 로딩 처리
@@ -375,7 +372,7 @@ class _MyPointViewState extends State<MyPointView> {
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!
-                              .copyWith(color: primaryGreen),
+                              .copyWith(color: errorRed),
                         );
                       }),
                     ],
@@ -391,20 +388,15 @@ class _MyPointViewState extends State<MyPointView> {
 
   Widget pointRecordCarouselSlider(context, buttonKey) {
     return Obx(() {
-      PointModel? pointModel = pointController.rxPointModel.value;
-      List<Map>? sortedPoints = [];
-
-      if (pointModel?.points != null) {
-        sortedPoints.addAll(pointModel!.points!);
+      if (springPointController.isLoading.value) {
+        return const Center(child: CircularProgressIndicator(color: primaryBlue));
       }
 
-      if (pointModel?.beePoints != null) {
-        sortedPoints.addAll(pointModel!.beePoints!);
-      }
+      List<ReasonBonus> sortedPoints = springPointController.pointReasonList.toList();
 
       if (sortedPoints.isNotEmpty) {
-        // points 리스트를 날짜 기준으로 정렬
-        sortedPoints.sort((a, b) => b['timestamp'].compareTo(a['timestamp']));
+        // Sort points by date
+        sortedPoints.sort((a, b) => b.createAt.compareTo(a.createAt));
 
         return SingleChildScrollView(
           child: Column(
@@ -444,22 +436,16 @@ class _MyPointViewState extends State<MyPointView> {
     });
   }
 
-  Widget itemInCarouselSlider(context,
-      {bool isFirst = false, bool isLast = false, required Map pointData}) {
-    String type = pointData['type'];
-    String reason = pointData['reason'];
-    String date = formatTimestamp(pointData['timestamp']);
-    double digit = pointData['digit'].toDouble();
+  Widget itemInCarouselSlider(BuildContext context,
+      {bool isFirst = false, bool isLast = false, required ReasonBonus pointData}) {
+    String type = pointData.reason;
+    String reason = pointData.detail;
+    String date = formatTimestamp(pointData.createAt);
+    double digit = pointData.point.toDouble();
     String formattedDigit = formatter.format(digit);
-    bool isBeePoint = false;
+    bool isBonus = pointData.isBonus;
 
-    if (type == '세미나 지각' ||
-        type == '세미나 결석' ||
-        type == '과제 지각' ||
-        type == '과제 결석' ||
-        type == '벌점 조정') {
-      isBeePoint = true;
-    }
+    print(isBonus);
 
     return Padding(
       padding: isFirst
@@ -496,18 +482,28 @@ class _MyPointViewState extends State<MyPointView> {
                     borderRadius: BorderRadius.circular(8.r),
                     border: GradientBoxBorder(
                       width: 1.w,
-                      gradient: isBeePoint
+                      gradient: isBonus
                           ? LinearGradient(colors: [
+                              Theme.of(context).colorScheme.onSecondary,
+                              Theme.of(context).colorScheme.secondary,
+                            ]) :
+                            LinearGradient(colors: [
                               Theme.of(context).colorScheme.error,
                               Theme.of(context).colorScheme.error,
                             ])
-                          : LinearGradient(colors: [
-                              Theme.of(context).colorScheme.onSecondary,
-                              Theme.of(context).colorScheme.secondary,
-                            ]),
                     ),
-                    gradient: isBeePoint
-                        ? LinearGradient(colors: [
+                    gradient: isBonus
+                        ?  LinearGradient(colors: [
+                            Theme.of(context)
+                                .colorScheme
+                                .onSecondary
+                                .withOpacity(0.1),
+                            Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(0.1),
+                          ]) : 
+                          LinearGradient(colors: [
                             Theme.of(context)
                                 .colorScheme
                                 .error
@@ -517,33 +513,22 @@ class _MyPointViewState extends State<MyPointView> {
                                 .error
                                 .withOpacity(0.1),
                           ])
-                        : LinearGradient(colors: [
-                            Theme.of(context)
-                                .colorScheme
-                                .onSecondary
-                                .withOpacity(0.1),
-                            Theme.of(context)
-                                .colorScheme
-                                .secondary
-                                .withOpacity(0.1),
-                          ]),
                   ),
                   child: Center(
                     child: GradientText(
-                      isBeePoint ? '벌점' : type,
+                      isBonus ? type : '벌점' ,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
                           .copyWith(height: 0),
-                      colors: isBeePoint
-                          ? [
+                      colors: isBonus
+                          ?  [
+                              Theme.of(context).colorScheme.onSecondary,
+                              Theme.of(context).colorScheme.secondary,
+                            ] : [
                               Theme.of(context).colorScheme.error,
                               Theme.of(context).colorScheme.error,
                             ]
-                          : [
-                              Theme.of(context).colorScheme.onSecondary,
-                              Theme.of(context).colorScheme.secondary,
-                            ],
                     ),
                   ),
                 ),
@@ -565,9 +550,8 @@ class _MyPointViewState extends State<MyPointView> {
                   height: 8.h,
                 ),
                 Text(
-                  isBeePoint
-                      ? '$date | $formattedDigit점'
-                      : '$date | +$formattedDigit점',
+                  isBonus
+                      ? '$date | +$formattedDigit점' : '$date | $formattedDigit점',
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
@@ -581,10 +565,9 @@ class _MyPointViewState extends State<MyPointView> {
       ),
     );
   }
-}
 
-String formatTimestamp(Timestamp firestoreTimestamp) {
-  DateTime dateTime = firestoreTimestamp.toDate();
-  final DateFormat formatter = DateFormat('MM.dd(E)', 'ko_KR');
-  return formatter.format(dateTime);
+  String formatTimestamp(DateTime dateTime) {
+    final DateFormat formatter = DateFormat('MM.dd(E)', 'ko_KR');
+    return formatter.format(dateTime);
+  }
 }
