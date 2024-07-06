@@ -8,8 +8,7 @@ import 'auth_controller.dart';
 
 class SpringPointController extends GetxController {
   Rx<UserPoint?> rxUserPoint = Rx<UserPoint?>(null);
-  RxMap<RankPointModel, double> userPointsMap = <RankPointModel, double>{}.obs;
-  RxBool isLoading = true.obs;
+ RxList<RankPointModel> top3RankList = <RankPointModel>[].obs;   RxBool isLoading = true.obs;
   final AuthController authController = Get.find<AuthController>();
 
   @override
@@ -53,7 +52,7 @@ class SpringPointController extends GetxController {
       isLoading(true);
       String? token = authController.obxToken.value;
       final response = await http.get(
-        Uri.parse('${dotenv.env['SERVER_URL']}/top3'),
+        Uri.parse('${dotenv.env['SERVER_URL']}/v1/rank/top3'),
         headers: {
           'Content-Type': 'application/json',
           'Cookie': 'Authorization=$token',
@@ -61,13 +60,9 @@ class SpringPointController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        List<dynamic> jsonResponse = json.decode(response.body);
-        Map<RankPointModel, double> userPoints = {};
-        for (var data in jsonResponse) {
-          RankPointModel user = RankPointModel.fromJson(data);
-          userPoints[user] = data['totalBonus'];
-        }
-        userPointsMap.assignAll(userPoints);
+        List<dynamic> jsonResponse = jsonDecode(response.body);
+        List<RankPointModel> top3Rank = jsonResponse.map((data) => RankPointModel.fromJson(data)).toList();
+        top3RankList.assignAll(top3Rank);
       } else {
         throw Exception('Failed to load top 3 ranks: ${response.statusCode}');
       }
