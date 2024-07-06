@@ -8,8 +8,10 @@ import 'package:gradient_borders/gradient_borders.dart';
 import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/component/point_policy_dialog.dart';
 import 'package:pard_app/controllers/point_controller.dart';
+import 'package:pard_app/controllers/spring_point_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
+import 'package:pard_app/model/point_model/rank_point_model.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -24,6 +26,7 @@ class MyPointView extends StatefulWidget {
 class _MyPointViewState extends State<MyPointView> {
   final PointController pointController = Get.find<PointController>();
   final UserController userController = Get.put(UserController());
+  final SpringPointController springPointController = Get.put(SpringPointController());
   final formatter = NumberFormat("#,##0.##");
 
   @override
@@ -41,11 +44,10 @@ class _MyPointViewState extends State<MyPointView> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey buttonKey = GlobalKey();
-    print('fffffffffff ${pointController.hashCode}');
 
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: PardAppBar(
+      appBar: const PardAppBar(
         '내 점수',
       ),
       body: Column(
@@ -70,40 +72,42 @@ class _MyPointViewState extends State<MyPointView> {
                     height: 16.h,
                   ),
                   Obx(() {
-                    final RxMap<dynamic, dynamic> rxUserPointsMap =
-                        pointController.userPointsMap;
+  if (springPointController.isLoading.value) {
+    return const CircularProgressIndicator(
+      color: primaryBlue,
+    ); // 로딩 처리
+  }
 
-                    if (rxUserPointsMap.isEmpty) {
-                      return const CircularProgressIndicator(
-                        color: primaryBlue,
-                      ); // 로딩 처리
-                    }
+  List<RankPointModel> top3Ranks = springPointController.top3RankList.toList();
 
-                    // RxMap을 Map<UserModel, double>으로 변환
-                    final Map<UserModel, double> userPointsMap =
-                        Map<UserModel, double>.from(rxUserPointsMap);
+  if (top3Ranks.isEmpty) {
+    return const CircularProgressIndicator(
+      color: primaryBlue,
+    ); // 로딩 처리
+  }
 
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        rankWithTopIcon(
-                          'top1',
-                          context,
-                          userPointsMap.keys.elementAt(0),
-                        ),
-                        rankWithTopIcon(
-                          'top2',
-                          context,
-                          userPointsMap.keys.elementAt(1),
-                        ),
-                        rankWithTopIcon(
-                          'top3',
-                          context,
-                          userPointsMap.keys.elementAt(2),
-                        ),
-                      ],
-                    );
-                  }),
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      rankWithTopIcon(
+        'top1',
+        context,
+        top3Ranks[0],
+      ),
+      rankWithTopIcon(
+        'top2',
+        context,
+        top3Ranks[1],
+      ),
+      rankWithTopIcon(
+        'top3',
+        context,
+        top3Ranks[2],
+      ),
+    ],
+  );
+}),
+
                   SizedBox(
                     height: 24.h,
                   ),
@@ -189,7 +193,7 @@ class _MyPointViewState extends State<MyPointView> {
     );
   }
 
-  Widget rankWithTopIcon(String top, context, UserModel user) {
+  Widget rankWithTopIcon(String top, context, RankPointModel user) {
     return ConstrainedBox(
       constraints: BoxConstraints(
         // maxWidth: 92.w,
@@ -207,14 +211,14 @@ class _MyPointViewState extends State<MyPointView> {
             children: [
               // TODO: 유저 데이터 가져오기
               Text(
-                '${user.part}',
+                user.part,
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall!
                     .copyWith(color: grayScale[30]),
               ),
               Text(
-                user.name!,
+                user.name,
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall!
@@ -261,8 +265,8 @@ class _MyPointViewState extends State<MyPointView> {
                         userController.userInfo.value?.member == '운영진')
                     ? '- 위'
                     : (text == '파트 내 랭킹')
-                        ? '${currentUserPartRank}위'
-                        : '${currentUserRank}위',
+                        ? '$currentUserPartRank위'
+                        : '$currentUserRank위',
                 style: Theme.of(context)
                     .textTheme
                     .headlineLarge!
@@ -410,7 +414,7 @@ class _MyPointViewState extends State<MyPointView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   minHeight: 136,
                 ),
                 height: 136.h,
