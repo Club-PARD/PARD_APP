@@ -5,10 +5,12 @@ import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:pard_app/Views/mypage.dart';
 import 'package:pard_app/component/pard_appbar.dart';
 import 'package:pard_app/component/point_policy_dialog.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/spring_point_controller.dart';
+import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
 import 'package:pard_app/model/point_model/rank_point_model.dart';
@@ -26,6 +28,7 @@ class MyPointView extends StatefulWidget {
 class _MyPointViewState extends State<MyPointView> {
   final PointController pointController = Get.find<PointController>();
   final UserController userController = Get.put(UserController());
+  final SpringUserController springUserController = Get.put(SpringUserController());
   final SpringPointController springPointController = Get.put(SpringPointController());
   final formatter = NumberFormat("#,##0.##");
 
@@ -122,14 +125,14 @@ class _MyPointViewState extends State<MyPointView> {
                               rankWithText(
                                 '파트 내 랭킹',
                                 context,
-                                pointController.currentUserRank.value,
-                                pointController.currentUserPartRank.value,
+                                springPointController.rxUserPoint.value?.totalRanking ?? 0,
+                                springPointController.rxUserPoint.value?.partRanking ?? 0,
                               ),
                               rankWithText(
                                 '전체 랭킹',
                                 context,
-                                pointController.currentUserRank.value,
-                                pointController.currentUserPartRank.value,
+                                springPointController.rxUserPoint.value?.totalRanking ?? 0,
+                                springPointController.rxUserPoint.value?.partRanking ?? 0,
                               ),
                             ],
                           );
@@ -261,8 +264,8 @@ class _MyPointViewState extends State<MyPointView> {
           Obx(
             () {
               return Text(
-                (userController.userInfo.value?.member == '잔잔파도' ||
-                        userController.userInfo.value?.member == '운영진')
+                (getRoleString(springUserController.userInfo.value?.role )== '잔잔파도' ||
+                getRoleString(springUserController.userInfo.value?.role ) == '운영진')
                     ? '- 위'
                     : (text == '파트 내 랭킹')
                         ? '$currentUserPartRank위'
@@ -319,22 +322,18 @@ class _MyPointViewState extends State<MyPointView> {
                         height: 8.h,
                       ),
                       Obx(() {
-                        PointModel? pointModel =
-                            pointController.rxPointModel.value;
-
-                        if (pointModel == null) {
+                        if (springUserController.userInfo.value?.totalBonus == null) {
                           return const CircularProgressIndicator(
                             color: primaryBlue,
                           ); // 로딩 처리
                         }
                         return Text(
-                          (userController.userInfo.value?.member == '잔잔파도' ||
-                                  userController.userInfo.value?.member ==
-                                      '운영진')
+                          (getRoleString(springUserController.userInfo.value?.role) == '잔잔파도' ||
+                            getRoleString(springUserController.userInfo.value?.role) == '운영진')
                               ? '-'
-                              : (pointModel.currentPoints == 0)
-                                  ? '${formatter.format(pointModel.currentPoints)}점'
-                                  : '+${formatter.format(pointModel.currentPoints)}점',
+                              : (springUserController.userInfo.value?.totalBonus == 0)
+                                  ? '${formatter.format(springUserController.userInfo.value?.totalBonus)}점'
+                                  : '+${formatter.format(springUserController.userInfo.value?.totalBonus)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!
@@ -361,23 +360,22 @@ class _MyPointViewState extends State<MyPointView> {
                         height: 8.h,
                       ),
                       Obx(() {
-                        PointModel? pointModel =
-                            pointController.rxPointModel.value;
-                        if (pointModel == null) {
+                        if (springUserController.userInfo.value?.totalBonus == null) {
                           return const CircularProgressIndicator(
                             color: primaryBlue,
                           ); // 로딩 처리
                         }
                         return Text(
-                          (userController.userInfo.value?.member == '잔잔파도' ||
-                                  userController.userInfo.value?.member ==
-                                      '운영진')
+                          (getRoleString(springUserController.userInfo.value?.role) == '잔잔파도' ||
+                            getRoleString(springUserController.userInfo.value?.role) == '운영진')
                               ? '-'
-                              : '${formatter.format(pointModel.currentBeePoints)}점',
+                              : (springUserController.userInfo.value?.totalMinus == 0)
+                                  ? '${formatter.format(springUserController.userInfo.value?.totalMinus)}점'
+                                  : '+${formatter.format(springUserController.userInfo.value?.totalMinus)}점',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge!
-                              .copyWith(color: errorRed),
+                              .copyWith(color: primaryGreen),
                         );
                       }),
                     ],
