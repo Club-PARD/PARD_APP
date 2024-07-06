@@ -10,6 +10,7 @@ import 'package:pard_app/component/point_policy_dialog.dart';
 import 'package:pard_app/controllers/point_controller.dart';
 import 'package:pard_app/controllers/user_controller.dart';
 import 'package:pard_app/model/point_model/point_model.dart';
+import 'package:pard_app/model/point_model/rank_point_model.dart';
 import 'package:pard_app/model/user_model/user_model.dart';
 import 'package:pard_app/utilities/color_style.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -45,7 +46,7 @@ class _MyPointViewState extends State<MyPointView> {
 
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: PardAppBar(
+      appBar: const PardAppBar(
         '내 점수',
       ),
       body: Column(
@@ -83,23 +84,26 @@ class _MyPointViewState extends State<MyPointView> {
                     final Map<UserModel, double> userPointsMap =
                         Map<UserModel, double>.from(rxUserPointsMap);
 
+                        final Map<RankPointModel, double> springUserPointsMap =
+            Map<RankPointModel, double>.from(pointController.userPointsMap);
+
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         rankWithTopIcon(
                           'top1',
                           context,
-                          userPointsMap.keys.elementAt(0),
+                          springUserPointsMap.keys.elementAt(0),
                         ),
                         rankWithTopIcon(
                           'top2',
                           context,
-                          userPointsMap.keys.elementAt(1),
+                          springUserPointsMap.keys.elementAt(1),
                         ),
                         rankWithTopIcon(
                           'top3',
                           context,
-                          userPointsMap.keys.elementAt(2),
+                          springUserPointsMap.keys.elementAt(2),
                         ),
                       ],
                     );
@@ -189,7 +193,7 @@ class _MyPointViewState extends State<MyPointView> {
     );
   }
 
-  Widget rankWithTopIcon(String top, context, UserModel user) {
+  Widget rankWithTopIcon(String top, context, RankPointModel user) {
     return ConstrainedBox(
       constraints: BoxConstraints(
         // maxWidth: 92.w,
@@ -207,14 +211,14 @@ class _MyPointViewState extends State<MyPointView> {
             children: [
               // TODO: 유저 데이터 가져오기
               Text(
-                '${user.part}',
+                user.part,
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall!
                     .copyWith(color: grayScale[30]),
               ),
               Text(
-                user.name!,
+                user.name,
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall!
@@ -261,8 +265,8 @@ class _MyPointViewState extends State<MyPointView> {
                         userController.userInfo.value?.member == '운영진')
                     ? '- 위'
                     : (text == '파트 내 랭킹')
-                        ? '${currentUserPartRank}위'
-                        : '${currentUserRank}위',
+                        ? '$currentUserPartRank위'
+                        : '$currentUserRank위',
                 style: Theme.of(context)
                     .textTheme
                     .headlineLarge!
@@ -410,7 +414,7 @@ class _MyPointViewState extends State<MyPointView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   minHeight: 136,
                 ),
                 height: 136.h,

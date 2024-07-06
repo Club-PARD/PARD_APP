@@ -370,13 +370,6 @@ class _HomePageState extends State<HomePage> {
 
                          int level = determineLevel(springUserController.userInfo.value?.pangoolPoint ?? 0);
 
-                         print('user 점수');
-                         print(springUserController.userInfo.value?.pangoolPoint);
-                         print('level');
-                          print(level);
-                          print(springUserController.userInfo.value?.totalBonus);
-                          print(springUserController.userInfo.value?.totalMinus);
-
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -622,16 +615,12 @@ class _HomePageState extends State<HomePage> {
                                           ); // 로딩 처리
                                         }
                                         return Text(
-                                          (userController.userInfo.value
-                                                          ?.member ==
-                                                      '잔잔파도' ||
-                                                  userController.userInfo.value
-                                                          ?.member ==
-                                                      '운영진')
+                                          (getRoleString(springUserController.userInfo.value?.role) == '잔잔파도' ||
+                                          getRoleString(springUserController.userInfo.value?.role) == '운영진')
                                               ? '-'
                                               : (springUserController.userInfo.value == 0)
-                                                  ? '${formatter.format(springUserController.userInfo.value)}점'
-                                                  : '+${formatter.format(springUserController.userInfo.value)}점',
+                                                  ? '${formatter.format(springUserController.userInfo.value?.totalBonus)}점'
+                                                  : '+${formatter.format(springUserController.userInfo.value?.totalBonus)}점',
                                           style: Theme.of(context)
                                               .textTheme
                                               .displayMedium!
