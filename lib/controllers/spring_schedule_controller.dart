@@ -51,21 +51,25 @@ class SpringScheduleController extends GetxController {
     }
   }
 
-  Future<void> categorizeSchedules(List<ScheduleResponseDTO> scheduleList) async {
-    var upcoming = <ScheduleResponseDTO>[];
-    var past = <ScheduleResponseDTO>[];
+Future<void> categorizeSchedules(List<ScheduleResponseDTO> scheduleList) async {
+  var upcoming = <ScheduleResponseDTO>[];
+  var past = <ScheduleResponseDTO>[];
 
-    for (var schedule in scheduleList) {
-      if (schedule.date.isBefore(DateTime.now()) && (schedule.part.contains('전체') || schedule.part.contains(springUserController.userInfo.value?.part.replaceAll('파트', '') ?? '청소'))) {
-        past.add(schedule);
-      } else if(schedule.date.isAfter(DateTime.now()) && (schedule.part.contains('전체') || schedule.part.contains(springUserController.userInfo.value?.part.replaceAll('파트', '') ?? '청소'))){
-        upcoming.add(schedule);
-      }
+  for (var schedule in scheduleList) {
+    String userPart = springUserController.userInfo.value?.part.replaceAll('파트', '') ?? '청소';
+
+    if (schedule.date.isBefore(DateTime.now()) && 
+        (schedule.part.contains('전체') || schedule.part.contains(userPart))) {
+      past.add(schedule);
+    } else if (schedule.date.isAfter(DateTime.now()) && 
+               (schedule.part.contains('전체') || schedule.part.contains(userPart))) {
+      upcoming.add(schedule);
     }
-
-    upcomingSchedules.assignAll(upcoming);
-    pastSchedules.assignAll(past);
   }
+
+  upcomingSchedules.assignAll(upcoming);
+  pastSchedules.assignAll(past);
+}
 
   Future<void> fetchPartSchedules(String part) async {
     try {

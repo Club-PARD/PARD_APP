@@ -223,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                                   children: <TextSpan>[
                                     const TextSpan(text: '안녕하세요, '),
                                     TextSpan(
-                                      text: springUserController.userInfo.value?.name ?? '사용자',
+                                      text: springUserController.userInfo.value?.name ?? '주',
                                       style: displayMedium.copyWith(
                                           color: const Color(0XFF5262F5)),
                                     ),
@@ -259,7 +259,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Text(
                                       /** generation값으로 대체 null이면 0기 */
-                                      '${springUserController.userInfo.value?.generation ?? 0}기'
+                                      '${springUserController.userInfo.value?.generation ?? '똘'}기'
                                           .toString(),
                                       style: titleMedium.copyWith(height: 0)),
                                 ),
