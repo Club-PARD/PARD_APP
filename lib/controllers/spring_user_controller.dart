@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:pard_app/model/user_model/user_info_model.dart';
@@ -11,8 +12,27 @@ import 'package:pard_app/model/user_model/user_info_model.dart' as pard_user;
 
 class SpringUserController extends GetxController {
 
+  @override
+  void onInit() {
+    super.onInit();
+    _loadOnOffValue();
+  }
+
   var isAgree = false.obs;
    Rx<pard_user.UserInfo?> userInfo = Rx<pard_user.UserInfo?>(null);
+   final storage = const FlutterSecureStorage();
+   RxBool? onOff = true.obs;
+
+   Future<void> _loadOnOffValue() async {
+    String? value = await storage.read(key: 'onOff');
+    if (value != null) {
+      onOff!.value = value.toLowerCase() == 'true';
+    }
+  }
+
+  Future<void> saveOnOffValue(bool value) async {
+    await storage.write(key: 'onOff', value: value.toString());
+  }
 
   Future<String?> login(String email) async {
     final response = await http.post(

@@ -11,6 +11,7 @@ import 'package:pard_app/model/qr_model/attendance_admin_request_dto.dart';
 import 'package:pard_app/model/qr_model/request_qr_dto.dart';
 import 'package:pard_app/model/qr_model/response_qr_dto.dart';
 import 'package:pard_app/model/schedule_model/schedule_response_dto.dart.dart';
+import 'package:pard_app/utilities/color_style.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -24,71 +25,110 @@ class QRController extends GetxController {
   RxString? obxToken; // Token from AuthController
   SpringScheduleController springScheduleController = Get.find();
   AuthController authController = Get.find();
+  bool _isScanning = false; 
   
 
-  void onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    final email = authController.userEmail.value ?? '';
+void onQRViewCreated(QRViewController controller) {
+  this.controller = controller;
 
-    controller.scannedDataStream.listen((scanData) async {
-      if (!isScanned) {
-        isScanned = true; 
-        result.value = scanData; // Save scan result
+  // 유효한 QR 코드 URL 리스트
+  final validQrCodes = [
+    "https://me-qr.com/uoN4lOs1",
+    "https://me-qr.com/1",
+    "https://me-qr.com/2",
+    "https://me-qr.com/3",
+    "https://me-qr.com/4",
+    "https://me-qr.com/5",
+    "https://me-qr.com/6",
+    "https://me-qr.com/7",
+    "https://me-qr.com/8",
+    "https://me-qr.com/9",
+    "https://me-qr.com/10",
+  ];
 
-        DateTime currentTime = DateTime.now(); // Time when QR is scanned
-        String qrCode = result.value?.code ?? '';
+  controller.scannedDataStream.listen((scanData) async {
+    if (!isScanned && !_isScanning) {
+      isScanned = true;
+      _isScanning = true;
+      
+      result.value = scanData; // 스캔 결과 저장
 
-        ScheduleResponseDTO? todaySchedule = await getTodaySchedule();
+      String qrCode = result.value?.code ?? '';
+      print(qrCode);
 
-        // Check QR validity
-        if (qrCode != "https://me-qr.com/uoN4lOs1") {
-          _showInvalidQRDialog();
-          return;
-        }
-
-        QRAttendanceRequestDTO requestDTO = QRAttendanceRequestDTO(
-          QRUrl: qrCode,
-          seminar: todaySchedule?.title ?? '', 
-          time: currentTime,
-        );
-
-        // Call backend to validate QR
-        AttendanceResponse? response = await _validateQR(requestDTO);
-
-        if (response != null && response.isAttended) {
-          checkAttendance('출석', todaySchedule?.title ?? '', email);
-          _showAttendanceDialog('출석이 완료되었어요.', '출석', 'check_success.png', Colors.green);
-        } else {
-          checkAttendance('지각', todaySchedule?.title ?? '', email);
-          _showAttendanceDialog('지각 처리되었어요', '지각', 'warning.png', Colors.red);
-        }
-        isScanned = false; // Reset scanned flag
+      // QR 코드 유효성 검사
+      if (!validQrCodes.contains(qrCode)) {
+        _showInvalidQRDialog();
+        isScanned = false; // 스캔 플래그 리셋
+        _isScanning = false;
+        return;
       }
-    });
-  }
 
-  Future<AttendanceResponse?> _validateQR(QRAttendanceRequestDTO requestDTO) async {
-    try {
-      final response = await http.post(
-        Uri.parse('${dotenv.env['SERVER_URL']}/v1/validQR'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Cookie': 'Authorization=${authController.obxToken.value}',
-        },
-        body: jsonEncode(requestDTO.toJson()),
+      String? todaySchedule = await getTodaySchedule(qrCode);
+
+      QRAttendanceRequestDTO requestDTO = QRAttendanceRequestDTO(
+        qrUrl: qrCode,
+        seminar: todaySchedule ?? '', 
       );
 
-      if (response.statusCode == 200) {
-        return AttendanceResponse.fromJson(jsonDecode(response.body));
+      // 백엔드 호출하여 QR 유효성 검사
+      AttendanceResponse? response = await _validateQR(requestDTO);
+
+      if (response != null && response.isAttended) {
+        _showAttendanceDialog('출석이 완료되었어요.', '출석', 'check_success.png', Colors.green);
       } else {
-        print('Failed to validate QR: ${response.statusCode}');
-        return null;
+        _showAttendanceDialog('지각 처리되었어요', '지각', 'warning.png', Colors.red);
       }
-    } catch (e) {
-      print('Error validating QR: $e');
+      
+      isScanned = true; 
+      _isScanning = false;
+    } else {
+      _showAttendanceDialog(
+        '이미 출석 완료되었어요',
+        '출석체크',
+        '2ndQR.png',
+        primaryBlue,
+      );
+      isScanned = true;
+      _isScanning = false;
+    }
+  });
+}
+
+Future<AttendanceResponse?> _validateQR(QRAttendanceRequestDTO requestDTO) async {
+  if (_isScanning) {
+    print('QR 코드 스캔이 이미 진행 중입니다.');
+    return null;
+  }
+
+  _isScanning = true;
+  try {
+    Map<String, dynamic> requestBody = requestDTO.toJson();
+    final response = await http.post(
+      Uri.parse('${dotenv.env['SERVER_URL']}/v1/validQR'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': 'Authorization=${authController.obxToken.value}',
+      },
+      body: jsonEncode(requestBody),
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      return AttendanceResponse.fromJson(jsonDecode(response.body));
+    } else {
+      print('200 아님 : ${response.statusCode}');
+      print({response.body});
       return null;
     }
+  } catch (e) {
+    print('Error validating QR: $e');
+    return null;
+  } finally {
+    _isScanning = false;
   }
+}
+
 
   void _showInvalidQRDialog() {
     Get.dialog(
@@ -205,13 +245,10 @@ class QRController extends GetxController {
                     ),
                     child: TextButton(
                       onPressed: () async {
-                        Get.back();
-                        // Add attendance info to the backend
-                        // await userController.addAttendInfo('출');
-                        // await pointController.attendQR(user, 6);
+                        Get.toNamed('/home');
                       },
                       child: Text(
-                        '세미나 입장하기',
+                        title == "지각" ?  '다음부터 안그럴게요' : '세미나 입장하기',
                         style: TextStyle(color: Colors.white, fontSize: 16.sp),
                       ),
                     ),
@@ -226,25 +263,35 @@ class QRController extends GetxController {
     );
   }
 
-  Future<ScheduleResponseDTO?> getTodaySchedule() async {
-    DateTime now = DateTime.now();
-    String todayStr = DateFormat('yyyy-MM-dd').format(now);
-
-    try {
-      ScheduleResponseDTO firstSchedule = springScheduleController.upcomingSchedules.firstWhere(
-        (schedule) {
-          String scheduleDateStr = DateFormat('yyyy-MM-dd').format(schedule.date);
-          return scheduleDateStr == todayStr;
-        },
-        orElse: () => throw Exception('No schedule found for today'),
-      );
-
-      return firstSchedule;
-    } catch (e) {
-      print('오늘 스케쥴 없음 : $e');
-      return null;
-    }
+  Future<String> getTodaySchedule(String qrCode) async {
+  switch (qrCode) {
+    case "https://me-qr.com/uoN4lOs1":
+      return "OT";
+    case "https://me-qr.com/1":
+      return "1차 세미나";
+    case "https://me-qr.com/2":
+      return "2차 세미나";
+    case "https://me-qr.com/3":
+      return "3차 세미나";
+    case "https://me-qr.com/4":
+      return "4차 세미나";
+    case "https://me-qr.com/5":
+      return "5차 세미나";
+    case "https://me-qr.com/6":
+      return "6차 세미나";
+    case "https://me-qr.com/7":
+      return "연합 세미나";
+    case "https://me-qr.com/8":
+      return "연합 세미나2";
+    case "https://me-qr.com/9":
+      return "아이디어 피칭";
+    case "https://me-qr.com/10":
+      return "종강총회";
+    default:
+      throw Exception("잘못된 QR 코드입니다.");
   }
+}
+
 
   Future<void> checkAttendance(String status,String seminar, String email) async {
     final url = Uri.parse('${dotenv.env['SERVER_URL']}/v1/attendance/admin');

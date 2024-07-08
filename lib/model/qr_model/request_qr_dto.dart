@@ -1,19 +1,23 @@
 class QRAttendanceRequestDTO {
-  final String QRUrl;
+  final String qrUrl;
   final String seminar;
-  final DateTime time;
 
   QRAttendanceRequestDTO({
-    required this.QRUrl,
+    required this.qrUrl,
     required this.seminar,
-    required this.time,
   });
+
+  factory QRAttendanceRequestDTO.fromJson(Map<String, dynamic> json) {
+    return QRAttendanceRequestDTO(
+      qrUrl: json['qrUrl'] as String,
+      seminar: json['seminar'] as String,
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
-      'QRUrl': QRUrl,
+      'qrUrl': qrUrl,
       'seminar': seminar,
-      'time': time.toIso8601String(),
     };
   }
 }

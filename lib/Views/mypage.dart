@@ -246,15 +246,11 @@ class _MyPageState extends State<MyPage> {
                               padding: EdgeInsets.only(right: 24.w),
                               child: Obx(() {
                                 return Switch(
-                                  value: userController.onOff.value!,
+                                  value: springUserController.onOff!.value,
                                   onChanged: (value) async {
-                                    userController.onOff.value =
-                                        !userController.onOff.value!;
-                                    print(userController.onOff.value);
-                                    await FirebaseFirestore.instance
-                                        .collection('users')
-                                        .doc(uid)
-                                        .update({'onOff': value});
+                                   springUserController.onOff!.value =
+                                        !springUserController.onOff!.value;
+                                    springUserController.saveOnOffValue(value);
                                     AppSettings.openAppSettings();
                                   },
                                 );

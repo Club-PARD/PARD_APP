@@ -12,14 +12,15 @@ class PartComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final bool isAllParts = part == '전체';
+    String displayPart = part.replaceAll('파트', '');
+    final bool isAllParts = displayPart == '전체';
 
     return Container(
       width: 60,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        gradient: part == '전체'
+        gradient: displayPart == '전체'
             ? const LinearGradient(
                 colors: [primaryBlue, primaryPurple],
               )
@@ -31,9 +32,9 @@ class PartComponent extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: GradientText(
-        part,
+        displayPart,
         style: Theme.of(context).textTheme.headlineSmall,
-        colors: part == '전체'
+        colors: displayPart == '전체'
             ? [Colors.white, Colors.white]
             : [primaryBlue, primaryPurple],
       ),
