@@ -48,8 +48,6 @@ void onQRViewCreated(QRViewController controller) {
 
   controller.scannedDataStream.listen((scanData) async {
     if (!isScanned && !_isScanning) {
-      isScanned = true;
-      _isScanning = true;
       
       result.value = scanData; // 스캔 결과 저장
 
@@ -73,15 +71,13 @@ void onQRViewCreated(QRViewController controller) {
 
       // 백엔드 호출하여 QR 유효성 검사
       AttendanceResponse? response = await _validateQR(requestDTO);
-
-      if (response != null && response.isAttended) {
+      print(response?.attended);
+      if (response != null && response.attended) {
         _showAttendanceDialog('출석이 완료되었어요.', '출석', 'check_success.png', Colors.green);
       } else {
         _showAttendanceDialog('지각 처리되었어요', '지각', 'warning.png', Colors.red);
       }
       
-      isScanned = true; 
-      _isScanning = false;
     } else {
       _showAttendanceDialog(
         '이미 출석 완료되었어요',
@@ -89,8 +85,6 @@ void onQRViewCreated(QRViewController controller) {
         '2ndQR.png',
         primaryBlue,
       );
-      isScanned = true;
-      _isScanning = false;
     }
   });
 }
@@ -245,6 +239,8 @@ Future<AttendanceResponse?> _validateQR(QRAttendanceRequestDTO requestDTO) async
                     ),
                     child: TextButton(
                       onPressed: () async {
+                        isScanned = true; 
+                        _isScanning = false;
                         Get.toNamed('/home');
                       },
                       child: Text(

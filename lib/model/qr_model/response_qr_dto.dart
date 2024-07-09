@@ -1,11 +1,11 @@
 class AttendanceResponse {
-  final bool isAttended;
+  final bool attended;
 
-  AttendanceResponse({required this.isAttended});
+  AttendanceResponse({required this.attended});
 
   factory AttendanceResponse.fromJson(Map<String, dynamic> json) {
     return AttendanceResponse(
-      isAttended: json['isAttended'],
+      attended: json['attended'],
     );
   }
 }
