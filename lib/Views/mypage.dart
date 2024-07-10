@@ -2,6 +2,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
@@ -56,13 +57,35 @@ String getRoleString(String? role) {
       case 'ROLE_YB':
         return '파디';
       case 'ROLE_OB':
-        return '파도';
+        return '잔잔파도';
       default:
-        return '청소';
+        return '청소부';
     }
   }
 
 class _MyPageState extends State<MyPage> {
+    int _pressCount = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _pressCount++;
+    });
+
+    if (_pressCount >= 10) {
+      _showPhotos();
+      _pressCount = 0; 
+    }
+  }
+
+Future<void> _showPhotos() async {
+    String url = dotenv.env['S3_EASTER'] ?? '';
+    if (await launchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final BottomBarController bottomController = Get.find();
@@ -195,11 +218,23 @@ class _MyPageState extends State<MyPage> {
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                     ),
-                                    child: Center(
-                                      child: Text(
-                                          getRoleString(springUserController.userInfo.value?.role),
-                                          style:
-                                              titleMedium.copyWith(height: 0)),
+                                    child:  Center(
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                          padding: EdgeInsets
+                                              .zero, // Remove default padding
+                                          minimumSize: const Size(
+                                              0, 0), // Set minimum size to zero
+                                        ),
+                                        onPressed: _incrementCounter,
+                                        child: Text(
+                                          getRoleString('${springUserController
+                                                  .userInfo.value?.role}') ??
+                                              '청소원',
+                                          style: titleMedium.copyWith(
+                                              height: 0, color: Colors.white),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),

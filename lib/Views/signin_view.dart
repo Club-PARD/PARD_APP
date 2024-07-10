@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pard_app/controllers/auth_controller.dart';
-import 'package:pard_app/controllers/user_controller.dart';
+import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/utilities/color_style.dart';
 
 class SignInView extends StatelessWidget {
@@ -13,7 +13,7 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
-    final UserController userController = Get.put(UserController());
+    final SpringUserController springUserController = Get.put(SpringUserController());
     // authController.checkPreviousLogin();
 
     return WillPopScope(
@@ -87,9 +87,9 @@ class SignInView extends StatelessWidget {
                         ),
                       ),
                       onTap: () async {
-                        await userController.getDeviceInfo();
+                        await springUserController.getDeviceInfo();
                         print(
-                            '디바이스 명: ${userController.deviceName}, 디바이스 버전: ${userController.deviceVersion}');
+                            '디바이스 명: ${springUserController.deviceName}, 디바이스 버전: ${springUserController.deviceVersion}');
                         authController.signInWithApple();
                       }),
                 SizedBox(
@@ -134,9 +134,9 @@ class SignInView extends StatelessWidget {
                         ),
                       ),
                       onTap: () async {
-                        await userController.getDeviceInfo();
+                        await springUserController.getDeviceInfo();
                         print(
-                            '디바이스 명: ${userController.deviceName}, 디바이스 버전: ${userController.deviceVersion}');
+                            '디바이스 명: ${springUserController.deviceName}, 디바이스 버전: ${springUserController.deviceVersion}');
                         authController.signInWithGoogle();
                       }),
               ],

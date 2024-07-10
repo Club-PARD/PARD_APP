@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:pard_app/controllers/error_controller.dart';
 import 'package:pard_app/model/user_model/user_info_model.dart';
 import 'package:pard_app/model/user_model/user_request_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,8 +22,33 @@ class SpringUserController extends GetxController {
 
   var isAgree = false.obs;
    Rx<pard_user.UserInfo?> userInfo = Rx<pard_user.UserInfo?>(null);
+   final ErrorController _errorController = Get.put(ErrorController());
    final storage = const FlutterSecureStorage();
    RxBool? onOff = true.obs;
+   Rx<String?> deviceName = Rx<String?>(null);
+   Rx<String?> deviceVersion = Rx<String?>(null);
+
+     Future<void> getDeviceInfo() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    try {
+      if (GetPlatform.isAndroid) {
+        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+        deviceName.value = androidInfo.model; // Android 기기의 모델명
+        deviceVersion.value = androidInfo.version.release; // Android 기기의 버전
+      } else if (GetPlatform.isIOS) {
+        IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+        deviceName.value = iosInfo.model; // iOS 기기의 모델명
+        deviceVersion.value = iosInfo.systemVersion; // IOS 기기의 버전
+      }
+    } catch (e) {
+      print("디바이스 모델명 불러오기 실패: $e");
+      await _errorController.writeErrorLog(
+        e.toString(),
+        userInfo.value?.name ?? 'none',
+        'getDeviceInfo()',
+      );
+    }
+  }
 
    Future<void> _loadOnOffValue() async {
     String? value = await storage.read(key: 'onOff');
