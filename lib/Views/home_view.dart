@@ -790,7 +790,7 @@ class _HomePageState extends State<HomePage> {
       case 'ROLE_OB':
         return '잔잔파도';
       default:
-        return '청소';
+        return '청소부';
     }
   }
 
