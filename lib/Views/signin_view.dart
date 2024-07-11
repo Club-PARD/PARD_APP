@@ -14,7 +14,7 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
     final SpringUserController springUserController = Get.put(SpringUserController());
-    // authController.checkPreviousLogin();
+    authController.checkPreviousLogin();
 
     return WillPopScope(
       onWillPop: () async => false,
