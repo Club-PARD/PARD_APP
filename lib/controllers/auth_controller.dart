@@ -24,9 +24,15 @@ class AuthController extends GetxController {
   Rx<String?> userEmail = Rx<String?>(null); // 1차적으로 이메일 저장(휴대폰 인증 전 필요)
   Rx<User?> user = Rx<User?>(null);
   RxBool isAgree = false.obs;
-  RxBool isLogin = true.obs;
+  RxBool isLogin = false.obs;
   var obxToken = ''.obs; 
   Rx<pard_user.UserInfo?> userInfo = Rx<pard_user.UserInfo?>(null);
+
+    @override
+  void onInit() {
+    super.onInit();
+    checkPreviousLogin();
+  }
 
   checkPreviousLogin() async {
     try {
@@ -39,6 +45,8 @@ class AuthController extends GetxController {
       }
       String? email = await sStorage.value.read(key: 'email');
       userEmail.value = email;
+      if(email != null) {
+      
       String? token = await _springUserController.login(userEmail.value!); 
       if (token != null) {
             if (token.startsWith('Authorization=')) {
@@ -57,7 +65,9 @@ class AuthController extends GetxController {
             } else {
               Get.toNamed('/tos');
             }
-          } else if (token == null || email == null) {
+          }
+          } else if (email == null) {
+            // await signInWithGoogle();
         print('로그인 이력 없음: 로그인 필요');
         isLogin.value = false;
       } else {
@@ -71,6 +81,7 @@ class AuthController extends GetxController {
         'checkPreviousLogin()',
       );
     }
+    isLogin.value = false;
   }
 // 에러로그 db 삭제
   Future<void> deleteAllDocuments() async {
