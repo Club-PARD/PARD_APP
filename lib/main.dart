@@ -48,6 +48,7 @@ Future<void> main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
 UserController.init();
+  Get.put(AuthController());
   Get.put(BottomBarController());
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());

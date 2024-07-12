@@ -24,9 +24,15 @@ class AuthController extends GetxController {
   Rx<String?> userEmail = Rx<String?>(null); // 1차적으로 이메일 저장(휴대폰 인증 전 필요)
   Rx<User?> user = Rx<User?>(null);
   RxBool isAgree = false.obs;
-  RxBool isLogin = true.obs;
+  RxBool isLogin = false.obs;
   var obxToken = ''.obs; 
   Rx<pard_user.UserInfo?> userInfo = Rx<pard_user.UserInfo?>(null);
+
+    @override
+  void onInit() {
+    super.onInit();
+    checkPreviousLogin();
+  }
 
   checkPreviousLogin() async {
     try {
@@ -37,21 +43,37 @@ class AuthController extends GetxController {
         await sStorage.value.deleteAll();
         prefs.setBool('first_run', false);
       }
-      String? email = await sStorage.value.read(key: 'login');
+      String? email = await sStorage.value.read(key: 'email');
       userEmail.value = email;
-      String? token = prefs.getString('Authorization');
-      if (token != null && token.startsWith('Authorization=')) {
-      token = token.replaceFirst('Authorization=', '');
-    }
-      print('checkPreviousLogin() $token , $email');
-      if (token == null || email == null) {
-        print('로그인 이력 없음: 로그인 필요');
-        isLogin.value = false;
-      } else {
+      if(email != null) {
+      
+      String? token = await _springUserController.login(userEmail.value!); 
+      if (token != null) {
+            if (token.startsWith('Authorization=')) {
+              token = token.replaceFirst('Authorization=', '');
+            }
+            obxToken.value = token; 
+            print('checkPreviousLogin() $token , $email');
+            // await sStorage.value.write(key: 'Authorization', value: token); // sStorage에 토큰 저장
+            pard_user.UserInfo? userInfo = await _springUserController.fetchUser(token);
+            String? tosAgreement = await sStorage.value.read(key: 'tos');
+            if (userInfo != null && tosAgreement == 'agree') {
+              // await sStorage.value.write(key: 'login', value: user.email!);
         await _springUserController.fetchUser(token); // 스프링 서버에서 유저 정보 가져옴
         Get.toNamed('/home');
         isLogin.value = true;
-      }
+            } else {
+              Get.toNamed('/tos');
+            }
+          }
+          } else if (email == null) {
+            // await signInWithGoogle();
+        print('로그인 이력 없음: 로그인 필요');
+        isLogin.value = false;
+      } else {
+            Get.toNamed('/tos');
+        }
+      
     } catch (e) {
       await _errorController.writeErrorLog(
         e.toString(),
@@ -59,6 +81,7 @@ class AuthController extends GetxController {
         'checkPreviousLogin()',
       );
     }
+    isLogin.value = false;
   }
 // 에러로그 db 삭제
   Future<void> deleteAllDocuments() async {
@@ -95,6 +118,7 @@ class AuthController extends GetxController {
           userEmail.value = user.email;
           print(userEmail.value);
          // 구글 로그인 후 서버에서 받아온 토큰을 가져옴
+         sStorage.value.write(key: 'email', value: userEmail.value);
           String? token = await _springUserController.login(userEmail.value!);       
 
           if (token != null) {
