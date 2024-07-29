@@ -1,6 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:pard_app/controllers/spring_user_controller.dart';
 import 'package:pard_app/model/point_model/point_reason.dart';
 import 'package:pard_app/model/point_model/rank_point_model.dart';
 import 'package:pard_app/model/point_model/total_rank_model.dart';
@@ -15,6 +16,7 @@ class SpringPointController extends GetxController {
   final AuthController authController = Get.find<AuthController>();
   RxList<RankingResponseDTO> rankingList = <RankingResponseDTO>[].obs;
   RxList<ReasonBonus> pointReasonList = <ReasonBonus>[].obs;
+  final SpringUserController springUserController = Get.find<SpringUserController>();
 
   @override
   void onInit() async{
@@ -58,8 +60,12 @@ class SpringPointController extends GetxController {
     try {
       isLoading(true);
       String? token = authController.obxToken.value;
+      String? generation = springUserController.userInfo.value?.generation;
+      
+      final uri = Uri.parse('${dotenv.env['SERVER_URL']}/v1/rank/top3?generation=$generation');
+      print(uri);
       final response = await http.get(
-        Uri.parse('${dotenv.env['SERVER_URL']}/v1/rank/top3'),
+        uri,
         headers: {
           'Content-Type': 'application/json',
           'Cookie': 'Authorization=$token',
@@ -83,8 +89,10 @@ class SpringPointController extends GetxController {
     try {
       isLoading(true);
       String? token = authController.obxToken.value;
+      String? generation = springUserController.userInfo.value?.generation;
+      final uri = Uri.parse('${dotenv.env['SERVER_URL']}/v1/rank/total?generation=$generation');
       final response = await http.get(
-        Uri.parse('${dotenv.env['SERVER_URL']}/v1/rank/total'),
+        uri,
         headers: {
           'Content-Type': 'application/json',
           'Cookie': 'Authorization=$token',
