@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                                     const TextSpan(text: '안녕하세요, '),
                                     TextSpan(
                                       text: springUserController.userInfo.value?.name ?? '주',
-                                      style: displayMedium.copyWith(
+                                      style: displaySmall.copyWith(
                                           color: const Color(0XFF5262F5)),
                                     ),
                                     const TextSpan(
