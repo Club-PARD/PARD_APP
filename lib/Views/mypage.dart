@@ -22,7 +22,7 @@ class MyPage extends StatefulWidget {
 
 void launchPrivateInformation() async {
   final Uri privateInfo = Uri.parse(
-      'https://pardhgu.notion.site/Pard-APP-fbccc11671d14b4d8012dd999eff7f93?pvs=4');
+      'https://we-pard.notion.site/Pard-APP-fc37c472e47941d3958765587b57e21f?pvs=4');
   try {
     await launchUrl(privateInfo);
   } catch (e) {
@@ -32,7 +32,7 @@ void launchPrivateInformation() async {
 
 void launchServiceInformation() async {
   final Uri serviceInfo = Uri.parse(
-      'https://pardhgu.notion.site/Pard-APP-18c93fe8a2c648009e17d1ab294a4fa9?pvs=4');
+      'https://we-pard.notion.site/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0?pvs=4');
   try {
     await launchUrl(serviceInfo);
   } catch (e) {
@@ -219,24 +219,29 @@ Future<void> _showPhotos() async {
                                       ),
                                     ),
                                     child:  Center(
-                                      child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          padding: EdgeInsets
-                                              .zero, // Remove default padding
-                                          minimumSize: const Size(
-                                              0, 0), // Set minimum size to zero
-                                        ),
-                                        onPressed: _incrementCounter,
-                                        child: Text(
-                                          getRoleString('${springUserController
-                                                  .userInfo.value?.role}') ??
-                                              '청소원',
-                                          style: titleMedium.copyWith(
-                                              height: 0, color: Colors.white),
+                                      child: Obx(
+                                        () => TextButton(
+                                          style: TextButton.styleFrom(
+                                            padding: EdgeInsets
+                                                .zero, // Remove default padding
+                                            minimumSize: const Size(
+                                                0, 0), // Set minimum size to zero
+                                          ),
+                                          onPressed: _incrementCounter,
+                                          child: Text(
+                                            getRoleString('${springUserController
+                                                    .userInfo.value?.role}') ??
+                                                '청소원',
+                                            style: titleMedium.copyWith(
+                                                height: 0, color: Colors.white),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
+                                ),
+                                Expanded(
+                                  child: Container(),
                                 ),
                               ],
                             ),
@@ -283,7 +288,7 @@ Future<void> _showPhotos() async {
                                 return Switch(
                                   value: springUserController.onOff!.value,
                                   onChanged: (value) async {
-                                   springUserController.onOff!.value =
+                                    springUserController.onOff!.value =
                                         !springUserController.onOff!.value;
                                     springUserController.saveOnOffValue(value);
                                     AppSettings.openAppSettings();
@@ -308,62 +313,74 @@ Future<void> _showPhotos() async {
                       SizedBox(
                         height: 8.h,
                       ),
-                      Container(
-                        width: 327.w,
-                        height: 50.h,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF2A2A2A),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 24.w),
-                              child: Text('개인정보 처리방침', style: headlineSmall),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(right: 10.w),
-                              child: IconButton(
+                      GestureDetector(
+                        onTap: () {
+                          launchPrivateInformation(); // Function to be called when container is tapped
+                        },
+                        child: Container(
+                          width: 327.w,
+                          height: 50.h,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF2A2A2A),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 24.w),
+                                child: Text('개인정보 처리방침', style: headlineSmall),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: 10.w),
+                                child: IconButton(
                                   onPressed: () {
-                                    launchPrivateInformation();
+                                    launchPrivateInformation(); // Function to be called when the button is pressed
                                   },
                                   icon: const Icon(
                                     Icons.arrow_forward_ios_outlined,
                                     color: Color.fromRGBO(228, 228, 228, 1),
                                     size: 20,
-                                  )),
-                            )
-                          ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                      Container(
-                        width: 327.w,
-                        height: 50.h,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF2A2A2A),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 24.w),
-                              child: Text('서비스 이용약관', style: headlineSmall),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(right: 10.w),
-                              child: IconButton(
+                      GestureDetector(
+                        onTap: () {
+                          launchServiceInformation(); // Function to be called when the container is tapped
+                        },
+                        child: Container(
+                          width: 327.w,
+                          height: 50.h,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF2A2A2A),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 24.w),
+                                child: Text('서비스 이용약관', style: headlineSmall),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: 10.w),
+                                child: IconButton(
                                   onPressed: () {
-                                    launchServiceInformation();
+                                    launchServiceInformation(); // Function to be called when the button is pressed
                                   },
                                   icon: const Icon(
                                     Icons.arrow_forward_ios_outlined,
                                     color: Color.fromRGBO(228, 228, 228, 1),
                                     size: 20,
-                                  )),
-                            )
-                          ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(

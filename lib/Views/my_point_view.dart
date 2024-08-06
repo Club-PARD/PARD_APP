@@ -72,42 +72,42 @@ class _MyPointViewState extends State<MyPointView> {
                     height: 16.h,
                   ),
                   Obx(() {
-  if (springPointController.isLoading.value) {
-    return const CircularProgressIndicator(
-      color: primaryBlue,
-    ); // 로딩 처리
-  }
+                    if (springPointController.isLoading.value) {
+                      return const CircularProgressIndicator(
+                        color: primaryBlue,
+                      ); // 로딩 처리
+                    }
 
-  List<RankPointModel> top3Ranks = springPointController.top3RankList.toList();
+                    List<RankPointModel> top3Ranks =
+                        springPointController.top3RankList.toList();
 
-  if (top3Ranks.isEmpty) {
-    return const CircularProgressIndicator(
-      color: primaryBlue,
-    ); // 로딩 처리
-  }
+                    if (top3Ranks.isEmpty) {
+                      return const CircularProgressIndicator(
+                        color: primaryBlue,
+                      ); // 로딩 처리
+                    }
 
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      rankWithTopIcon(
-        'top1',
-        context,
-        top3Ranks[0],
-      ),
-      rankWithTopIcon(
-        'top2',
-        context,
-        top3Ranks[1],
-      ),
-      rankWithTopIcon(
-        'top3',
-        context,
-        top3Ranks[2],
-      ),
-    ],
-  );
-}),
-
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        rankWithTopIcon(
+                          'top1',
+                          context,
+                          top3Ranks[0],
+                        ),
+                        rankWithTopIcon(
+                          'top2',
+                          context,
+                          top3Ranks[1],
+                        ),
+                        rankWithTopIcon(
+                          'top3',
+                          context,
+                          top3Ranks[2],
+                        ),
+                      ],
+                    );
+                  }),
                   SizedBox(
                     height: 24.h,
                   ),

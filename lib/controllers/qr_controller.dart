@@ -26,7 +26,7 @@ class QRController extends GetxController {
   SpringScheduleController springScheduleController = Get.find();
   AuthController authController = Get.find();
   bool _isScanning = false; 
-  
+  bool _dialogShown = false;
 
 void onQRViewCreated(QRViewController controller) {
   this.controller = controller;
@@ -55,7 +55,8 @@ void onQRViewCreated(QRViewController controller) {
       print(qrCode);
 
       // QR 코드 유효성 검사
-      if (!validQrCodes.contains(qrCode)) {
+      if (!validQrCodes.contains(qrCode) && !_dialogShown) {
+         _dialogShown = true;
         _showInvalidQRDialog();
         isScanned = false; // 스캔 플래그 리셋
         _isScanning = false;
@@ -172,6 +173,7 @@ Future<AttendanceResponse?> _validateQR(QRAttendanceRequestDTO requestDTO) async
                       onPressed: () async {
                         Get.back();
                         isScanned = false; 
+                        _dialogShown = false;
                       },
                       child: Text(
                         '확인',
