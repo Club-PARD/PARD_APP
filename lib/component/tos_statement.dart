@@ -12,7 +12,7 @@ class TosAgreement extends StatelessWidget {
   final String tosStatement;
   final String tosUrl;
 
-  TosAgreement(this.pipStatement, this.pipUrl, this.tosStatement, this.tosUrl,);
+  const TosAgreement(this.pipStatement, this.pipUrl, this.tosStatement, this.tosUrl, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -103,10 +103,10 @@ class TosDescription extends StatelessWidget {
   final String string2;
   final String string3;
 
-  TosDescription(
+  const TosDescription(
     this.string1,
     this.string2,
-    this.string3,
+    this.string3, {super.key}
   );
 
   @override
@@ -162,9 +162,9 @@ class TosCheckbox extends StatelessWidget {
   final RxBool isAgree;
   final double height;
 
-  TosCheckbox(
+  const TosCheckbox(
     this.isAgree,
-    this.height,
+    this.height, {super.key}
   );
 
   @override

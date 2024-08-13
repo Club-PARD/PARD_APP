@@ -140,7 +140,7 @@ class _MyPointViewState extends State<MyPointView> {
                           Get.toNamed('/overallRanking');
                         },
                         child: Text(
-                          '전체랭킹 확인하기',
+                          '전체 랭킹 확인하기',
                           style:
                               Theme.of(context).textTheme.titleMedium!.copyWith(
                                     color: grayScale[30],
@@ -394,8 +394,9 @@ class _MyPointViewState extends State<MyPointView> {
 
       List<ReasonBonus> sortedPoints = springPointController.pointReasonList.toList();
 
+      print(sortedPoints);
+
       if (sortedPoints.isNotEmpty) {
-        // Sort points by date
         sortedPoints.sort((a, b) => b.createAt.compareTo(a.createAt));
 
         return SingleChildScrollView(
@@ -431,7 +432,30 @@ class _MyPointViewState extends State<MyPointView> {
           ),
         );
       } else {
-        return Container();
+        return 
+Padding(
+  padding: EdgeInsets.symmetric(horizontal: 27.25.w), // Apply padding to the parent
+  child: Container(
+    constraints: BoxConstraints(maxHeight: 92.h),
+    width: double.infinity,
+    height: 92.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8.r),
+      color: containerBackgroundColor,
+    ),
+    child: Center(
+      child: Text(
+        '파드에 등록되지 않은 이메일이거나\n파드너십 및 벌점 목록이 비어있습니다.',
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.titleLarge,
+        maxLines: 2, 
+        overflow: TextOverflow.ellipsis, 
+      ),
+    ),
+  ),
+);
+
+
       }
     });
   }

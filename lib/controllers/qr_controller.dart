@@ -48,6 +48,7 @@ void onQRViewCreated(QRViewController controller) {
 
   controller.scannedDataStream.listen((scanData) async {
     if (!isScanned && !_isScanning) {
+      controller.pauseCamera();
       
       result.value = scanData; // 스캔 결과 저장
 
@@ -72,12 +73,13 @@ void onQRViewCreated(QRViewController controller) {
 
       // 백엔드 호출하여 QR 유효성 검사
       AttendanceResponse? response = await _validateQR(requestDTO);
-      print(response?.attended);
       if (response != null && response.attended) {
         _showAttendanceDialog('출석이 완료되었어요.', '출석', 'check_success.png', Colors.green);
       } else {
         _showAttendanceDialog('지각 처리되었어요', '지각', 'warning.png', Colors.red);
       }
+      _isScanning = false;
+      controller.resumeCamera();
       
     } else {
       _showAttendanceDialog(
@@ -87,42 +89,43 @@ void onQRViewCreated(QRViewController controller) {
         primaryBlue,
       );
     }
+    _isScanning = false;
   });
 }
 
-Future<AttendanceResponse?> _validateQR(QRAttendanceRequestDTO requestDTO) async {
-  if (_isScanning) {
-    print('QR 코드 스캔이 이미 진행 중입니다.');
-    return null;
-  }
-
-  _isScanning = true;
-  try {
-    Map<String, dynamic> requestBody = requestDTO.toJson();
-    final response = await http.post(
-      Uri.parse('${dotenv.env['SERVER_URL']}/v1/validQR'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': 'Authorization=${authController.obxToken.value}',
-      },
-      body: jsonEncode(requestBody),
-    );
-
-    if (response.statusCode == 200) {
-      print(response.body);
-      return AttendanceResponse.fromJson(jsonDecode(response.body));
-    } else {
-      print('200 아님 : ${response.statusCode}');
-      print({response.body});
+Future<AttendanceResponse?> _validateQR(
+      QRAttendanceRequestDTO requestDTO) async {
+    if (_isScanning) {
+      print('QR 코드 스캔이 이미 진행 중입니다.');
       return null;
-    }
-  } catch (e) {
-    print('Error validating QR: $e');
-    return null;
-  } finally {
-    _isScanning = false;
+    } 
+      try {
+        Map<String, dynamic> requestBody = requestDTO.toJson();
+        final response = await http.post(
+          Uri.parse('${dotenv.env['SERVER_URL']}/v1/validQR'),
+          headers: {
+            'Content-Type': 'application/json',
+            'Cookie': 'Authorization=${authController.obxToken.value}',
+          },
+          body: jsonEncode(requestBody),
+        );
+
+        if (response.statusCode == 200) {
+          print('200 맞음 : ${response.statusCode}');
+          return AttendanceResponse.fromJson(jsonDecode(response.body));
+        } else {
+          print('200 아님 : ${response.statusCode}');
+          print({response.body});
+          return null;
+        }
+      } catch (e) {
+        print('Error validating QR: $e');
+        return null;
+      } finally {
+        _isScanning = false;
+      }
+    
   }
-}
 
 
   void _showInvalidQRDialog() {

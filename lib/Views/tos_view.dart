@@ -25,7 +25,7 @@ class TosView extends StatelessWidget {
             () => Center(
               child: Column(
                 children: [
-                  TosDescription('서비스 가입 및 이용을 위해', '서비스 이용약관', '에 동의해주세요'),
+                  const TosDescription('서비스 가입 및 이용을 위해', '서비스 이용약관', '에 동의해주세요'),
                   SizedBox(
                     height: 48.h,
                   ),
@@ -54,8 +54,8 @@ class TosView extends StatelessWidget {
                   SizedBox(
                     height: 16.h,
                   ),
-                  TosAgreement(
-                      '개인정보 처리방침',
+                  const TosAgreement(
+                      '개인정보 수집 및 이용 동의 (필수)',
                       'https://we-pard.notion.site/Pard-APP-fc37c472e47941d3958765587b57e21f?pvs=4',
                       '서비스 이용약관(필수)',
                       'https://we-pard.notion.site/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0?pvs=4'),
