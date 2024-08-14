@@ -397,370 +397,291 @@ Future<void> _showPhotos() async {
                       SizedBox(
                         height: 8.h,
                       ),
-                      Container(
-                        width: 327.w,
-                        height: 50.h,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF2A2A2A),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 24.w),
-                              child: Text('로그아웃', style: headlineSmall),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(right: 10.w),
-                              child: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return Dialog(
-                                              backgroundColor:
-                                                  const Color(0xFF1A1A1A),
-                                              child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      width: 327.w,
-                                                      height: 192.h,
-                                                      decoration:
-                                                          ShapeDecoration(
-                                                        color: const Color(
-                                                            0xFF1A1A1A),
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          side: const BorderSide(
-                                                              width: 0.50,
-                                                              color: Color(
-                                                                  0xFF5262F5)),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                        ),
-                                                      ),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 24.h,
-                                                          ),
-                                                          Text('로그아웃',
-                                                              style:
-                                                                  displaySmall
-                                                                      .copyWith(
-                                                                color: const Color(
-                                                                    0xFF5262F5),
-                                                              )),
-                                                          Text('로그아웃 하시겠습니까?',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style:
-                                                                  titleLarge),
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceAround,
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 20.w,
-                                                              ),
-                                                              Container(
-                                                                width: 116.w,
-                                                                height: 44.h,
-                                                                decoration:
-                                                                    ShapeDecoration(
-                                                                  color: const Color(
-                                                                      0xFF2A2A2A),
-                                                                  shape:
-                                                                      RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            30),
-                                                                  ),
-                                                                ),
-                                                                child:
-                                                                    TextButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          Get.back();
-                                                                        },
-                                                                        child:
-                                                                            Text(
-                                                                          '취소',
-                                                                          style:
-                                                                              headlineMedium.copyWith(
-                                                                            color:
-                                                                                const Color(0xFFA2A2A2),
-                                                                          ),
-                                                                        )),
-                                                              ),
-                                                              Container(
-                                                                  width: 116.w,
-                                                                  height: 44.h,
-                                                                  decoration:
-                                                                      ShapeDecoration(
-                                                                    gradient:
-                                                                        const LinearGradient(
-                                                                      begin: Alignment(
-                                                                          1.00,
-                                                                          -0.03),
-                                                                      end: Alignment(
-                                                                          -1,
-                                                                          0.03),
-                                                                      colors: [
-                                                                        Color(
-                                                                            0xFF7B3FEF),
-                                                                        Color(
-                                                                            0xFF5262F5),
-                                                                      ],
-                                                                    ),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              30),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      TextButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            bottomController.selectedIndex.value =
-                                                                                0; //로그아웃하고 들어올 때 index 0으로 하기
-                                                                            AuthController().signOut();
-                                                                          },
-                                                                          child:
-                                                                              Text(
-                                                                            '확인',
-                                                                            style:
-                                                                                headlineMedium.copyWith(
-                                                                              color: Colors.white,
-                                                                            ),
-                                                                          ))),
-                                                              SizedBox(
-                                                                width: 20.w,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            height: 24.h,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            );
-                                          });
-                                    });
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Color.fromRGBO(228, 228, 228, 1),
-                                    size: 20,
-                                  )),
-                            )
-                          ],
-                        ),
+GestureDetector(
+  onTap: () {
+    setState(() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: const Color(0xFF1A1A1A),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 327.w,
+                  height: 192.h,
+                  decoration: ShapeDecoration(
+                    color: const Color(0xFF1A1A1A),
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                          width: 0.50, color: Color(0xFF5262F5)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        height: 24.h,
                       ),
-                      Container(
-                        width: 327.w,
-                        height: 70.h,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF2A2A2A),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 24.w),
-                              child: Text('회원탈퇴', style: headlineSmall),
+                      Text('로그아웃',
+                          style: displaySmall.copyWith(
+                            color: const Color(0xFF5262F5),
+                          )),
+                      Text('로그아웃 하시겠습니까?',
+                          textAlign: TextAlign.center,
+                          style: titleLarge),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            width: 20.w,
+                          ),
+                          Container(
+                            width: 116.w,
+                            height: 44.h,
+                            decoration: ShapeDecoration(
+                              color: const Color(0xFF2A2A2A),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(right: 10.w),
-                              child: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return Dialog(
-                                              backgroundColor:
-                                                  const Color(0xFF1A1A1A),
-                                              child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      width: 327.w,
-                                                      height: 192.h,
-                                                      decoration:
-                                                          ShapeDecoration(
-                                                        color: const Color(
-                                                            0xFF1A1A1A),
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          side: const BorderSide(
-                                                              width: 0.50,
-                                                              color: Color(
-                                                                  0xFF5262F5)),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                        ),
-                                                      ),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 10.h,
-                                                          ),
-                                                          Text('회원탈퇴',
-                                                              style:
-                                                                  displaySmall
-                                                                      .copyWith(
-                                                                color: const Color(
-                                                                    0xFF5262F5),
-                                                              )),
-                                                          Text(
-                                                              '회원 탈퇴 후 개인정보, 점수 등의\n 데이터가 삭제되며 복구할 수 없습니다.\n 정말 삭제하시겠습니까?',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style:
-                                                                  titleLarge),
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceAround,
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 20.w,
-                                                              ),
-                                                              Container(
-                                                                width: 116.w,
-                                                                height: 44.h,
-                                                                decoration:
-                                                                    ShapeDecoration(
-                                                                  color: const Color(
-                                                                      0xFF2A2A2A),
-                                                                  shape:
-                                                                      RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            30),
-                                                                  ),
-                                                                ),
-                                                                child:
-                                                                    TextButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          Get.back();
-                                                                        },
-                                                                        child:
-                                                                            Text(
-                                                                          '취소',
-                                                                          style:
-                                                                              headlineMedium.copyWith(
-                                                                            color:
-                                                                                const Color(0xFFA2A2A2),
-                                                                          ),
-                                                                        )),
-                                                              ),
-                                                              Container(
-                                                                  width: 116.w,
-                                                                  height: 44.h,
-                                                                  decoration:
-                                                                      ShapeDecoration(
-                                                                    gradient:
-                                                                        const LinearGradient(
-                                                                      begin: Alignment(
-                                                                          1.00,
-                                                                          -0.03),
-                                                                      end: Alignment(
-                                                                          -1,
-                                                                          0.03),
-                                                                      colors: [
-                                                                        Color(
-                                                                            0xFF7B3FEF),
-                                                                        Color(
-                                                                            0xFF5262F5),
-                                                                      ],
-                                                                    ),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              30),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      TextButton(
-                                                                          onPressed:
-                                                                              () async {
-                                                                                AppSettings.openAppSettings();
-                                                                            bottomController.selectedIndex.value =
-                                                                                0; //로그아웃하고 들어올 때 index 0으로 하기
+                            child: TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text(
+                                '취소',
+                                style: headlineMedium.copyWith(
+                                  color: const Color(0xFFA2A2A2),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 116.w,
+                            height: 44.h,
+                            decoration: ShapeDecoration(
+                              gradient: const LinearGradient(
+                                begin: Alignment(1.00, -0.03),
+                                end: Alignment(-1, 0.03),
+                                colors: [
+                                  Color(0xFF7B3FEF),
+                                  Color(0xFF5262F5),
+                                ],
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                bottomController.selectedIndex.value =
+                                    0; //로그아웃하고 들어올 때 index 0으로 하기
+                                AuthController().signOut();
+                              },
+                              child: Text(
+                                '확인',
+                                style: headlineMedium.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.w,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    });
+  },
+  child: Container(
+    width: 327.w,
+    height: 50.h,
+    decoration: const BoxDecoration(
+      color: Color(0xFF2A2A2A),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 24.w),
+          child: Text('로그아웃', style: headlineSmall),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 10.w),
+          child: const Icon(
+            Icons.arrow_forward_ios_outlined,
+            color: Color.fromRGBO(228, 228, 228, 1),
+            size: 20,
+          ),
+        ),
+      ],
+    ),
+  ),
+),
 
-                                                                            if (uid !=
-                                                                                null) {
-                                                                              AuthController().deleteUserFields();
-                                                                            } else {
-                                                                              print("UID is null");
-                                                                            }
-                                                                          },
-                                                                          child:
-                                                                              Text(
-                                                                            '확인',
-                                                                            style:
-                                                                                headlineMedium.copyWith(
-                                                                              color: Colors.white,
-                                                                            ),
-                                                                          ))),
-                                                              SizedBox(
-                                                                width: 20.w,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            height: 24.h,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            );
-                                          });
-                                    });
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Color.fromRGBO(228, 228, 228, 1),
-                                    size: 20,
-                                  )),
-                            )
-                          ],
-                        ),
+                      GestureDetector(
+  onTap: () {
+    setState(() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: const Color(0xFF1A1A1A),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 327.w,
+                  height: 192.h,
+                  decoration: ShapeDecoration(
+                    color: const Color(0xFF1A1A1A),
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                          width: 0.50, color: Color(0xFF5262F5)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        height: 10.h,
                       ),
+                      Text('회원탈퇴',
+                          style: displaySmall.copyWith(
+                            color: const Color(0xFF5262F5),
+                          )),
+                      Text(
+                        '회원 탈퇴 후 개인정보, 점수 등의\n 데이터가 삭제되며 복구할 수 없습니다.\n 정말 삭제하시겠습니까?',
+                        textAlign: TextAlign.center,
+                        style: titleLarge,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            width: 20.w,
+                          ),
+                          Container(
+                            width: 116.w,
+                            height: 44.h,
+                            decoration: ShapeDecoration(
+                              color: const Color(0xFF2A2A2A),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text(
+                                '취소',
+                                style: headlineMedium.copyWith(
+                                  color: const Color(0xFFA2A2A2),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 116.w,
+                            height: 44.h,
+                            decoration: ShapeDecoration(
+                              gradient: const LinearGradient(
+                                begin: Alignment(1.00, -0.03),
+                                end: Alignment(-1, 0.03),
+                                colors: [
+                                  Color(0xFF7B3FEF),
+                                  Color(0xFF5262F5),
+                                ],
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: TextButton(
+                              onPressed: () async {
+                                AppSettings.openAppSettings();
+                                bottomController.selectedIndex.value = 0;
+
+                                if (uid != null) {
+                                  AuthController().deleteUserFields();
+                                } else {
+                                  print("UID is null");
+                                }
+                              },
+                              child: Text(
+                                '확인',
+                                style: headlineMedium.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.w,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    });
+  },
+  child: Container(
+    width: 327.w,
+    height: 70.h,
+    decoration: const BoxDecoration(
+      color: Color(0xFF2A2A2A),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 24.w),
+          child: Text('회원탈퇴', style: headlineSmall),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 10.w),
+          child: const Icon(
+            Icons.arrow_forward_ios_outlined,
+            color: Color.fromRGBO(228, 228, 228, 1),
+            size: 20,
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
                     ],
                   ),
                   SizedBox(
