@@ -447,7 +447,7 @@ Padding(
       child: Text(
         '파드에 등록되지 않은 이메일이거나\n파드너십 및 벌점 목록이 비어있습니다.',
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.titleLarge,
+        style: Theme.of(context).textTheme.titleMedium,
         maxLines: 2, 
         overflow: TextOverflow.ellipsis, 
       ),
