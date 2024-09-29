@@ -40,10 +40,10 @@ class SchedulerScreen extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.width / 34,
           ),
-          const Divider(
-            color: Colors.grey, // Replace with grayScale[30]
-            thickness: 1,
-          ),
+          // const Divider(
+          //   color: Colors.grey, // Replace with grayScale[30]
+          //   thickness: 1,
+          // ),
           buildSection('지난 일정', springScheduleController.pastSchedules,
               Theme.of(context).textTheme.headlineSmall!, true),
         ],

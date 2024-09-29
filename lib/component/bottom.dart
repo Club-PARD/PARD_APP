@@ -30,45 +30,52 @@ class BottomBar extends StatelessWidget {
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(16.0),
           ),
-          child: BottomNavigationBar(
-            backgroundColor: const Color(0xFF2A2A2A),
-            elevation: 8.0,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Padding(
-                  padding: EdgeInsets.only(right: 18.0.w),
-                  child: controller.selectedIndex.value == 0
-                      ? Image.asset(
-                          'assets/images/selected_home.png',
-                          width: iconSize,
-                        )
-                      : Image.asset(
-                          'assets/images/home.png',
-                          width: iconSize,
-                        ),
-                ),
-                label: '',
-              ),
-              BottomNavigationBarItem(
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              splashFactory: NoSplash.splashFactory, // Disables splash effect
+              highlightColor: Colors.transparent, // Disables highlight effect
+            ),
+            child: BottomNavigationBar(
+              backgroundColor: const Color(0xFF2A2A2A),
+              elevation: 8.0,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
                   icon: Padding(
-                    padding: EdgeInsets.only(left: 18.0.w),
-                    child: controller.selectedIndex.value == 1
+                    padding: EdgeInsets.only(right: 18.0.w),
+                    child: controller.selectedIndex.value == 0
                         ? Image.asset(
-                            'assets/images/selected_my.png',
+                            'assets/images/selected_home.png',
                             width: iconSize,
                           )
                         : Image.asset(
-                            'assets/images/my.png',
+                            'assets/images/home.png',
                             width: iconSize,
                           ),
                   ),
-                  label: ''),
-            ],
-            currentIndex: controller.selectedIndex.value,
-            // selectedItemColor: const Color.fromRGBO(82, 98, 245, 1),
-            onTap: controller.onItemTapped,
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                    icon: Padding(
+                      padding: EdgeInsets.only(left: 18.0.w),
+                      child: controller.selectedIndex.value == 1
+                          ? Image.asset(
+                              'assets/images/selected_my.png',
+                              width: iconSize,
+                            )
+                          : Image.asset(
+                              'assets/images/my.png',
+                              width: iconSize,
+                            ),
+                    ),
+                    label: ''),
+              ],
+              currentIndex: controller.selectedIndex.value,
+              // selectedItemColor: const Color.fromRGBO(82, 98, 245, 1),
+              onTap: controller.onItemTapped,
+              
+            ),
           ),
         ),
       ),

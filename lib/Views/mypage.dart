@@ -278,25 +278,26 @@ Future<void> _showPhotos() async {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 24.w),
-                              child: Text('알림 설정', style: headlineSmall),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(right: 24.w),
-                              child: Obx(() {
-                                return Switch(
-                                  value: springUserController.onOff!.value,
-                                  onChanged: (value) async {
-                                    springUserController.onOff!.value =
-                                        !springUserController.onOff!.value;
-                                    springUserController.saveOnOffValue(value);
-                                    AppSettings.openAppSettings();
-                                  },
-                                );
-                              }),
-                            ),
-                          ],
+  Padding(
+    padding: EdgeInsets.only(left: 24.w),
+    child: Text('알림 설정', style: headlineSmall),
+  ),
+  Padding(
+    padding: EdgeInsets.only(right: 24.w),
+    child: Obx(() {
+      return Switch(
+        value: springUserController.onOff!.value,
+        activeColor: Color(0xFF5262F5),  // Custom color for "on" state
+        onChanged: (value) async {
+          springUserController.onOff!.value = !springUserController.onOff!.value;
+          springUserController.saveOnOffValue(value);
+          AppSettings.openAppSettings();
+        },
+      );
+    }),
+  ),
+],
+
                         ),
                       ),
                       SizedBox(
