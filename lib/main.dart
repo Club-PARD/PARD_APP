@@ -20,9 +20,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('******************백그라운드 시작***********************');
 
-  final pushController = PushNotificationController(); // 셋팅 메소드
-  await pushController.setupFlutterNotifications();
-  pushController.showFlutterNotification(message); // 로컬노티
+  // final pushController = PushNotificationController(); // 셋팅 메소드
+  // await pushController.setupFlutterNotifications();
+  // pushController.showFlutterNotification(message); // 로컬노티
 }
 
 Future<void> main() async {
@@ -39,13 +39,13 @@ Future<void> main() async {
     print("실패 : $error");
   }
   FirebaseMessaging.instance.requestPermission();
-  Get.put(PushNotificationController());
+  // Get.put(PushNotificationController());
   /** pushNotificationController에 있는것들 사용한다 */
-  await PushNotificationController.to.setupFlutterNotifications();
+  // await PushNotificationController.to.setupFlutterNotifications();
 
-  FirebaseMessaging.onMessage
-      .listen(PushNotificationController.to.showFlutterNotification);
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onMessage
+  //     .listen(PushNotificationController.to.showFlutterNotification);
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
 UserController.init();
   Get.put(AuthController());

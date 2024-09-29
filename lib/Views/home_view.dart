@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void showOverlay(BuildContext context) async {
-    await PushNotificationController.to.setupFlutterNotifications();
+    // await PushNotificationController.to.setupFlutterNotifications();
 
 
     final RenderBox renderBox =
