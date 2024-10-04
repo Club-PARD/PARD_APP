@@ -34,14 +34,14 @@ void onQRViewCreated(QRViewController controller) {
   // 유효한 QR 코드 URL 리스트
   final validQrCodes = [
     "https://me-qr.com/uoN4lOs1",
-    "https://me-qr.com/1",
-    "https://me-qr.com/2",
-    "https://me-qr.com/3",
-    "https://me-qr.com/4",
-    "https://me-qr.com/5",
-    "https://me-qr.com/6",
-    "https://me-qr.com/7",
-    "https://me-qr.com/8",
+    "https://m.site.naver.com/1tv11",
+    "https://m.site.naver.com/1tv1w",
+    "https://m.site.naver.com/1tv1S",
+    "https://m.site.naver.com/1tv29",
+    "https://m.site.naver.com/1tv3r",
+    "https://m.site.naver.com/1tv3C",
+    "https://m.site.naver.com/1tv3L",
+    "https://m.site.naver.com/1tv47",
     "https://me-qr.com/9",
     "https://me-qr.com/10",
   ];
@@ -266,26 +266,24 @@ Future<AttendanceResponse?> _validateQR(
 
   Future<String> getTodaySchedule(String qrCode) async {
   switch (qrCode) {
-    case "https://me-qr.com/uoN4lOs1":
+    case "https://m.site.naver.com/1tv2A":
       return "OT";
-    case "https://me-qr.com/1":
+    case "https://m.site.naver.com/1tv11":
       return "1차 세미나";
-    case "https://me-qr.com/2":
+    case "https://m.site.naver.com/1tv1w":
       return "2차 세미나";
-    case "https://me-qr.com/3":
+    case "https://m.site.naver.com/1tv1S":
       return "3차 세미나";
-    case "https://me-qr.com/4":
+    case "https://m.site.naver.com/1tv29":
       return "4차 세미나";
-    case "https://me-qr.com/5":
+    case "https://m.site.naver.com/1tv3r":
       return "5차 세미나";
-    case "https://me-qr.com/6":
+    case "https://m.site.naver.com/1tv3C":
       return "6차 세미나";
-    case "https://me-qr.com/7":
+    case "https://m.site.naver.com/1tv3L":
       return "연합 세미나";
-    case "https://me-qr.com/8":
+    case "https://m.site.naver.com/1tv47":
       return "연합 세미나2";
-    case "https://me-qr.com/9":
-      return "아이디어 피칭";
     case "https://me-qr.com/10":
       return "종강총회";
     default:
