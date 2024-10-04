@@ -20,10 +20,13 @@ class HomeSchedule extends StatelessWidget {
         if (springScheduleController.upcomingSchedules.isNotEmpty) {
           ScheduleResponseDTO firstSchedule =
               springScheduleController.upcomingSchedules.first;
+              print('firstSchedule: ${firstSchedule.remaingDay}');
 
           final int dayLeft = firstSchedule.remaingDay ?? 0;
-          final dDay = _calculateDday(dayLeft);
+          final dDay = _calculateDday(firstSchedule.date);
           final bool isAllParts = firstSchedule.part == '전체';
+          print('dayLeft: $dayLeft');
+          print('dDay: $dDay');
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,13 +99,16 @@ class HomeSchedule extends StatelessWidget {
     );
   }
 
-  String _calculateDday(int dayLeft) {
+  String _calculateDday(DateTime dueDate) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final difference = dueDate.difference(today);
 
-
-    if (dayLeft<0) {
+    if (difference.isNegative) {
       return '';
-    } else if (dayLeft > 0) {
-      return 'D-$dayLeft';
+    } else if (difference.inDays > 0) {
+      final days = difference.inDays;
+      return 'D-$days';
     } else {
       return 'D-DAY';
     }
