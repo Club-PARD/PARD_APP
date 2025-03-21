@@ -16,10 +16,11 @@ class HomeEndDrawer extends StatefulWidget {
 }
 
 final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-// 파베에 있는 insta 필드에 있는 url값 가져온다 
+// 파베에 있는 insta 필드에 있는 url값 가져온다
 Future<void> fetchInstaUrl() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -27,11 +28,10 @@ Future<void> fetchInstaUrl() async {
         String url = data['instagram'];
         if (url.isNotEmpty) {
           final Uri instaUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(instaUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -41,10 +41,10 @@ Future<void> fetchInstaUrl() async {
   }
 }
 
-
-Future<void> fetchPardWebUrl() async{
+Future<void> fetchPardWebUrl() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -52,11 +52,10 @@ Future<void> fetchPardWebUrl() async{
         String url = data['pardweb'];
         if (url.isNotEmpty) {
           final Uri pardWebUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(pardWebUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -66,9 +65,10 @@ Future<void> fetchPardWebUrl() async{
   }
 }
 
-Future<void> fetchPardNotion() async{
+Future<void> fetchPardNotion() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -76,11 +76,10 @@ Future<void> fetchPardNotion() async{
         String url = data['notion'];
         if (url.isNotEmpty) {
           final Uri pardNotionUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(pardNotionUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -90,9 +89,10 @@ Future<void> fetchPardNotion() async{
   }
 }
 
-Future<void> fetchSeminarFeedback() async{
+Future<void> fetchSeminarFeedback() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -100,11 +100,10 @@ Future<void> fetchSeminarFeedback() async{
         String url = data['피드백'];
         if (url.isNotEmpty) {
           final Uri pardSeminarFeedbackUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(pardSeminarFeedbackUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -114,9 +113,10 @@ Future<void> fetchSeminarFeedback() async{
   }
 }
 
-Future<void> fetchPMNotion() async{
+Future<void> fetchPMNotion() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -124,11 +124,10 @@ Future<void> fetchPMNotion() async{
         String url = data['기획'];
         if (url.isNotEmpty) {
           final Uri pardPMUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(pardPMUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -138,9 +137,10 @@ Future<void> fetchPMNotion() async{
   }
 }
 
-Future<void> fetchDesignNotion() async{
+Future<void> fetchDesignNotion() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -148,11 +148,10 @@ Future<void> fetchDesignNotion() async{
         String url = data['디자인'];
         if (url.isNotEmpty) {
           final Uri pardDesignUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(pardDesignUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -162,9 +161,10 @@ Future<void> fetchDesignNotion() async{
   }
 }
 
-Future<void> fetchWebNotion() async{
+Future<void> fetchWebNotion() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -172,11 +172,10 @@ Future<void> fetchWebNotion() async{
         String url = data['웹'];
         if (url.isNotEmpty) {
           final Uri pardWebPartUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(pardWebPartUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -186,9 +185,10 @@ Future<void> fetchWebNotion() async{
   }
 }
 
-Future<void> fetchiOSNotion() async{
+Future<void> fetchiOSNotion() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -196,11 +196,10 @@ Future<void> fetchiOSNotion() async{
         String url = data['iOS'];
         if (url.isNotEmpty) {
           final Uri pardiOSNotionUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(pardiOSNotionUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -210,9 +209,10 @@ Future<void> fetchiOSNotion() async{
   }
 }
 
-Future<void> fetchBackendNotion() async{
+Future<void> fetchBackendNotion() async {
   try {
-    QuerySnapshot querySnapshot = await firebaseFirestore.collection('url').get();
+    QuerySnapshot querySnapshot =
+        await firebaseFirestore.collection('url').get();
 
     for (var document in querySnapshot.docs) {
       var data = document.data() as Map<String, dynamic>;
@@ -220,11 +220,10 @@ Future<void> fetchBackendNotion() async{
         String url = data['서버'];
         if (url.isNotEmpty) {
           final Uri pardBackendNotionUrl = Uri.parse(url);
-          try{
+          try {
             await launchUrl(pardBackendNotionUrl);
-          } catch (e){
-          }
-          return; 
+          } catch (e) {}
+          return;
         }
       }
     }
@@ -233,7 +232,6 @@ Future<void> fetchBackendNotion() async{
     print('Error fetching URL: $e');
   }
 }
-
 
 class _HomeEndDrawerState extends State<HomeEndDrawer> {
   bool _areItemsVisible = false;
@@ -250,37 +248,29 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
             SizedBox(height: 20.h),
             Container(
               padding: EdgeInsets.only(left: 24.w),
-              decoration: const BoxDecoration(
-                color: Color(0XFF2A2A2A),
-              ),
+              decoration: const BoxDecoration(color: Color(0XFF2A2A2A)),
               child: GradientText(
                 '공지 및 자료',
                 style: headlineMedium,
-                colors: const [
-                  primaryBlue,
-                  primaryPurple,
-                ],
+                colors: const [primaryBlue, primaryPurple],
               ),
             ),
-            SizedBox(
-              height: 8.h,
-            ),
-            Divider(
-              thickness: 0.5,
-              height: 0,
-              color: grayScale[30],
-            ),
+            SizedBox(height: 8.h),
+            Divider(thickness: 0.5, height: 0, color: grayScale[30]),
             GestureDetector(
               onTap: () {
                 setState(() {
                   _areItemsVisible = !_areItemsVisible;
                 });
               },
-              
+
               child: Container(
                 height: 60.h,
                 padding: EdgeInsets.only(left: 24.w),
-                color: _areItemsVisible ? const Color(0xFF3D3D3D) : const Color(0XFF2A2A2A),
+                color:
+                    _areItemsVisible
+                        ? const Color(0xFF3D3D3D)
+                        : const Color(0XFF2A2A2A),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -291,15 +281,13 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                           width: 22.w,
                           height: 22.h,
                         ),
-                        SizedBox(
-                          width: 4.w,
-                        ),
+                        SizedBox(width: 4.w),
                         Text('PARD 노션', style: headlineSmall),
                       ],
                     ),
                     IconButton(
                       splashColor: Colors.transparent,
- highlightColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       icon: Icon(
                         _areItemsVisible
                             ? Icons.keyboard_arrow_down_sharp
@@ -320,128 +308,119 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
             if (_areItemsVisible) ...[
               ListTile(
                 title: InkWell(
-                    child: Row(
-                  children: [
-                    SizedBox(
-                      width: 22.w,
-                    ),
-                    Text('전체',
-                        style: headlineSmall.copyWith(color: grayScale[30])),
-                  ],
-                )),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 22.w),
+                      Text(
+                        '전체',
+                        style: headlineSmall.copyWith(color: grayScale[30]),
+                      ),
+                    ],
+                  ),
+                ),
                 onTap: () {
                   fetchPardNotion();
                 },
               ),
               ListTile(
                 title: InkWell(
-                    child: Row(
-                  children: [
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    Text('기획 파트',
-                        style: headlineSmall.copyWith(color: grayScale[30])),
-                  ],
-                )),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 20.w),
+                      Text(
+                        '기획 파트',
+                        style: headlineSmall.copyWith(color: grayScale[30]),
+                      ),
+                    ],
+                  ),
+                ),
                 onTap: () {
                   fetchPMNotion();
                 },
               ),
               ListTile(
                 title: InkWell(
-                    child: Row(
-                  children: [
-                    SizedBox(width: 20.w),
-                    Text('디자인 파트',
-                        style: headlineSmall.copyWith(color: grayScale[30])),
-                  ],
-                )),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 20.w),
+                      Text(
+                        '디자인 파트',
+                        style: headlineSmall.copyWith(color: grayScale[30]),
+                      ),
+                    ],
+                  ),
+                ),
                 onTap: () {
                   fetchDesignNotion();
                 },
               ),
               ListTile(
                 title: InkWell(
-                    child: Row(
-                  children: [
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    Text('서버 파트',
-                        style: headlineSmall.copyWith(color: grayScale[30])),
-                  ],
-                )),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 20.w),
+                      Text(
+                        '서버 파트',
+                        style: headlineSmall.copyWith(color: grayScale[30]),
+                      ),
+                    ],
+                  ),
+                ),
                 onTap: () {
                   fetchBackendNotion();
                 },
               ),
               ListTile(
                 title: InkWell(
-                    child: Row(
-                  children: [
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    Text('웹 파트',
-                        style: headlineSmall.copyWith(color: grayScale[30])),
-                  ],
-                )),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 20.w),
+                      Text(
+                        '웹 파트',
+                        style: headlineSmall.copyWith(color: grayScale[30]),
+                      ),
+                    ],
+                  ),
+                ),
                 onTap: () {
                   fetchWebNotion();
                 },
               ),
               ListTile(
                 title: InkWell(
-                    child: Row(
-                  children: [
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    Text('iOS 파트',
-                        style: headlineSmall.copyWith(color: grayScale[30])),
-                  ],
-                )),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 20.w),
+                      Text(
+                        'iOS 파트',
+                        style: headlineSmall.copyWith(color: grayScale[30]),
+                      ),
+                    ],
+                  ),
+                ),
                 onTap: () {
                   fetchiOSNotion();
                 },
-              )
+              ),
             ],
-            Divider(
-              thickness: 0.5,
-              height: 0,
-              color: grayScale[30],
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
+            Divider(thickness: 0.5, height: 0, color: grayScale[30]),
+            SizedBox(height: 32.h),
             InkWell(
               onTap: () {
                 launchFeedback();
               },
               child: Container(
                 padding: EdgeInsets.only(left: 20.w),
-                decoration: const BoxDecoration(
-                  color: Color(0XFF2A2A2A),
-                ),
+                decoration: const BoxDecoration(color: Color(0XFF2A2A2A)),
                 child: GradientText(
                   '피드백',
                   style: headlineMedium,
-                  colors: const [
-                    primaryBlue,
-                    primaryPurple,
-                  ],
+                  colors: const [primaryBlue, primaryPurple],
                 ),
               ),
             ),
-            SizedBox(
-              height: 8.h,
-            ),
-            Divider(
-              thickness: 0.5,
-              height: 0,
-              color: grayScale[30],
-            ),
+            SizedBox(height: 8.h),
+            Divider(thickness: 0.5, height: 0, color: grayScale[30]),
             InkWell(
               onTap: fetchSeminarFeedback,
               child: SizedBox(
@@ -449,50 +428,31 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                 height: 60.h,
                 child: Row(
                   children: [
-                    SizedBox(
-                      width: 24.w,
-                    ),
+                    SizedBox(width: 24.w),
                     Image.asset(
                       'assets/images/googleSheet.png',
                       width: 13.w,
                       height: 18.h,
                     ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    Text('세미나 구글폼', style: headlineSmall)
+                    SizedBox(width: 8.w),
+                    Text('운영진 피드백 구글폼', style: headlineSmall),
                   ],
                 ),
               ),
             ),
-            Divider(
-              thickness: 0.5,
-              height: 0,
-              color: grayScale[30],
-            ),
+            Divider(thickness: 0.5, height: 0, color: grayScale[30]),
             SizedBox(height: 32.h),
             Container(
               padding: EdgeInsets.only(left: 20.w),
-              decoration: const BoxDecoration(
-                color: Color(0XFF2A2A2A),
-              ),
+              decoration: const BoxDecoration(color: Color(0XFF2A2A2A)),
               child: GradientText(
                 '공식 채널',
                 style: headlineMedium,
-                colors: const [
-                  primaryBlue,
-                  primaryPurple,
-                ],
+                colors: const [primaryBlue, primaryPurple],
               ),
             ),
-            SizedBox(
-              height: 8.h,
-            ),
-            Divider(
-              thickness: 0.5,
-              height: 0,
-              color: grayScale[30],
-            ),
+            SizedBox(height: 8.h),
+            Divider(thickness: 0.5, height: 0, color: grayScale[30]),
             SizedBox(
               width: 200.w,
               height: 150.h,
@@ -504,52 +464,38 @@ class _HomeEndDrawerState extends State<HomeEndDrawer> {
                       onTap: fetchInstaUrl,
                       child: Row(
                         children: [
-                          SizedBox(
-                            width: 24.w,
-                          ),
+                          SizedBox(width: 24.w),
                           Image.asset(
                             "assets/images/ig.png",
                             width: 16.w,
                             height: 16.h,
                           ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          Text('인스타그램', style: headlineSmall)
+                          SizedBox(width: 8.w),
+                          Text('인스타그램', style: headlineSmall),
                         ],
                       ),
                     ),
                   ),
-                  Divider(
-                    thickness: 0.5,
-                    height: 0,
-                    color: grayScale[30],
-                  ),
+                  Divider(thickness: 0.5, height: 0, color: grayScale[30]),
                   SizedBox(
                     height: 60.h,
                     child: InkWell(
                       onTap: fetchPardWebUrl,
                       child: Row(
                         children: [
-                          SizedBox(
-                            width: 24.w,
+                          SizedBox(width: 24.w),
+                          Image.asset(
+                            "assets/images/logo.png",
+                            width: 43.7.w,
+                            height: 9.h,
                           ),
-                          Image.asset("assets/images/logo.png",
-                              width: 43.7.w, height: 9.h),
                           SizedBox(width: 8.w),
-                          Text(
-                            '웹사이트',
-                            style: headlineSmall,
-                          )
+                          Text('웹사이트', style: headlineSmall),
                         ],
                       ),
                     ),
                   ),
-                  Divider(
-                    thickness: 0.5,
-                    height: 0,
-                    color: grayScale[30],
-                  ),
+                  Divider(thickness: 0.5, height: 0, color: grayScale[30]),
                 ],
               ),
             ),
